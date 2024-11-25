@@ -20,3 +20,4 @@ Durante o desenvolvimento
 
 - Adaptação
 - Realizar reuniões diárias com a equipa (daily scrum)
+.
