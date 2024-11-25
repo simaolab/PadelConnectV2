@@ -1,0 +1,13 @@
+<a class="links-sidebar" *ngIf="href" [routerLink]="href">
+  <div class="box-icon" [ngClass]="{'active': isActive(href)}">
+    <span class="material-icons-sharp">{{ icon }}</span>
+  </div>
+  <p class="p-sidebar">{{ p }}</p>
+</a>
+
+<div *ngIf="!href" class="links-sidebar" (click)="onClick()">
+  <div class="box-icon">
+    <span class="material-icons-sharp">{{ icon }}</span>
+  </div>
+  <p class="p-sidebar">{{ p }}</p>
+</div>

@@ -1,0 +1,21 @@
+<div class="navbar">
+  <div class="icon-box">
+      <img src="assets/images/logos/LogoBrancoPadel_Final.png">
+  </div>
+  <div class="links-box">
+      <a routerLink="/" [ngClass]="{'active': isActive('/')}">Home</a>
+      <a href="/courts" [ngClass]="{'active': isActive('/courts')}">Campos</a>
+      <a href="/about-us" [ngClass]="{'active': isActive('/about-us')}">Sobre nós</a>
+      <a href="/contact-us" [ngClass]="{'active': isActive('/contact-us')}">Contactos</a>
+
+      <div class="btn-box">
+          <a href="" class="btn btn-reservation">Reservar</a>
+      </div>
+  </div>
+  <div class="user-box">
+    <a href="/login">
+      <i class='bx bxs-user'></i>
+    </a>
+      <i class='bx bx-menu'></i>
+  </div>
+</div>

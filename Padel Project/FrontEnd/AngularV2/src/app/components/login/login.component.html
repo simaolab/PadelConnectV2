@@ -1,0 +1,125 @@
+<modal></modal>
+
+<div class="container no-animation">
+  <div class="form-card login">
+      <form (ngSubmit)="login()">
+          <h1 class="title">Sign in</h1>
+          <div class="social-icons">
+              <a href="">
+                  <i class='bx bxl-facebook'></i>
+              </a>
+              <a href="">
+                  <i class='bx bxl-google'></i>
+              </a>
+              <a href="">
+                  <i class='bx bxl-apple'></i>
+              </a>
+          </div>
+          <p>or use your username</p>
+          <div class="input-box">
+              <input type="text" name="login" [(ngModel)]="loginObj.login"
+                placeholder="Username or email">
+              <i class='bx bx-user'></i>
+          </div>
+          <div class="input-box">
+              <input type="password" name="password" [(ngModel)]="loginObj.password"
+                placeholder="Password">
+              <i class='bx bx-lock'></i>
+          </div>
+          <div class="forgot-password">
+              <a href="">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn">SIGN UP</button>
+      </form>
+  </div>
+
+  <div class="form-card register">
+    <form>
+      <h1 class="title">Create Account</h1>
+      <div class="social-icons">
+        <a href=""><i class='bx bxl-facebook'></i></a>
+        <a href=""><i class='bx bxl-google'></i></a>
+        <a href=""><i class='bx bxl-apple'></i></a>
+      </div>
+      <p>or register with email</p>
+
+      <!-- Step 1 -->
+<!-- Step 1 -->
+<div class="step-1">
+  <div class="steps">
+    <div class="step-number active"><p>1</p></div>
+    <div class="divider"></div>
+    <div class="step-number"><p>2</p></div>
+  </div>
+
+  <div class="input-box">
+    <input type="email" placeholder="email" required
+      name="email" [(ngModel)]="registerObj.email">
+    <i class='bx bx-user'></i>
+  </div>
+
+  <div class="input-box">
+    <input type="text" placeholder="username" required
+      name="username" [(ngModel)]="registerObj.username">
+    <i class='bx bx-user'></i>
+  </div>
+
+  <div class="input-box">
+    <input type="number" placeholder="NIF" required
+      name="nif" [(ngModel)]="registerObj.nif">
+    <i class='bx bx-lock'></i>
+  </div>
+
+  <div class="box-btn">
+    <button type="button" class="btn btn-next">Next</button>
+  </div>
+</div>
+
+<!-- Step 2 -->
+<div class="step-2 hidden">
+  <div class="steps">
+    <div class="step-number"><p>1</p></div>
+    <div class="divider"></div>
+    <div class="step-number active"><p>2</p></div>
+  </div>
+
+  <div class="input-box">
+    <input type="password" placeholder="password" required
+      name="password" [(ngModel)]="registerObj.password">
+    <i class='bx bx-lock'></i>
+  </div>
+
+  <div class="input-box">
+    <input type="password" placeholder="confirm password" required
+    name="password_confirmation" [(ngModel)]="registerObj.password_confirmation">
+    <i class='bx bx-lock'></i>
+  </div>
+
+  <div class="box-btn sign-up">
+    <button type="button" class="btn btn-previous">Previous</button>
+    <button type="submit" class="btn" (click)="register()">SIGN UP</button>
+  </div>
+</div>
+
+    </form>
+  </div>
+
+  <div class="toggle-box">
+      <div class="toggle-panel toggle-left">
+          <div class="logo-box">
+              <img src="assets/images/logos/LogoBrancoPadel_Final.png" class="logo">
+          </div>
+          <h1>Hello, Friend</h1>
+          <p>Don't have an account?</p>
+          <button class="btn register-btn">Register</button>
+      </div>
+      <div class="toggle-panel toggle-right">
+          <div class="logo-box">
+              <img src="assets/images/logos/LogoBrancoPadel_Final.png" class="logo">
+          </div>
+          <h1>Welcome Back!</h1>
+          <p>Already have an account?</p>
+          <button class="btn login-btn">Sign in</button>
+      </div>
+  </div>
+</div>

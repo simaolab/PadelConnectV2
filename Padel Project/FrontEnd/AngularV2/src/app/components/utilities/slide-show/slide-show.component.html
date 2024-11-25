@@ -1,0 +1,37 @@
+<section id="slide-show">
+  <div class="container">
+    <h2 class="text-center section-heading">Campos com melhor avaliação</h2>
+    <p class="text-center section-subheading">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam aut ad obcaecati sed ullam.</p>
+  </div>
+
+  <div class="container">
+    <div class="swiper slide-show-slider">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" *ngFor="let field of fields">
+          <a href="#" class="slide-link">
+            <div class="slide-img">
+              <img [src]="field.image" [alt]="field.name">
+            </div>
+            <div class="slide-content-bottom">
+              <h3 class="field-name">{{ field.name }}</h3>
+              <h3 class="field-rating">
+                <span>{{ field.rating }}</span>
+                <div class="rating">
+                  <i class='bx bxs-star' *ngFor="let star of [1, 2, 3, 4];"></i>
+                  <i class='bx bxs-star-half'></i>
+                </div>
+              </h3>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Navegação -->
+      <div class="tranding-slider-control">
+        <div class="swiper-button-prev slider-arrow"></div>
+        <div class="swiper-button-next slider-arrow"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </div>
+</section>

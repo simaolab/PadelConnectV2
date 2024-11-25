@@ -1,0 +1,66 @@
+a {
+  color: var(--color-white);
+}
+/* =============================
+   HEADER MAIN
+   ============================= */
+   .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+    height: 180px;
+    padding: 3rem 2rem;
+    background: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-message {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.menu-icon {
+    font-size: var(--font-subtitle);
+    cursor: pointer;
+}
+
+.welcome-message h3 {
+    font-size: 1.5rem;
+}
+
+.right-header {
+    display: flex;
+    gap: 7rem;
+    font-size: 1rem;
+}
+
+.date-hour {
+    display: flex;
+    gap: 4rem;
+}
+
+.date,
+.hour {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.date p,
+.hour p {
+    font-size: 1.1rem;
+}
+
+.home-notifications{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.home,
+.notifications {
+    text-decoration: none;
+}

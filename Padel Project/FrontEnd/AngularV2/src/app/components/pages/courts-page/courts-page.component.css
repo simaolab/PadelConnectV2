@@ -1,0 +1,45 @@
+.search {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(-500%);
+  background: var(--color-white);
+  padding: 0 1rem;
+  border-radius: var(--border-radius-1);
+}
+
+.searchbar {
+  width: 80%;
+  padding: 15px 0;
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  background: transparent;
+}
+
+.box-searchbar {
+  display: inline-flex;
+  /* gap: 1rem; */
+  font-size: 1rem;
+  align-items: center;
+}
+
+.date-hour,
+.filter {
+  border-left: 2px solid var(--color-primary);
+  padding: 8px 20px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15rem;
+}

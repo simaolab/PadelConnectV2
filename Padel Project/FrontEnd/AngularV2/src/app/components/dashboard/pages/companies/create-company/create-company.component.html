@@ -1,0 +1,72 @@
+<title-page pageText="Adicionar Empresa"></title-page>
+
+<card-table>
+  <form class="form">
+    <div class="form-row">
+      <div class="form-column">
+        <label class="label">Nome</label>
+        <div class="input-box">
+          <input type="text" name="name" [(ngModel)]="companyObj.name"
+            placeholder="Nome">
+          <i class='bx bx-user'></i>
+        </div>
+      </div>
+
+      <div class="form-column">
+        <label class="label">Email</label>
+        <div class="input-box">
+          <input type="text" name="email" [(ngModel)]="companyObj.email"
+            placeholder="Email">
+            <i class='bx bx-envelope'></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-column">
+        <label class="label">Contacto</label>
+        <div class="input-box">
+          <input type="number" name="contact" [(ngModel)]="companyObj.contact"
+            placeholder="contact">
+            <i class='bx bx-phone'></i>
+        </div>
+      </div>
+
+      <div class="form-column">
+        <label class="label">Morada</label>
+        <div class="input-box">
+          <input type="number" name="address" [(ngModel)]="companyObj.address_id"
+            placeholder="address">
+            <i class='bx bx-home'></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-column">
+        <label class="label">NIF</label>
+        <div class="input-box">
+          <input type="number" name="nif" [(ngModel)]="companyObj.nif"
+            placeholder="nif">
+            <i class='bx bx-info-circle'></i>
+        </div>
+      </div>
+
+      <div class="form-column">
+        <label class="label">Newsletter</label>
+        <div class="input-box">
+          <input type="" name="newsletter" [(ngModel)]="companyObj.newsletter"
+            placeholder="newsletter">
+            <i class='bx bxs-news'></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="button">
+      <button type="submt" (click)="create()" class="btn">
+        Adicionar
+        <i class='bx bx-plus-circle'></i>
+      </button>
+    </div>
+  </form>
+</card-table>

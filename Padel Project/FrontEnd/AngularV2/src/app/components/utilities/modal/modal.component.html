@@ -1,0 +1,18 @@
+<div class="modal" *ngIf="Visible">
+    <div class="modal-card"
+    [ngClass]="{
+      'modal-error': type === 'Error',
+      'modal-success': type === 'Success'
+    }">
+      <div class="modal-header">
+        <h2 [ngClass]="{'error': type === 'Error', 'success': type === 'Success', 'message': type === 'Message'}">{{ type }}</h2>
+        <button (click)="closeModal()">
+          <i class='bx bx-x'></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ message }}</p>
+      </div>
+    </div>
+</div>
+

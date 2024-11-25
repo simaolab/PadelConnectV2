@@ -1,0 +1,35 @@
+<title-page pageText="Campos"></title-page>
+
+<card-table>
+  <div *ngIf="isLoading; else showTable">
+    <p class="loading">Carregando...</p>
+  </div>
+  <ng-template #showTable>
+    <div *ngIf="courts.length > 0; else noCourts">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Empresa</th>
+            <th>Preço / h</th>
+            <th>Tipo de chão</th>
+            <th>Iluminação</th>
+            <th>Cobertura</th>
+            <th>Estado</th>
+            <th>Última manutenção</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let court of courts">
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</ng-template>
+</card-table>
+
+<ng-template #noCourts>
+  <p class="no-courts">Não existe nenhum campo</p>
+</ng-template>

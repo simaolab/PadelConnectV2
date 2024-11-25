@@ -1,0 +1,85 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --color-primary: #57cc99;
+    --color-danger: #A50B0B;
+    --color-success: #1b9c5c;
+    --color-warning: #FDC500;
+    --color-white: #fff;
+
+    --color-gray: #A4A3A3;
+    --color-dark: #1e1e1f;
+
+    --color-background: #EDEAE0;
+    --color-background-sec: #f3fff8;
+
+    --color-blue-1: #00296B;
+    --color-blue-2: #00509D;
+    --color-yellow: #FFD500;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 1.2rem;
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+    --box-shadow-btn: 0 0 1rem var(--color-gray);
+
+    --font-title: 5.5rem;
+    --font-subtitle: 1.5rem;
+    --font-size: 1.3rem;
+
+    --color-input: #e9e8e8;
+    --box-shadow-card: 0 0 3rem var(--color-input);
+    --color-dashboard: #c7f9dc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    appearance: none;
+    border: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    scroll-behavior: smooth !important;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    font-size: 0.88rem;
+    background: var(--color-white);
+    user-select: none;
+    overflow-x: hidden;
+}
+
+.animated {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animated.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15rem;
+}
+
+.block-title {
+  font-size: 2rem;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

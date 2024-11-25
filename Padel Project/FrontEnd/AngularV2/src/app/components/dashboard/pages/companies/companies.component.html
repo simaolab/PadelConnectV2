@@ -1,0 +1,41 @@
+<title-page pageText="Empresas"></title-page>
+
+<add-button href="/dashboard/create-company"></add-button>
+
+<card-table>
+  <div *ngIf="isLoading; else showTable">
+    <p class="loading">Carregando...</p>
+  </div>
+  <ng-template #showTable>
+    <div *ngIf="companies.length > 0; else noCompanies">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>NIF</th>
+            <th>Morada</th>
+            <th>Campos</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let company of companies">
+            <td>{{ company.name }}</td>
+            <td>{{ company.email }}</td>
+            <td>{{ company.contact }}</td>
+            <td>{{ company.nif }}</td>
+            <td>{{ company.address.address }}</td>
+            <td>{{ company.fields_count }}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</ng-template>
+</card-table>
+
+<ng-template #noCompanies>
+  <p class="no-companies">Nenhuma empresa encontrada</p>
+</ng-template>

@@ -1,0 +1,36 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th{
+  color: var(--color-primary);
+  font-size: 1.3rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 15px;
+}
+
+tbody td {
+  font-size: 1.1rem;
+  color: var(--color-gray);
+  padding: 15px;
+}
+
+.loading {
+  font-size: 1.1rem;
+  color: var(--color-primary);
+}
+
+.no-users {
+  font-size: 1.1rem;
+  color: var(--color-danger);
+}
+
+button {
+  color: aqua;
+  width: 20%;
+  height: 20%;
+}

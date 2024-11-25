@@ -1,0 +1,30 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  transition: all ease 300ms;
+}
+
+thead th{
+  color: var(--color-primary);
+  font-size: 1.3rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tbody td {
+  font-size: 1.1rem;
+  color: var(--color-gray);
+}
+
+.loading {
+  font-size: 1.1rem;
+  color: var(--color-primary);
+}
+
+.no-courts {
+  font-size: 1.1rem;
+  color: var(--color-danger);
+}

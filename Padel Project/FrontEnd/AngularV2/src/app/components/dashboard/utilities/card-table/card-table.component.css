@@ -1,0 +1,8 @@
+.card-table {
+  background: var(--color-white);
+  border-radius: var(--border-radius-2);
+  box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: all ease 300ms;
+  margin-top: 2rem;
+}
