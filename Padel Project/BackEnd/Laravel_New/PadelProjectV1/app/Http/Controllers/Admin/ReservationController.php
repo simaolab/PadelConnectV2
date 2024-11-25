@@ -23,7 +23,7 @@ class ReservationController extends Controller
             // If table Reservation does not have any data echo a message else show data
             if ($reservations->isEmpty()) {
                 return response()->json([
-                    'message'   => 'Esta lista ainda não contém dados.',
+                    'message'   => 'Esta lista ainda não contém dados..',
                     'reservations'     => []
                 ]);
             }
