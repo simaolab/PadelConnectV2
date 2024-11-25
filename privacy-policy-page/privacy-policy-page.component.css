@@ -1,0 +1,24 @@
+.content{
+    padding: 0 10rem 10rem;
+}
+
+.text-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 5rem;
+}
+
+.text-content h2{
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+    margin-bottom: 2.5rem;
+}
+
+.text-content p{
+    font-size: 1.2rem;
+}
