@@ -1,0 +1,56 @@
+a {
+  color: var(--color-gray);
+}
+/* =============================
+   SIDEBAR
+   ============================= */
+   .sidebar {
+    background: var(--color-white);
+    color: var(--color-gray);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem;
+    width: 270px;
+    height: 100vh;
+    position: fixed;
+    box-shadow: 5px 0 5px rgba(0, 0, 0, 0.1);
+    transition: all ease 500ms;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 10rem;
+    gap: 1rem;
+}
+
+.logo-img {
+    width: 80px;
+    height: 80px;
+}
+
+.logo .site-name {
+    font-size: 1.5rem;
+    display: flex;
+}
+
+.logo h3 span {
+    color: var(--color-primary);
+}
+
+.logout-container {
+  margin-top: auto;
+}
+
+/* =============================
+   MIN SIDEBAR
+   ============================= */
+.sidebar.closed {
+    width: 110px;
+}
+
+.sidebar.closed p{
+    display: none;
+}

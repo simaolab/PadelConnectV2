@@ -1,0 +1,13 @@
+Organização:
+     Acho que sou um pouco desorganizado em termos de fazer codigo em 
+     formato de equipa mas tou a tentar melhorar esse aspeto
+
+ O meu contributo:
+     Consigo contribuir de forma positiva na area que tou colocado (Back end), 
+     falhei foi mais nos UML e na organização de codigo
+ Melhorias que acho necessário fazer:
+     Gestão de tempo, melhorar comunicação e organização de codigo de 
+     forma a tornar o codigo ser facil de ler(comentarios)
+
+Autoavaliação
+15 

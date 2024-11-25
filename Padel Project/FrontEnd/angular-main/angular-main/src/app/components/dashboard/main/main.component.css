@@ -1,0 +1,81 @@
+/* =============================
+   DASHBOARD
+   ============================= */
+   .all-cards {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 2rem;
+    width: 100%;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.card {
+    background: var(--color-white);
+    border-radius: var(--border-radius-2);
+    box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: all ease 300ms;
+}
+
+.card.reservations,
+.card.courts,
+.card.promotions,
+.card.customers {
+    height: 240px;
+    padding: 1.5rem;
+}
+
+.card.statistics {
+  margin-top: 20px;
+    height: 520px;
+}
+
+.card-title {
+    display: flex;
+    gap: 2rem;
+    color: var(--color-gray);
+    align-items: center;
+}
+
+.card-title span {
+    border-radius: var(--border-radius-1);
+    color: var(--color-white);
+    padding: 0.5rem;
+}
+
+.card-title.reservations span {
+    background: var(--color-yellow);
+}
+
+.card-title.courts span{
+    background: var(--color-success);
+}
+
+.card-title.promotions  span{
+    background: var(--color-blue-2);
+}
+
+.card-title.customers span {
+    background: var(--color-blue-1);
+}
+
+.card-title.statistics span {
+    background: var(--color-warning);
+}
+
+@media screen and (max-width: 1250px) {
+  .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      width: 100%;
+  }
+}

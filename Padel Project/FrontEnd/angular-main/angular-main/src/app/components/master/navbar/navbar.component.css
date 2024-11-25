@@ -1,0 +1,85 @@
+.navbar {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  padding: 2rem;
+  position: fixed;
+  transition: all ease 300ms;
+  z-index: 1000;
+}
+
+.navbar.scrolled {
+  background: var(--color-gray);
+  transition: all ease 300ms;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.icon-box img {
+  width: 50px;
+  height: 50px;
+}
+
+.links-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: var(--font-size);
+}
+
+.links-box a {
+  color: var(--color-white);
+  transition: all ease 300ms;
+}
+
+.links-box a:hover {
+  transform: scale(1.05);
+  transition: all ease 300ms;
+  color: var(--color-primary);
+}
+
+.links-box a.active {
+  border-bottom: 2px solid var(--color-white);
+}
+
+.links-box a:hover.active {
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.btn-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-box .btn-reservation {
+  padding: 0.5rem 2.5rem;
+  background: transparent;
+  color: var(--color-white);
+  border: 2px solid var(--color-white);
+  border-radius: 99px;
+  text-align: center;
+}
+
+.btn-box .btn-reservation:hover {
+  transform: scale(1.05);
+  transition: all ease 300ms;
+  border: 2px solid var(--color-primary);
+}
+
+.user-box {
+  display: inline-flex;
+  align-items: center;
+  font-size: 24px;
+  gap: 1rem;
+}
+
+.user-box i {
+  color: var(--color-white);
+}
+
+.bx-menu {
+  display: none;
+}
