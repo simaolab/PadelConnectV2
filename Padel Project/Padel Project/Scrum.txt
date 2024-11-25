@@ -1,0 +1,27 @@
+Antes de começar a fazer qualquer coisa:
+
+- Planear muito por alto como nós achariamos que deveria ficar o site, sem nada muito pormenorizado
+- Definir calendário de datas e organização (Trello)
+- Reunião com o cliente para ver quais funcionalidades, ferramentas (Agendar a primeira reunião)
+- Planear base dados (Afonso Ferreira, Hélder Fernandes e Simão Correia - Desenho e UML)
+- Planear estética (Catarina Lopes e Rafael Costa - Figma)
+
+Durante o desenvolvimento
+
+- Sprints
+	Planeamento do sprint
+		- Inicar uma reunião com o cliente e depois com a equipa (sprint planning)
+		- Definir bem as prioridades e atribuir tarefas
+		- Criar um product backlog (lista de prioridades de TUDO (funcionalidades, aspeto, ...) o que precisa ser feito)
+		- O Sprint backlog será cada item da lista (Apontar quem fez)
+- Desenvolvimento
+- Revisão - MUITO IMPORTANTE (Antecipar risco, se vir um problema, tenta resolver OU escreve no trello se não consegue resolver)
+	NÃO DEIXAR DE PARTE / ESQUECER !!!!!!!!!!
+
+- Adaptação
+- Realizar reuniões diárias com a equipa (daily scrum)
+<<<<<<< HEAD
+..
+=======
+.
+>>>>>>> 76e37ecc5566e4b35d7a0229e592dd5544e5b7d5

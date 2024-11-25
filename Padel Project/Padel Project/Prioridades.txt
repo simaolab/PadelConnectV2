@@ -1,0 +1,16 @@
+•	Reservas – Prioridade 1
+•	Gestão de campos (do próprio) – Prioridade 1
+•	Gestão de utilizadores – Prioridade 1
+•	Gestão de Campos (Global) – Prioridade 1
+•	Gestão de Reservas (Global) – Prioridade 1
+•	Login e Registo – Prioridade 2
+•	Pesquisa de Campos – Prioridade 2
+•	Encriptação – Prioridade 2
+•	Segurança – Bloqueio de conta – Prioridade 2
+•	Pagamentos – Prioridade  3
+•	Gestão de Promoções – Prioridade 3
+•	Notificações de email automáticos – Prioridade 3
+•	Histórico de Reservas – Prioridade 3
+•	Feedback e Avaliações – Prioridade 4
+•	Análise e Relatórios – Prioridade 4
+

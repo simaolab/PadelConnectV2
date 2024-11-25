@@ -1,0 +1,191 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.3">
+  <diagram name="Page-1" id="UJWXzUGF7BPBQ5PaJ_mi">
+    <mxGraphModel dx="3294" dy="1742" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-227" value="" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=1.001;entryY=0.598;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="xuuyDoi8f-7ROgXGjiuA-228">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="620" y="650" as="sourcePoint" />
+            <mxPoint x="1490" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-228" value="&lt;b&gt;Alternativo&lt;/b&gt;" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=80;height=20;" vertex="1" parent="1">
+          <mxGeometry x="620" y="530" width="880" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-229" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;" vertex="1" parent="1">
+          <mxGeometry x="880" y="50" width="20" height="960" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-230" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="xuuyDoi8f-7ROgXGjiuA-229">
+          <mxGeometry x="5" y="80" width="10" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-231" value="1. Acede e escreve no campo de pesquisa" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" parent="1" target="xuuyDoi8f-7ROgXGjiuA-235">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="895" y="130" as="sourcePoint" />
+            <mxPoint x="1145" y="130" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-232" value="2. Não realiza pesquisa" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" parent="1" source="xuuyDoi8f-7ROgXGjiuA-235">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="895" y="250" as="targetPoint" />
+            <mxPoint x="1145" y="250" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-233" value="Página de Catálogo" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="1100" y="50" width="110" height="960" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-234" value="3. Prepara query para pesquisar em Addresses" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" edge="1" parent="xuuyDoi8f-7ROgXGjiuA-233">
+          <mxGeometry x="-1" y="115" relative="1" as="geometry">
+            <mxPoint x="60" y="320" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="90" y="350" />
+            </Array>
+            <mxPoint x="65" y="350" as="targetPoint" />
+            <mxPoint x="-115" y="105" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-235" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="xuuyDoi8f-7ROgXGjiuA-233">
+          <mxGeometry x="50" y="80" width="10" height="880" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-236" value="4. Envia query para Addresses-&amp;gt;address.city" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" parent="1" target="xuuyDoi8f-7ROgXGjiuA-239">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1160" y="450" as="sourcePoint" />
+            <mxPoint x="1415" y="450" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-237" value="5. Retorna resultados (ou vazio)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1160" y="530" as="targetPoint" />
+            <mxPoint x="1415" y="530" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-238" value="Base de dados" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="1365" y="50" width="100" height="960" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-239" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="xuuyDoi8f-7ROgXGjiuA-238">
+          <mxGeometry x="45" y="400" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-240" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="xuuyDoi8f-7ROgXGjiuA-238">
+          <mxGeometry x="45" y="760" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-241" value="&lt;h3 style=&quot;&quot;&gt;&lt;br&gt;&lt;/h3&gt;&lt;h3 style=&quot;&quot;&gt;Fluxo Principal: Pesquisa com resultados na tabela &quot;Addresses&quot;&lt;/h3&gt;&lt;ol&gt;&lt;li style=&quot;&quot;&gt;&lt;strong&gt;Utilizador (U)&lt;/strong&gt;&amp;nbsp;escreve no campo de pesquisa.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Sistema de Pesquisa (SP)&lt;/strong&gt;&amp;nbsp;não realiza a pesquisa e não apresentar sugestões.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;SP&lt;/strong&gt; prepara uma query para pesquisar na tabela &quot;Addresses&quot;.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;SP&lt;/strong&gt; envia a query para a tabela Addresses, especificamente na coluna &quot;city&quot;.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;DB&lt;/strong&gt;&amp;nbsp;retorna os resultados.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;SP&lt;/strong&gt;&amp;nbsp;apresenta resultados da tabela addresses.&lt;/li&gt;&lt;/ol&gt;&lt;h3 style=&quot;&quot;&gt;Fluxo Secundário: Pesquisa e não há resultados na tabela &quot;Addresses&quot;&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;&lt;strong&gt;Utilizador (U)&lt;/strong&gt; digita no campo de pesquisa.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;SP&lt;/strong&gt;&amp;nbsp;não realiza a pesquisa e retorna ao&amp;nbsp;Utilizador&amp;nbsp;sem apresentar sugestões&lt;/li&gt;&lt;li&gt;&lt;strong style=&quot;background-color: initial;&quot;&gt;SP&lt;/strong&gt;&lt;span style=&quot;background-color: initial;&quot;&gt; prepara uma query para pesquisar na tabela&lt;/span&gt;&amp;nbsp;&quot;Addresses&quot;.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;SP&lt;/strong&gt; envia a query para a tabela Addresses, especificamente na coluna &quot;city&quot;.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;DB&lt;/strong&gt;&amp;nbsp;retorna vazio (nenhum resultado).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;SP&lt;/strong&gt; verifica que não há resultados na tabela addresses.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;SP&lt;/strong&gt; prepara uma query para pesquisar na tabela Campos.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;SP&lt;/strong&gt; envia a query para a tabela &lt;b&gt;&quot;&lt;/b&gt;Campos&quot;, especificamente na coluna &quot;nome&quot;.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;DB&lt;/strong&gt;&amp;nbsp;retorna os resultados.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;SP&lt;/strong&gt; apresenta resultados da tabela &quot;Campos&quot;.&lt;/li&gt;&lt;/ol&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="10" y="610" width="560" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-242" value="[ Se há resultados na tabela addresses]" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="630" y="570" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-243" value="6. Atualiza catálogo com campos por localização" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" parent="1">
+          <mxGeometry x="-0.001" relative="1" as="geometry">
+            <mxPoint x="895" y="610" as="targetPoint" />
+            <mxPoint x="1150" y="610" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-244" value="[ Se &lt;span&gt;não&lt;/span&gt; há resultados na tabela addresses]" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="630" y="670" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-245" value="7. Prepara query para pesquisar em Campos" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" edge="1" parent="1">
+          <mxGeometry x="-1" y="115" relative="1" as="geometry">
+            <mxPoint x="1160" y="730" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="1190" y="760" />
+            </Array>
+            <mxPoint x="1165" y="760" as="targetPoint" />
+            <mxPoint x="-115" y="105" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-246" value="8. Envia query para Campos-&amp;gt;nome" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" parent="1" target="xuuyDoi8f-7ROgXGjiuA-240">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1160" y="810" as="sourcePoint" />
+            <mxPoint x="1410" y="810" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-247" value="9. Retorna resultados (ou vazio)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1160" y="890" as="targetPoint" />
+            <mxPoint x="1415" y="890" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-248" value="10. Retorna resultados (ou vazio)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" parent="1">
+          <mxGeometry x="0.0022" relative="1" as="geometry">
+            <mxPoint x="895" y="930" as="targetPoint" />
+            <mxPoint x="1150" y="930" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-249" value="&lt;span&gt;Diagrama de sequencia&lt;/span&gt;" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=120;height=40;fillColor=#fff2cc;strokeColor=#000000;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="610" y="10" width="960" height="1000" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-250" value="&lt;b&gt;(U) &lt;/b&gt;User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="445" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-251" value="(&lt;b&gt;SP&lt;/b&gt;) Sistema" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="285" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-252" value="&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;Pesquisa Campo - Use Case&lt;/font&gt;&lt;/b&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;align=center;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="90" y="10" width="480.42" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-253" value="" style="swimlane;startSize=0;swimlaneFillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="90" y="90" width="480" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-254" value="Não mostrar nada" style="ellipse;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="xuuyDoi8f-7ROgXGjiuA-253">
+          <mxGeometry x="290" y="190" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-255" value="Obter Sugestões de pesquisa" style="ellipse;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="xuuyDoi8f-7ROgXGjiuA-253">
+          <mxGeometry x="90" y="190" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-256" value="Mostrar Pesquisa" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="xuuyDoi8f-7ROgXGjiuA-253">
+          <mxGeometry x="90" y="50" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-257" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="xuuyDoi8f-7ROgXGjiuA-253" source="xuuyDoi8f-7ROgXGjiuA-255" target="xuuyDoi8f-7ROgXGjiuA-256">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-258" value="include" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="xuuyDoi8f-7ROgXGjiuA-257">
+          <mxGeometry x="0.0302" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-259" value="Pesquisar &lt;br&gt;Campo de Padel" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="xuuyDoi8f-7ROgXGjiuA-253">
+          <mxGeometry x="90" y="350" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-260" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="xuuyDoi8f-7ROgXGjiuA-253" source="xuuyDoi8f-7ROgXGjiuA-259" target="xuuyDoi8f-7ROgXGjiuA-255">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-261" value="include" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="xuuyDoi8f-7ROgXGjiuA-260">
+          <mxGeometry x="0.1885" y="-1" relative="1" as="geometry">
+            <mxPoint x="-1" y="13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-262" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="xuuyDoi8f-7ROgXGjiuA-253" source="xuuyDoi8f-7ROgXGjiuA-254" target="xuuyDoi8f-7ROgXGjiuA-255">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="285" y="225" as="sourcePoint" />
+            <mxPoint x="240" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-263" value="extend" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="xuuyDoi8f-7ROgXGjiuA-262">
+          <mxGeometry x="0.2577" y="-2" relative="1" as="geometry">
+            <mxPoint x="11" y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-264" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="xuuyDoi8f-7ROgXGjiuA-251" target="xuuyDoi8f-7ROgXGjiuA-255">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="80" y="314.5" as="sourcePoint" />
+            <mxPoint x="195" y="314.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xuuyDoi8f-7ROgXGjiuA-265" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="xuuyDoi8f-7ROgXGjiuA-250">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="240" y="490" as="sourcePoint" />
+            <mxPoint x="180" y="475" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

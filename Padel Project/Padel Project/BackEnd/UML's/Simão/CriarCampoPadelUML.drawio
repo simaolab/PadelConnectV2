@@ -1,0 +1,304 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.3">
+  <diagram name="Página-1" id="Z5VSvBLuPAd-XhyVf_JD">
+    <mxGraphModel dx="3301" dy="871" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="iZfYzvmAQ7dcaAIWvK7L-20" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-1095" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-2" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=0;" parent="1" vertex="1">
+          <mxGeometry x="-1050" y="90" width="910" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-3" value="&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;Criar um novo campo - Use Case&lt;/font&gt;&lt;/b&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;align=center;" parent="1" vertex="1">
+          <mxGeometry x="-1050" y="30" width="910" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="iZfYzvmAQ7dcaAIWvK7L-5" target="iZfYzvmAQ7dcaAIWvK7L-8" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-5" value="Página Criar Campo Padel" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-990" y="210" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="iZfYzvmAQ7dcaAIWvK7L-8" target="iZfYzvmAQ7dcaAIWvK7L-13" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-7" value="&amp;lt;&amp;lt; INCLUDE &amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="iZfYzvmAQ7dcaAIWvK7L-6" vertex="1" connectable="0">
+          <mxGeometry x="0.1964" y="1" relative="1" as="geometry">
+            <mxPoint x="6" y="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-8" value="Preenche dados campos" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-760" y="210" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-9" value="&amp;lt;&amp;lt; INCLUDE &amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="-819.9966666666669" y="240.0000000000001" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-10" value="Sistema" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="-715" y="330" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="iZfYzvmAQ7dcaAIWvK7L-13" target="iZfYzvmAQ7dcaAIWvK7L-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-370" y="160" />
+              <mxPoint x="-370" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-12" value="&amp;lt;&amp;lt; INCLUDE &amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="iZfYzvmAQ7dcaAIWvK7L-11" vertex="1" connectable="0">
+          <mxGeometry x="-0.1458" relative="1" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-13" value="Verifica dados Introduzidos" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-530" y="120" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-14" value="Envia Feedback" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-290" y="120" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-15" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="iZfYzvmAQ7dcaAIWvK7L-21" target="iZfYzvmAQ7dcaAIWvK7L-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-760" y="390" as="sourcePoint" />
+            <mxPoint x="-710" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-16" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="iZfYzvmAQ7dcaAIWvK7L-10" target="iZfYzvmAQ7dcaAIWvK7L-13" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-430" y="350" as="sourcePoint" />
+            <mxPoint x="-400" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sBhYokYq1XZi2q8xEiVz-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="iZfYzvmAQ7dcaAIWvK7L-17" target="iZfYzvmAQ7dcaAIWvK7L-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-17" value="Dados mal introduzidos" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-530" y="350" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;dashed=1;endArrow=none;endFill=0;startArrow=open;startFill=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="iZfYzvmAQ7dcaAIWvK7L-13" target="iZfYzvmAQ7dcaAIWvK7L-17" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-690" y="220" as="sourcePoint" />
+            <mxPoint x="-620" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-19" value="&amp;lt;&amp;lt; EXTEND &amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="iZfYzvmAQ7dcaAIWvK7L-18" vertex="1" connectable="0">
+          <mxGeometry x="-0.0505" relative="1" as="geometry">
+            <mxPoint y="5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-20" value="Admin" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="-1110" y="405" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-21" value="Editor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="-1110" y="230" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-25" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=0;" parent="1" vertex="1">
+          <mxGeometry x="-1050" y="510" width="470" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-26" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;font-size: 18px; background-color: initial;&quot;&gt;Fluxo Principal (Sucesso)&lt;/span&gt;&lt;/h1&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;div style=&quot;font-size: 15px;&quot;&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;&lt;b style=&quot;&quot;&gt;Objetivo: &lt;/b&gt;Criar um novo campo de padel e armazená-lo na base de dados com sucesso.&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 15px;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b style=&quot;&quot;&gt;Ponto 1&lt;/b&gt; - Editor/Admin acedem à página de criação de campo de padel.&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 6px;&quot;&gt;&lt;font style=&quot;font-size: 6px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Ponto 2&lt;/b&gt; - Editor/Admin preenchem os dados do campo.&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 6px;&quot;&gt;&lt;font style=&quot;font-size: 6px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Ponto 3&lt;/b&gt; - Sistema verifica os dados introduzidos.&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 6px;&quot;&gt;&lt;font style=&quot;font-size: 6px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Ponto 4&lt;/b&gt; - Sistema armazena os valores na base de dados.&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 6px;&quot;&gt;&lt;font style=&quot;font-size: 6px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b style=&quot;background-color: initial;&quot;&gt;Ponto 5&lt;/b&gt;&amp;nbsp;- Sistema envia mensagem de feedback.&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 15px;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 15px;&quot;&gt;&lt;div&gt;&lt;b&gt;Fim: &lt;/b&gt;O processo de criação de novo campo foi concluído com sucesso.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-1030" y="530" width="430" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-27" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=0;" parent="1" vertex="1">
+          <mxGeometry x="-1050" y="860" width="470" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-28" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;font-size: 18px; background-color: initial;&quot;&gt;Fluxo Secundário (Dados Mal Introduzidos)&lt;/span&gt;&lt;/h1&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;div style=&quot;font-size: 15px;&quot;&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;&lt;b style=&quot;&quot;&gt;Objetivo: &lt;/b&gt;Tratar da inserção incorreta ou incompleta dos dados.&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 15px;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b style=&quot;&quot;&gt;Ponto 1&lt;/b&gt; - Editor/Admin acedem à página de criação de campo de padel.&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 6px;&quot;&gt;&lt;font style=&quot;font-size: 6px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Ponto 2&lt;/b&gt; - Editor/Admin preenchem os dados do campo.&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 6px;&quot;&gt;&lt;font style=&quot;font-size: 6px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Ponto 3&lt;/b&gt; - Sistema verifica os dados introduzidos.&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;div&gt;&lt;b&gt;Ponto 3.1&amp;nbsp;&lt;/b&gt;- Sistema deteta dados mal introduzidos ou incompletos.&lt;/div&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;div&gt;&lt;b&gt;Ponto 3.2&amp;nbsp;&lt;/b&gt;- Sistema apresenta mensagem de erro.&lt;/div&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;div&gt;&lt;b&gt;Ponto 3.3&amp;nbsp;&lt;/b&gt;- Pede ao editor/admin para voltar a introduzir os dados.&lt;/div&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;&lt;/blockquote&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;div style=&quot;font-size: 6px;&quot;&gt;&lt;font style=&quot;font-size: 6px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Ponto 4&lt;/b&gt; - Retorna ao ponto 2 do fluxo principal.&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 15px;&quot;&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-1030" y="880" width="430" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-29" value="&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;Criar Campo Padel - Diagrama Sequência&lt;/font&gt;&lt;/b&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;align=center;" parent="1" vertex="1">
+          <mxGeometry x="-100" y="30" width="1390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-30" value="Diagrama Sequência" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;recursiveResize=0;container=1;collapsible=0;width=160;" parent="1" vertex="1">
+          <mxGeometry x="-100" y="100" width="1390" height="510" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-31" value="" style="html=1;verticalAlign=bottom;endArrow=none;curved=0;rounded=0;startArrow=none;startFill=0;endFill=0;dashed=1;" parent="iZfYzvmAQ7dcaAIWvK7L-30" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="881.76" y="209" as="sourcePoint" />
+            <mxPoint x="882" y="130" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-32" value="Página Criação Campo Padel" style="html=1;whiteSpace=wrap;" parent="iZfYzvmAQ7dcaAIWvK7L-30" vertex="1">
+          <mxGeometry x="434" y="67" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-33" value="BD" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" parent="iZfYzvmAQ7dcaAIWvK7L-30" vertex="1">
+          <mxGeometry x="1280" y="64" width="53" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-34" value="Editor / Admin" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" parent="iZfYzvmAQ7dcaAIWvK7L-30" vertex="1">
+          <mxGeometry x="120" y="66" width="17" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-36" value="1. Acede à página de criação de um campo de Padel" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;" parent="iZfYzvmAQ7dcaAIWvK7L-30" edge="1">
+          <mxGeometry x="-0.0006" width="80" relative="1" as="geometry">
+            <mxPoint x="133.5" y="171" as="sourcePoint" />
+            <mxPoint x="480" y="171" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-38" value="2. Insere dados referentes ao campo" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;" parent="iZfYzvmAQ7dcaAIWvK7L-30" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="133.5" y="204" as="sourcePoint" />
+            <mxPoint x="480" y="204" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-43" value="Sistema" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" parent="iZfYzvmAQ7dcaAIWvK7L-30" vertex="1">
+          <mxGeometry x="872" y="66" width="17" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-44" value="" style="html=1;verticalAlign=bottom;endArrow=none;curved=0;rounded=0;startArrow=none;startFill=0;endFill=0;dashed=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="iZfYzvmAQ7dcaAIWvK7L-30" target="iZfYzvmAQ7dcaAIWvK7L-32" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="488.76" y="159" as="sourcePoint" />
+            <mxPoint x="488.76" y="130" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-45" value="" style="html=1;verticalAlign=bottom;endArrow=none;curved=0;rounded=0;startArrow=none;startFill=0;endFill=0;dashed=1;entryX=0.442;entryY=1.016;entryDx=0;entryDy=0;entryPerimeter=0;" parent="iZfYzvmAQ7dcaAIWvK7L-30" source="iZfYzvmAQ7dcaAIWvK7L-47" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="128.15999999999985" y="160" as="sourcePoint" />
+            <mxPoint x="128.4000000000001" y="119" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-48" value="" style="html=1;verticalAlign=bottom;endArrow=none;curved=0;rounded=0;startArrow=none;startFill=0;endFill=0;dashed=1;" parent="iZfYzvmAQ7dcaAIWvK7L-30" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="1307" y="400" as="sourcePoint" />
+            <mxPoint x="1305.5900000000001" y="130" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-1" value="Envia dados preenchidos&amp;nbsp;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" parent="iZfYzvmAQ7dcaAIWvK7L-30" source="iZfYzvmAQ7dcaAIWvK7L-35">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="530.5" y="220" as="sourcePoint" />
+            <mxPoint x="877" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;" edge="1" parent="iZfYzvmAQ7dcaAIWvK7L-30">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="887" y="230" as="sourcePoint" />
+            <mxPoint x="887" y="255.03999999999996" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="918" y="230" />
+              <mxPoint x="918" y="255" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-3" value="3. VerificaDados()" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="9ll4efIk2uns9fdx6p8x-2">
+          <mxGeometry x="0.0273" relative="1" as="geometry">
+            <mxPoint x="52" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-4" value="&amp;nbsp; Alternativo" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;recursiveResize=0;container=1;collapsible=0;width=170;align=left;fontStyle=1" vertex="1" parent="iZfYzvmAQ7dcaAIWvK7L-30">
+          <mxGeometry x="10" y="265" width="1370" height="235" as="geometry" />
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-6" value="Dados inválidos" style="text;html=1;align=center;verticalAlign=middle;fontStyle=1" vertex="1" parent="9ll4efIk2uns9fdx6p8x-4">
+          <mxGeometry width="70" height="20" relative="1" as="geometry">
+            <mxPoint x="26" y="63" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-7" value="Dados válidos" style="line;strokeWidth=1;dashed=1;labelPosition=center;verticalLabelPosition=bottom;align=left;verticalAlign=top;spacingLeft=20;spacingTop=15;html=1;whiteSpace=wrap;fontStyle=1" vertex="1" parent="9ll4efIk2uns9fdx6p8x-4">
+          <mxGeometry y="109" width="1370" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-8" value="3.2 Apresenta mensagem de erro e indica campos com erro" style="html=1;verticalAlign=bottom;endArrow=none;curved=0;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;startArrow=open;startFill=0;endFill=0;dashed=1;" edge="1" parent="9ll4efIk2uns9fdx6p8x-4">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="484" y="27.5" as="sourcePoint" />
+            <mxPoint x="867" y="27" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-9" value="3.2 Apresenta mensagem de erro e indica campos com erro" style="html=1;verticalAlign=bottom;endArrow=none;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;startArrow=open;startFill=0;endFill=0;dashed=1;" edge="1" parent="9ll4efIk2uns9fdx6p8x-4">
+          <mxGeometry x="-0.0006" width="80" relative="1" as="geometry">
+            <mxPoint x="123.5" y="53" as="sourcePoint" />
+            <mxPoint x="474" y="53" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-10" value="2. Corrige dados mal introduzidos" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;" edge="1" parent="9ll4efIk2uns9fdx6p8x-4">
+          <mxGeometry x="0.0005" width="80" relative="1" as="geometry">
+            <mxPoint x="124" y="77" as="sourcePoint" />
+            <mxPoint x="470.5" y="77" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-11" value="Envia dados corrigidos" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" edge="1" parent="9ll4efIk2uns9fdx6p8x-4">
+          <mxGeometry x="0.0014" width="80" relative="1" as="geometry">
+            <mxPoint x="484" y="84.5" as="sourcePoint" />
+            <mxPoint x="867" y="84" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-12" value="" style="html=1;verticalAlign=bottom;endArrow=none;curved=0;rounded=0;startArrow=none;startFill=0;endFill=0;dashed=1;" edge="1" parent="9ll4efIk2uns9fdx6p8x-4" source="9ll4efIk2uns9fdx6p8x-13">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="872" y="63" as="sourcePoint" />
+            <mxPoint x="872" y="34" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-13" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="9ll4efIk2uns9fdx6p8x-4">
+          <mxGeometry x="867" y="76" width="10" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-17" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="9ll4efIk2uns9fdx6p8x-4">
+          <mxGeometry x="474" y="170" width="10" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-22" value="" style="html=1;verticalAlign=bottom;endArrow=none;curved=0;rounded=0;startArrow=none;startFill=0;endFill=0;dashed=1;" edge="1" parent="9ll4efIk2uns9fdx6p8x-4" source="9ll4efIk2uns9fdx6p8x-17">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="478.65999999999985" y="131" as="sourcePoint" />
+            <mxPoint x="478.65999999999985" y="102" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-56" value="" style="html=1;verticalAlign=bottom;endArrow=none;curved=0;rounded=0;startArrow=none;startFill=0;endFill=0;dashed=1;" edge="1" parent="9ll4efIk2uns9fdx6p8x-4" source="9ll4efIk2uns9fdx6p8x-57" target="9ll4efIk2uns9fdx6p8x-13">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="872" y="133" as="sourcePoint" />
+            <mxPoint x="872" y="104" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-57" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="9ll4efIk2uns9fdx6p8x-4">
+          <mxGeometry x="867" y="126" width="10" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-60" value="5. Envia mensagem de sucesso" style="html=1;verticalAlign=bottom;endArrow=none;curved=0;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;startArrow=open;startFill=0;endFill=0;dashed=1;" edge="1" parent="9ll4efIk2uns9fdx6p8x-4">
+          <mxGeometry x="0.0014" width="80" relative="1" as="geometry">
+            <mxPoint x="484" y="186.5" as="sourcePoint" />
+            <mxPoint x="867" y="186" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-61" value="4. Insere novo campo na base dados" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;" edge="1" parent="9ll4efIk2uns9fdx6p8x-4" target="9ll4efIk2uns9fdx6p8x-63">
+          <mxGeometry x="0.0014" width="80" relative="1" as="geometry">
+            <mxPoint x="877" y="148.07999999999998" as="sourcePoint" />
+            <mxPoint x="1260" y="147.57999999999998" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-63" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="9ll4efIk2uns9fdx6p8x-4">
+          <mxGeometry x="1292" y="136" width="10" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-64" value="Confirma inserção de dados" style="html=1;verticalAlign=bottom;endArrow=none;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;startArrow=open;startFill=0;endFill=0;dashed=1;" edge="1" parent="9ll4efIk2uns9fdx6p8x-4">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="877.0000000000005" y="174" as="sourcePoint" />
+            <mxPoint x="1292" y="174" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9ll4efIk2uns9fdx6p8x-65" value="5. Envia mensagem de sucesso" style="html=1;verticalAlign=bottom;endArrow=none;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;startArrow=open;startFill=0;endFill=0;dashed=1;" edge="1" parent="9ll4efIk2uns9fdx6p8x-4">
+          <mxGeometry x="0.0014" width="80" relative="1" as="geometry">
+            <mxPoint x="123.5" y="193.42999999999995" as="sourcePoint" />
+            <mxPoint x="474" y="193.43" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-47" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="iZfYzvmAQ7dcaAIWvK7L-30" vertex="1">
+          <mxGeometry x="123.5" y="160" width="10" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-37" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="iZfYzvmAQ7dcaAIWvK7L-30" vertex="1">
+          <mxGeometry x="877" y="209" width="10" height="91" as="geometry" />
+        </mxCell>
+        <mxCell id="iZfYzvmAQ7dcaAIWvK7L-35" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="iZfYzvmAQ7dcaAIWvK7L-30" vertex="1">
+          <mxGeometry x="484" y="160" width="10" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="sBhYokYq1XZi2q8xEiVz-2" value="&amp;lt;&amp;lt; INCLUDE &amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="-340.0014710884504" y="379.997619047619" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

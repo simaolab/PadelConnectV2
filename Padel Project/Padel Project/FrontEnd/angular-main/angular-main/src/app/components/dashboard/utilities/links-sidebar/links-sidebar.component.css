@@ -1,0 +1,48 @@
+.links-sidebar {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  color: var(--color-gray);
+
+  flex-grow: 0;
+}
+
+.links-sidebar .box-icon {
+  border-radius: var(--border-radius-1);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-sidebar {
+  display: flex;
+  font-size: 1.1rem;
+}
+
+.p-sidebar.minimized {
+  display: none;
+}
+
+.links-sidebar .box-icon.active {
+  border-radius: var(--border-radius-1);
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.links-sidebar:last-child {
+  margin-top: auto;
+}
+
+.links-sidebar:hover .box-icon.active span {
+  color: var(--color-white);
+}
+
+.links-sidebar:hover p{
+  color: var(--color-primary);
+}
+
+.links-sidebar:hover span {
+  color: var(--color-primary);
+}
