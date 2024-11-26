@@ -58,8 +58,8 @@ class FieldController extends Controller
         //Create a new field with the verified data
         $field = Field::create($validatedData);
         return response()->json([
-            'message' => 'Campo criado com sucesso!',
-            'field' => $field->load('company')
+            'status' => 'success',
+            'message' => 'Campo ' . $field->name. ' criado com sucesso!',
         ], 201);
     }
 
