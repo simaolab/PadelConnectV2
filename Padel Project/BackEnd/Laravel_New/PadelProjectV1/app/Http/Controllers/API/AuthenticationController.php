@@ -90,6 +90,7 @@ class AuthenticationController extends Controller
                 'status' => 'success',
                 'message' => 'User information retrieved successfully',
                 'user' => $user
+                'isAdmin' => $user->role->name === 'Admin',
             ]);
         }
 
