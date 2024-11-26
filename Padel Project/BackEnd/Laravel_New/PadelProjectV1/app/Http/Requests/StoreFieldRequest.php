@@ -23,7 +23,7 @@ class StoreFieldRequest extends FormRequest
             'company_id' => 'required|exists:companies,id',
             'name' => 'required|string|min:2|max:100|unique:fields,name',
             'price_hour' => 'required|numeric|min:0',
-            'type_floor' => 'required|string|max:50',
+            'type_floor' => 'required|string|in:Piso Cimento,Piso Madeira,Piso Acrílico,Piso Relva Sintética|max:30',
             'illumination' => 'nullable|boolean',
             'cover' => 'nullable|boolean',
             'status' => 'required|string',
@@ -50,6 +50,7 @@ class StoreFieldRequest extends FormRequest
             'type_floor.required'   => 'O tipo de piso é um campo obrigatório',
             'type_floor.string'     => 'O tipo de piso não aceita caractéres especiais.',
             'type_floor.max'        => 'O tipo de piso não pode exceder os 30 caracteres.',
+            'type_floor.in'         => 'O tipo de piso deve ser um dos seguintes Piso Cimento, Piso Madeira, Piso Acrílico, ou Piso Relva Sintética.',
 
             'illumination.boolean'  => 'O iluminação tem de ser sim ou não.',
             'cover.boolean'         => 'A cobertura tem de ser sim ou não.',
