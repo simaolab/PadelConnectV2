@@ -71,6 +71,7 @@ class ReservationController extends Controller
         $newReservation = Reservation::where('id', $reservation->id)->with('fields')->get();
 
         return response()->json([
+            'status' => 'success',
             'message' => 'Reserva criada com sucesso.',
         ], 201);
     }
@@ -141,6 +142,7 @@ class ReservationController extends Controller
             $updatedReservation->update($request->validated());
             return response()->json(
                 [
+                    'status' => 'success',
                     'message' => 'Reserva atualizada com sucesso!'
                 ], 200);
         }

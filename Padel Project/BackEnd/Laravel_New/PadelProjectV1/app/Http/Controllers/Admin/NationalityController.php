@@ -52,6 +52,7 @@ class NationalityController extends Controller
         //Create a new nationality with the verified data
         $nationality = Nationality::create($validatedData);
         return response()->json([
+            'status' => 'success',
             'message' => 'Nacionalidade '.$nationality->name.' criada com sucesso!'
         ], 201);
     }
@@ -99,6 +100,7 @@ class NationalityController extends Controller
             $nationality->update($request->validated());
             return response()->json(
                 [
+                    'status' => 'success',
                     'message' => 'Nacionalidade '.$nationality->name.' atualizada com sucesso!'
                 ], 200);
         }

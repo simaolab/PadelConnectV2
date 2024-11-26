@@ -24,7 +24,13 @@ class PaymentMethodController extends Controller
                     'message'           => 'Esta lista ainda não contém dados.',
                     'payment_methods'   => []
                 ], 200); }
-            else { return response()->json($paymentMethods, 200); }
+            else
+            {
+                return response()->json(
+                    [
+                        'payment_methods' => $paymentMethods
+                    ], 200);
+            }
         }
         catch(\Exception $exception)
         {
@@ -54,8 +60,8 @@ class PaymentMethodController extends Controller
 
         // Return a response with the payment method created
         return response()->json([
-            'message' => 'Método pagamento criado com sucesso!',
-            'payment_method' => $payment_method
+            'status' => 'success',
+            'message' => 'Método pagamento criado com sucesso!'
         ], 201);
     }
 
@@ -108,6 +114,7 @@ class PaymentMethodController extends Controller
             $paymentMethod->update($request->validated());
             return response()->json(
                 [
+                    'status' => 'success',
                     'message' => 'Método de pagamento '.$paymentMethod->name.' atualizado com sucesso!'
                 ], 200);
         }

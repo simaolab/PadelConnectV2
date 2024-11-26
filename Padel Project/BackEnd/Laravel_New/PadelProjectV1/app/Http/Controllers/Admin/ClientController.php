@@ -51,6 +51,7 @@ class ClientController extends Controller
         $client = Client::create($validatedData);
         return response()->json(
             [
+                'status' => 'success',
                 'message' => 'Cliente '.$client->user->username.' criado com sucesso!'
             ], 201);
     }
@@ -71,6 +72,7 @@ class ClientController extends Controller
         else {
             return response()->json(
                 [
+                    'status' => 'success',
                     'client' => $client->load('nationality','address', 'user')
                 ], 200);
         }

@@ -57,6 +57,7 @@ class RoleController extends Controller
         //Create a new role with the verified data
         $role = Role::create($validatedData);
         return response()->json([
+            'status' => 'success',
             'message' => 'Role '.$role->name.' criada com sucesso!'
         ], 201);
     }
@@ -109,6 +110,7 @@ class RoleController extends Controller
             $role->update($request->validated());
             return response()->json(
                 [
+                    'status' => 'success',
                     'message' => 'Role '.$role->name.' atualizada com sucesso!'
                 ], 200);
         }

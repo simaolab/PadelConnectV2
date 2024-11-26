@@ -30,7 +30,8 @@ class PaymentController extends Controller
                 return response()->json(
                     [
                         'payments' => $payments
-                    ], 200); }
+                    ], 200);
+            }
         }
         catch(\Exception $exception)
         {
@@ -58,8 +59,8 @@ class PaymentController extends Controller
         //Create a new payment with the verified data
         $payment = Payment::create($validatedData);
         return response()->json([
-            'message' => 'Pagammento criado com sucesso!',
-            'payment' => $payment->load('paymentMethod')
+            'status' => 'success',
+            'message' => 'Pagammento criado com sucesso!'
         ], 201);
     }
 
@@ -112,6 +113,7 @@ class PaymentController extends Controller
             $payment->update($request->validated());
             return response()->json(
                 [
+                    'status' => 'success',
                     'message' => 'Pagamento atualizado com sucesso!'
                 ], 200);
         }

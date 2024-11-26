@@ -75,6 +75,7 @@ class AddressController extends Controller
         else {
             return response()->json(
                 [
+                    'status' => 'success',
                     'address' => $address
                 ], 200);
         }
@@ -105,6 +106,7 @@ class AddressController extends Controller
             $address->update($request->validated());
             return response()->json(
                 [
+                    'status' => 'success',
                     'message' => 'Morada '.$address->address.' atualizada com sucesso!'
                 ], 200);
         }

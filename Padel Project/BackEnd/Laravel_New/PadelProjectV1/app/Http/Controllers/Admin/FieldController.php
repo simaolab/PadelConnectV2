@@ -116,6 +116,7 @@ class FieldController extends Controller
             $field->update($request->validated());
             return response()->json(
                 [
+                    'status' => 'success',
                     'message' => 'Campo '.$field->name.' atualizado com sucesso!'
                 ], 200);
         }

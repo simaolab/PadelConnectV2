@@ -58,6 +58,7 @@ class CompanyController extends Controller
         //Create a new company with the verified data
         $company = Company::create($validatedData);
         return response()->json([
+            'status' => 'success',
             'message' => 'Empresa '.$company->name.' criada com sucesso!',
         ], 201);
     }
@@ -111,6 +112,7 @@ class CompanyController extends Controller
             $company->update($request->validated());
             return response()->json(
                 [
+                    'status' => 'success',
                     'message' => 'Empresa '.$company->name.' atualizada com sucesso!'
                 ], 200);
         }
