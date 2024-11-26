@@ -1,5 +1,6 @@
 <title-page pageText="Clientes"></title-page>
 
+
 <card-table>
   <div *ngIf="isLoading; else showTable">
     <p class="loading">Carregando...</p>
@@ -18,13 +19,13 @@
         </thead>
         <tbody>
           <tr *ngFor="let user of users">
-            <td>{{ user.username }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.role?.name }}</td>
-            <td *ngIf="user.last_login_at; else noLogin">
+            <td data-cell="Username">{{ user.username }}</td>
+            <td data-cell="Email">{{ user.email }}</td>
+            <td data-cell="Name">{{ user.role?.name }}</td>
+            <td *ngIf="user.last_login_at; else noLogin" data-cell="Lastlogin">
               {{ user.last_login_at }}
             </td>
-            <td>
+            <td data-cell="Detalhes">
               <button (click)="showUser(user.id)">Detalhes</button>
             </td>
           </tr>
@@ -35,7 +36,7 @@
 </card-table>
 
 <ng-template #noLogin>
-  <td>Nunca fez login</td>
+  <td data-cell="Último Login">Nunca fez login</td>
 </ng-template>
 
 <ng-template #noUsers>

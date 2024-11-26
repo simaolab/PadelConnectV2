@@ -10,19 +10,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  // login(loginObj: { login: string; password: string }): Observable<any> {
-  //   return this.http.post(ApiRoutes.login, loginObj, { withCredentials: true });
-  // }
-
-  login(loginObj: { login: string, password: string }): Observable<any> {
-    // Fazer a requisição para configurar o CSRF
-    return this.http.get('https://api.padelconnect.pt/sanctum/csrf-cookie', { withCredentials: true })
-      .pipe(
-        // Depois de configurar o cookie CSRF, fazemos o login
-        switchMap(() => {
-          return this.http.post('https://api.padelconnect.pt/api/login', loginObj, { withCredentials: true });
-        })
-      );
+  login(loginObj: { login: string; password: string }): Observable<any> {
+    return this.http.post(ApiRoutes.login, loginObj, { withCredentials: true });
   }
 
   register(registerObj: { username: string; email: string; nif: number; password: string })

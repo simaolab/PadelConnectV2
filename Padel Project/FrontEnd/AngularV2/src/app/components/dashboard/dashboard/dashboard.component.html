@@ -1,7 +1,7 @@
 <div class="container">
   <sidebar></sidebar>
   <div class="main-container">
-    <header></header>
+    <header (componentLoaded)="onHeaderLoaded()"></header>
     <div class="dashboard">
       <router-outlet></router-outlet>
     </div>

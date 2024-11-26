@@ -7,6 +7,7 @@ import { TitlePageComponent } from '../../utilities/title-page/title-page.compon
 import { CardTableComponent } from '../../utilities/card-table/card-table.component';
 import { ModalComponent } from '../../../utilities/modal/modal.component';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
+import { AddButtonComponent } from '../../utilities/add-button/add-button.component';
 
 @Component({
   selector: 'courts',
@@ -16,7 +17,8 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
     TitlePageComponent,
     CardTableComponent,
     ModalComponent,
-    DashboardComponent
+    DashboardComponent,
+    AddButtonComponent
   ],
   templateUrl: './courts.component.html',
   styleUrl: './courts.component.css'

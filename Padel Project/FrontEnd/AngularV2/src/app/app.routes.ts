@@ -25,6 +25,9 @@ import { SettingsComponent } from './components/dashboard/pages/settings/setting
 //CRUD COMPANY
 import { CreateCompanyComponent } from './components/dashboard/pages/companies/create-company/create-company.component';
 
+//CRUD COMPANY
+import { CreateCourtComponent } from './components/dashboard/pages/courts/create-court/create-court.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -75,6 +78,7 @@ export const routes: Routes = [
       { path: 'settings', component: SettingsComponent, title: 'Dashboard - Definições' },
 
       { path: 'create-company', component: CreateCompanyComponent, title: 'Dashboard - Adicionar Empresa' },
+      { path: 'create-court', component: CreateCourtComponent, title: 'Dashboard - Adicionar Campo' },
 
 
       { path: '', redirectTo: 'main', pathMatch: 'full' },

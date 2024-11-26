@@ -46,3 +46,19 @@
 .links-sidebar:hover span {
   color: var(--color-primary);
 }
+
+@media screen and (max-width: 1000px) {
+  .p-sidebar{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 674px) {
+  .links-sidebar:last-child {
+    margin-top: 0;
+  }
+
+.links-sidebar {
+    padding: 0;
+  }
+}

@@ -79,3 +79,9 @@
       width: 100%;
   }
 }
+
+@media screen and (max-width: 674px) {
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

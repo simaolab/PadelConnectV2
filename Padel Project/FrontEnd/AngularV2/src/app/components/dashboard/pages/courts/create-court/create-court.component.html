@@ -1,0 +1,87 @@
+<title-page pageText="Adicionar Campo"></title-page>
+
+<card-table>
+ <form class="form">
+
+  <div class="form-row">
+    <div class="form-column">
+      <label class="label">Nome</label>
+      <div class="input-box">
+        <input type="text" name="name" [(ngModel)]="courtObj.name"
+          placeholder="Nome">
+        <i class='bx bx-user'></i>
+      </div>
+    </div>
+
+    <div class="form-column">
+      <label class="label">Empresa</label>
+      <div class="input-box">
+        <input type="number" name="company_id" [(ngModel)]="courtObj.company_id"
+          placeholder="Empresa">
+          <i class='bx bx-envelope'></i>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-row">
+    <div class="form-column">
+      <label class="label">Preço hora</label>
+      <div class="input-box">
+        <input type="number" name="price_hour" [(ngModel)]="courtObj.price_hour"
+          placeholder="Preço Hora">
+          <i class='bx bx-envelope'></i>
+      </div>
+    </div>
+
+    <div class="form-column">
+      <label class="label">Tipo de chão</label>
+      <div class="input-box">
+        <input type="text" name="type_floor" [(ngModel)]="courtObj.type_floor"
+          placeholder="Tipo de chão">
+          <i class='bx bx-phone'></i>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-row">
+    <div class="form-column">
+      <label class="label">Estado</label>
+      <div class="input-box">
+        <input type="text" name="status" [(ngModel)]="courtObj.status"
+          placeholder="nif">
+          <i class='bx bx-info-circle'></i>
+      </div>
+    </div>
+
+    <div class="form-column">
+      <label class="label">Cobertura</label>
+      <div class="input-box">
+        <input type="" name="cover" [(ngModel)]="courtObj.cover"
+          placeholder="Cobertura">
+          <i class='bx bxs-news'></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-column">
+      <label class="label">Última Manutenção</label>
+      <div class="input-box">
+        <input type="date" name="last_maintenance" [(ngModel)]="courtObj.last_maintenance"
+        placeholder="Última manutenção" [value]="courtObj.last_maintenance | date: 'yyyy-MM-dd'">
+
+          <i class='bx bx-info-circle'></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="button">
+    <button type="submt" (click)="create()" class="btn">
+      Adicionar
+      <i class='bx bx-plus-circle'></i>
+    </button>
+  </div>
+</form>
+</card-table>

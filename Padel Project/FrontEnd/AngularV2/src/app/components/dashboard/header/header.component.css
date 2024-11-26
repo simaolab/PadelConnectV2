@@ -64,3 +64,37 @@ a {
 .notifications {
     text-decoration: none;
 }
+
+@media screen and (max-width: 1000px) {
+  .right-header {
+    gap: 4rem;
+  }
+
+  .date-hour {
+    gap: 1.5rem;
+  }
+
+  .menu-icon {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 674px) {
+  .right-header {
+    gap: 2rem;
+  }
+
+  .date-hour {
+    gap: 1rem;
+  }
+
+  .date-hour i {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .right-header {
+      gap: 1rem;
+    }
+}

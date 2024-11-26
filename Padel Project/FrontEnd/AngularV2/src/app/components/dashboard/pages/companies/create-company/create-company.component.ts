@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CompaniesService } from '../../../../../services/companies.service';
@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { CardTableComponent } from '../../../utilities/card-table/card-table.component';
 import { TitlePageComponent } from '../../../utilities/title-page/title-page.component';
 import { DashboardComponent } from '../../../dashboard/dashboard.component';
-import { error } from 'console';
 
 @Component({
   selector: 'create-company',

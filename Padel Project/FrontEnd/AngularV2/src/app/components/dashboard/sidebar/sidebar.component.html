@@ -6,12 +6,10 @@
 
   <link-sidebar href="/dashboard/reservations" icon="event" p="Reservas"></link-sidebar>
 
-    <div class="auth" *ngIf="isAdmin">
-      <link-sidebar href="/dashboard/companies" icon="domain" p="Empresas"></link-sidebar>
-      <link-sidebar href="/dashboard/courts" icon="sports_tennis" p="Campos"></link-sidebar>
-      <link-sidebar href="/dashboard/statistics" icon="signal_cellular_alt" p="Estatísticas"></link-sidebar>
-      <link-sidebar href="/dashboard/customers" icon="group" p="Clientes"></link-sidebar>
-    </div>
+  <link-sidebar href="/dashboard/companies" icon="domain" p="Empresas" *ngIf="isAdmin"></link-sidebar>
+  <link-sidebar href="/dashboard/courts" icon="sports_tennis" p="Campos" *ngIf="isAdmin"></link-sidebar>
+  <link-sidebar href="/dashboard/statistics" icon="signal_cellular_alt" p="Estatísticas" *ngIf="isAdmin"></link-sidebar>
+  <link-sidebar href="/dashboard/customers" icon="group" p="Clientes" *ngIf="isAdmin"></link-sidebar>
 
   <link-sidebar href="/dashboard/promotions" icon="sell" p="Promoções"></link-sidebar>
   <link-sidebar href="/dashboard/settings" icon="settings" p="Definições"></link-sidebar>

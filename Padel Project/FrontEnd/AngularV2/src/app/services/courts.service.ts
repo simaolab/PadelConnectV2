@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiRoutes } from '../config/api-routes';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,5 +13,19 @@ export class CourtsService {
 
   index(): Observable<any> {
     return this.http.get<any>(ApiRoutes.courts);
+  }
+
+  create(courtObj: {
+    name: string;
+    company_id: number;
+    price_hour: number;
+    type_floor: string;
+    status: string;
+    cover: number;
+    last_maintenance: string }): Observable<any> {
+      const token = localStorage.getItem('authToken');
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+      return this.http.post<any>(ApiRoutes.courts, courtObj, { headers });
   }
 }

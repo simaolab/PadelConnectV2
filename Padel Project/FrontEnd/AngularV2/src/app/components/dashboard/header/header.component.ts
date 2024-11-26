@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'header',
@@ -10,6 +10,12 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
   username = localStorage.getItem('username');
 
-  date: string = "12 de Novembro";
-  hour: string = "16:00";
+  date: string = "";
+  hour: string = "";
+
+  @Output() componentLoaded = new EventEmitter<void>();
+
+  ngOnInit() {
+    this.componentLoaded.emit();
+  }
 }

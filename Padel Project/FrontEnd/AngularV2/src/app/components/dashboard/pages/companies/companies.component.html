@@ -22,13 +22,13 @@
         </thead>
         <tbody>
           <tr *ngFor="let company of companies">
-            <td>{{ company.name }}</td>
-            <td>{{ company.email }}</td>
-            <td>{{ company.contact }}</td>
-            <td>{{ company.nif }}</td>
-            <td>{{ company.address.address }}</td>
-            <td>{{ company.fields_count }}</td>
-            <td></td>
+            <td data-cell="Nome">{{ company.name }}</td>
+            <td data-cell="Email">{{ company.email }}</td>
+            <td data-cell="Contacto">{{ company.contact }}</td>
+            <td data-cell="NIF">{{ company.nif }}</td>
+            <td data-cell="Morada">{{ company.address.address }}</td>
+            <td data-cell="Campos">{{ company.fields_count }}</td>
+            <td data-cell="Ações"></td>
           </tr>
         </tbody>
       </table>

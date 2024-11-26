@@ -22,6 +22,10 @@ export class DashboardComponent {
 
     constructor(private router: Router) {}
 
+    onHeaderLoaded() {
+      document.dispatchEvent(new Event('headerLoaded'));
+    }
+
     showModal(type: string, message: string): void {
       if (this.modalComponent) {
         this.modalComponent.showModal(type, message);
@@ -33,4 +37,5 @@ export class DashboardComponent {
         this.modalComponent.closeModal();
       }
     }
+
 }

@@ -17,6 +17,12 @@ a {
     transition: all ease 500ms;
 }
 
+.show-sidebar {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 .logo {
     display: flex;
     justify-content: center;
@@ -53,4 +59,37 @@ a {
 
 .sidebar.closed p{
     display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .sidebar {
+      width: 110px;
+  }
+
+  .logo .site-name {
+      display: none;
+  }
+}
+
+@media screen and (max-width: 674px) {
+    .sidebar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4rem;
+      width: 100%;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition: transform ease 300ms ;
+    }
+
+  .logo {
+    display: none;
+  }
 }

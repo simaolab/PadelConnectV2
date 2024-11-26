@@ -1,5 +1,7 @@
 <title-page pageText="Campos"></title-page>
 
+<add-button href="/dashboard/create-court"></add-button>
+
 <card-table>
   <div *ngIf="isLoading; else showTable">
     <p class="loading">Carregando...</p>
@@ -22,7 +24,17 @@
         </thead>
         <tbody>
           <tr *ngFor="let court of courts">
+            <td data-cell="Nome">{{ court.name }}</td>
+            <td data-cell="Empresa">{{ court.company.name }}</td>
+            <td data-cell="Preço / h">{{ court.price_hour }}</td>
+            <td data-cell="Tipo de chão">{{ court.type_floor }}</td>
+            <td data-cell="Iluminação">{{ court.illumination }}</td>
+            <td data-cell="Cobertura">{{ court.cover }}</td>
+            <td data-cell="Estado">{{ court.status }}</td>
+            <td data-cell="Última manutenção">{{ court.last_maintenance }}</td>
+            <td data-cell="Ações">
 
+            </td>
           </tr>
         </tbody>
       </table>
