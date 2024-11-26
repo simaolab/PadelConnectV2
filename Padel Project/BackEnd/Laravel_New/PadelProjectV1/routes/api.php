@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\API\AuthenticationController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Middleware\RoleCheck;
 use Illuminate\Support\Facades\Route;
 
@@ -67,5 +68,8 @@ Route::middleware('auth:api')->group(function () {
         ->middleware(RoleCheck::class);
     Route::get('/clients/search/{name?}', [ClientController::class, 'search'])
         ->middleware(RoleCheck::class);
-
+    Route::apiResource('promotions', PromotionController::class)
+        ->middleware(RoleCheck::class);
+    Route::get('/promotions/search/{string?}', [PromotionController::class, 'search'])
+        ->middleware(RoleCheck::class);
 });
