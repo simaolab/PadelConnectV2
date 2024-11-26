@@ -113,6 +113,11 @@ class AuthenticationController extends Controller
             // Get the authenticated user details
             $user = Auth::user()->load('role');
 
+            // Update column last_login
+            $user->update([
+                'last_login_at' => now(),
+            ]);
+
             // Create an access token for the user
             $accessToken = $user->createToken('authToken')->accessToken;
 

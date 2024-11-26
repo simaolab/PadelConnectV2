@@ -7,11 +7,11 @@ use App\Http\Controllers\Admin\FieldController;
 use App\Http\Controllers\Admin\NationalityController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\PaymentMethodController;
+use app\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\API\AuthenticationController;
-use App\Http\Controllers\PromotionController;
 use App\Http\Middleware\RoleCheck;
 use Illuminate\Support\Facades\Route;
 
@@ -62,7 +62,7 @@ Route::middleware('auth:api')->group(function () {
         ->middleware(RoleCheck::class);
     Route::get('/roles/search/{name?}', [RoleController::class, 'search'])
         ->middleware(RoleCheck::class);
-    Route::get('users', [UserController::class, 'index'])
+    Route::apiResource('users', UserController::class)
         ->middleware(RoleCheck::class);
     Route::apiResource('clients', ClientController::class)
         ->middleware(RoleCheck::class);

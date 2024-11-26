@@ -29,4 +29,31 @@ class UserController extends Controller
             return response()->json(['error' => $exception], 500);
         }
     }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //Not used, only for view
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show($userId)
+    {
+        //Search for the user
+        $user = User::find($userId);
+        //If the user does not exist show message error, else show user
+        if (!$user) { return response()->json(
+            [
+                'message' => 'Utilizador não foi encontrado!'
+            ], 404); }
+        else { return response()->json(
+            [
+                'user' => $user->load('role')
+            ], 200);
+        }
+    }
 }
