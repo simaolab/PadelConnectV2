@@ -35,6 +35,7 @@
   --font-subtitle: 1.5rem;
   --font-size: 1.3rem;
   --font-small: 1.1rem;
+  --font-smaller: .9rem;
 
   --color-input: #e9e8e8;
   --box-shadow-card: 0 0 3rem var(--color-input);
@@ -95,13 +96,34 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
-.two-fields{
-      width: 100%;
-    display: flex;
-    gap: 2rem;
+.wrap-attribute-container{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.small-large{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 1.5rem;
+}
+
+.complete{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+}
+
+.large-small{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1.5rem;
 }
 
 .attribute-container{
@@ -180,5 +202,7 @@ input[type=number] {
 }
 
 .small-error {
+  padding: .5rem;
   color: var(--color-danger);
+  font-size: var(--font-smaller);
 }
