@@ -4,7 +4,7 @@
   <form class="form">
 
     <div class="small-large">
-      
+
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
@@ -14,11 +14,11 @@
           <div class="input-container">
             <input type="number" name="nif" [(ngModel)]="companyObj.nif" placeholder="999999999">
           </div>
-        </div>        
+        </div>
         <small *ngIf="formErrors['nif']" class="small-error">{{ formErrors['nif'] }}</small>
       </div>
 
-      
+
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
@@ -48,7 +48,7 @@
     </div>
 
     <div class="complete">
-      
+
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
@@ -61,7 +61,7 @@
         </div>
       </div>
       <small *ngIf="formErrors['email']" class="small-error">{{ formErrors['email'] }}</small>
-      
+
     </div>
 
     <div class="large-small">
@@ -75,7 +75,7 @@
           <div class="input-container">
             <input type="number" name="address" [(ngModel)]="companyObj.address_id" placeholder="Rua do Padel, 1, Porto, 4000-000">
           </div>
-        </div>        
+        </div>
         <small *ngIf="formErrors['address_id']" class="small-error">{{ formErrors['address_id'] }}</small>
       </div>
 
@@ -114,3 +114,4 @@
     </div>
   </form>
 </card-form>
+

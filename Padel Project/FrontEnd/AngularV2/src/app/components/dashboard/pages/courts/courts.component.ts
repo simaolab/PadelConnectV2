@@ -1,5 +1,5 @@
 import { CourtsService } from './../../../../services/courts.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component} from '@angular/core';
 
@@ -13,6 +13,7 @@ import { AddButtonComponent } from '../../utilities/add-button/add-button.compon
   selector: 'courts',
   standalone: true,
   imports: [
+    RouterModule,
     CommonModule,
     TitlePageComponent,
     CardTableComponent,
