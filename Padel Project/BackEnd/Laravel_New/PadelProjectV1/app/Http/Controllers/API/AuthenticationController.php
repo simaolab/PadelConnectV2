@@ -89,8 +89,8 @@ class AuthenticationController extends Controller
                 'response_code' => '200',
                 'status' => 'success',
                 'message' => 'User information retrieved successfully',
-                'user' => $user
-                'isAdmin' => $user->role->name === 'Admin',
+                'user' => $user,
+                'isAdmin' => $user->role->name === 'Admin'
             ]);
         }
 
