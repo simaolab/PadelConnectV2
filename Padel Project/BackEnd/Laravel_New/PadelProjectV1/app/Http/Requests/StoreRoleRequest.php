@@ -40,7 +40,7 @@ class StoreRoleRequest extends FormRequest
     {
         //We need to use HttpResponse to break the current task execution and show the errors
         throw new HttpResponseException(response()->json([
-            'message' => 'Erro ao criar a role:',
+            'message' => 'Erro ao criar a role!',
             'error(s)' => $validator->errors()
         ], 422));
     }

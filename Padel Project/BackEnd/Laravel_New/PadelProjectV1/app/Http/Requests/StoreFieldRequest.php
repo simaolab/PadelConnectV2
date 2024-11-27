@@ -68,7 +68,7 @@ class StoreFieldRequest extends FormRequest
         //We need to use HttpResponse to break the current task execution and show the errors
         throw new HttpResponseException(response()->json([
             'message' => 'Erro ao criar um campo!',
-            'errors' => $validator->errors()
+            'error(s)' => $validator->errors()
         ], 422));
     }
 }

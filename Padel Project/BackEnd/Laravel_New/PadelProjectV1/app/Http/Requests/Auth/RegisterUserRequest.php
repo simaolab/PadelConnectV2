@@ -40,11 +40,11 @@ class RegisterUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'            => 'required|string|email|max:255|unique:users,email|regex:/^[^@]+@[^@]+\.[^@]+$/',
+            'email'            => 'required|string|max:100|unique:users,email|regex:/^[^@]+@[^@]+\.[^@]+$/',
             'password'         => 'required|string|min:8|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&]{8,}$/',
-            'username'         => 'required|string|min:3|max:255|unique:users,username',
+            'username'         => 'required|string|min:3|max:30|unique:users,username',
             'nif'              => 'required|digits:9|unique:users,nif',
-            'new_user'         => 'boolean',
+            'birthday'         => 'required|date_format:d/m/Y|before:18 years ago|after:110 years ago',
         ];
     }
 
@@ -52,28 +52,29 @@ class RegisterUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required'            => 'The email field is required.',
-            'email.email'               => 'Please enter a valid email address.',
-            'email.unique'              => 'This email address already exists.',
-            'email.max'                 => 'The email may not be greater than 255 characters.',
-            'email.regex'               => 'The email format is invalid. It must contain "@" and a domain',
+            'email.required'            => 'O email é um campo obrigatório',
+            'email.unique'              => 'Esse email já está em uso',
+            'email.max'                 => 'O email não pode ter mais que 100 caracteres.',
+            'email.regex'               => 'O email esta invalido. Tem de conter "@" e um dominio',
 
-            'password.required'         => 'The password field is required.',
-            'password.min'              => 'The password must be at least 8 characters.',
-            'password.confirmed'        => 'The password confirmation does not match',
-            'password.regex'            => 'The password must have a character a-z, A-Z, 0-9, and a special character.',
+            'password.required'         => 'A password é um campo obrigatorio',
+            'password.min'              => 'A password tem de ter no minimo 8 caracteres',
+            'password.confirmed'        => 'As passwords não coincidem.',
+            'password.regex'            => 'A password tem de ter no minimo 1 caracter a-z, A-Z, 0-9, e 1 caracter especial',
 
-            'username.required'         => 'The username field is required.',
-            'username.min'              => 'The username must be at least 3 characters.',
-            'username.max'              => 'The username may not be greater than 255 characters.',
-            'username.unique'           => 'This username already exists. Try another one.',
+            'username.required'         => 'O username é um campo obrigatório.',
+            'username.min'              => 'O username tem de ter no mínimo 2 catacteres.',
+            'username.max'              => 'O username tem de ter no mínimo 30 catacteres.',
+            'username.unique'           => 'Este username já está em uso',
 
-            'nif.required'              => 'The NIF field is required.',
-            'nif.integer'               => 'The NIF must be an integer.',
-            'nif.digits'                => 'The NIF must be at least 9 characters.',
-            'nif.unique'                => 'The NIF already exists. Try another one.',
+            'nif.required'              => 'O NIF é um campo obrigatório.',
+            'nif.integer'               => 'O NIF tem de ser um número.',
+            'nif.digits'                => 'O NIF tem de ter 9 digitos no minimo.',
+            'nif.unique'                => 'O NIF já se encontra associado a um utilizador.',
 
-            'new_user.boolean'          => 'The new user field must be true or false.',
+            'birthday.date_format'      => 'A data de nascimento tem de estar no formato dd/mm/yyyy.',
+            'birthday.before'           => 'Tem de ter mais de 18 anos para criar conta.',
+            'birthday.after'            => 'Data de nascimento inválida.',
         ];
     }
 
@@ -82,8 +83,8 @@ class RegisterUserRequest extends FormRequest
     {
         //We need to use HttpResponse to break the current task execution and show the errors
         throw new HttpResponseException(response()->json([
-            'message' => 'Error registering a new user:',
-            'errors'  => $validator->errors()
+            'message' => 'Erro ao registar a conta',
+            'error(s)'  => $validator->errors()
         ], 422));
     }
 }

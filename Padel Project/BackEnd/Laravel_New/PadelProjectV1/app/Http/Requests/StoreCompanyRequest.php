@@ -20,7 +20,6 @@ class StoreCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address_id' => 'required|exists:addresses,id',
             'name' => 'required|unique:companies|min:2|max:100',
             'nif' => [
                 'required',
@@ -34,6 +33,7 @@ class StoreCompanyRequest extends FormRequest
             ],
             'email' => 'required|email|unique:companies,email',
             'newsletter' => 'nullable',
+            'address' => 'required'
         ];
     }
 
@@ -41,8 +41,7 @@ class StoreCompanyRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'address_id.required'   => 'A morada é um campo obrigatório.',
-            'address_id.exists'     => 'A morada selecionada não é válida.',
+            'address.required'      => 'A morada é um campo obrigatório.',
 
             'name.min'              => 'O nome da empresa tem de ter no mínimo 2 caractéres.',
             'name.max'              => 'O nome da empresa não pode ter mais do que 30 caractéres.',

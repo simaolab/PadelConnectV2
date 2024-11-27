@@ -17,9 +17,7 @@ class CompanyController extends Controller
         //Try to get all Companies from table Company
         try
         {
-            $companies = Company::with('address')
-                ->withCount('fields')
-                ->get();
+            $companies = Company::withCount('fields')->get();
             // If table Company does not have any data echo a message, else show data
             if ($companies->isEmpty()) { return response()->json(
                 [
@@ -29,7 +27,9 @@ class CompanyController extends Controller
             }
             else
             {
-                return response()->json([$companies], 200);
+                return response()->json([
+                    'companies' => $companies
+                ], 200);
             }
         }
         catch(\Exception $exception)
@@ -81,7 +81,7 @@ class CompanyController extends Controller
         {
             return response()->json(
                 [
-                    'company' => $company->load('address')
+                    'company' => $company
                 ], 200);
         }
     }
@@ -153,9 +153,7 @@ class CompanyController extends Controller
             //If something was sent in the route
             if ($name) {
                 //Get all companies that matches with the data sent
-                $companies = Company::with('address')
-                    ->where('name', 'LIKE', '%' . $name . '%')
-                    ->get();
+                $companies = Company::where('name', 'LIKE', '%' . $name . '%')->get();
             }
 
             //Return the data

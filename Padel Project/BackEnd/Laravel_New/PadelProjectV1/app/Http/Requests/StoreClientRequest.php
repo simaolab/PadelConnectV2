@@ -20,10 +20,8 @@ class StoreClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address_id'        => 'nullable|exists:addresses,id',
             'first_name'        => 'nullable|string|max:50',
             'last_name'         => 'nullable|string|max:50',
-            'birthday'          => 'nullable|date_format:d/m/Y|before:18 years ago|after:110 years ago',
             'gender'            => 'nullable|string|in:Male,Female,Other',
             'contact'           => [
                 'nullable',
@@ -33,6 +31,7 @@ class StoreClientRequest extends FormRequest
             'nationality_id'    => 'nullable|exists:nationalities,id',
             'newsletter'        => 'boolean',
             'user_id'           => 'required|exists:users,id|unique:clients,user_id',
+            'address'           => 'nullable|string|max:100',
         ];
     }
 
@@ -40,12 +39,8 @@ class StoreClientRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'address_id.exists'     => 'A morada selecionada não existe.',
             'first_name.max'        => 'O primeiro nome deve ter no máximo 50 caractéres.',
             'last_name.max'         => 'O último nome deve ter no máximo 50 caractéres.',
-            'birthday.date_format'  => 'A data de nascimento tem de estar no formato dd/mm/yyyy.',
-            'birthday.before'       => 'Tem de ter mais de 18 anos para criar conta.',
-            'birthday.after'        => 'Data de nascimento inválida.',
             'gender.in'             => 'O gênero tem de ser masculino, feminino ou outro',
             'contact.regex'         => 'O contacto tem de ser um contacto válido português',
             'nationality_id.exists' => 'A nacionalidade selecionada é inválida',

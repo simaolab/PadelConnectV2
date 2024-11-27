@@ -28,6 +28,7 @@ class AuthenticationController extends Controller
             $user->email    = $request->email;
             $user->password = Hash::make($request->password);
             $user->nif      = $request->nif;
+            $user->birthday = $request->birthday;
             $user->role_id  = 3;
 
             // Attempt to save the user to the database

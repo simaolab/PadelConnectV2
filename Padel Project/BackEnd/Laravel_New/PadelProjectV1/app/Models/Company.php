@@ -12,25 +12,19 @@ class Company extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'address_id',
         'name',
         'email',
         'contact',
         'nif',
-        'newsletter'
+        'newsletter',
+        'address'
     ];
 
     protected $hidden = [
-        'address_id',
         'created_at',
         'updated_at',
         'deleted_at'
     ];
-
-    public function address()
-    {
-        return $this->belongsTo(Address::class);
-    }
 
     public function fields()
     {

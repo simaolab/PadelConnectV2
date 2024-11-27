@@ -41,8 +41,8 @@ class StorePaymentMethodRequest extends FormRequest
     {
         //We need to use HttpResponse to break the current task execution and show the errors
         throw new HttpResponseException(response()->json([
-            'message' => 'Error creating nationality:',
-            'errors' => $validator->errors()
+            'message' => 'Erro ao criar um método de pagamento!',
+            'error(s)' => $validator->errors()
         ], 422));
     }
 }

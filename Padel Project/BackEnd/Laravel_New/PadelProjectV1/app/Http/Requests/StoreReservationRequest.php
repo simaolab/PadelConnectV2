@@ -70,8 +70,8 @@ class StoreReservationRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
-            'message' => 'Error: The provided data contains validation errors. Please review the information and try again.',
-            'errors' => $validator->errors()
+            'message' => 'Erro ao criar a reserva',
+            'error(s)' => $validator->errors()
         ], 422));
     }
 }

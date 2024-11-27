@@ -50,7 +50,7 @@ class UpdatePaymentMethodRequest extends FormRequest
     {
         //We need to use HttpResponse to break the current task execution and show the errors
         throw new HttpResponseException(response()->json([
-            'message' => 'Erro ao editar o método de pagamento',
+            'message' => 'Erro ao editar o método de pagamento!',
             'error(s)' => $validator->errors()
         ], 422));
     }

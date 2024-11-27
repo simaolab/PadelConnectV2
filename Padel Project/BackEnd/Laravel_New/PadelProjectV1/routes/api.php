@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\AddressController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\FieldController;
@@ -38,8 +37,6 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('fields', FieldController::class)
         ->except(['index', 'show'])
         ->middleware(RoleCheck::class);
-    Route::apiResource('addresses', AddressController::class)
-        ->middleware(RoleCheck::class);
     Route::apiResource('payments', PaymentController::class)
         ->middleware(RoleCheck::class);
     Route::get('/payments/search/{payment?}', [PaymentController::class, 'search'])
@@ -47,8 +44,6 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('payment-methods', PaymentMethodController::class)
         ->middleware(RoleCheck::class);
     Route::get('/payment-methods/search/{description?}', [PaymentMethodController::class, 'search'])
-        ->middleware(RoleCheck::class);
-    Route::get('/addresses/search/{address?}', [AddressController::class, 'search'])
         ->middleware(RoleCheck::class);
     Route::apiResource('companies', CompanyController::class)
         ->middleware(RoleCheck::class);

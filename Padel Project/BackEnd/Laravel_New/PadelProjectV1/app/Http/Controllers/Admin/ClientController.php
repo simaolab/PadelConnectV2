@@ -15,7 +15,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::with('nationality', 'address', 'user')->get();
+        $clients = Client::with('nationality', 'user')->get();
         // If table Clients does not have any data echo a message, else show data
         if ($clients->isEmpty()) { return response()->json(
             [
@@ -73,7 +73,7 @@ class ClientController extends Controller
             return response()->json(
                 [
                     'status' => 'success',
-                    'client' => $client->load('nationality','address', 'user')
+                    'client' => $client->load('nationality', 'user')
                 ], 200);
         }
     }
@@ -134,7 +134,7 @@ class ClientController extends Controller
             //If something was sent in the route
             if ($name) {
                 //Get all clients that matches with the data sent on first_name or last_name column
-                $clients = Client::with('nationality','address','user')
+                $clients = Client::with('nationality','user')
                     ->where('first_name', 'LIKE', '%' . $name . '%')
                     ->orWhere('last_name', 'LIKE', '%' . $name . '%')
                     ->get();

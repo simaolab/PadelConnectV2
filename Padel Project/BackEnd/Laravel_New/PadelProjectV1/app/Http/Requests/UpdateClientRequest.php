@@ -21,10 +21,9 @@ class UpdateClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address_id'        => 'nullable|exists:addresses,id',
+            'address'           => 'nullable',
             'first_name'        => 'nullable|string|max:50',
             'last_name'         => 'nullable|string|max:50',
-            'birthday'          => 'nullable|date_format:d/m/Y|before:18 years ago|after:100 years ago',
             'gender'            => 'nullable|string|in:Male,Female,Other',
             'contact'           => [
                 'nullable',
