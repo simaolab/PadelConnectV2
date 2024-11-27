@@ -201,6 +201,19 @@ input[type=number] {
   width: 150px;
 }
 
+.btn.back
+{
+   background: var(--color-primary);
+}
+
+.btn.edit {
+  background: var(--color-blue-2);
+}
+
+.btn.delete {
+  background: var(--color-danger);
+}
+
 .small-error {
   padding: .5rem;
   color: var(--color-danger);
