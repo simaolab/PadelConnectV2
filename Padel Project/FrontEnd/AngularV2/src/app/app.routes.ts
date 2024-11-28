@@ -21,6 +21,7 @@ import { PromotionsComponent } from './components/dashboard/pages/promotions/pro
 import { StatisticsComponent } from './components/dashboard/pages/statistics/statistics.component';
 import { CustomersComponent } from './components/dashboard/pages/customers/customers.component';
 import { SettingsComponent } from './components/dashboard/pages/settings/settings.component';
+import { DetailsPageComponent } from './components/pages/details-page/details-page.component';
 
 //CRUD COMPANY
 import { CreateCompanyComponent } from './components/dashboard/pages/companies/create-company/create-company.component';
@@ -61,6 +62,11 @@ export const routes: Routes = [
   { path: 'login',
     component: LoginComponent,
     title: 'Login'
+  },
+  {
+    path: 'courts/:id',
+    component: DetailsPageComponent,
+    title: 'Detalhes do Campo'
   },
   {
     path: 'dashboard',
