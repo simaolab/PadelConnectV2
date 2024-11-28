@@ -77,4 +77,9 @@ class Promotion extends Model
             return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
         }
     }
+
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class);
+    }
 }

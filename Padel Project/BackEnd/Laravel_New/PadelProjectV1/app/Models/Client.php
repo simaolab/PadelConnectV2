@@ -45,4 +45,9 @@ class Client extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function promotions()
+    {
+        return $this->belongsToMany(Promotion::class);
+    }
 }
