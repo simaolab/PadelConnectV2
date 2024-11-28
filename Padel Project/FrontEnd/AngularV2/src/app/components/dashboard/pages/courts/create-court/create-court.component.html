@@ -3,9 +3,7 @@
 <card-form>
   <form class="form">
 
-    <div class="small-large">
-
-
+    <div class="flex-container">
 
       <div class="wrap-attribute-container">
         <div class="attribute-container">
@@ -24,6 +22,24 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
+            <i class='bx bx-user'></i>
+            <p>Nome</p>
+          </div>
+          <div class="input-container">
+            <input type="text" name="name" [(ngModel)]="courtObj.name"
+            placeholder="Nome">
+          </div>
+        </div>
+        <small *ngIf="formErrors['name']" class="small-error">{{ formErrors['name'] }}</small>
+      </div>
+
+    </div>
+
+    <div class="flex-container">
+
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
             <i class='bx bx-euro'></i>
             <p>Preço hora</p>
           </div>
@@ -38,23 +54,6 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-user'></i>
-            <p>Nome</p>
-          </div>
-          <div class="input-container">
-            <input type="text" name="name" [(ngModel)]="courtObj.name"
-            placeholder="Nome">
-          </div>
-        </div>
-        <small *ngIf="formErrors['name']" class="small-error">{{ formErrors['name'] }}</small>
-      </div>
-    </div>
-
-    <div class="complete">
-
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
             <i class='bx bx-wrench'></i>
             <p>Última manutenção</p>
           </div>
@@ -63,25 +62,7 @@
             placeholder="Última manutenção" [value]="courtObj.last_maintenance | date: 'yyyy-MM-dd'">
           </div>
         </div>
-      </div>
-      <small *ngIf="formErrors['last_maintenance']" class="small-error">{{ formErrors['last_maintenance'] }}</small>
-
-    </div>
-
-    <div class="large-small">
-
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class='bx bx-grid'></i>
-            <p>Tipo de chão</p>
-          </div>
-          <div class="input-container">
-            <input type="text" name="type_floor" [(ngModel)]="courtObj.type_floor"
-            placeholder="Tipo de chão">
-          </div>
-        </div>
-        <small *ngIf="formErrors['type_floor']" class="small-error">{{ formErrors['type_floor'] }}</small>
+        <small *ngIf="formErrors['last_maintenance']" class="small-error">{{ formErrors['last_maintenance'] }}</small>
       </div>
 
       <div class="wrap-attribute-container">
@@ -101,6 +82,24 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
+            <i class='bx bx-grid'></i>
+            <p>Tipo de chão</p>
+          </div>
+          <div class="input-container">
+            <input type="text" name="type_floor" [(ngModel)]="courtObj.type_floor"
+            placeholder="Tipo de chão">
+          </div>
+        </div>
+        <small *ngIf="formErrors['type_floor']" class="small-error">{{ formErrors['type_floor'] }}</small>
+      </div>
+
+    </div>
+
+    <div class="flex-container">
+
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
             <i class='bx bx-cloud'></i>
             <p>Cobertura</p>
           </div>
@@ -111,6 +110,7 @@
         </div>
         <small *ngIf="formErrors['cover']" class="small-error">{{ formErrors['cover'] }}</small>
       </div>
+
     </div>
 
     <div class="button">
@@ -119,5 +119,6 @@
         <i class='bx bx-plus-circle'></i>
       </button>
     </div>
+    
   </form>
 </card-form>
