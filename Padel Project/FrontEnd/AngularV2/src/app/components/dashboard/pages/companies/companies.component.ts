@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CompaniesService } from '../../../../services/companies.service';
 
@@ -12,6 +12,7 @@ import { AddButtonComponent } from '../../utilities/add-button/add-button.compon
   selector: 'companies',
   standalone: true,
   imports: [
+    RouterModule,
     CommonModule,
     TitlePageComponent,
     CardTableComponent,
@@ -38,7 +39,6 @@ export class CompaniesComponent {
   loadCompanies(): void {
     this.companiesService.index().subscribe({
       next: (data: any) => {
-        console.log(data)
         setTimeout(() => {
           if(data && data.message) {
             if(this.router.url.includes('/companies')) {
@@ -49,7 +49,6 @@ export class CompaniesComponent {
             }
           } else {
             this.companies = data.companies;
-            console.log(this.companies)
           }
           this.isLoading = false;
         }, 1500);

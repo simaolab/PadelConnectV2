@@ -1,4 +1,4 @@
-<title-page pageText="Adicionar Empresa"></title-page>
+<title-page pageText="{{ companyObj.name }}"></title-page>
 
 <card-form>
   <form class="form">
@@ -108,12 +108,12 @@
 
     <div class="button">
       <button type="submit" class="btn back" [routerLink]="['/dashboard/companies']">
-        <i class='bx bx-plus-circle'></i>
+        <i class='bx bx-left-arrow-alt'></i>
         Voltar atrás
       </button>
-      <button type="submit" (click)="create()" class="btn create">
-        <i class='bx bx-plus-circle'></i>
-        Criar empresa
+      <button type="submit" (click)="editCompany()" class="btn edit">
+        <i class='bx bx-check-circle' ></i>
+        Editar empresa
       </button>
     </div>
   </form>
