@@ -1,0 +1,27 @@
+<div class="container">
+    <div *ngFor="let reservation of reservations" class="card">
+      <div class="card-content">
+        <div class="card-content-image">
+          <img [src]="reservation.image" alt="img">
+          <div class="card-overlay">
+            <h3 class="card-content-info-title">{{ reservation.title }}</h3>
+            <div class="rating">
+              <i *ngFor="let star of [].constructor(reservation.stars)" class='bx bxs-star'></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-content-price">
+          <div class="price">
+            <span>{{ reservation.price}}</span>
+          </div>
+          <div class="icons">
+            <i class='bx bx-cart'></i>
+            <i class='bx bx-heart'></i>
+          </div>
+        </div>
+        <div class="card-content-button">
+          <a [routerLink]="['/courts', reservation.id]"  class="btn reserve">Reservar Campo</a>
+        </div>
+      </div>
+    </div>
+  </div>

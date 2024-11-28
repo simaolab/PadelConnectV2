@@ -1,0 +1,148 @@
+/* Container para alinhar os cards em 3 por linha */
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas de tamanho igual */
+    gap: 40px; /* Espaçamento entre os cards */
+    justify-items: center; /* Centraliza os cards na grid */
+    padding: 20px;
+    width: 100%;
+    margin-bottom: -15rem;
+}
+
+/* Estilos do Card */
+.card {
+    width: 100%; /* Deixa o card ocupar toda a largura da coluna */
+    max-width: 25rem; /* Limita a largura máxima do card */
+    height: 28rem;
+    position: relative;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 1rem;
+    background-color: #fff;
+    transform: translateY(-350px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+.card:hover {
+    transform: translateY(-370px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos da imagem do card */
+.card-content-image {
+    position: relative;
+}
+
+.card-content-image img {
+    border-radius: 10px;
+    position: relative;
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+    display: block;
+}
+
+/* Sobreposição preta sobre a imagem */
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 70%;
+    background: rgba(0, 0, 0, 0.7); /* Fundo preto semi-transparente */
+    color: #fff;
+    padding: 35px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* Título na sobreposição */
+.card-content-info-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+/* Estrelas de rating na sobreposição */
+.rating {
+    display: flex;
+}
+
+.rating i {
+    color: var(--color-primary);/* Verde para as estrelas */
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+/* Botão de reservar */
+.card-content-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #fff;
+    width: 100%;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 0; /* Ajusta o padding */
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    cursor: pointer;
+    width: 100vw; /* Faz o botão ocupar toda a largura do card */
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+
+.card-content-price {
+    display: flex;
+    justify-content: space-between; /* Distribui os itens ao longo da linha */
+    align-items: center; /* Alinha os itens verticalmente no centro */
+    margin-top: 2rem;
+}
+
+.card-content-price .price {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.card-content-price .icons {
+    display: flex;
+    gap: 10px; 
+    color: var(--color-primary);
+}
+
+.card-content-price .icons i {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas menores */
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        grid-template-columns: 1fr; /* 1 coluna em telas muito pequenas */
+    }
+}
