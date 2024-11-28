@@ -90,6 +90,16 @@ body {
   justify-content: center;
 }
 
+.actions {
+  display: inline-flex;
+  gap: 20px;
+  font-size: var(--font-size);
+}
+
+.actions i {
+  cursor: pointer;
+}
+
 
 .form {
   padding: 1rem;
@@ -101,6 +111,7 @@ body {
 
 .wrap-attribute-container{
   display: flex;
+  width: 100%;
   justify-content: flex-start;
   flex-direction: column;
 }
@@ -123,6 +134,12 @@ body {
   width: 100%;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.flex-container{
+  display: flex;
+  width: 100%;
   gap: 1.5rem;
 }
 
@@ -157,6 +174,7 @@ body {
   outline: none;
   font-size: var(--font-small);
   color: var(--color-text);
+  width: 100%;
 }
 
 .input-container input::placeholder{
@@ -187,6 +205,8 @@ input[type=number] {
 .button {
   margin-left: 25px;
   margin-top: 2rem;
+  display: inline-flex;
+  gap: 2rem;
 }
 
 .btn {
@@ -198,11 +218,50 @@ input[type=number] {
   align-items: center;
   font-size: var(--font-size);
   padding: 10px;
-  width: 150px;
+  cursor: pointer;
+  gap: 10px;
+}
+
+.btn.back
+{
+   background: var(--color-primary);
+}
+
+.btn.edit, .btn.create {
+  background: var(--color-blue-2);
+}
+
+.btn.delete {
+  background: var(--color-danger);
 }
 
 .small-error {
   padding: .5rem;
   color: var(--color-danger);
   font-size: var(--font-smaller);
+}
+
+@media screen and (max-width: 1450px) {
+  .flex-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+}
+
+@media screen and (max-width: 1175px) {
+  .small-large{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .large-small{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flex-container{
+    display: flex;
+    flex-direction: column;
+  }
 }

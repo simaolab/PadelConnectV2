@@ -1,4 +1,4 @@
-<title-page pageText="Adicionar Empresa"></title-page>
+<title-page pageText="{{ companyObj.name }}"></title-page>
 
 <card-form>
   <form class="form">
@@ -12,10 +12,9 @@
             <p>NIF</p>
           </div>
           <div class="input-container">
-            <input type="number" name="nif" [(ngModel)]="companyObj.nif" placeholder="999999999">
+            <input type="number" name="nif" [(ngModel)]="companyObj.nif" readonly>
           </div>
         </div>
-        <small *ngIf="formErrors['nif']" class="small-error">{{ formErrors['nif'] }}</small>
       </div>
 
 
@@ -26,10 +25,9 @@
             <p>Contacto</p>
           </div>
           <div class="input-container">
-            <input type="number" name="contact" [(ngModel)]="companyObj.contact" placeholder="910000000" minlength="9" maxlength="9">
+            <input type="number" name="contact" [(ngModel)]="companyObj.contact" readonly>
           </div>
         </div>
-        <small *ngIf="formErrors['contact']" class="small-error">{{ formErrors['contact'] }}</small>
       </div>
 
       <div class="wrap-attribute-container">
@@ -39,10 +37,9 @@
             <p>Nome</p>
           </div>
           <div class="input-container">
-            <input type="text" name="name" [(ngModel)]="companyObj.name" placeholder="PadelConnect">
+            <input type="text" name="name" [(ngModel)]="companyObj.name" readonly>
           </div>
         </div>
-        <small *ngIf="formErrors['name']" class="small-error">{{ formErrors['name'] }}</small>
       </div>
 
     </div>
@@ -56,11 +53,10 @@
             <p>Email</p>
           </div>
           <div class="input-container">
-            <input type="text" name="email" [(ngModel)]="companyObj.email" placeholder="Email">
+            <input type="text" name="email" [(ngModel)]="companyObj.email" readonly>
           </div>
         </div>
       </div>
-      <small *ngIf="formErrors['email']" class="small-error">{{ formErrors['email'] }}</small>
 
     </div>
 
@@ -73,49 +69,58 @@
             <p>Endereço e Porta</p>
           </div>
           <div class="input-container">
-            <input type="text" name="addressPort" [(ngModel)]="addressObj.addressPort" placeholder="Rua do Padel 1">
+            <input type="text" name="addressPort" [(ngModel)]="addressObj.addressPort" readonly>
           </div>
         </div>
-        <small *ngIf="formErrors['address_id']" class="small-error">{{ formErrors['address_id'] }}</small>
       </div>
 
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
             <i class='bx bx-map'></i>
-            <p>Código Postal</p>
+            <p>Localidade</p>
           </div>
           <div class="input-container">
-            <input type="text" name="postalCode" [(ngModel)]="addressObj.postalCode" placeholder="4000-000">
+            <input type="text" name="postalCode" [(ngModel)]="addressObj.locality" readonly>
           </div>
         </div>
-        <small *ngIf="formErrors['address_id']" class="small-error">{{ formErrors['address_id'] }}</small>
       </div>
 
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
             <i class='bx bx-fingerprint'></i>
-            <p>Localidade</p>
+            <p>Código Postal</p>
           </div>
           <div class="input-container">
-            <input type="text" name="locality" [(ngModel)]="addressObj.locality" placeholder="Porto">
+            <input type="text" name="locality" [(ngModel)]="addressObj.postalCode" readonly>
           </div>
         </div>
-        <small *ngIf="formErrors['address_id']" class="small-error">{{ formErrors['address_id'] }}</small>
       </div>
+
+
     </div>
 
     <div class="button">
-      <button type="submit" class="btn back" [routerLink]="['/dashboard/companies']">
-        <i class='bx bx-plus-circle'></i>
+      <button class="btn back" [routerLink]="'/dashboard/companies'">
+        <i class='bx bx-left-arrow-alt'></i>
         Voltar atrás
       </button>
-      <button type="submit" (click)="create()" class="btn create">
-        <i class='bx bx-plus-circle'></i>
-        Criar empresa
+
+      <button class="btn edit" [routerLink]="['/dashboard/company', company_id, 'edit']">
+        <i class='bx bx-pencil'></i>
+        Editar
       </button>
+
+
+      <form method="post" (ngSubmit)="deleteCompany($event)">
+        <button type="submit" class="btn delete">
+          <i class='bx bx-trash'></i>
+          Eliminar
+        </button>
+      </form>
     </div>
   </form>
 </card-form>
+
 

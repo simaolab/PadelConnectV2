@@ -5,6 +5,7 @@ namespace app\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePromotionRequest;
 use App\Http\Requests\UpdatePromotionRequest;
+use App\Models\Client;
 use App\Models\Promotion;
 
 class PromotionController extends Controller
@@ -17,7 +18,7 @@ class PromotionController extends Controller
         //Try to get all Promotions from table Promotion
         try
         {
-            $promotions = Promotion::all();
+            $promotions = Promotion::withCount('clients')->get();
             // If table Promotion does not have any data echo a message, else show data
             if ($promotions->isEmpty()) { return response()->json(
                 [
@@ -57,6 +58,33 @@ class PromotionController extends Controller
 
         //Create a new promotion with the verified data
         $promotion = Promotion::create($validatedData);
+        
+        //Verify if the promotion is for new users
+        if ($promotion->for_new_users) {
+
+            //Get all new users 
+            $newClients = Client::whereHas('user', function ($query) {
+                $query->where('new_user', true);
+            })->get();
+
+            //Attach the promotion to the new users
+            foreach ($newClients as $user) {
+                $user->promotions()->attach($promotion->id);
+            }
+        }
+
+        //Verify if the promotion is for inactive users
+        if ($promotion->for_inactive_users) {
+            //Get all inactive users with last login 30 days ago
+            $inactiveClients = Client::whereHas('user', function ($query) {
+                $query->where('last_login', '<', now()->subDays(30));
+            })->get();
+            //Attach the promotion to the inactive users
+            foreach ($inactiveClients as $user) {
+                $user->promotions()->attach($promotion->id);
+            }
+        }
+
         return response()->json([
             'message' => 'Promoção criada com sucesso!'
         ], 201);
@@ -68,7 +96,7 @@ class PromotionController extends Controller
     public function show($promotionId)
     {
         //Search for the promotion
-        $promotion = Promotion::find($promotionId);
+        $promotion = Promotion::withCount('clients')->find($promotionId);
         //If the promotion does not exist show message error, else show promotion
         if (!$promotion) { return response()->json(
             [
@@ -119,6 +147,7 @@ class PromotionController extends Controller
     {
         //Search for the Promotion
         $promotion = Promotion::find($promotionId);
+        
         //If the promotion does not exist, show message error
         if(!$promotion){
             return response()->json(
@@ -146,8 +175,8 @@ class PromotionController extends Controller
         try{
             //If something was sent in the route
             if ($string) {
-                $promotions = Promotion::
-                    where('description', 'LIKE', '%' . $string . '%')
+                $promotions = Promotion::withCount('clients')     
+                    ->where('description', 'LIKE', '%' . $string . '%')
                     ->orWhere('promo_code', 'LIKE', '%' . $string . '%')
                     ->get();
             }

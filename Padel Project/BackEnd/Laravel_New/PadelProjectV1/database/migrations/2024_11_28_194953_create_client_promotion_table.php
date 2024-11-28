@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cancellations', function (Blueprint $table) {
+        Schema::create('client_promotion', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('reservation_id');
-            $table->string('reason')->nullable();
-            $table->decimal('total_refunded');
-            $table->string('status');
-            $table->date('cancellation_date')->nullable();
+            $table->foreignId('client_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('promotion_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cancellations');
+        Schema::dropIfExists('client_promotion');
     }
 };

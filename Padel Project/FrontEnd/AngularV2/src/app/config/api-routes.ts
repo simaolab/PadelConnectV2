@@ -13,5 +13,5 @@ export const ApiRoutes = {
   courts: 'https://api.padelconnect.pt/api/fields/',
 
   //COMPANIES
-  companies: 'https://api.padelconnect.pt/api/companies'
+  companies: 'https://api.padelconnect.pt/api/companies/'
 }

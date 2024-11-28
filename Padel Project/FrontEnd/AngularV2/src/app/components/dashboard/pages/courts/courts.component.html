@@ -33,7 +33,9 @@
             <td data-cell="Estado">{{ court.status }}</td>
             <td data-cell="Última manutenção">{{ court.last_maintenance }}</td>
             <td data-cell="Ações">
-
+              <div class="actions">
+                <i class='bx bx-show' [routerLink]="['/dashboard/court', court.id]"></i>
+              </div>
             </td>
           </tr>
         </tbody>

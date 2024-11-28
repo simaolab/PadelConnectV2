@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CompaniesService } from '../../../../../services/companies.service';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +12,7 @@ import { DashboardComponent } from '../../../dashboard/dashboard.component';
   selector: 'create-company',
   standalone: true,
   imports: [
+    RouterModule,
     CommonModule,
     FormsModule,
     TitlePageComponent,
@@ -26,12 +27,22 @@ export class CreateCompanyComponent {
   formErrors: { [key: string]: string } = {};
 
   companyObj = {
-    address_id: 0,
     name: '',
     email: '',
     contact: 0,
     nif: 0,
-    newsletter: 0
+    newsletter: 0,
+    address: '',
+  }
+
+  addressObj = {
+    addressPort: '',
+    postalCode: '',
+    locality: '',
+  }
+
+  get address(): string {
+    return `${this.addressObj.addressPort}, ${this.addressObj.postalCode}, ${this.addressObj.locality}`;
   }
 
   constructor(
@@ -41,12 +52,17 @@ export class CreateCompanyComponent {
   ) {}
 
   create() {
+    this.companyObj.address = this.address;
+
     this.companiesService.create(this.companyObj).subscribe({
       next: (res: any) => {
         if(res.status === 'success') {
           this.dashboardComponent.showModal(
             'Message',
-            res.message
+            res.message,
+            () => {
+              this.router.navigate(['/dashboard/companies']);
+            }
           );
           this.formErrors = {};
         }
@@ -54,8 +70,6 @@ export class CreateCompanyComponent {
       error: (err: any) => {
         this.formErrors = {};
         const errorDetails = err.error?.['error(s)'] || {};
-
-        console.log(errorDetails)
 
         for (const company in errorDetails) {
           if (errorDetails.hasOwnProperty(company)) {

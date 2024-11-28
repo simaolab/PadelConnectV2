@@ -51,14 +51,15 @@ export class CreateCourtComponent {
         }
       }
 
-      console.log(this.courtObj)
-
       this.courtsService.create(this.courtObj).subscribe({
         next: (res: any) => {
           if(res.status === 'success') {
             this.dashboardComponent.showModal(
               'Success',
-              res.message
+              res.message,
+              () => {
+                this.router.navigate(['/dashboard/courts']);
+              }
             );
             this.formErrors = {};
           }
@@ -66,8 +67,6 @@ export class CreateCourtComponent {
         error: (err: any) => {
           this.formErrors = {};
           const errorDetails = err.error?.['error(s)'] || {};
-
-          console.log(errorDetails)
 
           for (const court in errorDetails) {
             if (errorDetails.hasOwnProperty(court)) {
