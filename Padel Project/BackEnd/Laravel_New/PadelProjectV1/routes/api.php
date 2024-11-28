@@ -10,6 +10,7 @@ use app\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CancellationController;
 use App\Http\Controllers\API\AuthenticationController;
 use App\Http\Middleware\RoleCheck;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,7 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('reservations', ReservationController::class);
     Route::get('reservations/search/{reservation?}', [ReservationController::class, 'search']);
     Route::get('/reservations/deleted', [ReservationController::class, 'indexDeleted']);
+    Route::apiResource('cancellations', CancellationController::class);
 });
 
 //With authentication and role check
