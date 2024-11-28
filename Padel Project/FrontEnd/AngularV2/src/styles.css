@@ -101,6 +101,7 @@ body {
 
 .wrap-attribute-container{
   display: flex;
+  width: 100%;
   justify-content: flex-start;
   flex-direction: column;
 }
@@ -123,6 +124,12 @@ body {
   width: 100%;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.flex-container{
+  display: flex;
+  width: 100%;
   gap: 1.5rem;
 }
 
@@ -218,4 +225,29 @@ input[type=number] {
   padding: .5rem;
   color: var(--color-danger);
   font-size: var(--font-smaller);
+}
+
+@media screen and (max-width: 1450px) {
+  .flex-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+}
+
+@media screen and (max-width: 1175px) {
+  .small-large{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .large-small{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flex-container{
+    display: flex;
+    flex-direction: column;
+  }
 }
