@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Cancellation;
 
 class Reservation extends Model
 {
@@ -32,6 +33,11 @@ class Reservation extends Model
     public function fields()
     {
         return $this->belongsToMany(Field::Class);
+    }
+
+    public function cancellation()
+    {
+        return $this->hasOne(Cancellation::class, 'reservation_id');
     }
 
 
