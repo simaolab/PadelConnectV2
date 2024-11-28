@@ -5,8 +5,6 @@
 
     <div class="small-large">
 
-
-
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
@@ -53,8 +51,8 @@
             <p>Última manutenção</p>
           </div>
           <div class="input-container">
-            <input type="date" name="last_maintenance" [(ngModel)]="courtObj.last_maintenance"
-              [value]="courtObj.last_maintenance | date: 'yyyy-MM-dd'" readonly>
+            <input type="text" name="last_maintenance"
+              [value]="courtObj.last_maintenance ? courtObj.last_maintenance : 'Nunca'" readonly>
           </div>
         </div>
       </div>
@@ -94,7 +92,8 @@
             <p>Cobertura</p>
           </div>
           <div class="input-container">
-            <input type="" name="cover" [(ngModel)]="courtObj.cover" readonly>
+            <input type="" name="cover"
+            [value]="courtObj.cover === 0 ? 'Sem cobertura' : courtObj.cover === 1 ? 'Com cobertura' : ''"  readonly>
           </div>
         </div>
       </div>

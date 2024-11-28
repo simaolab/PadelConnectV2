@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalComponent } from '../../../utilities/modal/modal.component';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UsersService } from './../../../../services/users.service';
 
@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'customers',
   standalone: true,
   imports: [
+    RouterModule,
     CommonModule,
     TitlePageComponent,
     ModalComponent,

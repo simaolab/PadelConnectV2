@@ -53,8 +53,11 @@ export class ShowCourtComponent {
 
       this.courtsService.show(this.court_id).subscribe({
         next: (court: any) => {
+
           const field = court.field;
-          console.log(field.company.name)
+
+          console.log(field);
+
           this.courtObj = {
             name: field.name,
             company_name: field.company.name,

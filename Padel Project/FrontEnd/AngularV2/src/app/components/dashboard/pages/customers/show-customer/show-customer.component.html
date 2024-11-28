@@ -1,0 +1,149 @@
+<title-page pageText="{{ customerObj.username }}"></title-page>
+
+<card-form>
+  <form class="form">
+
+    <div class="small-large">
+
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
+            <i class='bx bx-envelope'></i>
+            <p>Email</p>
+          </div>
+          <div class="input-container">
+            <input type="email" name="email" [(ngModel)]="customerObj.email" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
+            <i class='bx bx-user'></i>
+            <p>Nome do Utilizador</p>
+          </div>
+          <div class="input-container">
+            <input type="text" name="username" [(ngModel)]="customerObj.username" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
+            <i class='bx bx-id-card'></i>
+            <p>NIF</p>
+          </div>
+          <div class="input-container">
+            <input type="number" name="nif" [(ngModel)]="customerObj.nif" readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="small-large">
+
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
+            <i class='bx bx-calendar'></i>
+            <p>Data de Nascimento</p>
+          </div>
+          <div class="input-container">
+            <input type="text" name="birthday" [(ngModel)]="customerObj.birthday"
+              [value]="customerObj.birthday | date: 'yyyy-MM-dd'" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
+            <i class='bx bx-calendar'></i>
+            <p>Data de email verificado</p>
+          </div>
+          <div class="input-container">
+            <input type="text" name="email_verified_at" [(ngModel)]="customerObj.email_verified_at"
+              [value]="customerObj.email_verified_at | date: 'yyyy-MM-dd'" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
+            <i class='bx bx-calendar'></i>
+            <p>Role</p>
+          </div>
+          <div class="input-container">
+            <input type="text" name="email_verified_at" [(ngModel)]="customerObj.role" readonly>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="large-small">
+
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
+            <i class='bx bx-time'></i>
+            <p>Último Login</p>
+          </div>
+          <div class="input-container">
+            <input type="text" name="last_login"
+            [value]="customerObj.last_login ? customerObj.last_login : 'Nunca fez login'" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
+            <i class='bx bx-shield'></i>
+            <p>Estado do Utilizador</p>
+          </div>
+          <div class="input-container">
+            <input type="text"name="user_blocked"
+            [value]="customerObj.user_blocked ? 'Bloqueado' : 'Ativo'" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
+            <i class='bx bx-calendar-x'></i>
+            <p>Data de Bloqueio</p>
+          </div>
+          <div class="input-container">
+            <input type="text" name="blocked_at"
+            [value]="customerObj.blocked_at ? customerObj.blocked_at : 'Nunca'"  readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="button">
+      <button class="btn back" [routerLink]="'/dashboard/customers'">
+        <i class='bx bx-left-arrow-alt'></i>
+        Voltar atrás
+      </button>
+
+      <button type="submit" class="btn edit" [routerLink]="['/dashboard/customer', customer_id, 'edit']">
+        <i class='bx bx-pencil'></i>
+        Editar
+      </button>
+
+      <form method="post" >
+        <button type="submit" class="btn delete">
+          <i class='bx bx-trash'></i>
+          Eliminar
+        </button>
+      </form>
+    </div>
+  </form>
+</card-form>
