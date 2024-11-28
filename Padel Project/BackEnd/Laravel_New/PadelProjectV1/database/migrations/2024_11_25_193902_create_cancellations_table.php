@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('cancellations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('reservation_id');
+            $table->string('reason')->nullable();
+            $table->decimal('total_refunded');
+            $table->string('status');
+            $table->date('cancellation_date')->nullable();
             $table->timestamps();
         });
     }

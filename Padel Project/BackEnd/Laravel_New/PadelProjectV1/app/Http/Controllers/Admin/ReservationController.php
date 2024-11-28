@@ -7,8 +7,11 @@ use App\Http\Controllers\Exception;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
 use App\Models\Reservation;
+use App\Models\Cancellation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use App\Http\Requests\StoreCancellationRequest;
+use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
@@ -153,7 +156,7 @@ class ReservationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, $reservationId)
+    public function destroy(StoreCancellationRequest $request, $reservationId)
     {
         try {
             // Locate the reservation by its ID
@@ -161,39 +164,64 @@ class ReservationController extends Controller
 
             // Check if the reservation exists
             if (!$reservation) {
-                // Return a 404 response if the reservation is not found
-                return response()->json(['message' => 'Reserva não foi encontrada!'], 404);
+                return response()->json(['message' => 'Reservation not found!'], 404);
             }
 
-            // Check if a specific field ID is provided in the request
-            if ($request->has('field_id')) {
-                $fieldId = $request->input('field_id'); // Get the 'field_id' from the request
+            // The data has already been validated by the StoreCancellationRequest
+            $data = $request->validated();
 
+            $reservationDate = Carbon::createFromFormat('d/m/Y', $reservation->start_date);
+            $todayDate = Carbon::now();
+            $diff = $todayDate->diffInHours($reservationDate);
+            $totalRefunded = $reservation->total;
+
+            if($diff <= 24)
+            {
+                $totalRefunded = 0;
+            }
+            elseif ($diff < 48)
+            {
+                $totalRefunded *= 0.5;
+            }
+
+            // Create a cancellation record before deleting the reservation
+            $cancellation = Cancellation::create([
+                'reservation_id' => $reservation->id,
+                'reason' => $data['reason'] ?? null,
+                'total_refunded' => $totalRefunded,
+                'status' => $data['status'],
+                'cancellation_date' => $data['cancellation_date'] ?? now(),
+            ]);
+
+            // Check if a specific field (field_id) was provided
+            if ($request->has('field_id')) {
+                $fieldId = $request->input('field_id');
                 $fieldName = $reservation->fields()->where('fields.id', $fieldId)->value('name');
-                // Check if the specified field is associated with the reservation
+
                 if ($reservation->fields()->where('fields.id', $fieldId)->exists()) {
-                    // If associated, detach (remove) the specific field from the reservation
+                    // Detach the field from the reservation if it exists
                     $reservation->fields()->detach($fieldId);
 
-                    // Return a success response with the updated list of fields
                     return response()->json([
-                        'message' => "Campo (Nome: $fieldName) elminado da reserva com sucesso!",
+                        'message' => "Field (Name: $fieldName) successfully removed from the reservation!",
+                        'cancellation' => $cancellation,
                     ], 200);
                 } else {
-                    // Return a 404 error if the field is not associated with the reservation
-                    return response()->json(['message' => "Campo (Nome: $fieldName) não está acossiado a esta reserva"], 404);
+                    // Return an error if the field is not associated with the reservation
+                    return response()->json(['message' => "Field (Name: $fieldName) is not associated with this reservation"], 404);
                 }
             }
 
-            // If no 'field_id' is provided, delete the entire reservation
+            // Delete the entire reservation if no specific field was removed
             $reservation->delete();
 
-            // Return a success response confirming the reservation was deleted
             return response()->json([
-                'message' => 'Reserva foi eleminada com sucesso!',
+                'message' => 'Reservation successfully deleted!',
+                'cancellation' => $cancellation,
             ], 200);
+
         } catch (Exception $exception) {
-            // Catch any exceptions and return a 500 error with the exception message
+            // Return a server error if an exception is thrown
             return response()->json(['error' => $exception->getMessage()], 500);
         }
     }
