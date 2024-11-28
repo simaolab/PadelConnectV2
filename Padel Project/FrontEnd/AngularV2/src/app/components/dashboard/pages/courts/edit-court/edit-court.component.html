@@ -1,4 +1,4 @@
-<title-page pageText="Adicionar Campo"></title-page>
+<title-page pageText="{{ courtObj.name }}"></title-page>
 
 <card-form>
   <form class="form">
@@ -14,9 +14,11 @@
             <p>Empresa</p>
           </div>
           <div class="input-container">
-            <input type="text" name="company_name" [(ngModel)]="courtObj.company_name" readonly>
+            <input type="number" name="company_id" [(ngModel)]="courtObj.company_id"
+            placeholder="Empresa">
           </div>
         </div>
+        <small *ngIf="formErrors['company_id']" class="small-error">{{ formErrors['company_id'] }}</small>
       </div>
 
       <div class="wrap-attribute-container">
@@ -26,9 +28,11 @@
             <p>Preço hora</p>
           </div>
           <div class="input-container">
-            <input type="number" name="price_hour" [(ngModel)]="courtObj.price_hour" readonly>
+            <input type="number" name="price_hour" [(ngModel)]="courtObj.price_hour"
+            placeholder="Preço Hora">
           </div>
         </div>
+        <small *ngIf="formErrors['price_hour']" class="small-error">{{ formErrors['price_hour'] }}</small>
       </div>
 
       <div class="wrap-attribute-container">
@@ -38,9 +42,11 @@
             <p>Nome</p>
           </div>
           <div class="input-container">
-            <input type="text" name="name" [(ngModel)]="courtObj.name" readonly>
+            <input type="text" name="name" [(ngModel)]="courtObj.name"
+            placeholder="Nome">
           </div>
         </div>
+        <small *ngIf="formErrors['name']" class="small-error">{{ formErrors['name'] }}</small>
       </div>
     </div>
 
@@ -54,10 +60,11 @@
           </div>
           <div class="input-container">
             <input type="date" name="last_maintenance" [(ngModel)]="courtObj.last_maintenance"
-              [value]="courtObj.last_maintenance | date: 'yyyy-MM-dd'" readonly>
+            placeholder="Última manutenção" [value]="courtObj.last_maintenance | date: 'yyyy-MM-dd'">
           </div>
         </div>
       </div>
+      <small *ngIf="formErrors['last_maintenance']" class="small-error">{{ formErrors['last_maintenance'] }}</small>
 
     </div>
 
@@ -70,9 +77,11 @@
             <p>Tipo de chão</p>
           </div>
           <div class="input-container">
-            <input type="text" name="type_floor" [(ngModel)]="courtObj.type_floor" readonly>
+            <input type="text" name="type_floor" [(ngModel)]="courtObj.type_floor"
+            placeholder="Tipo de chão">
           </div>
         </div>
+        <small *ngIf="formErrors['type_floor']" class="small-error">{{ formErrors['type_floor'] }}</small>
       </div>
 
       <div class="wrap-attribute-container">
@@ -82,9 +91,11 @@
             <p>Estado</p>
           </div>
           <div class="input-container">
-            <input type="text" name="status" [(ngModel)]="courtObj.status" readonly>
+            <input type="text" name="status" [(ngModel)]="courtObj.status"
+            placeholder="nif">
           </div>
         </div>
+        <small *ngIf="formErrors['status']" class="small-error">{{ formErrors['status'] }}</small>
       </div>
 
       <div class="wrap-attribute-container">
@@ -94,29 +105,23 @@
             <p>Cobertura</p>
           </div>
           <div class="input-container">
-            <input type="" name="cover" [(ngModel)]="courtObj.cover" readonly>
+            <input type="" name="cover" [(ngModel)]="courtObj.cover"
+            placeholder="Cobertura">
           </div>
         </div>
+        <small *ngIf="formErrors['cover']" class="small-error">{{ formErrors['cover'] }}</small>
       </div>
     </div>
 
     <div class="button">
-      <button class="btn back" [routerLink]="'/dashboard/courts'">
+      <button type="submit" class="btn back" [routerLink]="['/dashboard/courts']">
         <i class='bx bx-left-arrow-alt'></i>
         Voltar atrás
       </button>
-
-      <button type="submit" class="btn edit" [routerLink]="['/dashboard/court', court_id, 'edit']">
-        <i class='bx bx-pencil'></i>
-        Editar
+      <button type="submit" (click)="editCourt()" class="btn edit">
+        <i class='bx bx-check-circle' ></i>
+        Editar empresa
       </button>
-
-      <form method="post" (ngSubmit)="deleteCourt($event)">
-        <button type="submit" class="btn delete">
-          <i class='bx bx-trash'></i>
-          Eliminar
-        </button>
-      </form>
     </div>
   </form>
 </card-form>

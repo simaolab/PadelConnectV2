@@ -26,9 +26,14 @@
             <td data-cell="Email">{{ company.email }}</td>
             <td data-cell="Contacto">{{ company.contact }}</td>
             <td data-cell="NIF">{{ company.nif }}</td>
-            <td data-cell="Morada">{{ company.address.address }}</td>
+            <td data-cell="Morada">{{ company.address }}</td>
             <td data-cell="Campos">{{ company.fields_count }}</td>
-            <td data-cell="Ações"></td>
+            <td data-cell="Ações">
+              <div class="actions">
+                <i class='bx bx-show' [routerLink]="['/dashboard/company', company.id]"></i>
+                <i class='bx bx-pencil' [routerLink]="['/dashboard/company', company.id, 'edit']"></i>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>

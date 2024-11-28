@@ -24,10 +24,13 @@ import { SettingsComponent } from './components/dashboard/pages/settings/setting
 
 //CRUD COMPANY
 import { CreateCompanyComponent } from './components/dashboard/pages/companies/create-company/create-company.component';
+import { ShowCompanyComponent } from './components/dashboard/pages/companies/show-company/show-company.component';
+import { EditCompanyComponent } from './components/dashboard/pages/companies/edit-company/edit-company.component';
 
 //CRUD COMPANY
 import { CreateCourtComponent } from './components/dashboard/pages/courts/create-court/create-court.component';
 import { ShowCourtComponent } from './components/dashboard/pages/courts/show-court/show-court.component';
+import { EditCourtComponent } from './components/dashboard/pages/courts/edit-court/edit-court.component';
 
 export const routes: Routes = [
   {
@@ -79,10 +82,12 @@ export const routes: Routes = [
       { path: 'settings', component: SettingsComponent, title: 'Dashboard - Definições' },
 
       { path: 'create-company', component: CreateCompanyComponent, title: 'Dashboard - Adicionar Empresa' },
-
+      { path: 'company/:id', component: ShowCompanyComponent, title: 'Dashboard - details' },
+      { path: 'company/:id/edit', component: EditCompanyComponent, title: 'Dashboard - edit' },
 
       { path: 'create-court', component: CreateCourtComponent, title: 'Dashboard - Adicionar Campo' },
       { path: 'court/:id', component: ShowCourtComponent, title: 'Dashboard - details' },
+      { path: 'court/:id/edit', component: EditCourtComponent, title: 'Dashboard - details' },
 
 
       { path: '', redirectTo: 'main', pathMatch: 'full' },

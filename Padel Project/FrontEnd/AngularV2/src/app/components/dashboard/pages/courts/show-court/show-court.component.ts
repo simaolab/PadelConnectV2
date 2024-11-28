@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CourtsService } from '../../../../../services/courts.service';
 import { ActivatedRoute } from '@angular/router';
@@ -12,16 +13,18 @@ import { DashboardComponent } from '../../../dashboard/dashboard.component';
   selector: 'app-show-court',
   standalone: true,
   imports: [
-        CommonModule,
-        FormsModule,
-        TitlePageComponent,
-        CardFormComponent,
-        DashboardComponent,
+    RouterModule,
+    CommonModule,
+    FormsModule,
+    TitlePageComponent,
+    CardFormComponent,
+    DashboardComponent,
   ],
   templateUrl: './show-court.component.html',
   styleUrl: './show-court.component.css'
 })
 export class ShowCourtComponent {
+
   courtObj = {
     name: '',
     company_name: '',
@@ -32,23 +35,23 @@ export class ShowCourtComponent {
     last_maintenance: ''
   }
 
+  court_id: number = 0;
+
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private courtsService: CourtsService,
     private dashboardComponent: DashboardComponent
   ) {}
 
   ngOnInit(): void {
+    this.court_id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.showCourt();
   }
 
   showCourt(): void {
-    const courtId = this.activatedRoute.snapshot.paramMap.get('id');
 
-    if (courtId) {
-      const courtIdNumber = Number(courtId);
-
-      this.courtsService.show(courtIdNumber).subscribe({
+      this.courtsService.show(this.court_id).subscribe({
         next: (court: any) => {
           const field = court.field;
           console.log(field.company.name)
@@ -64,27 +67,39 @@ export class ShowCourtComponent {
           };
         },
         error: (err) => {
-          console.error('Erro ao buscar dados da quadra:', err);
+          const errorMessage = err?.error?.message
+
+          this.dashboardComponent.showModal(
+            'Error',
+            errorMessage,
+            () => {
+              this.router.navigate(['/dashboard/courts']);
+            }
+          );
         }
       });
-    } else {
-      console.error('Court ID is missing or invalid.');
-    }
   }
 
   deleteCourt(event: Event): void {
     event.preventDefault();
 
-    const courtId = this.activatedRoute.snapshot.paramMap.get('id');
-
-    const courtIdNumber = Number(courtId);
-
-    this.courtsService.delete(courtIdNumber).subscribe({
+    this.courtsService.delete(this.court_id).subscribe({
       next: (res: any) => {
         this.dashboardComponent.showModal(
           'Success',
-          res.message
+          res.message,
+          () => {
+            this.router.navigate(['/dashboard/courts']);
+          }
         )
+      },
+      error: (err) => {
+        const errorMessage = err?.error?.message
+
+        this.dashboardComponent.showModal(
+          'Error',
+          errorMessage
+        );
       }
     });
   }

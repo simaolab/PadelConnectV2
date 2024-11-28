@@ -90,6 +90,16 @@ body {
   justify-content: center;
 }
 
+.actions {
+  display: inline-flex;
+  gap: 20px;
+  font-size: var(--font-size);
+}
+
+.actions i {
+  cursor: pointer;
+}
+
 
 .form {
   padding: 1rem;
@@ -164,6 +174,7 @@ body {
   outline: none;
   font-size: var(--font-small);
   color: var(--color-text);
+  width: 100%;
 }
 
 .input-container input::placeholder{
@@ -194,6 +205,8 @@ input[type=number] {
 .button {
   margin-left: 25px;
   margin-top: 2rem;
+  display: inline-flex;
+  gap: 2rem;
 }
 
 .btn {
@@ -205,7 +218,8 @@ input[type=number] {
   align-items: center;
   font-size: var(--font-size);
   padding: 10px;
-  width: 150px;
+  cursor: pointer;
+  gap: 10px;
 }
 
 .btn.back
@@ -213,7 +227,7 @@ input[type=number] {
    background: var(--color-primary);
 }
 
-.btn.edit {
+.btn.edit, .btn.create {
   background: var(--color-blue-2);
 }
 
