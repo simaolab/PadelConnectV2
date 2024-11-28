@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CourtsService } from '../../../services/courts.service'; 
+import { CourtsService } from '../../../services/courts.service';
 import { PageTopComponent } from '../../utilities/page-top/page-top.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -9,7 +9,8 @@ import ptLocale from '@fullcalendar/core/locales/pt';
 @Component({
   selector: 'app-details-page',
   standalone: true,
-  imports: [PageTopComponent, 
+  imports: [
+    PageTopComponent,
     FullCalendarModule
   ],
   providers: [],
@@ -20,17 +21,17 @@ export class DetailsPageComponent implements OnInit {
 
   calendarOptions: any;
 
-  court: any; // Variável para armazenar os detalhes do campo
+  court: any;
 
   constructor(
-    private route: ActivatedRoute, 
-    private courtsService: CourtsService // Injete o serviço aqui
+    private route: ActivatedRoute,
+    private courtsService: CourtsService
   ) {}
 
   ngOnInit(): void {
     this.calendarOptions = {
       initialView: 'dayGridMonth',
-      plugins: [dayGridPlugin],  // Registrando o plugin dayGrid
+      plugins: [dayGridPlugin],
       locale: ptLocale,
       events: [
         { title: 'event 1', date: '2024-12-01' },

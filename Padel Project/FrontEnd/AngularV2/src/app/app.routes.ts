@@ -18,7 +18,6 @@ import { ReservationsComponent } from './components/dashboard/pages/reservations
 import { CompaniesComponent } from './components/dashboard/pages/companies/companies.component';
 import { CourtsComponent } from './components/dashboard/pages/courts/courts.component';
 import { PromotionsComponent } from './components/dashboard/pages/promotions/promotions.component';
-import { StatisticsComponent } from './components/dashboard/pages/statistics/statistics.component';
 import { CustomersComponent } from './components/dashboard/pages/customers/customers.component';
 import { SettingsComponent } from './components/dashboard/pages/settings/settings.component';
 import { DetailsPageComponent } from './components/pages/details-page/details-page.component';
@@ -32,6 +31,10 @@ import { EditCompanyComponent } from './components/dashboard/pages/companies/edi
 import { CreateCourtComponent } from './components/dashboard/pages/courts/create-court/create-court.component';
 import { ShowCourtComponent } from './components/dashboard/pages/courts/show-court/show-court.component';
 import { EditCourtComponent } from './components/dashboard/pages/courts/edit-court/edit-court.component';
+
+//CRUD USER
+import { ShowCustomerComponent } from './components/dashboard/pages/customers/show-customer/show-customer.component';
+import { EditCustomerComponent } from './components/dashboard/pages/customers/edit-customer/edit-customer.component';
 
 export const routes: Routes = [
   {
@@ -80,20 +83,21 @@ export const routes: Routes = [
         canActivate: [roleGuard] },
       { path: 'courts', component: CourtsComponent, title: 'Dashboard - Campos',
         canActivate: [roleGuard] },
-      { path: 'statistics', component: StatisticsComponent, title: 'Dashboard - Estatísticas',
-        canActivate: [roleGuard] },
       { path: 'customers', component: CustomersComponent, title: 'Dashboard - Clientes',
         canActivate: [roleGuard] },
       { path: 'promotions', component: PromotionsComponent, title: 'Dashboard - Promoções' },
       { path: 'settings', component: SettingsComponent, title: 'Dashboard - Definições' },
 
       { path: 'create-company', component: CreateCompanyComponent, title: 'Dashboard - Adicionar Empresa' },
-      { path: 'company/:id', component: ShowCompanyComponent, title: 'Dashboard - details' },
-      { path: 'company/:id/edit', component: EditCompanyComponent, title: 'Dashboard - edit' },
+      { path: 'company/:id', component: ShowCompanyComponent, title: 'Dashboard - Detalhes Empresa' },
+      { path: 'company/:id/edit', component: EditCompanyComponent, title: 'Dashboard - Editar Empresa' },
 
       { path: 'create-court', component: CreateCourtComponent, title: 'Dashboard - Adicionar Campo' },
-      { path: 'court/:id', component: ShowCourtComponent, title: 'Dashboard - details' },
-      { path: 'court/:id/edit', component: EditCourtComponent, title: 'Dashboard - details' },
+      { path: 'court/:id', component: ShowCourtComponent, title: 'Dashboard - Detalhes Campo' },
+      { path: 'court/:id/edit', component: EditCourtComponent, title: 'Dashboard - Editar Campo' },
+
+      { path: 'customer/:id', component: ShowCustomerComponent, title: 'Dashboard - Detalhes Utilizador' },
+      { path: 'customer/:id/edit', component: EditCustomerComponent, title: 'Dashboard - Editar Utilizador' },
 
 
       { path: '', redirectTo: 'main', pathMatch: 'full' },

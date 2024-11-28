@@ -13,8 +13,8 @@
             <th>Nome</th>
             <th>Email</th>
             <th>Role</th>
-            <th>Last Login</th>
-            <th>Actions</th>
+            <th>Último Login</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -25,8 +25,11 @@
             <td *ngIf="user.last_login_at; else noLogin" data-cell="Lastlogin">
               {{ user.last_login_at }}
             </td>
-            <td data-cell="Detalhes">
-              <button (click)="showUser(user.id)">Detalhes</button>
+            <td data-cell="Ações">
+              <div class="actions">
+                <i class='bx bx-show' [routerLink]="['/dashboard/customer', user.id]"></i>
+                <i class='bx bx-pencil' [routerLink]="['/dashboard/customer', user.id, 'edit']"></i>
+              </div>
             </td>
           </tr>
         </tbody>
