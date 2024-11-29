@@ -21,7 +21,6 @@
     margin-bottom: -28rem;
 }
 
-/* Estilos da imagem do card */
 .card-content-image {
     position: relative;
 }
@@ -112,7 +111,6 @@
     margin-bottom: 3rem;
 }
 
-/* Horário */
 .schedule {
   display: flex;
   flex-direction: column;
@@ -130,7 +128,6 @@
   font-size: var(--font-size);
 }
 
-/* Serviços Adicionais */
 .additional-services {
     margin-top: 1.5rem;
 }
@@ -311,3 +308,7 @@ full-calendar {
     width: 30vw;
     margin: 0 auto;
 }
+
+/* @media screen and (max-width: ) {
+
+} */

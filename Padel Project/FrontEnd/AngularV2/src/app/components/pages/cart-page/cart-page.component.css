@@ -1,0 +1,92 @@
+.cart-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 4rem 0;
+  width: 100%;
+}
+
+.cart-title {
+  font-size: var(--font-infos-court);
+  color: var(--color-gray);
+}
+
+.reservations {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.card-reservation {
+  height: 6rem;
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-left {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 13px;
+}
+
+.card-right {
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+}
+
+.name-court {
+  font-size: var(--font-subtitle);
+  color: var(--color-primary);
+}
+
+.card-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.address, .date {
+  font-size: var(--font-size);
+  color: var(--color-gray);
+}
+
+.actions {
+  display: inline-flex;
+  gap: 20px;
+  font-size: var(--font-size);
+}
+
+.actions i {
+  color: var(--color-gray);
+  font-size: 30px;
+}
+
+.button-checkout {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn.checkout {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+}
