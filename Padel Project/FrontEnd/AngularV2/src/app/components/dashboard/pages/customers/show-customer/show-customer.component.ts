@@ -56,7 +56,6 @@ export class ShowCustomerComponent {
     this.usersService.show(this.customer_id).subscribe({
       next: (customer: any) => {
 
-        console.log(customer)
         this.customerObj = {
           email: customer.user.email,
           username: customer.user.username,

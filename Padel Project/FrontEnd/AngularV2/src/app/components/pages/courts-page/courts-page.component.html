@@ -13,8 +13,10 @@
     </div>
   </div>
 
-  <div *ngFor="let court of courts">
-    <courts-card [court]="court"></courts-card>
+  <div class="container">
+    <div *ngFor="let court of courts">
+        <courts-card [court]="court"></courts-card>
+    </div>
   </div>
 
 </main-content>

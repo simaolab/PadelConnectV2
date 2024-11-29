@@ -18,7 +18,6 @@ export class CourtsCardComponent {
   constructor(private router: Router) {}
 
     ngOnInit(): void {
-      console.log(this.court)
 
     }
 

@@ -43,3 +43,17 @@
   align-items: center;
   gap: 15rem;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 0.4fr);
+  gap: 40px;
+  justify-items: center;
+  padding: 20px;
+  width: 85%;
+  margin-bottom: -15rem;
+}
+
+.courts-list {
+
+}
