@@ -1,4 +1,16 @@
-<title-page pageText="Adicionar Empresa"></title-page>
+<div class="page-info-create">
+  <div class="page-action">
+    <button type="submit" class="btn-round back" [routerLink]="['/dashboard/companies']">
+      <i class="ri-arrow-left-line"></i>
+    </button>
+  </div>
+  <div class="page-info">
+    <title-page pageText="Criação de uma empresa"></title-page>
+    <p class="description-page">Bem vindo á página de criação de empresa,
+      por favor preencha os dados obrigatório.
+    </p>
+  </div>
+</div>
 
 <card-form>
   <form class="form">
@@ -8,7 +20,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-id-card' ></i>
+            <i class="ri-fingerprint-line"></i>
             <p>NIF</p>
           </div>
           <div class="input-container">
@@ -22,7 +34,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-phone' ></i>
+            <i class="ri-phone-line"></i>
             <p>Contacto</p>
           </div>
           <div class="input-container">
@@ -35,7 +47,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-buildings' ></i>
+            <i class="ri-hotel-line"></i>
             <p>Nome</p>
           </div>
           <div class="input-container">
@@ -52,7 +64,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-envelope' ></i>
+            <i class="ri-mail-line"></i>
             <p>Email</p>
           </div>
           <div class="input-container">
@@ -69,7 +81,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-home'></i>
+            <i class="ri-home-4-line"></i>
             <p>Endereço e Porta</p>
           </div>
           <div class="input-container">
@@ -82,7 +94,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-map'></i>
+            <i class="ri-signpost-line"></i>
             <p>Código Postal</p>
           </div>
           <div class="input-container">
@@ -95,7 +107,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-fingerprint'></i>
+            <i class="ri-map-pin-2-line"></i>
             <p>Localidade</p>
           </div>
           <div class="input-container">
@@ -107,13 +119,9 @@
     </div>
 
     <div class="button">
-      <button type="submit" class="btn back" [routerLink]="['/dashboard/companies']">
-        <i class='bx bx-plus-circle'></i>
-        Voltar atrás
-      </button>
       <button type="submit" (click)="create()" class="btn create">
-        <i class='bx bx-plus-circle'></i>
-        Criar empresa
+        <i class="ri-save-line"></i>
+        Registar Empresa
       </button>
     </div>
   </form>

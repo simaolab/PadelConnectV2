@@ -2,8 +2,9 @@
   padding: 1rem;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   color: var(--color-gray);
+  font-weight: 500;
   flex-grow: 0;
 }
 
