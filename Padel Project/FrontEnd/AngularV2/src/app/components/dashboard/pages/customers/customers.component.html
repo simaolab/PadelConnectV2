@@ -17,25 +17,25 @@
       <table>
         <thead>
           <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Último Login</th>
-            <th>Ações</th>
+            <th class="left">Nome</th>
+            <th class="left">Email</th>
+            <th class="middle">Role</th>
+            <th class="left">Último Login</th>
+            <th class="middle">Ações</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let user of users">
-            <td data-cell="Username">{{ user.username }}</td>
-            <td data-cell="Email">{{ user.email }}</td>
-            <td data-cell="Name">{{ user.role?.name }}</td>
-            <td *ngIf="user.last_login_at; else noLogin" data-cell="Lastlogin">
+            <td data-cell="Username" class="left">{{ user.username }}</td>
+            <td data-cell="Email" class="left">{{ user.email }}</td>
+            <td data-cell="Name" class="middle">{{ user.role?.name }}</td>
+            <td *ngIf="user.last_login_at; else noLogin" data-cell="Lastlogin" class="left">
               {{ user.last_login_at }}
             </td>
-            <td data-cell="Ações">
+            <td data-cell="Ações" class="middle">
               <div class="actions">
-                <i class='bx bx-show' [routerLink]="['/dashboard/customer', user.id]"></i>
-                <i class='bx bx-pencil' [routerLink]="['/dashboard/customer', user.id, 'edit']"></i>
+                <i class='ri-eye-2-line' [routerLink]="['/dashboard/customer', user.id]"></i>
+                <i class='ri-edit-line' [routerLink]="['/dashboard/customer', user.id, 'edit']"></i>
               </div>
             </td>
           </tr>

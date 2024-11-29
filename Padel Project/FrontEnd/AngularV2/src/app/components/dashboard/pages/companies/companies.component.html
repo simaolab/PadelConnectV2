@@ -17,35 +17,42 @@
   </div>
   <ng-template #showTable>
     <div *ngIf="companies.length > 0; else noCompanies">
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Contacto</th>
-            <th>NIF</th>
-            <th>Morada</th>
-            <th>Campos</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let company of companies">
-            <td data-cell="Nome">{{ company.name }}</td>
-            <td data-cell="Email">{{ company.email }}</td>
-            <td data-cell="Contacto">{{ company.contact || 'Nenhum contacto associado' }}</td>
-            <td data-cell="NIF">{{ company.nif }}</td>
-            <td data-cell="Morada">{{ company.address }}</td>
-            <td data-cell="Campos">{{ company.fields_count }}</td>
-            <td data-cell="Ações">
-              <div class="actions">
-                <i class='bx bx-show' [routerLink]="['/dashboard/company', company.id]"></i>
-                <i class='bx bx-pencil' [routerLink]="['/dashboard/company', company.id, 'edit']"></i>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="left">Nome</th>
+              <th class="left">Email</th>
+              <th class="middle">Contacto</th>
+              <th class="middle">NIF</th>
+              <th class="left">Morada</th>
+              <th class="middle">Campos</th>
+              <th class="middle">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let company of companies">
+              <td data-cell="Nome" class="left">{{ company.name }}</td>
+              <td data-cell="Email" class="left">{{ company.email }}</td>
+              <td data-cell="Contacto" class="middle">{{ company.contact || 'Sem contacto' }}</td>
+              <td data-cell="NIF" class="middle">{{ company.nif }}</td>
+              <td data-cell="Morada" class="left">{{ company.address }}</td>
+              <td data-cell="Campos" class="middle">
+                <div class="field-count-wrapper">
+                  <i class='ri-input-field'></i>
+                  {{ company.fields_count }}
+                </div>
+              </td>
+              <td data-cell="Ações" class="middle">
+                <div class="actions">
+                  <i class='ri-eye-2-line' [routerLink]="['/dashboard/company', company.id]"></i>
+                  <i class='ri-edit-line' [routerLink]="['/dashboard/company', company.id, 'edit']"></i>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 </ng-template>
 </card-table>
