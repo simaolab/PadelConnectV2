@@ -18,7 +18,9 @@ class Field extends Model
         'price_hour',
         'type_floor',
         'status',
-        'last_maintenance'
+        'last_maintenance',
+        'illumination',
+        'cover'
     ];
 
     protected $hidden = [

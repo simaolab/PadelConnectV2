@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CourtsService } from '../../../../../services/courts.service';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +13,7 @@ import { error } from 'console';
   selector: 'app-create-court',
   standalone: true,
   imports: [
+    RouterModule,
     CommonModule,
     FormsModule,
     TitlePageComponent,
@@ -28,10 +29,11 @@ export class CreateCourtComponent {
 
   courtObj = {
     name: '',
-    company_id: 0,
-    price_hour: 0,
+    company_id: 2,
+    price_hour: 5,
     type_floor: '',
     status: '',
+    illumination: 1,
     cover: 0,
     last_maintenance: ''
   }
@@ -43,6 +45,7 @@ export class CreateCourtComponent {
     ) {}
 
     create() {
+
       if (this.courtObj.last_maintenance) {
         const dateParts = this.courtObj.last_maintenance.split('-');
         if (dateParts.length === 3) {
