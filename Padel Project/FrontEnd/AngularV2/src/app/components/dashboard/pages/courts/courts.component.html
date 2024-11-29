@@ -1,46 +1,79 @@
-<title-page pageText="Campos"></title-page>
-
-<add-button href="/dashboard/create-court"></add-button>
+<div class="page-info-action">
+  <div class="page-info">
+    <title-page pageText="Listagem de Campos"></title-page>
+    <p class="description-page">Esta lista apresenta todas as suas 
+      campos associadas ao <span>Padel Connect</span>
+    </p>
+  </div>
+  <div class="page-action">
+    <add-button href="/dashboard/create-court"></add-button>
+  </div>
+</div>
 
 <card-table>
-  <div *ngIf="isLoading; else showTable">
-    <p class="loading">Carregando...</p>
+  <div *ngIf="isLoading; else showTable" class="loading-screen">
+    <div class="spinner"></div>
+    <p class="loading">A carregar a lista de campos, por favor aguarde ...</p>
   </div>
   <ng-template #showTable>
     <div *ngIf="courts.length > 0; else noCourts">
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Empresa</th>
-            <th>Preço / h</th>
-            <th>Tipo de chão</th>
-            <th>Iluminação</th>
-            <th>Cobertura</th>
-            <th>Estado</th>
-            <th>Última manutenção</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let court of courts">
-            <td data-cell="Nome">{{ court.name }}</td>
-            <td data-cell="Empresa">{{ court.company.name }}</td>
-            <td data-cell="Preço / h">{{ court.price_hour }}</td>
-            <td data-cell="Tipo de chão">{{ court.type_floor }}</td>
-            <td data-cell="Iluminação">{{ court.illumination }}</td>
-            <td data-cell="Cobertura">{{ court.cover }}</td>
-            <td data-cell="Estado">{{ court.status }}</td>
-            <td data-cell="Última manutenção">{{ court.last_maintenance }}</td>
-            <td data-cell="Ações">
-              <div class="actions">
-                <i class='bx bx-show' [routerLink]="['/dashboard/court', court.id]"></i>
-                <i class='bx bx-pencil' [routerLink]="['/dashboard/court', court.id, 'edit']"></i>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="left">Nome</th>
+              <th class="left">Empresa</th>
+              <th class="middle">Preço/h</th>
+              <th class="left">Pavimento</th>
+              <th class="middle">Iluminação</th>
+              <th class="middle">Cobertura</th>
+              <th class="middle">Estado</th>
+              <th class="middle">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let court of courts">
+              <td data-cell="Nome" class="left">{{ court.name }}</td>
+              <td data-cell="Empresa" class="left">{{ court.company.name }}</td>
+              <td data-cell="Preço / h" class="middle">{{ court.price_hour }}</td>
+              <td data-cell="Tipo de chão" class="left">{{ court.type_floor }}</td>
+              <td data-cell="Iluminação" class="middle">
+                <div *ngIf="court.illumination === 1">
+                  <i class="ri-lightbulb-flash-line"></i>
+                </div>
+                <div *ngIf="court.illumination === 0">
+                  <i class="ri-lightbulb-line"></i>
+                </div>
+              </td>
+              <td data-cell="Cobertura" class="middle">
+                <div *ngIf="court.cover === 1">
+                  <i class="ri-building-2-line"></i>
+                </div>
+                <div *ngIf="court.cover === 0">
+                  <i class="ri-tree-line"></i>
+                </div>
+              </td>
+              <td data-cell="Estado" class="middle">
+                <div class="status-wrapper">
+                  <div [ngClass]="{
+                    'status-disponivel': court.status === 'Disponivel',
+                    'status-inativo': court.status === 'Inativo',
+                    'status-occupied': court.status === 'Indisponivel'
+                  }">
+                    {{ court.status }}
+                  </div>
+                </div>
+              </td>
+              <td data-cell="Ações" class="middle">
+                <div class="actions">
+                  <i class="ri-eye-2-line" [routerLink]="['/dashboard/court', court.id]"></i>
+                  <i class='ri-edit-line' [routerLink]="['/dashboard/court', court.id, 'edit']"></i>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 </ng-template>
 </card-table>

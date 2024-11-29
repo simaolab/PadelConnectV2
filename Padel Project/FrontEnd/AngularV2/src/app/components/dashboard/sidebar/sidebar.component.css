@@ -5,7 +5,7 @@ a {
    SIDEBAR
    ============================= */
    .sidebar {
-    background: var(--color-white);
+    background: var(--color-background-sec);
     color: var(--color-gray);
     display: flex;
     flex-direction: column;

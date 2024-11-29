@@ -48,14 +48,14 @@ class FieldSeeder extends Seeder
                 'type_floor'    => 'Piso Acrílico',
                 'status'        => 'Disponivel',
                 'illumination'  => true,
-                'cover'         => true,
+                'cover'         => false,
             ],
             [
                 'company_id'    => 3,
                 'name'          => 'Campo de Padel XXL',
                 'price_hour'    => '20.00',
                 'type_floor'    => 'Piso Cimento',
-                'status'        => 'Disponivel',
+                'status'        => 'Inativo',
                 'illumination'  => true,
                 'cover'         => true,
             ],
@@ -65,8 +65,8 @@ class FieldSeeder extends Seeder
                 'price_hour'    => '22.50',
                 'type_floor'    => 'Piso Relva Sintética',
                 'status'        => 'Disponivel',
-                'illumination'  => true,
-                'cover'         => true,
+                'illumination'  => false,
+                'cover'         => false,
             ],
         ]);
     }

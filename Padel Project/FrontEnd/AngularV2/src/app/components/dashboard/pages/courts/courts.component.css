@@ -1,33 +1,70 @@
-table {
-  width: 100%;
-  border-collapse: collapse;
-  transition: all ease 300ms;
+.ri-lightbulb-flash-line{
+  color: var(--color-warning);
 }
 
-thead th{
-  color: var(--color-primary);
-  font-size: 1.3rem;
+.ri-heavy-showers-line{
+  color: var(--color-blue-1);
 }
 
-th, td {
-  text-align: left;
-  padding: 8px;
-}
-
-tbody td {
-  font-size: 1.1rem;
-  color: var(--color-gray);
-  padding: 15px;
-}
-
-.loading {
-  font-size: 1.1rem;
-  color: var(--color-primary);
+.status-wrapper {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  min-width: 125px;
 }
 
 .no-courts {
   font-size: 1.1rem;
   color: var(--color-danger);
+}
+
+.status-disponivel,
+.status-inativo,
+.status-occupied {
+  display: flex;
+  color: var(--color-white);
+  padding: 0.2rem 0.5rem;
+  width: 75%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  font-size: var(--font-smaller);
+}
+
+.status-disponivel {
+  background: var(--color-success) !important;
+}
+
+.status-inativo {
+  background: var(--color-warning) !important;
+}
+
+.status-occupied {
+  background: var(--color-danger) !important;
+}
+
+@media screen and (max-width: 1450px) {
+  .table-wrapper {
+    display: block; 
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  table {
+    min-width: 1200px; 
+  }
+
+  .table-wrapper::-webkit-scrollbar {
+    height: 7px; 
+  }
+
+  .table-wrapper::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: 50px;
+    cursor: pointer;
+  }
 }
 
 @media screen and (max-width: 1055px) {
@@ -84,5 +121,31 @@ tbody td {
     border-radius: var(--border-radius-2);
     padding: var(--card-padding);
     box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
+  }
+
+  .status-disponivel,
+  .status-inativo,
+  .status-occupied{
+    background: transparent !important;
+  }
+
+  .status-disponivel {
+    color: var(--color-success) !important;
+  }
+
+  .status-inativo {
+    color: var(--color-warning) !important;
+  }
+
+  .status-occupied {
+    color: var(--color-danger) !important;
+  }
+  
+  td, th{
+    border-left: none;
+  }
+
+  th:not(:first-child), td:not(:first-child){
+    border-left: none;
   }
 }

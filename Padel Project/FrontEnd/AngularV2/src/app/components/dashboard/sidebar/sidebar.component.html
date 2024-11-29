@@ -4,16 +4,16 @@
       <h3 class="site-name">Padel <span>Connect</span></h3>
   </a>
 
-  <link-sidebar href="/dashboard/reservations" icon="event" p="Reservas"></link-sidebar>
+  <link-sidebar href="/dashboard/reservations" icon="ri-list-check-2" p="Reservas"></link-sidebar>
 
-  <link-sidebar href="/dashboard/companies" icon="domain" p="Empresas" *ngIf="isAdmin"></link-sidebar>
-  <link-sidebar href="/dashboard/courts" icon="sports_tennis" p="Campos" *ngIf="isAdmin"></link-sidebar>
-  <link-sidebar href="/dashboard/customers" icon="group" p="Clientes" *ngIf="isAdmin"></link-sidebar>
+  <link-sidebar href="/dashboard/companies" icon="ri-hotel-line" p="Empresas" *ngIf="isAdmin"></link-sidebar>
+  <link-sidebar href="/dashboard/courts" icon="ri-input-field" p="Campos" *ngIf="isAdmin"></link-sidebar>
+  <link-sidebar href="/dashboard/customers" icon="ri-group-line" p="Clientes" *ngIf="isAdmin"></link-sidebar>
 
-  <link-sidebar href="/dashboard/promotions" icon="sell" p="Promoções"></link-sidebar>
-  <link-sidebar href="/dashboard/settings" icon="settings" p="Definições"></link-sidebar>
+  <link-sidebar href="/dashboard/promotions" icon="ri-percent-line" p="Promoções"></link-sidebar>
+  <link-sidebar href="/dashboard/settings" icon="ri-user-settings-line" p="Definições"></link-sidebar>
 
   <div class="logout-container">
-    <link-sidebar icon="logout" p="Logout" (click)="logout()"></link-sidebar>
+    <link-sidebar icon="ri-logout-circle-r-line" p="Logout" (click)="logout()"></link-sidebar>
   </div>
 </div>
