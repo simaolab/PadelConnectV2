@@ -21,10 +21,21 @@ export class DetailsPageComponent implements OnInit {
 
   calendarOptions: any;
 
-  court: any;
+  courtObj = {
+    name: '',
+    company_name: '',
+    price_hour: 0,
+    type_floor: '',
+    illumination: 0,
+    status: '',
+    cover: 0,
+    address: ''
+  }
+
+  court_id: number = 0;
 
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private courtsService: CourtsService
   ) {}
 
@@ -51,18 +62,29 @@ export class DetailsPageComponent implements OnInit {
       }
     };
 
-    const courtId = this.route.snapshot.paramMap.get('id'); // Obtendo o ID da URL
-    if (courtId) {
-      this.getCourtDetails(courtId); // Chame o método para buscar os detalhes do campo
-    }
+    this.court_id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.getCourtDetails();
   }
 
-  // Método para buscar os detalhes do campo
-  getCourtDetails(id: string): void {
-    this.courtsService.index().subscribe(courts => {
-      // Encontrar o campo específico com base no ID
-      this.court = courts.find((court: any) => court.id === id);
-    });
+  getCourtDetails(): void {
+    this.courtsService.show(this.court_id).subscribe({
+      next: (court: any) => {
+        const field = court.field;
+
+        this.courtObj = {
+          name: field.name,
+          company_name: field.company.name,
+          price_hour: field.price_hour,
+          type_floor: field.type_floor,
+          illumination: field.illumination,
+          status: field.status,
+          cover: field.cover,
+          address: field.company.address
+        };
+
+        console.log(this.courtObj)
+      }
+    })
   }
 
   changeTitleColor(): void {

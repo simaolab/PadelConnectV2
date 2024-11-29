@@ -1,18 +1,14 @@
-/* Container para alinhar os cards em 3 por linha */
 .container {
-    display: grid;
-    gap: 40px;
-    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+    align-items: center;
     padding: 20px;
-    width: 100%;
-    box-sizing: border-box;
 }
 
-/* Estilos do Card */
-.card {
-    width: 100%; 
-    max-width: 70rem; 
-    height: 38rem;
+.card-image {
+    width: 100%;
+    max-width: 70rem;
     position: relative;
     border: 1px solid #e0e0e0;
     border-radius: 20px;
@@ -20,7 +16,7 @@
     overflow: hidden;
     padding: 1rem;
     background-color: #fff;
-    transform: translateY(-450px);
+    transform: translateY(-50%);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-bottom: -28rem;
 }
@@ -30,13 +26,11 @@
     position: relative;
 }
 
-.card-container-grid{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+.card-container-info--{
+    display: inline-flex;
     gap: 20px;
-    width: 82.5%;
+    width: 60%;
     justify-items: center;
-    margin-bottom: -7rem;
 }
 
 .card-content-image img {
@@ -49,21 +43,57 @@
 }
 
 .card-content-main{
-    width: 70%;
-  
+    width: 60%;
+    margin-bottom: 6rem;
 }
 
-/* Informação do card */
+.divider {
+  width: 60%;
+  height: 2px;
+  background: var(--color-primary);
+}
+
 .card-content-info {
     width: 70%;
     margin-top: 4.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
 }
 
-.card-content-info-title {
-    font-size: 1.8rem;
+.first-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.second-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.info-title {
+    font-size: var(--font-infos-court) !important;
     font-weight: bold;
     color: #333;
     margin-bottom: 0.5rem;
+}
+
+.title-info {
+  font-size: var(--font-size);
+  color: var(--color-primary);
+}
+
+.sub-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.sub-info p {
+  color: var(--color-text);
+  font-size: var(--font-size);
 }
 
 .card-content-address {
@@ -71,26 +101,8 @@
     color: #666;
 }
 
-.rating {
-    display: flex;
-    margin: 0.5rem 0;
-}
-
-.rating i {
-    color: var(--color-primary);
-    font-size: 1.2rem;
-    margin-right: 5px;
-}
-
 .card-content-information{
-    margin-top: -18rem;
-}
 
-.card-content-information h4 {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 0.5rem;
 }
 
 .card-content-information p {
@@ -101,22 +113,21 @@
 }
 
 /* Horário */
-.card-content-schedule {
-    margin-top: 1rem;
-    margin-bottom: 3rem;
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.card-content-schedule h4 {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 0.5rem;
+.schedule-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.schedule-info p {
-    font-size: 1.2rem;
-    
-    color: #666;
+.schedule-hour {
+  color: var(--color-text);
+  font-size: var(--font-size);
 }
 
 /* Serviços Adicionais */
@@ -178,16 +189,11 @@
     width: 100%;
 }
 
-.btn:hover {
-    background-color: #45a049;
-}
-
 /* Preço e ícones */
 .card-content-price {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     margin-top: 2rem;
 }
 
@@ -208,7 +214,7 @@
 }
 
 .card-content-price i:hover {
-   
+
     background-color: var(--color-primary);
 
 }
@@ -242,7 +248,7 @@
     text-align: center;
     cursor: pointer;
     padding: 15px;
-    font-size: 0.9rem; 
+    font-size: 0.9rem;
 }
 
 .calendar-grid div:hover {
@@ -304,7 +310,4 @@
 full-calendar {
     width: 30vw;
     margin: 0 auto;
-  }
-
-
-  
+}

@@ -1,18 +1,15 @@
 <div class="container">
-    <div *ngFor="let reservation of reservations" class="card">
+    <div class="card">
       <div class="card-content">
         <div class="card-content-image">
-          <img [src]="reservation.image" alt="img">
+          <img alt="img" src="assets/images/about/renith-r-A9VpotrPr1k-unsplash.jpg">
           <div class="card-overlay">
-            <h3 class="card-content-info-title">{{ reservation.title }}</h3>
-            <div class="rating">
-              <i *ngFor="let star of [].constructor(reservation.stars)" class='bx bxs-star'></i>
-            </div>
+            <h3 class="card-content-info-title"> {{ court.name }}</h3>
           </div>
         </div>
         <div class="card-content-price">
           <div class="price">
-            <span>{{ reservation.price}}</span>
+            <span>{{ court.price_hour }} €</span>
           </div>
           <div class="icons">
             <i class='bx bx-cart'></i>
@@ -20,7 +17,7 @@
           </div>
         </div>
         <div class="card-content-button">
-          <a [routerLink]="['/courts', reservation.id]"  class="btn reserve">Reservar Campo</a>
+          <a class="btn reserve" [routerLink]="['/court', court.id]">Reservar Campo</a>
         </div>
       </div>
     </div>

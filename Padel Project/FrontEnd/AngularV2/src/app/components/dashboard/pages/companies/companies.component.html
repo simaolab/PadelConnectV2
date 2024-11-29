@@ -24,7 +24,7 @@
           <tr *ngFor="let company of companies">
             <td data-cell="Nome">{{ company.name }}</td>
             <td data-cell="Email">{{ company.email }}</td>
-            <td data-cell="Contacto">{{ company.contact }}</td>
+            <td data-cell="Contacto">{{ company.contact || 'Nenhum contacto associado' }}</td>
             <td data-cell="NIF">{{ company.nif }}</td>
             <td data-cell="Morada">{{ company.address }}</td>
             <td data-cell="Campos">{{ company.fields_count }}</td>
@@ -44,3 +44,4 @@
 <ng-template #noCompanies>
   <p class="no-companies">Nenhuma empresa encontrada</p>
 </ng-template>
+

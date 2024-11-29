@@ -41,9 +41,8 @@ export class UsersService {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.put(`${ApiRoutes.users}${user_id}`, { headers });
+    return this.http.put(`${ApiRoutes.users}${user_id}`, customerObj, { headers });
   }
-
 
   userInfo(): Observable<any> {
     const token = localStorage.getItem('authToken');

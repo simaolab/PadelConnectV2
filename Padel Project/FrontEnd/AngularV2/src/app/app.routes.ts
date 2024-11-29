@@ -67,7 +67,7 @@ export const routes: Routes = [
     title: 'Login'
   },
   {
-    path: 'courts/:id',
+    path: 'court/:id',
     component: DetailsPageComponent,
     title: 'Detalhes do Campo'
   },

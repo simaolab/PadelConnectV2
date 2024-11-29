@@ -12,7 +12,7 @@
 }
 
 .navbar.scrolled {
-  background: var(--color-gray);
+  background: var(--color-primary);
   transition: all ease 300ms;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

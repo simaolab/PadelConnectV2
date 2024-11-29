@@ -32,6 +32,7 @@
   --box-shadow-btn: 0 0 1rem var(--color-gray);
 
   --font-title: 5.5rem;
+  --font-infos-court: 2.1rem;
   --font-subtitle: 1.5rem;
   --font-size: 1.3rem;
   --font-small: 1.1rem;
@@ -203,7 +204,6 @@ input[type=number] {
 }
 
 .button {
-  margin-left: 25px;
   margin-top: 2rem;
   display: inline-flex;
   gap: 2rem;
@@ -246,7 +246,7 @@ input[type=number] {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
-  
+
 }
 
 @media screen and (max-width: 1175px) {
