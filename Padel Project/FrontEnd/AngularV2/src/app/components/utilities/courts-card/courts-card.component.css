@@ -1,18 +1,16 @@
-/* Container para alinhar os cards em 3 por linha */
 .container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas de tamanho igual */
-    gap: 40px; /* Espaçamento entre os cards */
-    justify-items: center; /* Centraliza os cards na grid */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    justify-items: center;
     padding: 20px;
     width: 100%;
     margin-bottom: -15rem;
 }
 
-/* Estilos do Card */
 .card {
-    width: 100%; /* Deixa o card ocupar toda a largura da coluna */
-    max-width: 25rem; /* Limita a largura máxima do card */
+    width: 100%;
+    max-width: 25rem;
     height: 28rem;
     position: relative;
     border: 1px solid #e0e0e0;
@@ -26,12 +24,6 @@
     box-sizing: border-box;
 }
 
-.card:hover {
-    transform: translateY(-370px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* Estilos da imagem do card */
 .card-content-image {
     position: relative;
 }
@@ -45,13 +37,12 @@
     display: block;
 }
 
-/* Sobreposição preta sobre a imagem */
 .card-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 70%;
-    background: rgba(0, 0, 0, 0.7); /* Fundo preto semi-transparente */
+    background: rgba(0, 0, 0, 0.7);
     color: #fff;
     padding: 35px;
     box-sizing: border-box;
@@ -62,7 +53,6 @@
     border-top-right-radius: 10px;
 }
 
-/* Título na sobreposição */
 .card-content-info-title {
     font-size: 1.2rem;
     font-weight: bold;
@@ -71,13 +61,12 @@
     color: #fff;
 }
 
-/* Estrelas de rating na sobreposição */
 .rating {
     display: flex;
 }
 
 .rating i {
-    color: var(--color-primary);/* Verde para as estrelas */
+    color: var(--color-primary);
     font-size: 1.2rem;
     margin-right: 5px;
 }
@@ -95,7 +84,7 @@
 .btn {
     display: inline-block;
     margin-top: 1rem;
-    padding: 0.8rem 0; /* Ajusta o padding */
+    padding: 0.8rem 0;
     font-size: 1rem;
     font-weight: 500;
     border-radius: 0.5rem;
@@ -103,18 +92,13 @@
     color: var(--color-white);
     border: none;
     cursor: pointer;
-    width: 100vw; /* Faz o botão ocupar toda a largura do card */
+    width: 100vw;
 }
-
-.btn:hover {
-    background-color: #45a049;
-}
-
 
 .card-content-price {
     display: flex;
-    justify-content: space-between; /* Distribui os itens ao longo da linha */
-    align-items: center; /* Alinha os itens verticalmente no centro */
+    justify-content: space-between;
+    align-items: center;
     margin-top: 2rem;
 }
 
@@ -125,7 +109,7 @@
 
 .card-content-price .icons {
     display: flex;
-    gap: 10px; 
+    gap: 10px;
     color: var(--color-primary);
 }
 
@@ -137,12 +121,12 @@
 
 @media (max-width: 900px) {
     .container {
-        grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas menores */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 600px) {
     .container {
-        grid-template-columns: 1fr; /* 1 coluna em telas muito pequenas */
+        grid-template-columns: 1fr;
     }
 }

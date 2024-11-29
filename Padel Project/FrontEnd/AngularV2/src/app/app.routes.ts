@@ -4,6 +4,7 @@ import { AboutPageComponent } from './components/pages/about-page/about-page.com
 import { ContactPageComponent } from './components/pages/contact-page/contact-page.component';
 import { CourtsPageComponent } from './components/pages/courts-page/courts-page.component';
 import { PrivacyPolicyPageComponent } from './components/pages/privacy-policy-page/privacy-policy-page.component';
+import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
 
 import { LoginComponent } from './components/login/login.component';
 
@@ -70,6 +71,11 @@ export const routes: Routes = [
     path: 'court/:id',
     component: DetailsPageComponent,
     title: 'Detalhes do Campo'
+  },
+  {
+    path: 'cart',
+    component: CartPageComponent,
+    title: 'Carrinho'
   },
   {
     path: 'dashboard',
