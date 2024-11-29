@@ -21,11 +21,12 @@ export class CourtsService {
     price_hour: number;
     type_floor: string;
     status: string;
+    illumination: number;
     cover: number;
     last_maintenance: string }): Observable<any> {
       const token = localStorage.getItem('authToken');
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
+      
       return this.http.post<any>(ApiRoutes.courts, courtObj, { headers });
   }
 

@@ -117,6 +117,10 @@ tbody td {
   padding-block: 1rem;
 }
 
+select{
+  background: red;
+}
+
 .animated {
   opacity: 0;
   transform: translateY(30px);
@@ -151,7 +155,7 @@ tbody td {
   width: 100%;
 }
 
-.page-info-create{
+.page-info-title{
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -273,7 +277,8 @@ tbody td {
   color: var(--color-primary);
 }
 
-.input-container input{
+.input-container input,
+.input-container select {
   background: none;
   outline: none;
   font-size: var(--font-small);
@@ -492,5 +497,23 @@ input[type=number] {
 
   th:not(:first-child), td:not(:first-child){
     border-left: none;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .page-info-action{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .page-info-title{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 }

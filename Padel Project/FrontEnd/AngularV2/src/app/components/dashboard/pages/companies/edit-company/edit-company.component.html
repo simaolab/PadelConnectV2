@@ -1,4 +1,17 @@
-<title-page pageText="{{ companyObj.name }}"></title-page>
+<div class="page-info-title">
+  <div class="page-action">
+    <button type="submit" class="btn-round back" [routerLink]="['/dashboard/companies']">
+      <i class="ri-arrow-left-line"></i>
+    </button>
+  </div>
+  <div class="page-info">
+    <title-page pageText="Dados da empresa"></title-page>
+    <p class="description-page">Bem vindo á página da empresa 
+      <span>{{ companyObj.name }}</span>, 
+      aqui pode editar os dados desta empresa.
+    </p>
+  </div>
+</div>
 
 <card-form>
   <form class="form">
@@ -107,13 +120,9 @@
     </div>
 
     <div class="button">
-      <button type="submit" class="btn back" [routerLink]="['/dashboard/companies']">
-        <i class='bx bx-left-arrow-alt'></i>
-        Voltar atrás
-      </button>
       <button type="submit" (click)="editCompany()" class="btn edit">
-        <i class='bx bx-check-circle' ></i>
-        Editar empresa
+        <i class="ri-check-line"></i>
+        Guardar alterações
       </button>
     </div>
   </form>

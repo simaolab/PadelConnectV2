@@ -1,4 +1,9 @@
-<div class="page-info-action">
+<div class="page-info-title">
+  <div class="page-action">
+    <button type="submit" class="btn-round back" [routerLink]="['/dashboard/courts']">
+      <i class="ri-arrow-left-line"></i>
+    </button>
+  </div>
   <div class="page-info">
     <title-page pageText="Criação de um campo"></title-page>
     <p class="description-page">Bem vindo á página de criação de campo,
@@ -15,7 +20,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-building'></i>
+            <i class="ri-hotel-line"></i>
             <p>Empresa</p>
           </div>
           <div class="input-container">
@@ -29,7 +34,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-user'></i>
+            <i class="ri-input-field"></i>
             <p>Nome</p>
           </div>
           <div class="input-container">
@@ -47,7 +52,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-euro'></i>
+            <i class="ri-money-euro-circle-line"></i>
             <p>Preço hora</p>
           </div>
           <div class="input-container">
@@ -61,7 +66,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-wrench'></i>
+            <i class="ri-tools-line"></i>
             <p>Última manutenção</p>
           </div>
           <div class="input-container">
@@ -75,12 +80,16 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-pulse'></i>
+            <i class="ri-information-line"></i>
             <p>Estado</p>
           </div>
           <div class="input-container">
-            <input type="text" name="status" [(ngModel)]="courtObj.status"
-            placeholder="nif">
+            <select name="status" [(ngModel)]="courtObj.status">
+              <option value="" disabled selected>Selecione o estado</option>
+              <option value="Disponivel">Disponivel</option>
+              <option value="Indisponivel">Indisponivel</option>
+              <option value="Inativo">Inativo</option>
+            </select>
           </div>
         </div>
         <small *ngIf="formErrors['status']" class="small-error">{{ formErrors['status'] }}</small>
@@ -89,12 +98,17 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-grid'></i>
+            <i class="ri-layout-line"></i>
             <p>Tipo de chão</p>
           </div>
           <div class="input-container">
-            <input type="text" name="type_floor" [(ngModel)]="courtObj.type_floor"
-            placeholder="Tipo de chão">
+            <select name="type_floor" [(ngModel)]="courtObj.type_floor">
+              <option value="" disabled selected>Selecione o tipo de chão</option>
+              <option value="Piso Cimento">Piso Cimento</option>
+              <option value="Piso Madeira">Piso Madeira</option>
+              <option value="Piso Acrílico">Piso Acrílico</option>
+              <option value="Piso Relva Sintética">Piso Relva Sintética</option>
+            </select>
           </div>
         </div>
         <small *ngIf="formErrors['type_floor']" class="small-error">{{ formErrors['type_floor'] }}</small>
@@ -111,12 +125,31 @@
             <p>Cobertura</p>
           </div>
           <div class="input-container">
-            <input type="" name="cover" [(ngModel)]="courtObj.cover"
-            placeholder="Cobertura">
+            <select name="cover" [(ngModel)]="courtObj.cover">
+              <option [ngValue]="true">Sim</option>
+              <option [ngValue]="false">Não</option>
+            </select>
           </div>
         </div>
         <small *ngIf="formErrors['cover']" class="small-error">{{ formErrors['cover'] }}</small>
       </div>
+      
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
+            <i class='bx bx-cloud'></i>
+            <p>Iluminação</p>
+          </div>
+          <div class="input-container">
+            <select name="illumination" [(ngModel)]="courtObj.illumination">
+              <option [ngValue]="true">Sim</option>
+              <option [ngValue]="false">Não</option>
+            </select>
+          </div>
+        </div>
+        <small *ngIf="formErrors['illumination']" class="small-error">{{ formErrors['illumination'] }}</small>
+      </div>
+      
 
     </div>
 

@@ -1,4 +1,19 @@
-<title-page pageText="{{ companyObj.name }}"></title-page>
+<div class="page-info-title">
+  <div class="page-action">
+    <button type="submit" class="btn-round back" [routerLink]="['/dashboard/companies']">
+      <i class="ri-arrow-left-line"></i>
+    </button>
+  </div>
+  <div class="page-info">
+    <title-page pageText="Dados da empresa"></title-page>
+    <p class="description-page">Bem vindo á página da empresa 
+      <span>{{ companyObj.name }}</span>, 
+      aqui pode visualizar todos os dados desta empresa.
+    </p>
+  </div>
+</div>
+
+<title-page pageText=""></title-page>
 
 <card-form>
   <form class="form">
@@ -8,7 +23,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-id-card' ></i>
+            <i class="ri-fingerprint-line"></i>
             <p>NIF</p>
           </div>
           <div class="input-container">
@@ -21,7 +36,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-phone' ></i>
+            <i class="ri-phone-line"></i>
             <p>Contacto</p>
           </div>
           <div class="input-container">
@@ -33,7 +48,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-buildings' ></i>
+            <i class="ri-hotel-line"></i>
             <p>Nome</p>
           </div>
           <div class="input-container">
@@ -49,7 +64,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-envelope' ></i>
+            <i class="ri-mail-line"></i>
             <p>Email</p>
           </div>
           <div class="input-container">
@@ -65,7 +80,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-home'></i>
+            <i class="ri-home-4-line"></i>
             <p>Endereço e Porta</p>
           </div>
           <div class="input-container">
@@ -77,7 +92,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-map'></i>
+            <i class="ri-signpost-line"></i>
             <p>Localidade</p>
           </div>
           <div class="input-container">
@@ -89,7 +104,7 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-fingerprint'></i>
+            <i class="ri-map-pin-2-line"></i>
             <p>Código Postal</p>
           </div>
           <div class="input-container">
@@ -102,21 +117,14 @@
     </div>
 
     <div class="button">
-      <button class="btn back" [routerLink]="'/dashboard/companies'">
-        <i class='bx bx-left-arrow-alt'></i>
-        Voltar atrás
-      </button>
-
       <button class="btn edit" [routerLink]="['/dashboard/company', company_id, 'edit']">
-        <i class='bx bx-pencil'></i>
-        Editar
+        <i class="ri-edit-line"></i>
+        Editar {{ companyObj.name }}
       </button>
-
-
       <form method="post" (ngSubmit)="deleteCompany($event)">
         <button type="submit" class="btn delete">
-          <i class='bx bx-trash'></i>
-          Eliminar
+          <i class="ri-delete-bin-2-line"></i>
+          Eliminar {{ companyObj.name }}
         </button>
       </form>
     </div>

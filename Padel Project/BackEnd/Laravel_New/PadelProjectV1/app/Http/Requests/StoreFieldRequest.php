@@ -26,7 +26,7 @@ class StoreFieldRequest extends FormRequest
             'type_floor' => 'required|string|in:Piso Cimento,Piso Madeira,Piso Acrílico,Piso Relva Sintética|max:30',
             'illumination' => 'nullable|boolean',
             'cover' => 'nullable|boolean',
-            'status' => 'required|string',
+            'status' => 'required|string|in:Disponível,Indisponivel,Inativo|max:50',
             'last_maintenance' => 'nullable|date',
         ];
     }
@@ -39,6 +39,7 @@ class StoreFieldRequest extends FormRequest
             'company_id.exists'     => 'Selecione uma empresa válida',
 
             'name.required'         => 'O nome do campo é um campo obrigatório',
+            'name.min'              => 'O nome do campo tem de ter no mínimo 2 caracteres.',
             'name.string'           => 'O nome do campo não aceita caractéres especiais.',
             'name.max'              => 'O nome do campo não pode exceder os 120 caracteres.',
             'name.unique'           => 'O nome do campo já está a ser usado',
@@ -54,6 +55,7 @@ class StoreFieldRequest extends FormRequest
 
             'illumination.boolean'  => 'O iluminação tem de ser sim ou não.',
             'cover.boolean'         => 'A cobertura tem de ser sim ou não.',
+            'status.in'             => 'O estado do campo deve ser um dos seguintes Disponível, Indisponivel, ou Inativo.',
             'status.required'       => 'O estado do campo é obrigatório.',
             'status.string'         => 'O estado do campo não pode ter caractéres especiais.',
             'status.max'            => 'O estado do campo não pode exceder os 50 caracteres.',
