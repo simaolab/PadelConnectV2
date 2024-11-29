@@ -70,7 +70,7 @@ export class ShowCompanyComponent {
           };
 
           const addressParts = company.address.split(', ');
-
+          
           if (addressParts.length === 3) {
             this.addressObj = {
               addressPort: addressParts[0],

@@ -1,6 +1,6 @@
 <div class="page-info-action">
   <div class="page-info">
-    <title-page pageText="Listagem de Campos"></title-page>
+    <title-page pageText="Listagem de Clientes"></title-page>
     <p class="description-page">Esta lista apresenta todos os 
       clientes associados ao <span>Padel Connect</span>
     </p>
@@ -14,33 +14,35 @@
   </div>
   <ng-template #showTable>
     <div *ngIf="users.length > 0; else noUsers">
-      <table>
-        <thead>
-          <tr>
-            <th class="left">Nome</th>
-            <th class="left">Email</th>
-            <th class="middle">Role</th>
-            <th class="left">Último Login</th>
-            <th class="middle">Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of users">
-            <td data-cell="Username" class="left">{{ user.username }}</td>
-            <td data-cell="Email" class="left">{{ user.email }}</td>
-            <td data-cell="Name" class="middle">{{ user.role?.name }}</td>
-            <td *ngIf="user.last_login_at; else noLogin" data-cell="Lastlogin" class="left">
-              {{ user.last_login_at }}
-            </td>
-            <td data-cell="Ações" class="middle">
-              <div class="actions">
-                <i class='ri-eye-2-line' [routerLink]="['/dashboard/customer', user.id]"></i>
-                <i class='ri-edit-line' [routerLink]="['/dashboard/customer', user.id, 'edit']"></i>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="left">Nome</th>
+              <th class="left">Email</th>
+              <th class="middle">Role</th>
+              <th class="left">Último Login</th>
+              <th class="middle">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td data-cell="Username" class="left">{{ user.username }}</td>
+              <td data-cell="Email" class="left">{{ user.email }}</td>
+              <td data-cell="Name" class="middle">{{ user.role?.name }}</td>
+              <td *ngIf="user.last_login_at; else noLogin" data-cell="Lastlogin" class="left">
+                {{ user.last_login_at }}
+              </td>
+              <td data-cell="Ações" class="middle">
+                <div class="actions">
+                  <i class='ri-eye-2-line' [routerLink]="['/dashboard/customer', user.id]"></i>
+                  <i class='ri-edit-line' [routerLink]="['/dashboard/customer', user.id, 'edit']"></i>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 </ng-template>
 </card-table>

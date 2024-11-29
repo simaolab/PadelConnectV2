@@ -1,11 +1,64 @@
-<title-page pageText="Definições / "></title-page>
+<div class="page-info-action">
+    <div class="page-info">
+        <title-page pageText="Definições Pessoais"></title-page>
+        <p class="description-page">Aqui pode alterar as suas definições pessoais associadas ao 
+            <span>Padel Connect</span>
+        </p>
+    </div>
+</div>
 
-<p>{{ clientObj.first_name }}</p>
-<p>{{ clientObj.last_name }}</p>
-<p>{{ clientObj.username }}</p>
-<p>{{ clientObj.email }}</p>
-<p>{{ clientObj.nif }}</p>
-<p>{{ clientObj.contact !== 0 ? clientObj.contact : 'Não definido' }}</p>
-<p>{{ clientObj.gender !== '' ? clientObj.gender : 'Não definido' }}</p>
-<p>{{ clientObj.nationality !== '' ? clientObj.nationality : 'Não definido' }}</p>
-<p>{{ clientObj.birthday }}</p>
+<div class="settings-form">
+    <form>
+        <div class="user-container-info">
+            <div class="container-description">
+                <p class="description-text">Informações de Utilizador</p>
+                <hr>
+            </div>
+            <div class="container-forms">
+                <div class="data-detail">
+                    <div class="detail">
+                        <label for="first_name">Nome utilizador</label>
+                        <input type="text" name="first_name" value="{{ clientObj.username }}">
+                    </div>
+                    <div class="detail">
+                        <label for="first_name">NIF</label>
+                        <input type="text" name="first_name" value="{{ clientObj.nif }}">
+                    </div>
+                    <div class="detail">
+                        <label for="first_name">Data Nascimento</label>
+                        <input type="text" name="first_name" value="{{ clientObj.birthday }}">
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <div class="detail">
+                        <label for="last_name">Contacto</label>
+                        <input type="text" name="last_name" value="{{ clientObj.contact !== 0 ? clientObj.contact : 'Não definido' }}">
+                    </div>
+                    <div class="detail">
+                        <label for="last_name">Email</label>
+                        <input type="text" name="last_name" value="{{ clientObj.email }}" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="user-container-info">
+            <div class="container-description">
+                <p class="description-text">Informações Pessoais</p>
+                <hr>
+            </div>
+            <div class="container-forms">
+                <div class="data-detail">
+                    <div class="detail">
+                        <label for="first_name">Primeiro Nome</label>
+                        <input type="text" name="first_name" value="{{ clientObj.first_name }}">
+                    </div>
+                    <div class="detail">
+                        <label for="first_name">Último Nome</label>
+                        <input type="text" name="first_name" value="{{ clientObj.last_name }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
