@@ -43,6 +43,7 @@ export class CourtsService {
     price_hour: number;
     type_floor: string;
     status: string;
+    illumination: number;
     cover: number;
     last_maintenance: string }, court_id: number): Observable<any> {
       const token = localStorage.getItem('authToken');

@@ -121,13 +121,13 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-cloud'></i>
+            <i class="ri-building-2-line"></i>
             <p>Cobertura</p>
           </div>
           <div class="input-container">
             <select name="cover" [(ngModel)]="courtObj.cover">
-              <option [ngValue]="true">Sim</option>
-              <option [ngValue]="false">Não</option>
+              <option [ngValue]="1">Sim</option>
+              <option [ngValue]="0">Não</option>
             </select>
           </div>
         </div>
@@ -137,26 +137,25 @@
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-cloud'></i>
+            <i class="ri-lightbulb-line"></i>
             <p>Iluminação</p>
           </div>
           <div class="input-container">
             <select name="illumination" [(ngModel)]="courtObj.illumination">
-              <option [ngValue]="true">Sim</option>
-              <option [ngValue]="false">Não</option>
+              <option [ngValue]="1">Sim</option>
+              <option [ngValue]="0">Não</option>
             </select>
           </div>
         </div>
         <small *ngIf="formErrors['illumination']" class="small-error">{{ formErrors['illumination'] }}</small>
       </div>
-      
 
     </div>
 
     <div class="button">
-      <button type="submit" (click)="create()" class="btn">
-        Criar empresa
-        <i class='bx bx-plus-circle'></i>
+      <button type="submit" (click)="create()" class="btn create">
+        <i class="ri-save-line"></i>
+        Registar Campo
       </button>
     </div>
     

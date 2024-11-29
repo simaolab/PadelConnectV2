@@ -35,7 +35,7 @@
             <tr *ngFor="let court of courts">
               <td data-cell="Nome" class="left">{{ court.name }}</td>
               <td data-cell="Empresa" class="left">{{ court.company.name }}</td>
-              <td data-cell="Preço / h" class="middle">{{ court.price_hour }}</td>
+              <td data-cell="Preço / h" class="middle">{{ court.price_hour }}€</td>
               <td data-cell="Tipo de chão" class="left">{{ court.type_floor }}</td>
               <td data-cell="Iluminação" class="middle">
                 <div *ngIf="court.illumination === 1">

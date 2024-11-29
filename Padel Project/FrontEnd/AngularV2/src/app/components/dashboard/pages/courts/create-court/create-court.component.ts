@@ -33,7 +33,7 @@ export class CreateCourtComponent {
     price_hour: 5,
     type_floor: '',
     status: '',
-    illumination: 1,
+    illumination: 0,
     cover: 0,
     last_maintenance: ''
   }

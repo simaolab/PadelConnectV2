@@ -1,14 +1,26 @@
-<title-page pageText="Adicionar Campo"></title-page>
+<div class="page-info-title">
+  <div class="page-action">
+    <button type="submit" class="btn-round back" [routerLink]="['/dashboard/courts']">
+      <i class="ri-arrow-left-line"></i>
+    </button>
+  </div>
+  <div class="page-info">
+    <title-page pageText="Detalhes do campo"></title-page>
+    <p class="description-page">Bem vindo á página do campo
+      <span>{{ courtObj.name }}</span>, 
+      aqui pode visualizar todos os detalhes do campo.
+    </p>
+  </div>
+</div>
 
 <card-form>
   <form class="form">
-
-    <div class="small-large">
+    <div class="flex-container">
 
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-building'></i>
+            <i class="ri-hotel-line"></i>
             <p>Empresa</p>
           </div>
           <div class="input-container">
@@ -16,23 +28,11 @@
           </div>
         </div>
       </div>
-
+  
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-euro'></i>
-            <p>Preço hora</p>
-          </div>
-          <div class="input-container">
-            <input type="number" name="price_hour" [(ngModel)]="courtObj.price_hour" readonly>
-          </div>
-        </div>
-      </div>
-
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class='bx bx-user'></i>
+            <i class="ri-input-field"></i>
             <p>Nome</p>
           </div>
           <div class="input-container">
@@ -40,43 +40,40 @@
           </div>
         </div>
       </div>
+  
     </div>
-
-    <div class="complete">
-
+  
+    <div class="flex-container">
+  
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-wrench'></i>
+            <i class="ri-money-euro-circle-line"></i>
+            <p>Preço hora</p>
+          </div>
+          <div class="input-container">
+            <input type="number" name="price_hour" [(ngModel)]="courtObj.price_hour" readonly>
+          </div>
+        </div>
+      </div>
+  
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
+            <i class="ri-tools-line"></i>
             <p>Última manutenção</p>
           </div>
           <div class="input-container">
             <input type="text" name="last_maintenance"
-              [value]="courtObj.last_maintenance ? courtObj.last_maintenance : 'Nunca'" readonly>
+            [value]="courtObj.last_maintenance ? courtObj.last_maintenance : 'Nunca'" readonly>
           </div>
         </div>
       </div>
-
-    </div>
-
-    <div class="large-small">
-
+  
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-grid'></i>
-            <p>Tipo de chão</p>
-          </div>
-          <div class="input-container">
-            <input type="text" name="type_floor" [(ngModel)]="courtObj.type_floor" readonly>
-          </div>
-        </div>
-      </div>
-
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class='bx bx-pulse'></i>
+            <i class="ri-information-line"></i>
             <p>Estado</p>
           </div>
           <div class="input-container">
@@ -84,38 +81,65 @@
           </div>
         </div>
       </div>
-
+  
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
-            <i class='bx bx-cloud'></i>
+            <i class="ri-layout-line"></i>
+            <p>Tipo de chão</p>
+          </div>
+          <div class="input-container">
+            <input type="text" name="type_floor" [(ngModel)]="courtObj.type_floor" readonly>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  
+    <div class="flex-container">
+  
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
+            <i class="ri-building-2-line"></i>
             <p>Cobertura</p>
           </div>
           <div class="input-container">
             <input type="" name="cover"
-            [value]="courtObj.cover === 0 ? 'Sem cobertura' : courtObj.cover === 1 ? 'Com cobertura' : ''"  readonly>
+              [value]="courtObj.cover === 0 ? 'Sem cobertura' : courtObj.cover === 1 ? 'Com cobertura' : ''"  readonly>
           </div>
         </div>
       </div>
+      
+      <div class="wrap-attribute-container">
+        <div class="attribute-container">
+          <div class="label-container">
+            <i class="ri-lightbulb-line"></i>
+            <p>Iluminação</p>
+          </div>
+          <div class="input-container">
+            <input type="" name="illumination"
+              [value]="courtObj.illumination === 0 ? 'Sem Iluminação' : courtObj.illumination === 1 ? 'Com Iluminação' : ''"  readonly>
+          </div>
+        </div>
+      </div>
+  
     </div>
 
     <div class="button">
-      <button class="btn back" [routerLink]="'/dashboard/courts'">
-        <i class='bx bx-left-arrow-alt'></i>
-        Voltar atrás
-      </button>
-
-      <button type="submit" class="btn edit" [routerLink]="['/dashboard/court', court_id, 'edit']">
-        <i class='bx bx-pencil'></i>
-        Editar
+      
+      <button class="btn edit" [routerLink]="['/dashboard/court', court_id, 'edit']">
+        <i class="ri-edit-line"></i>
+        Editar {{ courtObj.name }}
       </button>
 
       <form method="post" (ngSubmit)="deleteCourt($event)">
         <button type="submit" class="btn delete">
-          <i class='bx bx-trash'></i>
-          Eliminar
+          <i class="ri-delete-bin-2-line"></i>
+          Eliminar {{ courtObj.name }}
         </button>
       </form>
+
     </div>
   </form>
 </card-form>

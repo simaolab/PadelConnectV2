@@ -31,6 +31,7 @@ export class ShowCourtComponent {
     price_hour: 0,
     type_floor: '',
     status: '',
+    illumination: 0,
     cover: 0,
     last_maintenance: ''
   }
@@ -62,6 +63,7 @@ export class ShowCourtComponent {
             price_hour: field.price_hour,
             type_floor: field.type_floor,
             status: field.status,
+            illumination: field.illumination,
             cover: field.cover,
             last_maintenance: field.last_maintenance
 

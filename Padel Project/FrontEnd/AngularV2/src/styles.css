@@ -117,10 +117,6 @@ tbody td {
   padding-block: 1rem;
 }
 
-select{
-  background: red;
-}
-
 .animated {
   opacity: 0;
   transform: translateY(30px);

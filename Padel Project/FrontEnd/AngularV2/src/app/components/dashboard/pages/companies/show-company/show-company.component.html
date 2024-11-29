@@ -19,7 +19,7 @@
   <form class="form">
 
     <div class="small-large">
-
+      
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
@@ -96,7 +96,7 @@
             <p>Localidade</p>
           </div>
           <div class="input-container">
-            <input type="text" name="postalCode" [(ngModel)]="addressObj.locality" readonly>
+            <input type="text" name="locality" [(ngModel)]="addressObj.locality" readonly>
           </div>
         </div>
       </div>
@@ -108,11 +108,10 @@
             <p>Código Postal</p>
           </div>
           <div class="input-container">
-            <input type="text" name="locality" [(ngModel)]="addressObj.postalCode" readonly>
+            <input type="text" name="postalCode" [(ngModel)]="addressObj.postalCode" readonly>
           </div>
         </div>
       </div>
-
 
     </div>
 
@@ -128,6 +127,7 @@
         </button>
       </form>
     </div>
+    
   </form>
 </card-form>
 

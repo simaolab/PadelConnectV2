@@ -25,7 +25,7 @@
             <p>NIF</p>
           </div>
           <div class="input-container">
-            <input type="number" name="nif" [(ngModel)]="companyObj.nif" placeholder="999999999">
+            <input type="number" name="nif" [(ngModel)]="companyObj.nif">
           </div>
         </div>
         <small *ngIf="formErrors['nif']" class="small-error">{{ formErrors['nif'] }}</small>
@@ -39,7 +39,7 @@
             <p>Contacto</p>
           </div>
           <div class="input-container">
-            <input type="number" name="contact" [(ngModel)]="companyObj.contact" placeholder="910000000" minlength="9" maxlength="9">
+            <input type="number" name="contact" [(ngModel)]="companyObj.contact" minlength="9" maxlength="9">
           </div>
         </div>
         <small *ngIf="formErrors['contact']" class="small-error">{{ formErrors['contact'] }}</small>
@@ -52,7 +52,7 @@
             <p>Nome</p>
           </div>
           <div class="input-container">
-            <input type="text" name="name" [(ngModel)]="companyObj.name" placeholder="PadelConnect">
+            <input type="text" name="name" [(ngModel)]="companyObj.name">
           </div>
         </div>
         <small *ngIf="formErrors['name']" class="small-error">{{ formErrors['name'] }}</small>
@@ -69,7 +69,7 @@
             <p>Email</p>
           </div>
           <div class="input-container">
-            <input type="text" name="email" [(ngModel)]="companyObj.email" placeholder="Email">
+            <input type="text" name="email" [(ngModel)]="companyObj.email">
           </div>
         </div>
       </div>
@@ -86,7 +86,7 @@
             <p>Endereço e Porta</p>
           </div>
           <div class="input-container">
-            <input type="text" name="addressPort" [(ngModel)]="addressObj.addressPort" placeholder="Rua do Padel 1">
+            <input type="text" name="addressPort" [(ngModel)]="addressObj.addressPort">
           </div>
         </div>
         <small *ngIf="formErrors['address_id']" class="small-error">{{ formErrors['address_id'] }}</small>
@@ -99,7 +99,7 @@
             <p>Código Postal</p>
           </div>
           <div class="input-container">
-            <input type="text" name="postalCode" [(ngModel)]="addressObj.postalCode" placeholder="4000-000">
+            <input type="text" name="postalCode" [(ngModel)]="addressObj.postalCode">
           </div>
         </div>
         <small *ngIf="formErrors['address_id']" class="small-error">{{ formErrors['address_id'] }}</small>
@@ -112,7 +112,7 @@
             <p>Localidade</p>
           </div>
           <div class="input-container">
-            <input type="text" name="locality" [(ngModel)]="addressObj.locality" placeholder="Porto">
+            <input type="text" name="locality" [(ngModel)]="addressObj.locality">
           </div>
         </div>
         <small *ngIf="formErrors['address_id']" class="small-error">{{ formErrors['address_id'] }}</small>
