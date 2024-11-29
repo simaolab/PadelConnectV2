@@ -1,107 +1,93 @@
-<page-top></page-top>
+<page-top title="{{ courtObj.name }}"></page-top>
 
 <div class="container">
-    <!-- Imagem do Campo -->
-    <div class="card">
+    <div class="card-image">
         <div class="card-content-image">
             <img src="assets/images/slideshow/1.jpg" alt="img" class="campo-img">
         </div>
     </div>
-    <div class="card-container-grid">
+
+    <div class="card-container-info--">
     <!-- Informações do Campo -->
-    <div class="card-content-info">
-        <h3 class="card-content-info-title">Campo do Porto</h3>
-        <p class="card-content-address">Rua das Flores da Catarina, 4470-876 - Porto</p>
-        <div class="rating">
-            <i class='bx bxs-star'></i>
-            <i class='bx bxs-star'></i>
-            <i class='bx bxs-star'></i>
-            <i class='bx bxs-star'></i>
+      <div class="card-content-info">
+        <div class="first-info">
+          <h2 class="info-title">{{ courtObj.name }}</h2>
+          <p class="card-content-address">{{ courtObj.address }}</p>
         </div>
+
+        <div class="second-info">
+              <h2 class="info-title">Informações</h2>
+              <div class="sub-info">
+                <h4 class="title-info">Tipo de chão</h4>
+                <p>{{ courtObj.type_floor }}</p>
+              </div>
+              <div class="sub-info">
+                <h4 class="title-info">Iluminação</h4>
+                <p>{{ courtObj.illumination === 1 ? 'Com iluminação' : 'Sem iluminação' }}</p>
+              </div>
+              <div class="sub-info">
+                <h4 class="title-info">Estado</h4>
+                <p>{{ courtObj.status }}</p>
+              </div>
+              <div class="sub-info">
+                <h4 class="title-info">Cobertura</h4>
+                <p>{{ courtObj.cover === 1 ? 'Coberto' : 'Descoberto' }}</p>
+              </div>
+        </div>
+      </div>
+
+      <div class="calendar">
+          <div class="calendar-container">
+              <full-calendar [options]="calendarOptions"></full-calendar>
+          </div>
+          <div class="card-content-price">
+            <div class="price">
+                <span>Preço: 10€/h</span>
+            </div>
+            <div class="card-content-button">
+                <a class="btn reserve">Adicionar ao carrinho</a>
+            </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Calendário -->
-    <div class="calendar">
-        <div class="calendar-container">
-            <full-calendar [options]="calendarOptions"></full-calendar>
-        </div>
-        <div class="card-content-price">
-          <div class="price">
-              <span>Preço: 10€/h</span>
-              <i class='bx bx-heart'></i>
-          </div>
-          <div class="card-content-button">
-              <a class="btn reserve">Reservar Campo</a>
-          </div>
-      </div>
-    </div>
-      <!-- Preço e Botão de Reserva -->
-</div>
+    <div class="divider"></div>
 
     <div class="card-content-main">
-      <!-- Informações do Campo -->
-      <div class="card-content-information">
-        <h4>Informações</h4>
-        <p class="card-content-information-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae velit ad incidunt dolor labore a consequuntur fuga hic quam dolore provident, possimus voluptates, excepturi autem, perferendis quae soluta. Voluptatem, iste.</p>
+      <div class="schedule">
+          <h2 class="info-title">Horário</h2>
+          <div class="schedule-info">
+              <p class="schedule-hour">Seg-Sex: 09:00 - 23:00</p>
+              <p class="schedule-hour">Sáb: 11:00 - 21:00</p>
+          </div>
+      </div>
+
+      <!-- <div class="additional-services">
+          <h4>Serviços adicionais</h4>
+          <div class="services-icons">
+              <i class="bx bx-swim">
+                  <p>Balneário</p>
+              </i>
+              <i class="bx bx-swim">
+                  <p>Balneário</p>
+              </i>
+              <i class="bx bx-swim">
+                  <p>Balneário</p>
+              </i>
+          </div>
+          <div class="services-icons">
+              <i class="bx bx-swim">
+                  <p>Balneário</p>
+              </i>
+              <i class="bx bx-swim">
+                  <p>Balneário</p>
+              </i>
+              <i class="bx bx-swim">
+                  <p>Balneário</p>
+              </i>
+          </div>
+      </div> -->
     </div>
-
-    <!-- Horário -->
-    <div class="card-content-schedule">
-        <h4>Horário</h4>
-        <div class="schedule-info">
-            <p>Seg-Sex: 09:00 - 23:00</p>
-            <p>Sáb: 11:00 - 21:00</p>
-        </div>
-    </div>
-
-
-    <!-- Serviços Adicionais -->
-    <div class="additional-services">
-        <h4>Serviços adicionais</h4>
-        <div class="services-icons">
-            <i class="bx bx-swim">
-                <p>Balneário</p>
-            </i>
-            <i class="bx bx-swim">
-                <p>Balneário</p>
-            </i> 
-            <i class="bx bx-swim">
-                <p>Balneário</p>
-            </i>
-        </div>
-        <div class="services-icons">
-            <i class="bx bx-swim">
-                <p>Balneário</p>
-            </i>
-            <i class="bx bx-swim">
-                <p>Balneário</p>
-            </i> 
-            <i class="bx bx-swim">
-                <p>Balneário</p>
-            </i>
-        </div>
-    </div>
-
-  
-
-    <!-- Reviews -->
-    <div class="reviews-section">
-        <h4>Reviews</h4>
-        <div class="reviews-grid">
-            <div class="review">
-                <blockquote>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
-                    <cite>Catarina Lopes</cite>
-                </blockquote>
-            </div>
-            <div class="review">
-                <blockquote>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
-                    <cite>Catarina Lopes</cite>
-                </blockquote>
-            </div>
-        </div>
-    </div>
-</div>
 </div>
 

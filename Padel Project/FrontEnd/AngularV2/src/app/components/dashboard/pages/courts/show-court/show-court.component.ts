@@ -56,8 +56,6 @@ export class ShowCourtComponent {
 
           const field = court.field;
 
-          console.log(field);
-
           this.courtObj = {
             name: field.name,
             company_name: field.company.name,

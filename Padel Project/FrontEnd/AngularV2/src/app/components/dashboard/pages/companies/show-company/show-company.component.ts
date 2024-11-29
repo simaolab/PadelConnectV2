@@ -78,6 +78,11 @@ export class ShowCompanyComponent {
               locality: addressParts[2],
             };
           }
+
+          console.log(this.companyObj)
+          // this.companyObj = {
+          //   add
+          // }
         },
         error: (err) => {
           const errorMessage = err?.error?.message;
