@@ -1,5 +1,5 @@
 .main-container {
-  background: var(--color-dashboard);
+  background: var(--color-white);
   width: calc(100% - 270px);
   margin-left: 270px;
   transition: all ease 500ms;
@@ -14,6 +14,7 @@
   display: flex;
   flex-direction: column;
   padding: 2rem;
+  padding-inline: 3rem;
 }
 
 @media screen and (max-width: 1000px) {

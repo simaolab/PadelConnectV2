@@ -1,5 +1,7 @@
-.button {
-  margin-top: 2rem;
+.button-add-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .add-button {
@@ -10,8 +12,8 @@
   align-items: center;
   justify-content: center;
   font-size: var(--font-size);
-  background: var(--color-white);
-  color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-white);
   cursor: pointer;
   box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
 }

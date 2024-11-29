@@ -1,10 +1,19 @@
-<title-page pageText="Empresas"></title-page>
-
-<add-button href="/dashboard/create-company"></add-button>
+<div class="page-info-action">
+  <div class="page-info">
+    <title-page pageText="Listagem de Empresas"></title-page>
+    <p class="description-page">Esta lista apresenta todas as suas 
+      empresas associadas ao <span>Padel Connect</span>
+    </p>
+  </div>
+  <div class="page-action">
+    <add-button href="/dashboard/create-company"></add-button>
+  </div>
+</div>
 
 <card-table>
-  <div *ngIf="isLoading; else showTable">
-    <p class="loading">Carregando...</p>
+  <div *ngIf="isLoading; else showTable" class="loading-screen">
+    <div class="spinner"></div>
+    <p class="loading">A carregar a lista de empresas, por favor aguarde ...</p>
   </div>
   <ng-template #showTable>
     <div *ngIf="companies.length > 0; else noCompanies">

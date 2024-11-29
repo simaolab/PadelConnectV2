@@ -16,22 +16,22 @@ class CompanySeeder extends Seeder
         DB::table('companies')->insert([
 
             [
-                'address'   => 'Rua do Ouro, 100',
+                'address'   => 'Rua do Ouro, 100, 4000-200, Porto',
                 'name'      => 'PadelConnect',
                 'email'     => 'empresa1@padelconnect.pt',
-                'nif'       => 910000001,
+                'nif'       => 510000001,
             ],
             [
-                'address'   => 'Avenida da Liberdade, 200',
+                'address'   => 'Avenida da Liberdade, 200, 2000-200, Lisboa',
                 'name'      => 'PadelPro',
                 'email'     => 'empresa2@padelpro.pt',
-                'nif'       => 910000002,
+                'nif'       => 510000002,
             ],
             [
-                'address'   => 'Praça do Comércio, 300',
+                'address'   => 'Praça do Comércio, 300 , 3000-200, Coimbra',
                 'name'      => 'PadelMaster',
                 'email'     => 'empresa3@padelmaster.pt',
-                'nif'       => 910000003,
+                'nif'       => 510000003,
             ],
         ]);
     }

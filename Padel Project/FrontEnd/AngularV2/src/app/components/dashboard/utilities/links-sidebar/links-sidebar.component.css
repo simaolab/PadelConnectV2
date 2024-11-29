@@ -4,12 +4,12 @@
   align-items: center;
   gap: 2rem;
   color: var(--color-gray);
-
   flex-grow: 0;
 }
 
 .links-sidebar .box-icon {
   border-radius: var(--border-radius-1);
+  font-size: var(--font-size);
   padding: 10px;
   display: flex;
   align-items: center;

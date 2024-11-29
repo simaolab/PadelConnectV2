@@ -11,5 +11,5 @@ import { TitlePageComponent } from '../../utilities/title-page/title-page.compon
   styleUrl: './reservations.component.css'
 })
 export class ReservationsComponent {
-
+  
 }
