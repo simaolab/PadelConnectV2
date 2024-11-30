@@ -20,7 +20,10 @@ class Field extends Model
         'status',
         'last_maintenance',
         'illumination',
-        'cover'
+        'cover',
+        'shower_room',
+        'lockers',
+        'rent_equipment'
     ];
 
     protected $hidden = [

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Laravel\Passport\HasApiTokens;
+use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
