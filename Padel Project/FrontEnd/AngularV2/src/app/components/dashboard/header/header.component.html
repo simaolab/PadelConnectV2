@@ -1,21 +1,24 @@
 <div class="header-content">
   <!-- mensagem -->
   <div class="welcome-message">
-      <span class="material-icons-sharp menu-icon">menu</span>
-      <h3>Olá, <span>{{ username }}</span></h3>
+    <div class="date-hour">
+        <div class="date">
+            <i class="ri-calendar-event-line"></i>
+            <p id="date"></p>
+        </div>
+        <div class="hour">
+            <i class="ri-time-line"></i>
+            <p id="hour"></p>
+        </div>
+      </div>
+      <div class="message-container">
+          <span class="material-icons-sharp menu-icon">menu</span>
+          <h3>Olá, <span>{{ username }}</span></h3>
+      </div>
   </div>
   <!-- data e hora -->
   <div class="right-header">
-      <div class="date-hour">
-          <div class="date">
-              <i class='bx bx-calendar-alt'></i>
-              <p id="date"></p>
-          </div>
-          <div class="hour">
-              <i class='bx bx-time-five'></i>
-              <p id="hour"></p>
-          </div>
-      </div>
+      
       <!-- blog e logout links -->
       <div class="home-notifications">
           <a href="#" class="home">

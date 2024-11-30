@@ -68,6 +68,7 @@ export class ShowCustomerComponent {
           blocked_at: customer.user.blocked_at,
           role: customer.user.role.name
         };
+
       },
       error: (err) => {
         const errorMessage = err?.error?.message

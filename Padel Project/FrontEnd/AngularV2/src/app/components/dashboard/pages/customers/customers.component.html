@@ -1,6 +1,6 @@
 <div class="page-info-action">
   <div class="page-info">
-    <title-page pageText="Listagem de Clientes"></title-page>
+    <title-page pageText="Lista de Clientes"></title-page>
     <p class="description-page">Esta lista apresenta todos os 
       clientes associados ao <span>Padel Connect</span>
     </p>
@@ -35,8 +35,14 @@
               </td>
               <td data-cell="Ações" class="middle">
                 <div class="actions">
-                  <i class='ri-eye-2-line' [routerLink]="['/dashboard/customer', user.id]"></i>
-                  <i class='ri-edit-line' [routerLink]="['/dashboard/customer', user.id, 'edit']"></i>
+                  <div class="tooltip">
+                    <i class='ri-more-2-fill' [routerLink]="['/dashboard/customer', user.id]"></i>
+                    <span class="tooltip-text">Detalhes</span>
+                  </div>
+                  <div class="tooltip">
+                    <i class='ri-edit-line' [routerLink]="['/dashboard/customer', user.id, 'edit']"></i>
+                    <span class="tooltip-text">Editar</span>
+                  </div>
                 </div>
               </td>
             </tr>
