@@ -1,7 +1,7 @@
 <div class="page-info-action">
     <div class="page-info">
         <title-page pageText="Definições Pessoais"></title-page>
-        <p class="description-page">Aqui pode alterar as suas definições pessoais associadas ao 
+        <p class="description-page">Aqui pode alterar as suas definições pessoais associadas ao
             <span>Padel Connect</span>
         </p>
     </div>
@@ -21,21 +21,21 @@
                             <i class="ri-user-3-line"></i>
                             <label for="username">Nome utilizador</label>
                         </div>
-                        <input type="text" name="username" value="{{ clientObj.username }}">
+                        <input type="text" name="username" value="{{ clientObj.username }}" readonly>
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-fingerprint-line"></i>
                             <label for="nif">NIF</label>
                         </div>
-                        <input type="text" name="nif" value="{{ clientObj.nif }}">
+                        <input type="text" name="nif" value="{{ clientObj.nif }}" readonly>
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-cake-2-line"></i>
                             <label for="birthday">Data Nascimento</label>
                         </div>
-                        <input type="text" name="birthday" value="{{ clientObj.birthday }}">
+                        <input type="text" name="birthday" value="{{ clientObj.birthday }}" readonly>
                     </div>
                 </div>
                 <div class="contact-detail">
@@ -53,7 +53,7 @@
                             <i class="ri-mail-line"></i>
                             <label for="email">Email</label>
                         </div>
-                        <input type="text" name="email" value="{{ clientObj.email }}" disabled>
+                        <input type="text" name="email" value="{{ clientObj.email }}" readonly>
                     </div>
                 </div>
             </div>
@@ -71,28 +71,28 @@
                             <i class="ri-user-3-line"></i>
                             <label for="first_name">Primeiro Nome</label>
                         </div>
-                        <input type="text" name="first_name" value="{{ clientObj.first_name }}">
+                        <input type="text" name="first_name" value="{{ clientObj.first_name }}" [(ngModel)]="clientObj.first_name">
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-user-3-line"></i>
                             <label for="last_name">Último Nome</label>
                         </div>
-                        <input type="text" name="last_name" value="{{ clientObj.last_name }}">
+                        <input type="text" name="last_name" value="{{ clientObj.last_name }}" [(ngModel)]="clientObj.last_name">
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-flag-line"></i>
                             <label for="nacionality">Nacionalidade</label>
                         </div>
-                        <input type="text" name="nacionality" value="{{ clientObj.nationality }}">
+                        <input type="text" name="nationality" value="{{ clientObj.nationality }}" [(ngModel)]="clientObj.nationality">
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-men-line"></i>
                             <label for="first_name">Género</label>
                         </div>
-                        <input type="text" name="gender" value="{{ clientObj.gender }}">
+                        <input type="text" name="gender" value="{{ clientObj.gender }}" [(ngModel)]="clientObj.gender">
                     </div>
                 </div>
                 <div class="data-detail">
@@ -101,21 +101,21 @@
                             <i class="ri-home-4-line"></i>
                             <label for="addressPort">Endereço e número porta</label>
                         </div>
-                        <input type="text" name="addressPort" value="{{ addressObj.addressPort }}">
+                        <input type="text" name="addressPort" value="{{ addressObj.addressPort }}" [(ngModel)]="addressObj.addressPort">
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-signpost-line"></i>
                             <label for="locality">Localidade</label>
                         </div>
-                        <input type="text" name="locality" value="{{ addressObj.locality }}">
+                        <input type="text" name="locality" value="{{ addressObj.locality }}" [(ngModel)]="addressObj.locality">
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-map-pin-2-line"></i>
                             <label for="postalCode">Código Postal</label>
                         </div>
-                        <input type="text" name="postalCode" value="{{ addressObj.postalCode }}">
+                        <input type="text" name="postalCode" value="{{ addressObj.postalCode }}" [(ngModel)]="addressObj.postalCode">
                     </div>
                 </div>
             </div>
@@ -133,7 +133,7 @@
                             <i class="ri-newspaper-line"></i>
                             <label for="newsletter">Newsletter</label>
                         </div>
-                        <input type="text" name="newsletter" value="{{ clientObj.newsletter }}">
+                        <input type="text" name="newsletter" value="{{ clientObj.newsletter }}" [(ngModel)]="clientObj.newsletter">
                     </div>
                 </div>
             </div>
@@ -173,7 +173,7 @@
             </div>
           </div>
           <div class="button left">
-            <button class="btn edit">
+            <button class="btn edit" (click)="editClient()">
               <i class="ri-edit-line"></i>
               Salvar alterações
             </button>
