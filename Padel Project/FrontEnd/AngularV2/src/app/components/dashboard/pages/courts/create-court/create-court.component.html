@@ -17,7 +17,7 @@
 
     <div class="flex-container">
 
-      <div class="wrap-attribute-container">
+      <!-- <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
             <i class="ri-hotel-line"></i>
@@ -29,7 +29,14 @@
           </div>
         </div>
         <small *ngIf="formErrors['company_id']" class="small-error">{{ formErrors['company_id'] }}</small>
-      </div>
+      </div> -->
+      <dropdown
+      [items]="companies"
+      labelKey="name"
+      valueKey="id"
+      placeholder="Selecione uma Empresa"
+      (selectionChange)="onCompanySelected($event)">
+      ></dropdown>
 
       <div class="wrap-attribute-container">
         <div class="attribute-container">
@@ -133,7 +140,7 @@
         </div>
         <small *ngIf="formErrors['cover']" class="small-error">{{ formErrors['cover'] }}</small>
       </div>
-      
+
       <div class="wrap-attribute-container">
         <div class="attribute-container">
           <div class="label-container">
@@ -158,6 +165,6 @@
         Registar Campo
       </button>
     </div>
-    
+
   </form>
 </card-form>

@@ -1,0 +1,14 @@
+<div class="dropdown">
+  <div class="select" id="roleDropdown">
+    <span class="selected">{{ selectedItem?.[labelKey] || placeholder }}</span>
+    <div class="caret"></div>
+  </div>
+  <ul class="menu">
+    <li
+      *ngFor="let item of items"
+      (click)="selectItem(item)"
+      [attr.data-value]="item[valueKey]">
+      {{ item[labelKey] }}
+    </li>
+  </ul>
+</div>

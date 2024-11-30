@@ -3,11 +3,12 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CourtsService } from '../../../../../services/courts.service';
 import { FormsModule } from '@angular/forms';
+import { CompaniesService } from '../../../../../services/companies.service';
 
 import { CardFormComponent } from '../../../utilities/card-form/card-form.component';
 import { TitlePageComponent } from '../../../utilities/title-page/title-page.component';
 import { DashboardComponent } from '../../../dashboard/dashboard.component';
-import { error } from 'console';
+import { DropdownComponent } from '../../../utilities/dropdown/dropdown.component';
 
 @Component({
   selector: 'app-create-court',
@@ -19,6 +20,7 @@ import { error } from 'console';
     TitlePageComponent,
     CardFormComponent,
     DashboardComponent,
+    DropdownComponent,
   ],
   templateUrl: './create-court.component.html',
   styleUrl: './create-court.component.css'
@@ -38,10 +40,13 @@ export class CreateCourtComponent {
     last_maintenance: ''
   }
 
+  companies: any[] = [];
+
     constructor(
       private router: Router,
       private courtsService: CourtsService,
       private dashboardComponent: DashboardComponent,
+      private companiesService: CompaniesService
     ) {}
 
     create() {
@@ -79,4 +84,25 @@ export class CreateCourtComponent {
         }
       })
     }
+
+    ngOnInit(): void {
+      this.loadCompanies();
+    }
+
+    loadCompanies(): void {
+      this.companiesService.index().subscribe({
+        next: (data: any) => {
+          this.companies = data.companies;
+        },
+        error: (err: any) => {
+          console.error('Erro ao carregar empresas:', err);
+        }
+      });
+    }
+
+    onCompanySelected(company: any): void {
+      // Atualiza o campo company_id com o ID da empresa selecionada
+      this.courtObj.company_id = company.id;
+    }
+
 }
