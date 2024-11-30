@@ -19,41 +19,41 @@
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-user-3-line"></i>
-                            <label for="first_name">Nome utilizador</label>
+                            <label for="username">Nome utilizador</label>
                         </div>
-                        <input type="text" name="first_name" value="{{ clientObj.username }}">
+                        <input type="text" name="username" value="{{ clientObj.username }}">
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-fingerprint-line"></i>
-                            <label for="first_name">NIF</label>
+                            <label for="nif">NIF</label>
                         </div>
-                        <input type="text" name="first_name" value="{{ clientObj.nif }}">
+                        <input type="text" name="nif" value="{{ clientObj.nif }}">
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-cake-2-line"></i>
-                            <label for="first_name">Data Nascimento</label>
+                            <label for="birthday">Data Nascimento</label>
                         </div>
-                        <input type="text" name="first_name" value="{{ clientObj.birthday }}">
+                        <input type="text" name="birthday" value="{{ clientObj.birthday }}">
                     </div>
                 </div>
                 <div class="contact-detail">
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-phone-line"></i>
-                            <label for="last_name">Contacto</label>
+                            <label for="phone">Contacto</label>
                         </div>
-                        <input type="text" name="last_name" value="{{ clientObj.contact !== 0 ? clientObj.contact : 'Não definido' }}">
+                        <input type="text" name="phone" value="{{ clientObj.contact !== 0 ? clientObj.contact : 'Não definido' }}">
                     </div>
                 </div>
                 <div class="contact-detail">
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-mail-line"></i>
-                            <label for="last_name">Email</label>
+                            <label for="email">Email</label>
                         </div>
-                        <input type="text" name="last_name" value="{{ clientObj.email }}" disabled>
+                        <input type="text" name="email" value="{{ clientObj.email }}" disabled>
                     </div>
                 </div>
             </div>
@@ -76,16 +76,16 @@
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-user-3-line"></i>
-                            <label for="first_name">Último Nome</label>
+                            <label for="last_name">Último Nome</label>
                         </div>
-                        <input type="text" name="first_name" value="{{ clientObj.last_name }}">
+                        <input type="text" name="last_name" value="{{ clientObj.last_name }}">
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-flag-line"></i>
-                            <label for="first_name">Nacionalidade</label>
+                            <label for="nacionality">Nacionalidade</label>
                         </div>
-                        <input type="text" name="first_name" value="{{ clientObj.nationality }}">
+                        <input type="text" name="nacionality" value="{{ clientObj.nationality }}">
                     </div>
                     <div class="detail">
                         <div class="label-container">
@@ -99,23 +99,23 @@
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-home-4-line"></i>
-                            <label for="first_name">Endereço e número porta</label>
+                            <label for="addressPort">Endereço e número porta</label>
                         </div>
-                        <input type="text" name="first_name" value="{{ addressObj.addressPort }}">
+                        <input type="text" name="addressPort" value="{{ addressObj.addressPort }}">
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-signpost-line"></i>
-                            <label for="first_name">Localidade</label>
+                            <label for="locality">Localidade</label>
                         </div>
-                        <input type="text" name="first_name" value="{{ addressObj.locality }}">
+                        <input type="text" name="locality" value="{{ addressObj.locality }}">
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-map-pin-2-line"></i>
-                            <label for="first_name">Código Postal</label>
+                            <label for="postalCode">Código Postal</label>
                         </div>
-                        <input type="text" name="first_name" value="{{ addressObj.postalCode }}">
+                        <input type="text" name="postalCode" value="{{ addressObj.postalCode }}">
                     </div>
                 </div>
             </div>
@@ -131,9 +131,9 @@
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-newspaper-line"></i>
-                            <label for="first_name">Newsletter</label>
+                            <label for="newsletter">Newsletter</label>
                         </div>
-                        <input type="text" name="first_name" value="{{ clientObj.newsletter }}">
+                        <input type="text" name="newsletter" value="{{ clientObj.newsletter }}">
                     </div>
                 </div>
             </div>
@@ -171,6 +171,18 @@
                   </div>
                 </div>
             </div>
+          </div>
+          <div class="button left">
+            <button class="btn edit">
+              <i class="ri-edit-line"></i>
+              Salvar alterações
+            </button>
+            <form method="post">
+              <button type="submit" class="btn delete">
+                <i class="ri-delete-bin-2-line"></i>
+                Apagar Conta
+              </button>
+            </form>
           </div>
     </form>
 </div>

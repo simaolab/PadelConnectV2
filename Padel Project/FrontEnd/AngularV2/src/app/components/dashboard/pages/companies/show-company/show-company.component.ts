@@ -30,7 +30,7 @@ export class ShowCompanyComponent {
     email: '',
     contact: 0,
     nif: 0,
-    newsletter: 0,
+    newsletter: 'Não',
     address: '',
   }
 
@@ -65,7 +65,7 @@ export class ShowCompanyComponent {
             email: company.email,
             contact: company.contact,
             nif: company.nif,
-            newsletter: company.newsletter,
+            newsletter: company.newsletter || "Não",
             address: company.address
           };
 

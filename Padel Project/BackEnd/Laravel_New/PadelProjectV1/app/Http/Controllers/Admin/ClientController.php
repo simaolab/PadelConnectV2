@@ -102,6 +102,7 @@ class ClientController extends Controller
         {
             $client->update($request->validated());
             return response()->json([
+                'status' => 'success',
                 'message' => 'Cliente '.$client->user->username.' atualizado com sucesso!'
             ], 200);
         }

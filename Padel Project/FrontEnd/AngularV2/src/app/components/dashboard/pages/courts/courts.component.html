@@ -53,6 +53,30 @@
                   <i class="ri-tree-line"></i>
                   <span class="tooltip-text">Exterior</span>
                 </div>
+                <div *ngIf="court.shower_room === 1" class="tooltip">
+                  <i class="ri-drop-line"></i>
+                  <span class="tooltip-text">Com Balneário</span>
+                </div>
+                <div *ngIf="court.shower_room === 0" class="tooltip">
+                  <i class="ri-blur-off-line"></i>
+                  <span class="tooltip-text">Sem Balneário</span>
+                </div>
+                <div *ngIf="court.lockers === 1" class="tooltip">
+                  <i class="ri-lock-line"></i>
+                  <span class="tooltip-text">Com Cacifo</span>
+                </div>
+                <div *ngIf="court.lockers === 0" class="tooltip">
+                  <i class="ri-lock-unlock-line"></i>
+                  <span class="tooltip-text">Sem Cacifo</span>
+                </div>
+                <div *ngIf="court.rent_equipment === 1" class="tooltip">
+                  <i class="ri-checkbox-circle-line"></i>
+                  <span class="tooltip-text">Com Aluger equipamento</span>
+                </div>
+                <div *ngIf="court.rent_equipment === 0" class="tooltip">
+                  <i class="ri-prohibited-2-line"></i>
+                  <span class="tooltip-text">Sem Aluguer equipamento</span>
+                </div>
               </td>
               <td data-cell="Estado" class="middle">
                 <div class="status-wrapper">
