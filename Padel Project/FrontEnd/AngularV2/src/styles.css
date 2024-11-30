@@ -72,7 +72,6 @@ table {
 }
 
 .table-wrapper {
-  overflow-x: auto;
   width: 100%; 
 }
 
@@ -83,6 +82,13 @@ table {
 
 tr .middle {
   text-align: center;
+}
+  
+td.middle.services{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
 }
 
 tr .left {
@@ -197,7 +203,7 @@ tbody td {
   color: var(--color-primary);
 }
 
-.actions .ri-eye-2-line{
+.actions .ri-more-2-fill{
   color: var(--color-success);
 }
 
@@ -382,6 +388,47 @@ input[type=number] {
   margin-bottom: 10px;
 }
 
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  font-size: var(--font-smaller);
+}
+
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  background-color: var(--color-blue-2);
+  color: var(--color-white);
+  text-align: center;
+  border-radius: 5px;
+  padding: .5rem 1rem;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+
+.tooltip .tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--color-blue-2) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -472,6 +519,13 @@ input[type=number] {
 
   tr .middle {
     text-align: left;
+  }
+
+  td.middle.services{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .5rem;
   }
 
   table {

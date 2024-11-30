@@ -4,14 +4,35 @@
       <h3 class="site-name">Padel <span>Connect</span></h3>
   </a>
 
-  <link-sidebar href="/dashboard/reservations" icon="ri-list-check-2" p="Reservas"></link-sidebar>
-
-  <link-sidebar href="/dashboard/companies" icon="ri-hotel-line" p="Empresas" *ngIf="isAdmin"></link-sidebar>
-  <link-sidebar href="/dashboard/courts" icon="ri-input-field" p="Campos" *ngIf="isAdmin"></link-sidebar>
-  <link-sidebar href="/dashboard/customers" icon="ri-group-line" p="Clientes" *ngIf="isAdmin"></link-sidebar>
-
-  <link-sidebar href="/dashboard/promotions" icon="ri-percent-line" p="Promoções"></link-sidebar>
-  <link-sidebar href="/dashboard/settings" icon="ri-user-settings-line" p="Definições"></link-sidebar>
+  <div class="tooltip-sidebar">
+    <link-sidebar href="/dashboard/reservations" icon="ri-list-check-2" p="Reservas"></link-sidebar>
+    <span class="tooltip-text-sidebar">Reservas</span>
+  </div>
+  
+  <div class="tooltip-sidebar">
+    <link-sidebar href="/dashboard/companies" icon="ri-hotel-line" p="Empresas" *ngIf="isAdmin"></link-sidebar>
+    <span class="tooltip-text-sidebar">Empresas</span>
+  </div>
+  
+  <div class="tooltip-sidebar">
+    <link-sidebar href="/dashboard/courts" icon="ri-input-field" p="Campos" *ngIf="isAdmin"></link-sidebar>
+    <span class="tooltip-text-sidebar">Campos</span>
+  </div>
+  
+  <div class="tooltip-sidebar">
+    <link-sidebar href="/dashboard/customers" icon="ri-group-line" p="Clientes" *ngIf="isAdmin"></link-sidebar>
+    <span class="tooltip-text-sidebar">Clientes</span>
+  </div>
+  
+  <div class="tooltip-sidebar">
+    <link-sidebar href="/dashboard/promotions" icon="ri-percent-line" p="Promoções"></link-sidebar>
+    <span class="tooltip-text-sidebar">Promoções</span>
+  </div>
+  
+  <div class="tooltip-sidebar">
+    <link-sidebar href="/dashboard/settings" icon="ri-user-settings-line" p="Definições"></link-sidebar>
+    <span class="tooltip-text-sidebar">Definições</span>
+  </div>  
 
   <div class="logout-container">
     <link-sidebar icon="ri-logout-circle-r-line" p="Logout" (click)="logout()"></link-sidebar>
