@@ -23,8 +23,16 @@ export class SettingsComponent {
     contact: 0,
     gender: '',
     nationality: '',
-    birthday: ''
+    birthday: '',
+    address: '',
+    newsletter: 'Não',
   };
+
+  addressObj = {
+    addressPort: 'Ainda não tem morada',
+    postalCode: 'Não definido',
+    locality: 'Ainda não tem localidade',
+  }
 
   client_id: number = 0;
 
@@ -47,12 +55,23 @@ export class SettingsComponent {
             email: client.user?.email || '',
             nif: client.user?.nif || 0,
             contact: client.contact || 0,
-            gender: client.gender || '',
-            nationality: client.nationality || '',
-            birthday: client.user?.birthday || ''
+            gender: client.gender || 'Sem género',
+            nationality: client.nationality?.name || 'Sem nacionalidade',
+            birthday: client.user?.birthday || '',
+            address: client.address || '',
+            newsletter: client.newsletter || "Não",
           };
+          
+          const addressParts = client.address.split(', ');
+          
+          if (addressParts.length === 3) {
+            this.addressObj = {
+              addressPort: addressParts[0],
+              postalCode: addressParts[1],
+              locality: addressParts[2],
+            };
+          }
 
-          console.log(this.clientObj);
         } else {
           console.error('A resposta não contém o objeto "client".', res);
         }

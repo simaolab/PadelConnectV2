@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('type_floor');
             $table->boolean('illumination')->default(false);
             $table->boolean('cover')->default(false);
+            $table->boolean('shower_room')->default(false);
+            $table->boolean('lockers')->default(false);
+            $table->boolean('rent_equipment')->default(false);
             $table->string('status');
             $table->date('last_maintenance')->nullable();
             $table->timestamps();
