@@ -2,8 +2,27 @@
   color: var(--color-warning);
 }
 
-.ri-heavy-showers-line{
-  color: var(--color-blue-1);
+
+.ri-drop-line{
+  color: var(--color-blue-2);
+}
+
+.ri-tree-line{
+  color: var(--color-primary);
+}
+
+.ri-building-2-line,
+.ri-lightbulb-line,
+.ri-blur-off-line{
+  color: var(--color-gray);
+}
+
+.ri-checkbox-circle-line{
+  color: var(--color-primary);
+}
+
+.ri-prohibited-2-line{
+  color: var(--color-danger);
 }
 
 .status-wrapper {

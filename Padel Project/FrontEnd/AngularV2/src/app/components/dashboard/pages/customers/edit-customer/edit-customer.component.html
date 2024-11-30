@@ -76,7 +76,7 @@
                       <i class="ri-shield-user-line"></i>
                       <label for="first_name">Role</label>
                     </div>
-                    <input type="text" name="role" [(ngModel)]="customerObj.role" disabled>
+                    <input type="text" name="role" [(ngModel)]="customerObj.role">
                 </div>
                 <div class="detail">
                   <div class="label-container">
@@ -100,7 +100,7 @@
                     <label for="email-verified-at">Estado Utilizador</label>
                   </div>
                   <input type="text" name="blocked_at"
-                  [value]="customerObj.user_blocked ? customerObj.user_blocked : 'Ativo'"  disabled>
+                  [value]="customerObj.user_blocked ? customerObj.user_blocked : 'Ativo'">
                 </div>
             </div>
         </div>
