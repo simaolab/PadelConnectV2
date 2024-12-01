@@ -1,32 +1,29 @@
 <div class="header-content">
-  <!-- mensagem -->
   <div class="welcome-message">
     <div class="date-hour">
-        <div class="date">
-            <i class="ri-calendar-event-line"></i>
-            <p id="date"></p>
-        </div>
-        <div class="hour">
-            <i class="ri-time-line"></i>
-            <p id="hour"></p>
-        </div>
+      <div class="date">
+        <i class="ri-calendar-event-line"></i>
+        <p>{{ date }}</p>
       </div>
-      <div class="message-container">
-          <span class="material-icons-sharp menu-icon">menu</span>
-          <h3>Olá, <span>{{ username }}</span></h3>
+      <div class="hour">
+        <i class="ri-time-line"></i>
+        <p>{{ hour }}</p>
       </div>
+    </div>
+    <div class="message-container">
+      <span class="material-icons-sharp menu-icon" (click)="toggleMenu()">menu</span>
+      <h3>Olá, <span>{{ username }}</span></h3>
+    </div>
   </div>
-  <!-- data e hora -->
+
   <div class="right-header">
-      
-      <!-- blog e logout links -->
-      <div class="home-notifications">
-          <a href="#" class="home">
-              <i class='bx bx-home-alt-2' ></i>
-          </a>
-          <a href="#" class="notifications">
-              <i class='bx bx-bell'></i>
-          </a>
-      </div>
+    <div class="home-notifications">
+      <a href="#" class="home">
+        <i class='bx bx-home-alt-2'></i>
+      </a>
+      <a href="#" class="notifications">
+        <i class='bx bx-bell'></i>
+      </a>
+    </div>
   </div>
 </div>

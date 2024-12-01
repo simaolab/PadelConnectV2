@@ -2,12 +2,14 @@
   <div class="box-icon" [ngClass]="{'active': isActive(href)}">
     <i class="{{ icon }}"></i>
   </div>
-  <p class="p-sidebar">{{ p }}</p>
+  <p class="p-sidebar"
+    [ngClass]="{ minimized: isSidebarClosed }"
+    *ngIf="!isSidebarClosed">{{ p }}</p>
 </a>
 
 <div *ngIf="!href" class="links-sidebar" (click)="onClick()">
   <div class="box-icon">
     <i class="{{ icon }}"></i>
   </div>
-  <p class="p-sidebar">{{ p }}</p>
+  <p class="p-sidebar" [ngClass]="{ minimized: isSidebarClosed }" *ngIf="!isSidebarClosed">{{ p }}</p>
 </div>

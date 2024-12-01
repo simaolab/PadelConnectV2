@@ -8,6 +8,8 @@ import { CompaniesService } from '../../../../../services/companies.service';
 import { CardFormComponent } from '../../../utilities/card-form/card-form.component';
 import { TitlePageComponent } from '../../../utilities/title-page/title-page.component';
 import { DashboardComponent } from '../../../dashboard/dashboard.component';
+import { Company } from '../../../../../models/company';
+import { Address } from '../../../../../models/address';
 
 @Component({
   selector: 'app-show-company',
@@ -25,16 +27,16 @@ import { DashboardComponent } from '../../../dashboard/dashboard.component';
 })
 export class ShowCompanyComponent {
 
-  companyObj = {
+  companyObj: Company = {
     name: '',
     email: '',
     contact: 0,
     nif: 0,
-    newsletter: 'Não',
+    newsletter: 0,
     address: '',
   }
 
-  addressObj = {
+  addressObj: Address = {
     addressPort: '',
     postalCode: '',
     locality: '',
@@ -48,6 +50,7 @@ export class ShowCompanyComponent {
     private companiesService: CompaniesService,
     private dashboardComponent: DashboardComponent
   ) {}
+
 
   ngOnInit(): void {
     this.company_id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
@@ -65,24 +68,19 @@ export class ShowCompanyComponent {
             email: company.email,
             contact: company.contact,
             nif: company.nif,
-            newsletter: company.newsletter || "Não",
+            newsletter: company.newsletter,
             address: company.address
           };
 
           const addressParts = company.address.split(', ');
-          
-          if (addressParts.length === 3) {
+
+          if (addressParts.length === 4) {
             this.addressObj = {
-              addressPort: addressParts[0],
-              postalCode: addressParts[1],
-              locality: addressParts[2],
+              addressPort: addressParts[0] + ', ' + addressParts[1],
+              postalCode: addressParts[2],
+              locality: addressParts[3],
             };
           }
-
-          console.log(this.companyObj)
-          // this.companyObj = {
-          //   add
-          // }
         },
         error: (err) => {
           const errorMessage = err?.error?.message;

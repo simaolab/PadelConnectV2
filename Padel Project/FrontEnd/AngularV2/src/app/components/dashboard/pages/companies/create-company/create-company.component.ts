@@ -3,6 +3,8 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CompaniesService } from '../../../../../services/companies.service';
 import { FormsModule } from '@angular/forms';
+import { Address } from '../../../../../models/address';
+import { Company } from '../../../../../models/company';
 
 import { CardFormComponent } from '../../../utilities/card-form/card-form.component';
 import { TitlePageComponent } from '../../../utilities/title-page/title-page.component';

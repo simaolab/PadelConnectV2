@@ -19,14 +19,14 @@
 
 @media screen and (max-width: 1000px) {
   .main-container {
-    margin-left: 110px;
-    width: calc(100% - 110px);
+    margin-left: 110px !important;
+    width: calc(100% - 110px) !important;
   }
 }
 
 @media screen and (max-width: 674px) {
   .main-container {
-    margin-left: 0;
-    width: 100%;
+    margin-left: 0 !important;
+    width: 100% !important;
   }
 }

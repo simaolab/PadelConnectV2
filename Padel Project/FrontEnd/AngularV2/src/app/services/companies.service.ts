@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiRoutes } from '../config/api-routes';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Company } from '../models/company';
 
 @Injectable({
   providedIn: 'root'
@@ -38,13 +39,7 @@ export class CompaniesService {
     return this.http.get<any>(`${ApiRoutes.companies}${company_id}`, { headers });
   }
 
-  edit(companyObj: {
-    name: string;
-    email: string;
-    contact: number;
-    nif: number;
-    newsletter: number
-    address: string; }, company_id: number): Observable<any> {
+  edit(companyObj: Company, company_id: number): Observable<any> {
       const token = localStorage.getItem('authToken');
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 

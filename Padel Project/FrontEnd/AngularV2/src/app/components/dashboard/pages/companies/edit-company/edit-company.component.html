@@ -6,8 +6,8 @@
   </div>
   <div class="page-info">
     <title-page pageText="Dados da empresa"></title-page>
-    <p class="description-page">Bem vindo á página da empresa 
-      <span>{{ companyObj.name }}</span>, 
+    <p class="description-page">Bem vindo á página da empresa
+      <span>{{ companyObj.name }}</span>,
       aqui pode editar os dados desta empresa.
     </p>
   </div>
@@ -41,7 +41,7 @@
                     <i class="ri-phone-line"></i>
                     <label for="first_name">Contacto</label>
                   </div>
-                  <input type="number" name="contact" [(ngModel)]="companyObj.contact" disabled>
+                  <input type="number" name="contact" [(ngModel)]="companyObj.contact">
               </div>
             </div>
             <div class="contact-detail">
@@ -59,21 +59,24 @@
                       <i class="ri-home-4-line"></i>
                       <label for="addressPort">Endereço e número porta</label>
                   </div>
-                  <input type="text" name="addressPort" value="{{ addressObj.addressPort }}">
+                  <input type="text" name="addressPort" value="{{ addressObj.addressPort }}"
+                    [(ngModel)]="addressObj.addressPort">
               </div>
               <div class="detail">
                   <div class="label-container">
                       <i class="ri-signpost-line"></i>
                       <label for="locality">Localidade</label>
                   </div>
-                  <input type="text" name="locality" value="{{ addressObj.locality }}">
+                  <input type="text" name="locality" value="{{ addressObj.locality }}"
+                  [(ngModel)]="addressObj.locality">
               </div>
               <div class="detail">
                   <div class="label-container">
                       <i class="ri-map-pin-2-line"></i>
                       <label for="postalCode">Código Postal</label>
                   </div>
-                  <input type="text" name="postalCode" value="{{ addressObj.postalCode }}">
+                  <input type="text" name="postalCode" value="{{ addressObj.postalCode }}"
+                    [(ngModel)]="addressObj.postalCode">
               </div>
           </div>
         </div>
