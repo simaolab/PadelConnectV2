@@ -27,7 +27,6 @@ export class ModalComponent {
   closeModal() : void {
     this.Visible = false;
     this.modalClosed.emit();
-    console.log('Modal fechado, emitindo evento');
   }
 }
 

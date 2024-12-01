@@ -44,7 +44,9 @@
                             <i class="ri-phone-line"></i>
                             <label for="phone">Contacto</label>
                         </div>
-                        <input type="text" name="phone" value="{{ clientObj.contact !== 0 ? clientObj.contact : 'Não definido' }}">
+                        <input type="text" name="phone"
+                        value="{{ clientObj.contact !== 0 ? clientObj.contact : 'Não definido' }}"
+                        [(ngModel)]="clientObj.contact" placeholder="Contacto">
                     </div>
                 </div>
                 <div class="contact-detail">
@@ -71,28 +73,41 @@
                             <i class="ri-user-3-line"></i>
                             <label for="first_name">Primeiro Nome</label>
                         </div>
-                        <input type="text" name="first_name" value="{{ clientObj.first_name }}" [(ngModel)]="clientObj.first_name">
+                        <input type="text" name="first_name" value="{{ clientObj.first_name }}"
+                        [(ngModel)]="clientObj.first_name" placeholder="Primeiro Nome">
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-user-3-line"></i>
                             <label for="last_name">Último Nome</label>
                         </div>
-                        <input type="text" name="last_name" value="{{ clientObj.last_name }}" [(ngModel)]="clientObj.last_name">
+                        <input type="text" name="last_name" value="{{ clientObj.last_name }}"
+                        [(ngModel)]="clientObj.last_name" placeholder="Último Nome">
                     </div>
-                    <div class="detail">
+                    <!-- <div class="detail">
                         <div class="label-container">
                             <i class="ri-flag-line"></i>
                             <label for="nacionality">Nacionalidade</label>
                         </div>
-                        <input type="text" name="nationality" value="{{ clientObj.nationality }}" [(ngModel)]="clientObj.nationality">
-                    </div>
+                        <input type="text" name="nationality" value="{{ clientObj.nationality }}"
+                        [(ngModel)]="clientObj.nationality" placeholder="Nacionalidade">
+                    </div> -->
+                    <dropdown
+                    [items]="nationalities"
+                    labelKey="name"
+                    valueKey="id"
+                    placeholder="Selecione uma nacionalidade"
+                    (selectionChange)="onNationalitySelected($event)">
+                  </dropdown>
+
+
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-men-line"></i>
                             <label for="first_name">Género</label>
                         </div>
-                        <input type="text" name="gender" value="{{ clientObj.gender }}" [(ngModel)]="clientObj.gender">
+                        <input type="text" name="gender" value="{{ clientObj.gender }}"
+                        [(ngModel)]="clientObj.gender" placeholder="Género">
                     </div>
                 </div>
                 <div class="data-detail">
@@ -101,21 +116,24 @@
                             <i class="ri-home-4-line"></i>
                             <label for="addressPort">Endereço e número porta</label>
                         </div>
-                        <input type="text" name="addressPort" value="{{ addressObj.addressPort }}" [(ngModel)]="addressObj.addressPort">
+                        <input type="text" name="addressPort" value="{{ addressObj.addressPort }}"
+                        [(ngModel)]="addressObj.addressPort" placeholder="Endereço e número porta">
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-signpost-line"></i>
                             <label for="locality">Localidade</label>
                         </div>
-                        <input type="text" name="locality" value="{{ addressObj.locality }}" [(ngModel)]="addressObj.locality">
+                        <input type="text" name="locality" value="{{ addressObj.locality }}"
+                        [(ngModel)]="addressObj.locality" placeholder="Localidade">
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-map-pin-2-line"></i>
                             <label for="postalCode">Código Postal</label>
                         </div>
-                        <input type="text" name="postalCode" value="{{ addressObj.postalCode }}" [(ngModel)]="addressObj.postalCode">
+                        <input type="text" name="postalCode" value="{{ addressObj.postalCode }}"
+                        [(ngModel)]="addressObj.postalCode" placeholder="Código Postal">
                     </div>
                 </div>
             </div>
@@ -126,7 +144,7 @@
                 <p class="description-text">Informações Comunicação</p>
                 <hr>
             </div>
-            <div class="container-forms">
+            <!-- <div class="container-forms">
                 <div class="data-detail">
                     <div class="detail">
                         <div class="label-container">
@@ -136,8 +154,39 @@
                         <input type="text" name="newsletter" value="{{ clientObj.newsletter }}" [(ngModel)]="clientObj.newsletter">
                     </div>
                 </div>
+            </div> -->
+            <div class="container-forms">
+              <div class="data-detail">
+                <div class="detail">
+                  <div class="label-container">
+                    <i class="ri-newspaper-line"></i>
+                    <label for="newsletter">Newsletter</label>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="checkbox"
+                      id="newsletterSwitch"
+                      [(ngModel)]="clientObj.newsletter"
+                      (change)="toggleNewsletter($event)"
+                      [checked]="clientObj.newsletter === 1"
+                      class="input-toggle">
+
+                    <div class="display">
+                      <label class="toggle" for="newsletterSwitch">
+                        <div class="circle">
+                          <!-- <span class="material-icons-sharp span off">clear</span>
+                          <span class="material-icons-sharp span on">done</span> -->
+                          <i class="ri-chat-off-line i off no"></i>
+                          <i class="ri-chat-heart-line i on yes"></i>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
+
+          </div>
 
         <div class="user-container-info">
             <div class="container-description">
