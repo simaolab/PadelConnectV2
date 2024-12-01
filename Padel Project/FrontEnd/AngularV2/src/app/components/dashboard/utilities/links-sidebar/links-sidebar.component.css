@@ -6,6 +6,7 @@
   color: var(--color-gray);
   font-weight: 500;
   flex-grow: 0;
+  cursor: pointer;
 }
 
 .links-sidebar .box-icon {
@@ -36,7 +37,7 @@
   margin-top: auto;
 }
 
-.links-sidebar:hover .box-icon.active span {
+.links-sidebar:hover .box-icon.active i {
   color: var(--color-white);
 }
 
@@ -44,13 +45,13 @@
   color: var(--color-primary);
 }
 
-.links-sidebar:hover span {
+.links-sidebar:hover i {
   color: var(--color-primary);
 }
 
 @media screen and (max-width: 1000px) {
   .p-sidebar{
-    display: none;
+    display: none !important;
   }
 }
 

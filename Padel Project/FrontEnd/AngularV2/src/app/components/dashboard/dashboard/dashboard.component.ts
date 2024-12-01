@@ -2,6 +2,7 @@ import { Component, ViewChild, AfterViewInit  } from '@angular/core';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { HeaderComponent } from '../header/header.component';
 import { Router, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../utilities/modal/modal.component';
 
 
@@ -9,6 +10,7 @@ import { ModalComponent } from '../../utilities/modal/modal.component';
   selector: 'dashboard',
   standalone: true,
   imports: [
+    CommonModule,
     SidebarComponent,
     HeaderComponent,
     RouterOutlet,
@@ -18,16 +20,17 @@ import { ModalComponent } from '../../utilities/modal/modal.component';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements AfterViewInit{
-  @ViewChild(ModalComponent) modalComponent: ModalComponent | undefined;
+    @ViewChild(ModalComponent) modalComponent: ModalComponent | undefined;
 
     constructor(private router: Router) {}
+
+    isSidebarClosed: boolean = false;
 
     onHeaderLoaded() {
       document.dispatchEvent(new Event('headerLoaded'));
     }
 
     ngAfterViewInit(): void {
-      // Usar setTimeout para garantir que a visualização foi inicializada corretamente
       setTimeout(() => {
         if (this.modalComponent) {
           this.modalComponent.modalClosed?.subscribe(() => {
@@ -43,11 +46,8 @@ export class DashboardComponent implements AfterViewInit{
 
       if (callback) {
         this.modalComponent?.modalClosed?.subscribe(() => {
-          console.log('Modal fechado, executando callback');
           callback();
         });
-      } else {
-        console.log('no callback')
       }
     }
 
@@ -55,5 +55,10 @@ export class DashboardComponent implements AfterViewInit{
       if (this.modalComponent) {
         this.modalComponent.closeModal();
       }
+    }
+
+    onMenuToggled(): void {
+      this.isSidebarClosed = !this.isSidebarClosed;
+      console.log(this.isSidebarClosed);
     }
 }

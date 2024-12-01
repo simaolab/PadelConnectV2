@@ -18,6 +18,7 @@ export class LinksSidebarComponent {
   @Input() icon: string = "";
   @Input() p: string = "";
   @Output() click = new EventEmitter<void>();
+  @Input() isSidebarClosed: boolean = false;
 
   constructor(private router: Router) {}
 
