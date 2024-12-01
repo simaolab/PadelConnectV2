@@ -101,7 +101,6 @@ export class CreateCourtComponent {
     }
 
     onCompanySelected(company: any): void {
-      // Atualiza o campo company_id com o ID da empresa selecionada
       this.courtObj.company_id = company.id;
     }
 

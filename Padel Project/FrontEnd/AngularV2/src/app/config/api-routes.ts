@@ -16,5 +16,11 @@ export const ApiRoutes = {
   companies: 'https://api.padelconnect.pt/api/companies/',
 
   //PROMOTIONS
-  promotions: 'https://api.padelconnect.pt/api/promotions/'
+  promotions: 'https://api.padelconnect.pt/api/promotions/',
+
+  //NATIONALITIES
+  nationalities: 'https://api.padelconnect.pt/api/nationalities/',
+
+  //RESERVATIONS
+  reservations: 'https://api.padelconnect.pt/api/reservations/'
 }

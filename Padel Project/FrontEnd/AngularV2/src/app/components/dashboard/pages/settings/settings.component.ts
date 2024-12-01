@@ -4,8 +4,10 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TitlePageComponent } from '../../utilities/title-page/title-page.component';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
+import { DropdownComponent } from '../../utilities/dropdown/dropdown.component';
 
 import { UsersService } from '../../../../services/users.service';
+import { NationalitiesService } from '../../../../services/nationalities.service';
 
 @Component({
   selector: 'settings',
@@ -16,6 +18,7 @@ import { UsersService } from '../../../../services/users.service';
     FormsModule,
     TitlePageComponent,
     DashboardComponent,
+    DropdownComponent
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css'
@@ -30,23 +33,26 @@ export class SettingsComponent {
     nif: 0,
     contact: 0,
     gender: '',
-    nationality: '',
+    nationality_id: '',
     birthday: '',
     address: '',
-    newsletter: 'Não',
+    newsletter: 0,
   };
 
   addressObj = {
-    addressPort: 'Ainda não tem morada',
-    postalCode: 'Não definido',
-    locality: 'Ainda não tem localidade',
+    addressPort: '',
+    postalCode: '',
+    locality: '',
   }
 
   client_id: number = 0;
 
+  nationalities: any[] = [];
+
   constructor(
     private router: Router,
     private usersService: UsersService,
+    private nationalitiesService: NationalitiesService,
     private dashboardComponent: DashboardComponent
   ) {}
 
@@ -54,6 +60,7 @@ export class SettingsComponent {
 
   ngOnInit(): void {
     this.userInfo();
+    this.loadNationalities();
   }
 
   clientInfo(client_id: number): void {
@@ -70,28 +77,32 @@ export class SettingsComponent {
             nif: client.user?.nif,
             contact: client.contact,
             gender: client.gender,
-            nationality: client.nationality?.name,
+            nationality_id: client.nationality?.name,
             birthday: client.user?.birthday,
-            address: client.address,
+            address: client.address || ' ',
             newsletter: client.newsletter,
           };
 
-          const addressParts = client.address.split(', ');
+          if (client.address) {
+            const addressParts = client.address.split(', ');
 
-          if (addressParts.length === 3) {
-            this.addressObj = {
-              addressPort: addressParts[0],
-              postalCode: addressParts[1],
-              locality: addressParts[2],
-            };
+            if (addressParts.length === 3) {
+              this.addressObj = {
+                addressPort: addressParts[0],
+                postalCode: addressParts[1],
+                locality: addressParts[2],
+              };
+            }
           }
-
-        } else {
-          console.error('A resposta não contém o objeto "client".', res);
         }
       },
       error: (err: any) => {
-        console.error('Erro ao obter informações do cliente:', err);
+        const message = err.error?.message;
+
+        this.dashboardComponent.showModal(
+          'Error',
+          message
+        )
       }
     });
   }
@@ -103,11 +114,8 @@ export class SettingsComponent {
   editClient(): void {
     this.clientObj.address = this.address;
 
-    console.log(this.clientObj)
-
     this.usersService.editClient(this.clientObj, this.client_id).subscribe({
       next: (res: any) => {
-        console.log(res)
         if(res.status === 'success') {
           this.dashboardComponent.showModal(
             'Message',
@@ -117,7 +125,6 @@ export class SettingsComponent {
       },
       error: (err: any) => {
         this.formErrors = {};
-        console.log('Detalhes do erro:', err.error);
         const errorDetails = err.error?.['error(s)'] || {};
 
         for (const company in errorDetails) {
@@ -134,7 +141,41 @@ export class SettingsComponent {
       next: (res: any) => {
         this.client_id = res.user.id
         this.clientInfo(this.client_id);
+      },
+      error: (err: any) => {
+        const message = err.error?.message;
+
+        this.dashboardComponent.showModal(
+          'Error',
+          message
+        )
       }
     })
   }
+
+  loadNationalities(): void {
+    this.nationalitiesService.index().subscribe({
+      next: (data: any[]) => {
+        this.nationalities = data
+      },
+      error: (err: any) => {
+        const message = err.error?.message;
+        this.dashboardComponent.showModal(
+          'Error',
+          message
+        );
+      }
+    });
+  }
+
+
+  onNationalitySelected(nationality: any): void {
+    this.clientObj.nationality_id = nationality.id;
+  }
+
+
+  toggleNewsletter(event: Event): void {
+    this.clientObj.newsletter = (event.target as HTMLInputElement).checked ? 1 : 0;
+  }
+
 }
