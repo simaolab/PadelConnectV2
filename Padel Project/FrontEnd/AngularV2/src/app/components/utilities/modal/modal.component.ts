@@ -26,7 +26,7 @@ export class ModalComponent {
 
   closeModal() : void {
     this.Visible = false;
-    this.modalClosed.emit();;
+    this.modalClosed.emit();
   }
 }
 

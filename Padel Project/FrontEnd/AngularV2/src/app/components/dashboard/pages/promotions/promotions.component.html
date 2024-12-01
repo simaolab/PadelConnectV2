@@ -8,4 +8,27 @@
     <div class="page-action">
       <add-button  href="/dashboard/create-promotion"></add-button>
     </div>
+</div>
+
+<div *ngIf="isLoading; else showPromotion" class="loading-screen">
+  <div class="spinner"></div>
+  <p class="loading">A carregar a lista de promoções, por favor aguarde ...</p>
+</div>
+
+<ng-template #showPromotion>
+  <div *ngIf="promotions.length > 0; else noPromotions">
+  <ul>
+    <li *ngFor="let promotion of promotions" >
+      <strong>{{ promotion.description }}</strong><br>
+      Código: {{ promotion.promo_code }}<br>
+      Desconto: {{ promotion.discount }}<br>
+      Início: {{ promotion.start_date }}<br>
+      Fim: {{ promotion.end_date }}<br>
+    </li>
+  </ul>
   </div>
+</ng-template>
+
+<ng-template #noPromotions>
+  <p class="no-promotions">Não existe nenhuma promoção de momento</p>
+</ng-template>
