@@ -4,6 +4,7 @@ import { AboutPageComponent } from './components/pages/about-page/about-page.com
 import { ContactPageComponent } from './components/pages/contact-page/contact-page.component';
 import { CourtsPageComponent } from './components/pages/courts-page/courts-page.component';
 import { PrivacyPolicyPageComponent } from './components/pages/privacy-policy-page/privacy-policy-page.component';
+import { PadelRulesComponent } from './components/pages/padel-rules/padel-rules.component';
 import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
 
 import { LoginComponent } from './components/login/login.component';
@@ -62,6 +63,11 @@ export const routes: Routes = [
     path: 'privacy-policy',
     component: PrivacyPolicyPageComponent,
     title: 'Política de privacidade'
+  },
+  {
+    path: 'padel-rules',
+    component: PadelRulesComponent,
+    title: 'Regras de Padel'
   },
   { path: 'login',
     component: LoginComponent,
