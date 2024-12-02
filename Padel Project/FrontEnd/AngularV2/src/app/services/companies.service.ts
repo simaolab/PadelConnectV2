@@ -19,13 +19,7 @@ export class CompaniesService {
     return this.http.get<any>(ApiRoutes.companies, { headers });
   }
 
-  create(companyObj: {
-    name: string;
-    email: string;
-    contact: number;
-    nif: number;
-    newsletter: number
-    address: string; }): Observable<any> {
+  create(companyObj: Company): Observable<any> {
       const token = localStorage.getItem('authToken');
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 

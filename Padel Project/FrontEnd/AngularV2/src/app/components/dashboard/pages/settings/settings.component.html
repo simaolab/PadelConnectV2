@@ -98,7 +98,7 @@
                         </dropdown>
                         <!-- <input type="text" name="nationality" value="{{ clientObj.nationality }}"
                         [(ngModel)]="clientObj.nationality" placeholder="Nacionalidade"> -->
-                    </div> 
+                    </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-men-line"></i>
@@ -165,6 +165,7 @@
                       type="checkbox"
                       id="newsletterSwitch"
                       [(ngModel)]="clientObj.newsletter"
+                      name="newsletter"
                       (change)="toggleNewsletter($event)"
                       [checked]="clientObj.newsletter === 1"
                       class="input-toggle">

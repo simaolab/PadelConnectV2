@@ -28,7 +28,7 @@ export class CreateCompanyComponent {
 
   formErrors: { [key: string]: string } = {};
 
-  companyObj = {
+  companyObj: Company = {
     name: '',
     email: '',
     contact: 0,
@@ -37,7 +37,7 @@ export class CreateCompanyComponent {
     address: '',
   }
 
-  addressObj = {
+  addressObj: Address = {
     addressPort: '',
     postalCode: '',
     locality: '',
@@ -55,6 +55,9 @@ export class CreateCompanyComponent {
 
   create() {
     this.companyObj.address = this.address;
+    console.log('Morada: ', this.address);
+    console.log('Empresa:', this.companyObj.address)
+
 
     this.companiesService.create(this.companyObj).subscribe({
       next: (res: any) => {
@@ -73,6 +76,8 @@ export class CreateCompanyComponent {
         this.formErrors = {};
         const errorDetails = err.error?.['error(s)'] || {};
 
+        console.log(err.error)
+
         for (const company in errorDetails) {
           if (errorDetails.hasOwnProperty(company)) {
             this.formErrors[company] = errorDetails[company][0];
@@ -80,5 +85,9 @@ export class CreateCompanyComponent {
         }
       }
     })
+  }
+
+  toggleNewsletter(event: Event): void {
+    this.companyObj.newsletter = (event.target as HTMLInputElement).checked ? 1 : 0;
   }
 }

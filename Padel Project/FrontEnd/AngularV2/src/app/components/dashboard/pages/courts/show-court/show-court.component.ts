@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { CardFormComponent } from '../../../utilities/card-form/card-form.component';
 import { TitlePageComponent } from '../../../utilities/title-page/title-page.component';
 import { DashboardComponent } from '../../../dashboard/dashboard.component';
+import { Court } from '../../../../../models/court';
 
 @Component({
   selector: 'app-show-court',

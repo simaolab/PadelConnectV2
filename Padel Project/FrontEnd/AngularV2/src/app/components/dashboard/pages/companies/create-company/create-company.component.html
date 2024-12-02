@@ -26,7 +26,8 @@
                   <i class="ri-building-2-line"></i>
                   <label for="first_name">Nome Empresa</label>
                 </div>
-                <input type="text" name="username" value="{{ companyObj.name }}" placeholder="PadelConnect">
+                <input type="text" name="username" value="{{ companyObj.name }}"
+                  placeholder="PadelConnect" [(ngModel)]="companyObj.name">
               </div>
               <div class="detail">
                   <div class="label-container">
@@ -49,7 +50,9 @@
                       <i class="ri-mail-line"></i>
                       <label for="last_name">Email</label>
                     </div>
-                    <input type="text" name="email" value="{{ companyObj.email }}" placeholder="email@padelconnect.pt">
+                    <input type="text" name="email" value="{{ companyObj.email }}"
+                    placeholder="email@padelconnect.pt"
+                      [(ngModel)]="companyObj.email">
                 </div>
             </div>
             <div class="data-detail">
@@ -58,21 +61,24 @@
                       <i class="ri-home-4-line"></i>
                       <label for="addressPort">Endereço e número porta</label>
                   </div>
-                  <input type="text" name="addressPort" value="{{ addressObj.addressPort }}" placeholder="Rua do Padel, 1">
+                  <input type="text" name="addressPort" value="{{ addressObj.addressPort }}"
+                    placeholder="Rua do Padel, 1" [(ngModel)]="addressObj.addressPort">
               </div>
               <div class="detail">
                   <div class="label-container">
                       <i class="ri-signpost-line"></i>
                       <label for="locality">Localidade</label>
                   </div>
-                  <input type="text" name="locality" value="{{ addressObj.locality }}" placeholder="Porto">
+                  <input type="text" name="locality" value="{{ addressObj.locality }}"
+                    placeholder="Porto" [(ngModel)]="addressObj.locality">
               </div>
               <div class="detail">
                   <div class="label-container">
                       <i class="ri-map-pin-2-line"></i>
                       <label for="postalCode">Código Postal</label>
                   </div>
-                  <input type="text" name="postalCode" value="{{ addressObj.postalCode }}" placeholder="4000-200">
+                  <input type="text" name="postalCode" value="{{ addressObj.postalCode }}"
+                    placeholder="4000-200" [(ngModel)]="addressObj.postalCode">
               </div>
           </div>
         </div>
@@ -87,9 +93,27 @@
               <div class="detail">
                   <div class="label-container">
                       <i class="ri-newspaper-line"></i>
-                      <label for="first_name">Newsletter</label>
+                      <label for="newsletter">Newsletter</label>
                   </div>
-                  <input type="text" name="first_name" value="{{ companyObj.newsletter }}">
+                  <div class="form-group">
+                    <input
+                      type="checkbox"
+                      id="newsletterSwitch"
+                      [(ngModel)]="companyObj.newsletter"
+                      name="newsletter"
+                      (change)="toggleNewsletter($event)"
+                      [checked]="companyObj.newsletter === 1"
+                      class="input-toggle">
+
+                    <div class="display">
+                      <label class="toggle" for="newsletterSwitch">
+                        <div class="circle">
+                          <i class="ri-chat-off-line i off no"></i>
+                          <i class="ri-chat-heart-line i on yes"></i>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
               </div>
           </div>
       </div>

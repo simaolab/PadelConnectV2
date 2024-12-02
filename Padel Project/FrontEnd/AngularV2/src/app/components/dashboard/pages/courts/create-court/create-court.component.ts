@@ -9,6 +9,7 @@ import { CardFormComponent } from '../../../utilities/card-form/card-form.compon
 import { TitlePageComponent } from '../../../utilities/title-page/title-page.component';
 import { DashboardComponent } from '../../../dashboard/dashboard.component';
 import { DropdownComponent } from '../../../utilities/dropdown/dropdown.component';
+import { Court } from '../../../../../models/court';
 
 @Component({
   selector: 'app-create-court',
@@ -29,16 +30,16 @@ import { DropdownComponent } from '../../../utilities/dropdown/dropdown.componen
 export class CreateCourtComponent {
   formErrors: { [key: string]: string } = {};
 
-  courtObj = {
+  courtObj: Court = {
     name: '',
-    company_id: 2,
-    price_hour: 5,
+    company_id: 0,
+    price_hour: 0,
     type_floor: '',
     status: '',
     illumination: 0,
     cover: 0,
     last_maintenance: '',
-    shower_rooms: 0,
+    shower_room: 0,
     lockers: 0,
     rent_equipment: 0,
   }
@@ -46,7 +47,7 @@ export class CreateCourtComponent {
   serviceStates = {
     illumination: false,
     cover: false,
-    shower_rooms: false,
+    shower_room: false,
     lockers: false,
     rent_equipment: false,
   };
@@ -54,7 +55,7 @@ export class CreateCourtComponent {
   serviceTexts = {
     illumination: 'Sem Iluminação',
     cover: 'Exterior',
-    shower_rooms: 'Sem Balneário',
+    shower_room: 'Sem Balneário',
     lockers: 'Sem Cacifo',
     rent_equipment: 'Sem Aluguer Equipamento',
   };
@@ -87,7 +88,17 @@ export class CreateCourtComponent {
 
     create() {
 
-      this.formatLastMaintenanceDate();
+      // this.formatLastMaintenanceDate();
+
+      if (this.courtObj.last_maintenance) {
+        const dateParts = this.courtObj.last_maintenance.split('-');
+        if (dateParts.length === 3) {
+          const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+          this.courtObj.last_maintenance = formattedDate;
+        }
+      }
+
+      console.log(this.courtObj)
 
       this.courtsService.create(this.courtObj).subscribe({
         next: (res: any) => {
@@ -106,6 +117,8 @@ export class CreateCourtComponent {
           this.formErrors = {};
           const errorDetails = err.error?.['error(s)'] || {};
 
+          console.error(err.error)
+
           for (const court in errorDetails) {
             if (errorDetails.hasOwnProperty(court)) {
               this.formErrors[court] = errorDetails[court][0];
@@ -115,14 +128,14 @@ export class CreateCourtComponent {
       })
     }
 
-    private formatLastMaintenanceDate(): void {
-      if (this.courtObj.last_maintenance) {
-        const dateParts = this.courtObj.last_maintenance.split('-');
-        if (dateParts.length === 3) {
-          this.courtObj.last_maintenance = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
-        }
-      }
-    }
+    // private formatLastMaintenanceDate(): void {
+    //   if (this.courtObj.last_maintenance) {
+    //     const dateParts = this.courtObj.last_maintenance.split('-');
+    //     if (dateParts.length === 3) {
+    //       this.courtObj.last_maintenance = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+    //     }
+    //   }
+    // }
 
     loadCompanies(): void {
       this.companiesService.index().subscribe({
@@ -139,24 +152,31 @@ export class CreateCourtComponent {
       this.courtObj.company_id = company.id;
     }
 
-      // Alterna o estado de cada serviço e atualiza o texto exibido
-  toggleService(serviceKey: keyof typeof this.serviceStates): void {
-    this.serviceStates[serviceKey] = !this.serviceStates[serviceKey];
-    this.courtObj[serviceKey] = this.serviceStates[serviceKey] ? 1 : 0;
+    onStatusSelected(selected: any): void {
+      this.courtObj.status = selected.value;
+    }
 
-    this.serviceTexts[serviceKey] = this.serviceStates[serviceKey]
-      ? `Com ${this.getServiceName(serviceKey)}`
-      : `Sem ${this.getServiceName(serviceKey)}`;
-  }
+    onTypeFloorSelected(selected: any): void {
+      this.courtObj.type_floor = selected.value;
+    }
 
-  private getServiceName(serviceKey: string): string {
-    const names: { [key: string]: string } = {
-      illumination: 'Iluminação',
-      cover: 'Cobertura',
-      shower_rooms: 'Balneário',
-      lockers: 'Cacifo',
-      rent_equipment: 'Aluguer Equipamento',
-    };
-    return names[serviceKey] || serviceKey;
-  }
+    toggleService(serviceKey: keyof typeof this.serviceStates): void {
+      this.serviceStates[serviceKey] = !this.serviceStates[serviceKey];
+      this.courtObj[serviceKey] = this.serviceStates[serviceKey] ? 1 : 0;
+
+      this.serviceTexts[serviceKey] = this.serviceStates[serviceKey]
+        ? `Com ${this.getServiceName(serviceKey)}`
+        : `Sem ${this.getServiceName(serviceKey)}`;
+    }
+
+    private getServiceName(serviceKey: string): string {
+      const names: { [key: string]: string } = {
+        illumination: 'Iluminação',
+        cover: 'Cobertura',
+        shower_room: 'Balneário',
+        lockers: 'Cacifo',
+        rent_equipment: 'Aluguer Equipamento',
+      };
+      return names[serviceKey] || serviceKey;
+    }
 }

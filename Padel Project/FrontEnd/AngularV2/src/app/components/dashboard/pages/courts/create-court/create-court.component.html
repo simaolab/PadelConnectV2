@@ -63,7 +63,7 @@
                     valueKey="value"
                     placeholder="Selecione o estado"
                     [(ngModel)]="courtObj.status"
-                  >
+                    (selectionChange)="onStatusSelected($event)">
                   </dropdown>
                 </div>
                 <div class="detail">
@@ -76,7 +76,8 @@
                     labelKey="label"
                     valueKey="value"
                     placeholder="Selecione o tipo de piso"
-                    [(ngModel)]="courtObj.type_floor">
+                    [(ngModel)]="courtObj.type_floor"
+                    (selectionChange)="onTypeFloorSelected($event)">
                   </dropdown>
                 </div>
                 <div class="detail">
@@ -102,52 +103,52 @@
               class="service"
               [ngClass]="{ 'danger': !serviceStates.illumination, 'success': serviceStates.illumination }"
               (click)="toggleService('illumination')">
-              <i [ngClass]="{ 'ri-lightbulb-line': !serviceStates.illumination, 
+              <i [ngClass]="{ 'ri-lightbulb-line': !serviceStates.illumination,
               'ri-lightbulb-flash-line': serviceStates.illumination}"></i>
               <span class="tooltip-text">{{ serviceTexts.illumination }}</span>
             </div>
-        
+
             <div
               class="service"
               [ngClass]="{ 'danger': !serviceStates.cover, 'success': serviceStates.cover }"
               (click)="toggleService('cover')">
-              <i [ngClass]="{ 'ri-tree-line': !serviceStates.cover, 
+              <i [ngClass]="{ 'ri-tree-line': !serviceStates.cover,
               'ri-building-2-line': serviceStates.cover}"></i>
               <span class="tooltip-text">{{ serviceTexts.cover }}</span>
             </div>
-        
+
             <div
               class="service"
-              [ngClass]="{ 'danger': !serviceStates.shower_rooms, 'success': serviceStates.shower_rooms }"
-              (click)="toggleService('shower_rooms')">
-              <i [ngClass]="{ 'ri-blur-off-line': !serviceStates.shower_rooms, 
-              'ri-drop-line': serviceStates.shower_rooms}"></i>
-              <span class="tooltip-text">{{ serviceTexts.shower_rooms }}</span>
+              [ngClass]="{ 'danger': !serviceStates.shower_room, 'success': serviceStates.shower_room }"
+              (click)="toggleService('shower_room')">
+              <i [ngClass]="{ 'ri-blur-off-line': !serviceStates.shower_room,
+              'ri-drop-line': serviceStates.shower_room}"></i>
+              <span class="tooltip-text">{{ serviceTexts.shower_room }}</span>
             </div>
-        
+
             <div
               class="service"
               [ngClass]="{ 'danger': !serviceStates.lockers, 'success': serviceStates.lockers }"
               (click)="toggleService('lockers')">
-              <i [ngClass]="{ 'ri-lock-unlock-line': !serviceStates.lockers, 
+              <i [ngClass]="{ 'ri-lock-unlock-line': !serviceStates.lockers,
               'ri-lock-line': serviceStates.lockers}"></i>
               <span class="tooltip-text">{{ serviceTexts.lockers }}</span>
             </div>
-        
+
             <div
               class="service"
               [ngClass]="{ 'danger': !serviceStates.rent_equipment, 'success': serviceStates.rent_equipment }"
               (click)="toggleService('rent_equipment')">
-              <i [ngClass]="{ 'ri-prohibited-2-line': !serviceStates.rent_equipment, 
+              <i [ngClass]="{ 'ri-prohibited-2-line': !serviceStates.rent_equipment,
               'ri-checkbox-circle-line': serviceStates.rent_equipment}"></i>
               <span class="tooltip-text">{{ serviceTexts.rent_equipment }}</span>
             </div>
           </div>
         </div>
-        
+
       </div>
     </div>
-    
+
     <div class="button">
       <button type="submit" (click)="create()" class="btn create">
         <i class="ri-save-line"></i>
