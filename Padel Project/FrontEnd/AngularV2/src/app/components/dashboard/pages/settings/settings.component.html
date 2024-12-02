@@ -1,11 +1,236 @@
-<title-page pageText="Definições / "></title-page>
+<div class="page-info-action">
+    <div class="page-info">
+        <title-page pageText="Definições Pessoais"></title-page>
+        <p class="description-page">Aqui pode alterar as suas definições pessoais associadas ao
+            <span>Padel Connect</span>
+        </p>
+    </div>
+</div>
 
-<p>{{ clientObj.first_name }}</p>
-<p>{{ clientObj.last_name }}</p>
-<p>{{ clientObj.username }}</p>
-<p>{{ clientObj.email }}</p>
-<p>{{ clientObj.nif }}</p>
-<p>{{ clientObj.contact !== 0 ? clientObj.contact : 'Não definido' }}</p>
-<p>{{ clientObj.gender !== '' ? clientObj.gender : 'Não definido' }}</p>
-<p>{{ clientObj.nationality !== '' ? clientObj.nationality : 'Não definido' }}</p>
-<p>{{ clientObj.birthday }}</p>
+<div class="settings-form">
+    <form>
+        <div class="user-container-info">
+            <div class="container-description">
+                <p class="description-text">Informações de Utilizador</p>
+                <hr>
+            </div>
+            <div class="container-forms">
+                <div class="data-detail">
+                    <div class="detail">
+                        <div class="label-container">
+                            <i class="ri-user-3-line"></i>
+                            <label for="username">Nome utilizador</label>
+                        </div>
+                        <input type="text" name="username" value="{{ clientObj.username }}" readonly>
+                    </div>
+                    <div class="detail">
+                        <div class="label-container">
+                            <i class="ri-fingerprint-line"></i>
+                            <label for="nif">NIF</label>
+                        </div>
+                        <input type="text" name="nif" value="{{ clientObj.nif }}" readonly>
+                    </div>
+                    <div class="detail">
+                        <div class="label-container">
+                            <i class="ri-cake-2-line"></i>
+                            <label for="birthday">Data Nascimento</label>
+                        </div>
+                        <input type="text" name="birthday" value="{{ clientObj.birthday }}" readonly>
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <div class="detail">
+                        <div class="label-container">
+                            <i class="ri-phone-line"></i>
+                            <label for="phone">Contacto</label>
+                        </div>
+                        <input type="text" name="phone"
+                        value="{{ clientObj.contact !== 0 ? clientObj.contact : 'Não definido' }}"
+                        [(ngModel)]="clientObj.contact" placeholder="Contacto">
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <div class="detail">
+                        <div class="label-container">
+                            <i class="ri-mail-line"></i>
+                            <label for="email">Email</label>
+                        </div>
+                        <input type="text" name="email" value="{{ clientObj.email }}" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="user-container-info">
+            <div class="container-description">
+                <p class="description-text">Informações Pessoais</p>
+                <hr>
+            </div>
+            <div class="container-forms">
+                <div class="data-detail">
+                    <div class="detail">
+                        <div class="label-container">
+                            <i class="ri-user-3-line"></i>
+                            <label for="first_name">Primeiro Nome</label>
+                        </div>
+                        <input type="text" name="first_name" value="{{ clientObj.first_name }}"
+                        [(ngModel)]="clientObj.first_name" placeholder="Primeiro Nome">
+                    </div>
+                    <div class="detail">
+                        <div class="label-container">
+                            <i class="ri-user-3-line"></i>
+                            <label for="last_name">Último Nome</label>
+                        </div>
+                        <input type="text" name="last_name" value="{{ clientObj.last_name }}"
+                        [(ngModel)]="clientObj.last_name" placeholder="Último Nome">
+                    </div>
+                    <div class="detail">
+                        <div class="label-container">
+                            <i class="ri-flag-line"></i>
+                            <label for="nacionality">Nacionalidade</label>
+                        </div>
+                        <dropdown
+                            [items]="nationalities"
+                            labelKey="name"
+                            valueKey="id"
+                            placeholder="Selecione uma nacionalidade"
+                            (selectionChange)="onNationalitySelected($event)">
+                        </dropdown>
+                        <!-- <input type="text" name="nationality" value="{{ clientObj.nationality }}"
+                        [(ngModel)]="clientObj.nationality" placeholder="Nacionalidade"> -->
+                    </div>
+                    <div class="detail">
+                        <div class="label-container">
+                            <i class="ri-men-line"></i>
+                            <label for="first_name">Género</label>
+                        </div>
+                        <input type="text" name="gender" value="{{ clientObj.gender }}"
+                        [(ngModel)]="clientObj.gender" placeholder="Género">
+                    </div>
+                </div>
+                <div class="data-detail">
+                    <div class="detail">
+                        <div class="label-container">
+                            <i class="ri-home-4-line"></i>
+                            <label for="addressPort">Endereço e número porta</label>
+                        </div>
+                        <input type="text" name="addressPort" value="{{ addressObj.addressPort }}"
+                        [(ngModel)]="addressObj.addressPort" placeholder="Endereço e número porta">
+                    </div>
+                    <div class="detail">
+                        <div class="label-container">
+                            <i class="ri-signpost-line"></i>
+                            <label for="locality">Localidade</label>
+                        </div>
+                        <input type="text" name="locality" value="{{ addressObj.locality }}"
+                        [(ngModel)]="addressObj.locality" placeholder="Localidade">
+                    </div>
+                    <div class="detail">
+                        <div class="label-container">
+                            <i class="ri-map-pin-2-line"></i>
+                            <label for="postalCode">Código Postal</label>
+                        </div>
+                        <input type="text" name="postalCode" value="{{ addressObj.postalCode }}"
+                        [(ngModel)]="addressObj.postalCode" placeholder="Código Postal">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="user-container-info">
+            <div class="container-description">
+                <p class="description-text">Informações Comunicação</p>
+                <hr>
+            </div>
+            <!-- <div class="container-forms">
+                <div class="data-detail">
+                    <div class="detail">
+                        <div class="label-container">
+                            <i class="ri-newspaper-line"></i>
+                            <label for="newsletter">Newsletter</label>
+                        </div>
+                        <input type="text" name="newsletter" value="{{ clientObj.newsletter }}" [(ngModel)]="clientObj.newsletter">
+                    </div>
+                </div>
+            </div> -->
+            <div class="container-forms">
+              <div class="data-detail">
+                <div class="detail">
+                  <div class="label-container">
+                    <i class="ri-newspaper-line"></i>
+                    <label for="newsletter">Newsletter</label>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="checkbox"
+                      id="newsletterSwitch"
+                      [(ngModel)]="clientObj.newsletter"
+                      name="newsletter"
+                      (change)="toggleNewsletter($event)"
+                      [checked]="clientObj.newsletter === 1"
+                      class="input-toggle">
+
+                    <div class="display">
+                      <label class="toggle" for="newsletterSwitch">
+                        <div class="circle">
+                          <!-- <span class="material-icons-sharp span off">clear</span>
+                          <span class="material-icons-sharp span on">done</span> -->
+                          <i class="ri-chat-off-line i off no"></i>
+                          <i class="ri-chat-heart-line i on yes"></i>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        <div class="user-container-info">
+            <div class="container-description">
+                <p class="description-text">Segurança conta</p>
+                <hr>
+            </div>
+            <div class="container-forms">
+                <div class="contact-detail">
+                  <div class="detail">
+                      <div class="label-container">
+                        <i class="ri-lock-password-line"></i>
+                        <label for="last_name">Password Atual</label>
+                      </div>
+                      <input type="password" placeholder="Insira a sua password atual">
+                  </div>
+                </div>
+                <div class="data-detail">
+                  <div class="detail">
+                      <div class="label-container">
+                        <i class="ri-lock-unlock-line"></i>
+                        <label for="first_name">Nova Password</label>
+                      </div>
+                      <input type="password" placeholder="Coloque a nova password">
+                  </div>
+                  <div class="detail">
+                    <div class="label-container">
+                      <i class="ri-lock-unlock-line"></i>
+                      <label for="first_name">Confrmação Nova Password</label>
+                    </div>
+                    <input type="password" placeholder="Confirme a nova password">
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="button left">
+            <button class="btn edit" (click)="editClient()">
+              <i class="ri-edit-line"></i>
+              Salvar alterações
+            </button>
+            <form method="post">
+              <button type="submit" class="btn delete">
+                <i class="ri-delete-bin-2-line"></i>
+                Apagar Conta
+              </button>
+            </form>
+          </div>
+    </form>
+</div>

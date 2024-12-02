@@ -1,0 +1,30 @@
+.detail-services{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    color: var(--color-text);
+    font-weight: 500;
+}
+
+.detail-services i{
+    font-size: var(--font-size);
+}
+
+.service{
+    display: flex;
+    gap: .2rem;
+    padding: .5rem 1rem;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-white);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+}
+
+.service.success{
+    background: rgba(20, 182, 20, 0.5) !important;
+}
+
+.service.danger{
+    background: rgba(241, 16, 16, 0.5) !important;
+}

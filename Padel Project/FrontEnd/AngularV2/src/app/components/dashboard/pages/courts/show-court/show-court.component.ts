@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { CardFormComponent } from '../../../utilities/card-form/card-form.component';
 import { TitlePageComponent } from '../../../utilities/title-page/title-page.component';
 import { DashboardComponent } from '../../../dashboard/dashboard.component';
+import { Court } from '../../../../../models/court';
 
 @Component({
   selector: 'app-show-court',
@@ -31,8 +32,12 @@ export class ShowCourtComponent {
     price_hour: 0,
     type_floor: '',
     status: '',
+    illumination: 0,
     cover: 0,
-    last_maintenance: ''
+    last_maintenance: '',
+    shower_rooms: 0,
+    lockers: 0,
+    rent_equipment: 0,
   }
 
   court_id: number = 0;
@@ -62,10 +67,15 @@ export class ShowCourtComponent {
             price_hour: field.price_hour,
             type_floor: field.type_floor,
             status: field.status,
+            illumination: field.illumination,
             cover: field.cover,
-            last_maintenance: field.last_maintenance
-
+            last_maintenance: field.last_maintenance,
+            shower_rooms: field.shower_room,
+            lockers: field.lockers,
+            rent_equipment: field.rent_equipment
           };
+
+          console.log('courtObj:', this.courtObj);
         },
         error: (err) => {
           const errorMessage = err?.error?.message

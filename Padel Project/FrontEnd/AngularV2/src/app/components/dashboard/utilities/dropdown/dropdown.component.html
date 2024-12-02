@@ -1,0 +1,13 @@
+<div class="dropdown">
+  <div class="select" (click)="toggleMenu()">
+    <span>{{ selectedItem ? selectedItem[labelKey] : placeholder }}</span>
+    <i class="caret" [ngClass]="{ 'caret-rotate': isOpen }"></i>
+  </div>
+  
+  <!-- Menu que aparece quando o dropdown está aberto -->
+  <ul [ngClass]="{'menu-open': isOpen}" class="menu">
+    <li *ngFor="let item of items" (click)="selectItem(item)">
+      {{ item[labelKey] }}
+    </li>
+  </ul>
+</div>

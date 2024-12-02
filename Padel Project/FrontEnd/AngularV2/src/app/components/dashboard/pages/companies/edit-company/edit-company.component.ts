@@ -8,6 +8,8 @@ import { CompaniesService } from '../../../../../services/companies.service';
 import { CardFormComponent } from '../../../utilities/card-form/card-form.component';
 import { TitlePageComponent } from '../../../utilities/title-page/title-page.component';
 import { DashboardComponent } from '../../../dashboard/dashboard.component';
+import { Company } from '../../../../../models/company';
+import { Address } from '../../../../../models/address';
 
 @Component({
   selector: 'app-edit-company',
@@ -34,7 +36,7 @@ export class EditCompanyComponent {
 
   formErrors: { [key: string]: string } = {};
 
-  companyObj = {
+  companyObj: Company = {
     name: '',
     email: '',
     contact: 0,
@@ -43,7 +45,7 @@ export class EditCompanyComponent {
     address: '',
   }
 
-  addressObj = {
+  addressObj: Address = {
     addressPort: '',
     postalCode: '',
     locality: '',
@@ -77,7 +79,13 @@ export class EditCompanyComponent {
 
           const addressParts = company.address.split(', ');
 
-          if (addressParts.length === 3) {
+          if (addressParts.length === 4) {
+            this.addressObj = {
+              addressPort: addressParts[0] + ', ' + addressParts[1],
+              postalCode: addressParts[2],
+              locality: addressParts[3],
+            };
+          } else if (addressParts.length === 3) {
             this.addressObj = {
               addressPort: addressParts[0],
               postalCode: addressParts[1],
@@ -101,6 +109,8 @@ export class EditCompanyComponent {
 
   editCompany(): void {
     this.companyObj.address = this.address;
+
+    console.log(this.companyObj.address)
 
     this.companiesService.edit(this.companyObj, this.company_id).subscribe({
       next: (res: any) => {

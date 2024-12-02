@@ -44,6 +44,7 @@
               "src/assets/scripts/sidebar-Dashboard.js",
               "src/assets/scripts/dateHour.js",
               "src/assets/scripts/count-fields.js"
+              "src/assets/scripts/dropdownCompay.js"
             ],
             "server": "src/main.server.ts",
             "prerender": true,

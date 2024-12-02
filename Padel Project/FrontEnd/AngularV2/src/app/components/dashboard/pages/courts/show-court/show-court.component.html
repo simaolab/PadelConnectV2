@@ -1,119 +1,138 @@
-<title-page pageText="Adicionar Campo"></title-page>
+<div class="page-info-title">
+  <div class="page-action">
+    <button type="submit" class="btn-round back" [routerLink]="['/dashboard/courts']">
+      <i class="ri-arrow-left-line"></i>
+    </button>
+  </div>
+  <div class="page-info">
+    <title-page pageText="Detalhes do campo"></title-page>
+    <p class="description-page">Bem vindo á página do campo
+      <span>{{ courtObj.name }}</span>, 
+      aqui pode visualizar todos os detalhes do campo.
+    </p>
+  </div>
+</div>
 
 <card-form>
-  <form class="form">
-
-    <div class="small-large">
-
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class='bx bx-building'></i>
-            <p>Empresa</p>
-          </div>
-          <div class="input-container">
-            <input type="text" name="company_name" [(ngModel)]="courtObj.company_name" readonly>
-          </div>
-        </div>
+  <form class="form-show">
+    <div class="user-container-info">
+      <div class="container-description">
+          <p class="description-text">Informações do Campo</p>
+          <hr>
       </div>
-
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class='bx bx-euro'></i>
-            <p>Preço hora</p>
-          </div>
-          <div class="input-container">
-            <input type="number" name="price_hour" [(ngModel)]="courtObj.price_hour" readonly>
-          </div>
+      <div class="container-forms">
+          <div class="data-detail">
+              <div class="detail">
+                <div class="label-container">
+                  <i class="ri-input-field"></i>
+                  <label for="name">Nome Campo</label>
+                </div>
+                <input type="text" name="name" [(ngModel)]="courtObj.name" disabled>
+              </div>
+              <div class="detail">
+                  <div class="label-container">
+                    <i class="ri-building-2-line"></i>
+                    <label for="company_name">Empresa</label>
+                  </div>
+                  <input type="text" name="company_name" [(ngModel)]="courtObj.company_name" disabled>
+              </div>
+            </div>
+            <div class="contact-detail">
+                <div class="detail">
+                    <div class="label-container">
+                      <i class="ri-money-euro-circle-line"></i>
+                      <label for="price_hour">Preço Hora</label>
+                    </div>
+                    <input type="text" name="price_hour" value="{{ courtObj.price_hour }}" disabled>
+                </div>
+                <div class="detail">
+                  <div class="label-container">
+                    <i class="ri-money-euro-circle-line"></i>
+                    <label for="status">Estado</label>
+                  </div>
+                  <input type="text" name="status" [(ngModel)]="courtObj.status" disabled>
+                </div>
+                <div class="detail">
+                  <div class="label-container">
+                    <i class="ri-layout-line"></i>
+                    <label for="status">Tipo Piso</label>
+                  </div>
+                  <input type="text" name="type_floor" [(ngModel)]="courtObj.type_floor" disabled>
+                </div>
+                <div class="detail">
+                  <div class="label-container">
+                    <i class="ri-calendar-event-line"></i>
+                    <label for="status">Última manutenção</label>
+                  </div>
+                  <input type="text" name="last_maintenance"
+                    [value]="courtObj.last_maintenance ? courtObj.last_maintenance : 'Nunca'" disabled>
+                </div>
+            </div>
         </div>
+    </div>
+    <div class="user-container-info">
+      <div class="container-description">
+        <p class="description-text">Serviços do Campo</p>
+        <hr>
       </div>
-
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class='bx bx-user'></i>
-            <p>Nome</p>
-          </div>
-          <div class="input-container">
-            <input type="text" name="name" [(ngModel)]="courtObj.name" readonly>
-          </div>
+      <div class="container-forms">
+        <div class="data-detail">
+            <div class="detail-services">
+              <div *ngIf="courtObj.illumination === 1" class="service success">
+                <i class="ri-lightbulb-flash-line"></i>
+                <span class="tooltip-text">Com Iluminação</span>
+              </div>
+              <div *ngIf="courtObj.illumination === 0" class="service danger">
+                <i class="ri-lightbulb-line"></i>
+                <span class="tooltip-text">Sem Iluminação</span>
+              </div>
+              <div *ngIf="courtObj.cover === 1" class="service success">
+                <i class="ri-building-2-line"></i>
+                <span class="tooltip-text">Interior</span>
+              </div>
+              <div *ngIf="courtObj.cover === 0" class="service danger">
+                <i class="ri-tree-line"></i>
+                <span class="tooltip-text">Exterior</span>
+              </div>
+              <div *ngIf="courtObj.shower_rooms === 1" class="service success">
+                <i class="ri-drop-line"></i>
+                <span class="tooltip-text">Com Balneário</span>
+              </div>
+              <div *ngIf="courtObj.shower_rooms === 0" class="service danger">
+                <i class="ri-blur-off-line"></i>
+                <span class="tooltip-text">Sem Balneário</span>
+              </div>
+              <div *ngIf="courtObj.lockers === 1" class="service success">
+                <i class="ri-lock-line"></i>
+                <span class="tooltip-text">Com Cacifo</span>
+              </div>
+              <div *ngIf="courtObj.lockers === 0" class="service danger">
+                <i class="ri-lock-unlock-line"></i>
+                <span class="tooltip-text">Sem Cacifo</span>
+              </div>
+              <div *ngIf="courtObj.rent_equipment === 1" class="service success">
+                <i class="ri-checkbox-circle-line"></i>
+                <span class="tooltip-text">Com Aluger equipamento</span>
+              </div>
+              <div *ngIf="courtObj.rent_equipment === 0" class="service danger">
+                <i class="ri-prohibited-2-line"></i>
+                <span class="tooltip-text">Sem Aluguer equipamento</span>
+              </div>
+            </div>
         </div>
       </div>
     </div>
-
-    <div class="complete">
-
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class='bx bx-wrench'></i>
-            <p>Última manutenção</p>
-          </div>
-          <div class="input-container">
-            <input type="text" name="last_maintenance"
-              [value]="courtObj.last_maintenance ? courtObj.last_maintenance : 'Nunca'" readonly>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="large-small">
-
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class='bx bx-grid'></i>
-            <p>Tipo de chão</p>
-          </div>
-          <div class="input-container">
-            <input type="text" name="type_floor" [(ngModel)]="courtObj.type_floor" readonly>
-          </div>
-        </div>
-      </div>
-
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class='bx bx-pulse'></i>
-            <p>Estado</p>
-          </div>
-          <div class="input-container">
-            <input type="text" name="status" [(ngModel)]="courtObj.status" readonly>
-          </div>
-        </div>
-      </div>
-
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class='bx bx-cloud'></i>
-            <p>Cobertura</p>
-          </div>
-          <div class="input-container">
-            <input type="" name="cover"
-            [value]="courtObj.cover === 0 ? 'Sem cobertura' : courtObj.cover === 1 ? 'Com cobertura' : ''"  readonly>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    
     <div class="button">
-      <button class="btn back" [routerLink]="'/dashboard/courts'">
-        <i class='bx bx-left-arrow-alt'></i>
-        Voltar atrás
-      </button>
-
-      <button type="submit" class="btn edit" [routerLink]="['/dashboard/court', court_id, 'edit']">
-        <i class='bx bx-pencil'></i>
-        Editar
+      <button class="btn edit" [routerLink]="['/dashboard/court', court_id, 'edit']">
+        <i class="ri-edit-line"></i>
+        Editar {{ courtObj.name }}
       </button>
 
       <form method="post" (ngSubmit)="deleteCourt($event)">
         <button type="submit" class="btn delete">
-          <i class='bx bx-trash'></i>
-          Eliminar
+          <i class="ri-delete-bin-2-line"></i>
+          Eliminar {{ courtObj.name }}
         </button>
       </form>
     </div>

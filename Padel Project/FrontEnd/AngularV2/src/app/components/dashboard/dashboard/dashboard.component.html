@@ -1,11 +1,16 @@
 <div class="container">
-  <sidebar></sidebar>
-  <div class="main-container">
-    <header (componentLoaded)="onHeaderLoaded()"></header>
+  <sidebar [isSidebarClosed]="isSidebarClosed"></sidebar>
+
+  <div
+    class="main-container"
+    [ngClass]="{ 'maximized': isSidebarClosed }"
+    [style.marginLeft]="isSidebarClosed ? '110px' : '270px'">
+
+    <header (menuToggled)="onMenuToggled()"></header>
+
     <div class="dashboard">
       <router-outlet></router-outlet>
     </div>
   </div>
 </div>
-
 <modal></modal>

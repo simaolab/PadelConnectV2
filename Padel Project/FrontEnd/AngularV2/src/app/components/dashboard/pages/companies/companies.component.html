@@ -27,7 +27,7 @@
               <th class="middle">NIF</th>
               <th class="left">Morada</th>
               <th class="middle">Campos</th>
-              <th class="middle">Actions</th>
+              <th class="middle">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -38,15 +38,24 @@
               <td data-cell="NIF" class="middle">{{ company.nif }}</td>
               <td data-cell="Morada" class="left">{{ company.address }}</td>
               <td data-cell="Campos" class="middle">
-                <div class="field-count-wrapper">
-                  <i class='ri-input-field'></i>
-                  {{ company.fields_count }}
+                <div class="tooltip">
+                  <div class="field-count-wrapper">
+                    <i class='ri-input-field'></i>
+                    {{ company.fields_count }}
+                    <span class="tooltip-text">{{ company.fields_count }} Campos Associados</span>
+                  </div>
                 </div>
               </td>
               <td data-cell="Ações" class="middle">
                 <div class="actions">
-                  <i class='ri-eye-2-line' [routerLink]="['/dashboard/company', company.id]"></i>
-                  <i class='ri-edit-line' [routerLink]="['/dashboard/company', company.id, 'edit']"></i>
+                  <div class="tooltip">
+                    <i class='ri-more-2-fill' [routerLink]="['/dashboard/company', company.id]"></i>
+                    <span class="tooltip-text">Detalhes</span>
+                  </div>
+                  <div class="tooltip">
+                    <i class='ri-edit-line' [routerLink]="['/dashboard/company', company.id, 'edit']"></i>
+                    <span class="tooltip-text">Editar</span>
+                  </div>
                 </div>
               </td>
             </tr>

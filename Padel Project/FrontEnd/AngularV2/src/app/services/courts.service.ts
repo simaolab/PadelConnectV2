@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiRoutes } from '../config/api-routes';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Court } from '../models/court';
 
 @Injectable({
   providedIn: 'root'
@@ -15,18 +16,10 @@ export class CourtsService {
     return this.http.get<any>(ApiRoutes.courts);
   }
 
-  create(courtObj: {
-    name: string;
-    company_id: number;
-    price_hour: number;
-    type_floor: string;
-    status: string;
-    illumination: number;
-    cover: number;
-    last_maintenance: string }): Observable<any> {
+  create(courtObj: Court): Observable<any> {
       const token = localStorage.getItem('authToken');
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      
+
       return this.http.post<any>(ApiRoutes.courts, courtObj, { headers });
   }
 
@@ -37,14 +30,7 @@ export class CourtsService {
     return this.http.get<any>(`${ApiRoutes.courts}${court_id}`, { headers });
   }
 
-  edit(courtObj: {
-    name: string;
-    company_id: number;
-    price_hour: number;
-    type_floor: string;
-    status: string;
-    cover: number;
-    last_maintenance: string }, court_id: number): Observable<any> {
+  edit(courtObj: Court, court_id: number): Observable<any> {
       const token = localStorage.getItem('authToken');
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 

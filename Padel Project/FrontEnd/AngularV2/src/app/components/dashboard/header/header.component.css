@@ -7,17 +7,28 @@ a {
    .header-content {
     display: flex;
     justify-content: space-between;
-    align-items: start;
     width: 100%;
-    padding: 3rem 2rem;
+    padding: 3rem 3rem;
     background: var(--color-primary);
     color: var(--color-white);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.header-content i{
+  font-size: var(--font-size);
+}
+
 .welcome-message {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.message-container{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
     gap: 1rem;
 }
 
@@ -37,15 +48,14 @@ a {
 }
 
 .date-hour {
-    display: flex;
-    gap: 4rem;
+    display: flex; gap: 2rem;
 }
 
 .date,
 .hour {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: .5rem;
 }
 
 .date p,
@@ -55,7 +65,8 @@ a {
 
 .home-notifications{
     display: flex;
-    align-items: center;
+    justify-content: center;
+    align-items: start;
     gap: 1rem;
 }
 
@@ -95,5 +106,15 @@ a {
 @media screen and (max-width: 468px) {
   .right-header {
       gap: 1rem;
-    }
+  }
+
+  .date-hour {
+      display: none;
+  }
+
+  .header-content{
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: .5rem;
+  }
 }

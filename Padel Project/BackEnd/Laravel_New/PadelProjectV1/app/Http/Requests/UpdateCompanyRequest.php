@@ -37,7 +37,7 @@ class UpdateCompanyRequest extends FormRequest
                 Rule::unique('companies')->ignore($this->route('company')),
             ],
             'contact'           => [
-                'required',
+                'nullable',
                 'regex:/^(91|92|93|96|94|95)[0-9]{7}$/',
                 Rule::unique('companies')->ignore($this->route('company')),
             ],
