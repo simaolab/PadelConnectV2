@@ -376,7 +376,7 @@ input[type=number] {
 }
 
 .small-error {
-  padding: .5rem;
+  padding-block: .5rem;
   color: var(--color-danger);
   font-size: var(--font-smaller);
 }
@@ -471,6 +471,41 @@ input[type=number] {
     background-color: var(--color-primary);
     border-radius: 50px;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+
+
+  .contact-detail,
+  .data-detail{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .container-forms{
+    display: flex;
+    gap: 1rem;
+  }
+
+  .button{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .button form{
+    width: 100%;
+  }
+
+  .btn,
+  .btn.delete{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 1rem;
   }
 }
 

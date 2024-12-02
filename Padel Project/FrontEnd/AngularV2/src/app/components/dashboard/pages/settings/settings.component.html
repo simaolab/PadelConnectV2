@@ -84,23 +84,21 @@
                         <input type="text" name="last_name" value="{{ clientObj.last_name }}"
                         [(ngModel)]="clientObj.last_name" placeholder="Último Nome">
                     </div>
-                    <!-- <div class="detail">
+                    <div class="detail">
                         <div class="label-container">
                             <i class="ri-flag-line"></i>
                             <label for="nacionality">Nacionalidade</label>
                         </div>
-                        <input type="text" name="nationality" value="{{ clientObj.nationality }}"
-                        [(ngModel)]="clientObj.nationality" placeholder="Nacionalidade">
-                    </div> -->
-                    <dropdown
-                    [items]="nationalities"
-                    labelKey="name"
-                    valueKey="id"
-                    placeholder="Selecione uma nacionalidade"
-                    (selectionChange)="onNationalitySelected($event)">
-                  </dropdown>
-
-
+                        <dropdown
+                            [items]="nationalities"
+                            labelKey="name"
+                            valueKey="id"
+                            placeholder="Selecione uma nacionalidade"
+                            (selectionChange)="onNationalitySelected($event)">
+                        </dropdown>
+                        <!-- <input type="text" name="nationality" value="{{ clientObj.nationality }}"
+                        [(ngModel)]="clientObj.nationality" placeholder="Nacionalidade"> -->
+                    </div> 
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-men-line"></i>

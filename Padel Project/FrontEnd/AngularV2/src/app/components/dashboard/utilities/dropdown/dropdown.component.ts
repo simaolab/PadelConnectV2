@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   templateUrl: './dropdown.component.html',
-  styleUrl: './dropdown.component.css'
+  styleUrls: ['./dropdown.component.css']
 })
 export class DropdownComponent {
   @Input() items: any[] = [];
@@ -18,10 +18,15 @@ export class DropdownComponent {
   @Output() selectionChange = new EventEmitter<any>();
 
   selectedItem: any = null;
+  isOpen: boolean = false;  // Controle para abrir/fechar o menu
 
-  selectItem(item: any) {
-    this.selectedItem = item;
-    this.selectionChange.emit(item);
+  toggleMenu(): void {
+    this.isOpen = !this.isOpen;
   }
 
+  selectItem(item: any): void {
+    this.selectedItem = item;
+    this.selectionChange.emit(item);
+    this.isOpen = false;  // Fecha o menu após a seleção
+  }
 }

@@ -29,4 +29,8 @@
     margin-left: 0 !important;
     width: 100% !important;
   }
+
+  .dashboard{
+    padding: 2rem;
+  }
 }
