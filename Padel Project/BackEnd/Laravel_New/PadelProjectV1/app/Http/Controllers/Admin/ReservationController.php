@@ -13,6 +13,7 @@ use Illuminate\Support\Arr;
 use App\Http\Requests\StoreCancellationRequest;
 use Carbon\Carbon;
 
+
 class ReservationController extends Controller
 {
     /**
@@ -56,28 +57,36 @@ class ReservationController extends Controller
      */
     public function store(StoreReservationRequest $request)
     {
-        // Verify the data sent
-        // validated() follows the StoreReservationRequest rules
         $validatedData = $request->validated();
 
-        // Remove the 'fields' key from the validated data
-        //Use of Arr::except: This helper is designed to exclude specified keys from an array.
+        // Extract and format the dates
         $reservationData = Arr::except($validatedData, ['fields']);
+        $reservationData['start_date'] = Carbon::createFromFormat('d/m/Y', $reservationData['start_date'])->format('Y-m-d');
+        $reservationData['end_date'] = Carbon::createFromFormat('d/m/Y', $reservationData['end_date'])->format('Y-m-d');
 
-        // Create a new reservation with the verified data
+         // Check if there is an existing reservation conflicting with the provided dates
+        $conflictDate = Reservation::where('start_date', '<=', $reservationData['end_date'])
+            ->where('end_date', '>=', $reservationData['start_date'])
+            ->exists();
+
+        if ($conflictDate) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Já existe uma reserva para as datas selecionadas.',
+            ], 409);
+        }
+
+
         $reservation = Reservation::create($reservationData);
-
-        // Sync the fields relationship
         $reservation->fields()->sync($request->input('fields'));
-
-        // Fetch the newly created reservation with its related fields
-        $newReservation = Reservation::where('id', $reservation->id)->with('fields')->get();
 
         return response()->json([
             'status' => 'success',
             'message' => 'Reserva criada com sucesso.',
+            'reservation' => $reservation->load('fields'),
         ], 201);
     }
+
     /**
      * Display the specified resource.
      */
