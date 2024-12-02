@@ -12,26 +12,45 @@
       <div class="card-content-info">
         <div class="first-info">
           <h2 class="info-title">{{ courtObj.name }}</h2>
-          <p class="card-content-address">{{ courtObj.address }}</p>
+          <p class="card-content-address">{{ address }}</p>
         </div>
 
         <div class="second-info">
               <h2 class="info-title">Informações</h2>
               <div class="sub-info">
                 <h4 class="title-info">Tipo de chão</h4>
-                <p>{{ courtObj.type_floor }}</p>
+                <div *ngIf="courtObj.illumination === 1" class="service success">
+                  <i class="ri-lightbulb-flash-line"></i>
+                  <p>Com Iluminação</p>
+                </div>
+                <div *ngIf="courtObj.illumination === 0" class="service danger">
+                  <i class="ri-lightbulb-line"></i>
+                  <p>Sem Iluminação</p>
+                </div>
               </div>
-              <div class="sub-info">
-                <h4 class="title-info">Iluminação</h4>
-                <p>{{ courtObj.illumination === 1 ? 'Com iluminação' : 'Sem iluminação' }}</p>
-              </div>
-              <div class="sub-info">
-                <h4 class="title-info">Estado</h4>
-                <p>{{ courtObj.status }}</p>
-              </div>
+
               <div class="sub-info">
                 <h4 class="title-info">Cobertura</h4>
-                <p>{{ courtObj.cover === 1 ? 'Coberto' : 'Descoberto' }}</p>
+                <div *ngIf="courtObj.cover === 1" class="service success">
+                  <i class="ri-building-2-line"></i>
+                  <p>Interior</p>
+                </div>
+                <div *ngIf="courtObj.cover === 0" class="service danger">
+                  <i class="ri-tree-line"></i>
+                  <p>Exterior</p>
+                </div>
+              </div>
+
+              <div class="sub-info">
+                <h4 class="title-info">Estado</h4>
+                <div *ngIf="courtObj.status === 'Disponivel'" class="service success">
+                  <i class="ri-checkbox-circle-line"></i>
+                  <p>Disponível</p>
+                </div>
+                <div *ngIf="courtObj.status === 'Indisponivel'" class="service danger">
+                  <i class="ri-close-circle-line"></i>
+                  <p>Indisponível</p>
+                </div>
               </div>
         </div>
       </div>
@@ -63,31 +82,45 @@
           </div>
       </div>
 
-      <!-- <div class="additional-services">
-          <h4>Serviços adicionais</h4>
+      <div class="additional-services">
+        <h2 class="info-title">Serviços Adicionais</h2>
           <div class="services-icons">
-              <i class="bx bx-swim">
-                  <p>Balneário</p>
-              </i>
-              <i class="bx bx-swim">
-                  <p>Balneário</p>
-              </i>
-              <i class="bx bx-swim">
-                  <p>Balneário</p>
-              </i>
+
+            <div class="services">
+              <div *ngIf="courtObj.lockers === 1" class="service success">
+                <i class="ri-lock-line"></i>
+                <span class="tooltip-text">Com Cacifo</span>
+              </div>
+              <div *ngIf="courtObj.lockers === 0" class="service danger">
+                <i class="ri-lock-unlock-line"></i>
+                <span class="tooltip-text">Sem Cacifo</span>
+              </div>
+            </div>
+
+            <div class="services">
+              <div *ngIf="courtObj.rent_equipment === 1" class="service success">
+                <i class="ri-checkbox-circle-line"></i>
+                <span class="tooltip-text">Com Aluger equipamento</span>
+              </div>
+              <div *ngIf="courtObj.rent_equipment === 0" class="service danger">
+                <i class="ri-prohibited-2-line"></i>
+                <span class="tooltip-text">Sem Aluguer equipamento</span>
+              </div>
+            </div>
+
+            <div class="services">
+              <div *ngIf="courtObj.shower_room === 1" class="service success">
+                <i class="ri-drop-line"></i>
+                <span class="tooltip-text">Com Balneário</span>
+              </div>
+              <div *ngIf="courtObj.shower_room === 0" class="service danger">
+                <i class="ri-blur-off-line"></i>
+                <span class="tooltip-text">Sem Balneário</span>
+              </div>
+            </div>
+
           </div>
-          <div class="services-icons">
-              <i class="bx bx-swim">
-                  <p>Balneário</p>
-              </i>
-              <i class="bx bx-swim">
-                  <p>Balneário</p>
-              </i>
-              <i class="bx bx-swim">
-                  <p>Balneário</p>
-              </i>
-          </div>
-      </div> -->
+      </div>
     </div>
 </div>
 

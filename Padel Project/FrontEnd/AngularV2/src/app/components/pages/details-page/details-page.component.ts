@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CourtsService } from '../../../services/courts.service';
 import { PageTopComponent } from '../../utilities/page-top/page-top.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import ptLocale from '@fullcalendar/core/locales/pt';
+import { Court } from '../../../models/court';
+import { Address } from '../../../models/address';
 
 @Component({
   selector: 'app-details-page',
   standalone: true,
   imports: [
+    CommonModule,
     PageTopComponent,
     FullCalendarModule
   ],
@@ -21,16 +25,25 @@ export class DetailsPageComponent implements OnInit {
 
   calendarOptions: any;
 
-  courtObj = {
+  courtObj: Court = {
     name: '',
-    company_name: '',
+    company_id: 0,
     price_hour: 0,
     type_floor: '',
-    illumination: 0,
     status: '',
+    illumination: 0,
     cover: 0,
-    address: ''
+    last_maintenance: '',
+    shower_room: 0,
+    lockers: 0,
+    rent_equipment: 0,
   }
+
+    addressObj: Address = {
+      addressPort: '',
+      postalCode: '',
+      locality: '',
+    }
 
   court_id: number = 0;
 
@@ -38,6 +51,10 @@ export class DetailsPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private courtsService: CourtsService
   ) {}
+
+  get address(): string {
+    return `${this.addressObj.addressPort}, ${this.addressObj.postalCode}, ${this.addressObj.locality}`;
+  }
 
   ngOnInit(): void {
     this.calendarOptions = {
@@ -73,16 +90,28 @@ export class DetailsPageComponent implements OnInit {
 
         this.courtObj = {
           name: field.name,
-          company_name: field.company.name,
+          company_id: field.company.name,
           price_hour: field.price_hour,
           type_floor: field.type_floor,
           illumination: field.illumination,
           status: field.status,
           cover: field.cover,
-          address: field.company.address
+          last_maintenance: field.last_maintenance,
+          shower_room: field.shower_room,
+          lockers: field.lockers,
+          rent_equipment: field.rent_equipment,
         };
 
-        console.log(this.courtObj)
+        if (field.company.address) {
+          const addressParts = field.company.address.split(', ');
+          if (addressParts.length === 3) {
+            this.addressObj = {
+              addressPort: addressParts[0],
+              postalCode: addressParts[1],
+              locality: addressParts[2],
+            };
+          }
+        }
       }
     })
   }
@@ -98,6 +127,7 @@ export class DetailsPageComponent implements OnInit {
     const prevButton = document.querySelector('.fc-prev-button');
     const nextButton = document.querySelector('.fc-next-button');
     const todayButton = document.querySelector('.fc-today-button');
+    const allFcButtons = document.querySelectorAll('.fc-button');
 
     if (prevButton) {
       (prevButton as HTMLElement).style.backgroundColor = '#57cc99'; // Cor de fundo do botão anterior
@@ -111,6 +141,9 @@ export class DetailsPageComponent implements OnInit {
       (todayButton as HTMLElement).style.backgroundColor = '#57cc99'; // Cor de fundo do botão "Hoje"
       (todayButton as HTMLElement).style.color = '#ffffff'; // Cor do texto
     }
+    allFcButtons.forEach(button => {
+      (button as HTMLElement).style.border = 'none';
+    });
   }
 
 }

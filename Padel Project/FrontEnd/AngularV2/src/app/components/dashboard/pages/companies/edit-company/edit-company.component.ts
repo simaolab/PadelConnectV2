@@ -79,13 +79,7 @@ export class EditCompanyComponent {
 
           const addressParts = company.address.split(', ');
 
-          if (addressParts.length === 4) {
-            this.addressObj = {
-              addressPort: addressParts[0] + ', ' + addressParts[1],
-              postalCode: addressParts[2],
-              locality: addressParts[3],
-            };
-          } else if (addressParts.length === 3) {
+          if (addressParts.length === 3) {
             this.addressObj = {
               addressPort: addressParts[0],
               postalCode: addressParts[1],

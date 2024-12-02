@@ -43,4 +43,12 @@ export class CourtsService {
 
     return this.http.delete<any>(`${ApiRoutes.courts}${court_id}`, { headers });
   }
+
+  search(name: string): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<any>(`${ApiRoutes.courts}search/${name}`, { headers });
+  }
+
 }
