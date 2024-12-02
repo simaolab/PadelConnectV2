@@ -2,7 +2,11 @@
 
 <main-content>
   <div class="search">
-    <input class="searchbar" type="text" name="" id="" placeholder="Procure por campo ou localidade">
+    <input
+    class="searchbar"
+    type="text"
+    placeholder="Procure por nome do campo"
+    (input)="onSearchInput($event)">
     <div class="box-searchbar">
         <div class="date-hour">
             <span>Data / Hora</span>

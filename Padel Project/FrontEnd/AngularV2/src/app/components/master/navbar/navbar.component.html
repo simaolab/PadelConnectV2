@@ -1,4 +1,4 @@
-<div class="navbar">
+<div class="navbar" [ngClass]="{'scrolled': isScrolled}">
   <div class="icon-box">
       <img src="assets/images/logos/LogoBrancoPadel_Final.png">
   </div>
@@ -13,9 +13,12 @@
       </div>
   </div>
   <div class="user-box">
-    <a href="/login">
-      <i class='bx bxs-user'></i>
+    <a href="/cart">
+      <i class="ri-shopping-cart-2-line"></i>
     </a>
-      <i class='bx bx-menu'></i>
+    <a href="/login">
+      <i class="ri-user-line"></i>
+    </a>
+    <i class="ri-menu-3-line"></i>
   </div>
 </div>
