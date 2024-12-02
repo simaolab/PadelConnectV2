@@ -8,6 +8,7 @@ import { CourtsService } from '../../../../../services/courts.service';
 import { CardFormComponent } from '../../../utilities/card-form/card-form.component';
 import { TitlePageComponent } from '../../../utilities/title-page/title-page.component';
 import { DashboardComponent } from '../../../dashboard/dashboard.component';
+import { Court } from '../../../../../models/court';
 
 @Component({
   selector: 'app-edit-court',
@@ -27,7 +28,7 @@ export class EditCourtComponent {
 
   formErrors: { [key: string]: string } = {};
 
-  courtObj = {
+  courtObj: Court = {
     name: '',
     company_id: 0,
     price_hour: 0,
@@ -35,7 +36,10 @@ export class EditCourtComponent {
     status: '',
     illumination: 0,
     cover: 0,
-    last_maintenance: ''
+    last_maintenance: '',
+    shower_room: 0,
+    lockers: 0,
+    rent_equipment: 0
   }
 
   court_id: number = 0;
@@ -66,9 +70,13 @@ export class EditCourtComponent {
           status: field.status,
           illumination: field.illumination,
           cover: field.cover,
-          last_maintenance: field.last_maintenance
-
+          last_maintenance: field.last_maintenance,
+          shower_room: field.shower_room,
+          lockers: field.lockers,
+          rent_equipment: field.rent_equipment
         };
+
+        console.log(this.courtObj)
       },
       error: (err) => {
         const errorMessage = err?.error?.message

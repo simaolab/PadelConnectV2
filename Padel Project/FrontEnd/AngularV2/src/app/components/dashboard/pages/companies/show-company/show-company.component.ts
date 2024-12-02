@@ -80,6 +80,12 @@ export class ShowCompanyComponent {
               postalCode: addressParts[2],
               locality: addressParts[3],
             };
+          } else if (addressParts.length === 3) {
+            this.addressObj = {
+              addressPort: addressParts[0],
+              postalCode: addressParts[1],
+              locality: addressParts[2],
+            };
           }
         },
         error: (err) => {
