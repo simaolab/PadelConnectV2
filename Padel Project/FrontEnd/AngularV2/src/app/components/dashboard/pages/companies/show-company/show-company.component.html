@@ -41,7 +41,9 @@
                     <i class="ri-phone-line"></i>
                     <label for="first_name">Contacto</label>
                   </div>
-                  <input type="number" name="contact" [(ngModel)]="companyObj.contact" disabled>
+                  <input type="text" name="contact" 
+                  value="{{ companyObj.contact ? companyObj.contact : 'Sem contacto associado' }}" disabled>
+          
               </div>
             </div>
             <div class="contact-detail">
@@ -90,7 +92,8 @@
                       <i class="ri-newspaper-line"></i>
                       <label for="first_name">Newsletter</label>
                   </div>
-                  <input type="text" name="first_name" value="{{ companyObj.newsletter }}" disabled>
+                  <input type="text" name="newsletter" 
+                  value="{{ companyObj.newsletter === 1 ? 'Sim' : 'Não' }}" disabled>
               </div>
           </div>
       </div>

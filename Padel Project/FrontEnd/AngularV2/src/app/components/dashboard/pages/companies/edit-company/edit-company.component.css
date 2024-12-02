@@ -1,0 +1,70 @@
+.input-toggle {
+    display: none;
+  }
+  
+  .display {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    background: transparent;
+  }
+  
+  .toggle {
+    width: 50px;
+    height: 30px;
+    border-radius: 999px;
+    background: var(--color-light-grey);
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .circle {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--color-white);
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(10%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .no {
+    color: var(--color-danger);
+    opacity: 1;
+  }
+  
+  .yes {
+    margin-top: -170%;
+    color: var(--color-primary);
+  }
+  
+  .i {
+    position: absolute;
+  }
+  
+  .input-toggle:checked + .display label .circle {
+    left: 100%;
+    transform: translate(-110%, -50%);
+  }
+  
+    .input-toggle:checked + .display label .circle .no {
+        margin-top: 150%;
+        opacity: 0;
+    }
+  
+    .input-toggle:checked + .display label .circle .yes {
+        margin-top: 0%;
+    }
+  
+  .toggle:active .circle {
+    width: 35px;
+  }
+  

@@ -108,15 +108,29 @@ export class EditCompanyComponent {
   }
 
   editCompany(): void {
-    this.companyObj.address = this.address;
 
-    console.log(this.companyObj.address)
+    if (!this.addressObj['addressPort'] || !this.addressObj['postalCode'] || !this.addressObj['locality']) {
+      if (!this.addressObj['addressPort']) {
+        this.formErrors['addressPort'] = 'Endereço e número da porta são obrigatórios.';
+      } else { this.formErrors['addressPort'] = ''; }
+
+      if (!this.addressObj['postalCode']) {
+        this.formErrors['postalCode'] = 'O código postal é obrigatório.';
+      } else { this.formErrors['postalCode'] = ''; }
+
+      if (!this.addressObj['locality']) {
+        this.formErrors['locality'] = 'A localidade é obrigatória.';
+      } else { this.formErrors['locality'] = ''; }
+      return;
+    }
+    
+    this.companyObj.address = this.address;
 
     this.companiesService.edit(this.companyObj, this.company_id).subscribe({
       next: (res: any) => {
         if(res.status === 'success') {
           this.dashboardComponent.showModal(
-            'Message',
+            'Mensagem',
             res.message,
             () => {
               this.router.navigate(['/dashboard/companies']);
@@ -127,7 +141,7 @@ export class EditCompanyComponent {
       },
       error: (err: any) => {
         this.formErrors = {};
-        const errorDetails = err.error?.['error(s)'] || {};
+        const errorDetails = err.error?.['errors'] || {};
 
         for (const company in errorDetails) {
           if (errorDetails.hasOwnProperty(company)) {
@@ -136,5 +150,9 @@ export class EditCompanyComponent {
         }
       }
     })
+  }
+
+  toggleNewsletter(event: Event): void {
+    this.companyObj.newsletter = (event.target as HTMLInputElement).checked ? 1 : 0;
   }
 }
