@@ -68,6 +68,15 @@
   text-decoration: underline;
 }
 
+.politics-link {
+  border-right: 1px solid white;
+  padding: 1.5rem;
+}
+
+.rules-link{
+  padding: 1.5rem;
+}
+
 .politics a:hover {
   color: var(--color-primary);
 }

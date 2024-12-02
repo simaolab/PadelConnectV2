@@ -21,6 +21,7 @@
 
 .block-content p {
   font-size: var(--font-size);
+  color: var(--color-gray);
 }
 
 .block-2 {
