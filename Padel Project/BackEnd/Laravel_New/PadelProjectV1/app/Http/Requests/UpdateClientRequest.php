@@ -24,7 +24,7 @@ class UpdateClientRequest extends FormRequest
             'address'           => 'nullable',
             'first_name'        => 'nullable|string|max:50',
             'last_name'         => 'nullable|string|max:50',
-            'gender'            => 'nullable|string|in:Male,Female,Other',
+            'gender'            => 'nullable|string|in:Masculino,Feminino,Outro',
             'contact'           => [
                 'nullable',
                 'regex:/^(91|92|93|96|94|95)[0-9]{7}$/',
@@ -58,7 +58,7 @@ class UpdateClientRequest extends FormRequest
         //We need to use HttpResponse to break the current task execution and show the errors
         throw new HttpResponseException(response()->json([
             'message' => 'Erro ao atualizar o cliente!',
-            'errors' => $validator->errors()
+            'error(s)' => $validator->errors()
         ], 422));
     }
 }

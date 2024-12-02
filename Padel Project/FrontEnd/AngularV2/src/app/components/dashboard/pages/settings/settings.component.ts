@@ -8,6 +8,7 @@ import { DropdownComponent } from '../../utilities/dropdown/dropdown.component';
 
 import { UsersService } from '../../../../services/users.service';
 import { NationalitiesService } from '../../../../services/nationalities.service';
+import { log } from 'node:console';
 
 @Component({
   selector: 'settings',
@@ -45,6 +46,12 @@ export class SettingsComponent {
     locality: '',
   }
 
+  genderOptions = [
+    { label: 'Masculino', value: 'Masculino' },
+    { label: 'Feminino', value: 'Feminino' },
+    { label: 'Outro', value: 'Outro' },
+  ];
+
   client_id: number = 0;
 
   nationalities: any[] = [];
@@ -59,7 +66,6 @@ export class SettingsComponent {
   formErrors: { [key: string]: string } = {};
 
   ngOnInit(): void {
-    this.userInfo();
     this.loadNationalities();
   }
 
@@ -76,8 +82,8 @@ export class SettingsComponent {
             email: client.user?.email,
             nif: client.user?.nif,
             contact: client.contact,
-            gender: client.gender,
-            nationality_id: client.nationality?.name,
+            gender: client.gender || '',
+            nationality_id: client.nationality?.id || '',
             birthday: client.user?.birthday,
             address: client.address || ' ',
             newsletter: client.newsletter,
@@ -86,7 +92,13 @@ export class SettingsComponent {
           if (client.address) {
             const addressParts = client.address.split(', ');
 
-            if (addressParts.length === 3) {
+            if (addressParts.length === 4) {
+              this.addressObj = {
+                addressPort: addressParts[0] + ', ' + addressParts[1],
+                postalCode: addressParts[2],
+                locality: addressParts[3],
+              };
+            } else if (addressParts.length === 3) {
               this.addressObj = {
                 addressPort: addressParts[0],
                 postalCode: addressParts[1],
@@ -113,19 +125,23 @@ export class SettingsComponent {
 
   editClient(): void {
     this.clientObj.address = this.address;
-
     this.usersService.editClient(this.clientObj, this.client_id).subscribe({
       next: (res: any) => {
         if(res.status === 'success') {
           this.dashboardComponent.showModal(
             'Message',
             res.message,
+            () => {
+              window.location.reload();
+            }
           )
         }
       },
       error: (err: any) => {
         this.formErrors = {};
         const errorDetails = err.error?.['error(s)'] || {};
+
+        // console.error(err.error)
 
         for (const company in errorDetails) {
           if (errorDetails.hasOwnProperty(company)) {
@@ -156,7 +172,8 @@ export class SettingsComponent {
   loadNationalities(): void {
     this.nationalitiesService.index().subscribe({
       next: (data: any[]) => {
-        this.nationalities = data
+        this.nationalities = data;
+        this.userInfo();
       },
       error: (err: any) => {
         const message = err.error?.message;
@@ -168,11 +185,13 @@ export class SettingsComponent {
     });
   }
 
+  onGenderSelected(gender: any): void {
+    this.clientObj.gender = gender.value;
+  }
 
   onNationalitySelected(nationality: any): void {
     this.clientObj.nationality_id = nationality.id;
   }
-
 
   toggleNewsletter(event: Event): void {
     this.clientObj.newsletter = (event.target as HTMLInputElement).checked ? 1 : 0;

@@ -39,7 +39,7 @@ class UpdateCompanyRequest extends FormRequest
             'contact'           => [
                 'nullable',
                 'regex:/^(91|92|93|96|94|95)[0-9]{7}$/',
-                Rule::unique('companies')->ignore($this->route('company')),
+                Rule::unique('companies')->ignore($this->route('company'))
             ],
             'email' => [
                 'required',
@@ -70,7 +70,6 @@ class UpdateCompanyRequest extends FormRequest
 
             'contact.regex'         => 'O contacto tem de ser um contacto válido português.',
             'contact.unique'        => 'O contacto inserido já está associado a outro cliente.',
-            'contact.required'      => 'O contacto é um campo obrigatório.',
 
             'email.email'           => 'Coloque um email válido (ex.: user@padelconnect.pt).',
             'email.unique'          => 'O email inserido já está associado a outro cliente.',
@@ -84,7 +83,7 @@ class UpdateCompanyRequest extends FormRequest
         //We need to use HttpResponse to break the current task execution and show the errors
         throw new HttpResponseException(response()->json([
             'message' => 'Erro ao atualizar a empresa:',
-            'errors' => $validator->errors()
+            'error(s)' => $validator->errors()
         ], 422));
     }
 }
