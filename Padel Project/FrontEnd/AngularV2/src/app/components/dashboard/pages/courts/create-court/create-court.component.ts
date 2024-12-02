@@ -37,8 +37,40 @@ export class CreateCourtComponent {
     status: '',
     illumination: 0,
     cover: 0,
-    last_maintenance: ''
+    last_maintenance: '',
+    shower_rooms: 0,
+    lockers: 0,
+    rent_equipment: 0,
   }
+
+  serviceStates = {
+    illumination: false,
+    cover: false,
+    shower_rooms: false,
+    lockers: false,
+    rent_equipment: false,
+  };
+
+  serviceTexts = {
+    illumination: 'Sem Iluminação',
+    cover: 'Exterior',
+    shower_rooms: 'Sem Balneário',
+    lockers: 'Sem Cacifo',
+    rent_equipment: 'Sem Aluguer Equipamento',
+  };
+
+  statusOptions = [
+    { label: 'Disponível', value: 'Disponivel' },
+    { label: 'Indisponível', value: 'Indisponivel' },
+    { label: 'Inativo', value: 'Inativo' },
+  ];
+
+  floorOptions = [
+    { label: 'Piso Cimento', value: 'Piso Cimento' },
+    { label: 'Piso Madeira', value: 'Piso Madeira' },
+    { label: 'Piso Acrílico', value: 'Piso Acrílico' },
+    { label: 'Piso Relva Sintética', value: 'Piso Relva Sintética' },
+  ];
 
   companies: any[] = [];
 
@@ -49,15 +81,13 @@ export class CreateCourtComponent {
       private companiesService: CompaniesService
     ) {}
 
+    ngOnInit(): void {
+      this.loadCompanies();
+    }
+
     create() {
 
-      if (this.courtObj.last_maintenance) {
-        const dateParts = this.courtObj.last_maintenance.split('-');
-        if (dateParts.length === 3) {
-          const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
-          this.courtObj.last_maintenance = formattedDate;
-        }
-      }
+      this.formatLastMaintenanceDate();
 
       this.courtsService.create(this.courtObj).subscribe({
         next: (res: any) => {
@@ -85,8 +115,13 @@ export class CreateCourtComponent {
       })
     }
 
-    ngOnInit(): void {
-      this.loadCompanies();
+    private formatLastMaintenanceDate(): void {
+      if (this.courtObj.last_maintenance) {
+        const dateParts = this.courtObj.last_maintenance.split('-');
+        if (dateParts.length === 3) {
+          this.courtObj.last_maintenance = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+        }
+      }
     }
 
     loadCompanies(): void {
@@ -104,4 +139,24 @@ export class CreateCourtComponent {
       this.courtObj.company_id = company.id;
     }
 
+      // Alterna o estado de cada serviço e atualiza o texto exibido
+  toggleService(serviceKey: keyof typeof this.serviceStates): void {
+    this.serviceStates[serviceKey] = !this.serviceStates[serviceKey];
+    this.courtObj[serviceKey] = this.serviceStates[serviceKey] ? 1 : 0;
+
+    this.serviceTexts[serviceKey] = this.serviceStates[serviceKey]
+      ? `Com ${this.getServiceName(serviceKey)}`
+      : `Sem ${this.getServiceName(serviceKey)}`;
+  }
+
+  private getServiceName(serviceKey: string): string {
+    const names: { [key: string]: string } = {
+      illumination: 'Iluminação',
+      cover: 'Cobertura',
+      shower_rooms: 'Balneário',
+      lockers: 'Cacifo',
+      rent_equipment: 'Aluguer Equipamento',
+    };
+    return names[serviceKey] || serviceKey;
+  }
 }

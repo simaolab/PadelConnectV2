@@ -3,9 +3,7 @@
    ============================= */
    .dropdown {
     width: 100%;
-    height: 20px;
     position: relative;
-    margin-top: 1rem;
 }
 
 .dropdown * {
@@ -13,21 +11,23 @@
 }
 
 .select {
-    background-color: var(--color-background);
-    padding: 10px;
-    border-radius: var(--border-radius-1);
-    font-size: 16px;
-    box-shadow: var(--box-shadow);
-    color: var(--color-dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-text);
+    font-size: var(--font-smaller);
+    padding-block: .5rem;
+    padding-right: .5rem;
+    border-bottom: 1px solid var(--color-gray);
 }
 
 .select-clicked {
-    border-color: gray;
+    border-color: var(--color-gray);
     box-shadow: var(--box-shadow);
 }
 
-.select:hover {
-    background: var(--color-background);
+.select:hover .caret{
+    border-top: 6px solid var(--color-blue-2);
 }
 
 .caret {
@@ -35,7 +35,7 @@
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 6px solid var(--color-dark);
+    border-top: 6px solid var(--color-primary);
     transition: 0.3s;
 }
 
@@ -44,13 +44,13 @@
 }
 
 .menu {
-    font-size: 16px;
+    font-size: var(--font-smaller);
     list-style: none;
-    padding: 10px;
+    padding: .2rem;
     background: var(--color-white);
-    box-shadow: var(--box-shadow);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
     border-radius: var(--border-radius-1);
-    color: #9fa5b5;
+    color: var(--color-text);
     position: absolute;
     top: 3em;
     left: 50%;
@@ -58,8 +58,21 @@
     transform: translateX(-50%);
     opacity: 0;
     display: none;
+    transition: opacity 0.2s, visibility 0s linear 0.2s;
     transition: 0.2s;
     z-index: 1;
+    overflow-y: auto;
+    max-height: 220px;
+}
+
+.menu::-webkit-scrollbar {
+    height: 7px; 
+}
+
+.menu::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: 50px;
+    cursor: pointer;
 }
 
 .menu li {
@@ -70,7 +83,7 @@
 }
 
 .menu li:hover {
-    background: var(--color-light);
+    background: var(--color-background-sec);
 }
 
 .active {
@@ -81,4 +94,5 @@
 .menu-open {
     display: block;
     opacity: 1;
+    transition: 0.2s;
 }

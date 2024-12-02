@@ -12,16 +12,20 @@ document.addEventListener("DOMContentLoaded", function() {
       const selected = dropdown.querySelector('.selected');
       const hiddenInput = document.getElementById('roleHiddenField');
 
-      select.addEventListener('click', () => {
+      select.addEventListener('click', (e) => {
+          e.stopPropagation();
           select.classList.toggle('select-clicked');
           caret.classList.toggle('caret-rotate');
           menu.classList.toggle('menu-open');
       });
 
       options.forEach(option => {
-          option.addEventListener('click', () => {
+          option.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
               selected.innerText = option.innerText;
               hiddenInput.value = option.getAttribute('data-value');
+              
               select.classList.remove('select-clicked');
               caret.classList.remove('caret-rotate');
               menu.classList.remove('menu-open');
@@ -32,5 +36,13 @@ document.addEventListener("DOMContentLoaded", function() {
               option.classList.add('active');
           });
       });
+
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target)) {
+            select.classList.remove('select-clicked');
+            caret.classList.remove('caret-rotate');
+            menu.classList.remove('menu-open');
+        }
+    });
   });
 });
