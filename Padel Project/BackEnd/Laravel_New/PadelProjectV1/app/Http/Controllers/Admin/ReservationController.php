@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use App\Http\Requests\StoreCancellationRequest;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 
 class ReservationController extends Controller
