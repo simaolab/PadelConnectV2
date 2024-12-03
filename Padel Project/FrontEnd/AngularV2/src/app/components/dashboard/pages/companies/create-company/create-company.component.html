@@ -36,8 +36,8 @@
                     <label for="nif">NIF</label>
                   </div>
                   <input type="text" name="nif"
-                  (input)="formatNif($event)"   
-                  [(ngModel)]="companyObj.nif"
+                  (input)="formatNif($event)"
+                  [value]="companyObj.nif === 0 ? '' : companyObj.nif"
                   maxlength="9"
                   placeholder="Sem NIF">
                   <small *ngIf="formErrors['nif']" class="small-error">{{ formErrors['nif'] }}</small>
@@ -48,8 +48,8 @@
                     <label for="contact">Contacto</label>
                   </div>
                   <input type="text" name="contact"
-                  (input)="formatContact($event)"   
-                  [(ngModel)]="companyObj.contact"
+                  (input)="formatContact($event)"
+                  [value]="companyObj.contact === 0 ? '' : companyObj.contact"
                   maxlength="9"
                   placeholder="Sem Contacto">
                   <small *ngIf="formErrors['contact']" class="small-error">{{ formErrors['contact'] }}</small>

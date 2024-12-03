@@ -51,8 +51,12 @@
                       <i class="ri-money-euro-circle-line"></i>
                       <label for="price_hour">Preço Hora</label>
                     </div>
-                    <input type="number" name="price_hour" [(ngModel)]="courtObj.price_hour" placeholder="Preço Hora">
-                    <small *ngIf="formErrors['price_hour']" class="small-error">{{ formErrors['price_hour'] }}</small> 
+                    <input type="text" name="price_hour" 
+                    (input)="formatPriceHour($event)"
+                    placeholder="Indique preço hora"
+                    [value]="courtObj.price_hour || ''" 
+                    maxlength="5">
+                    <small *ngIf="formErrors['price_hour']" class="small-error">{{ formErrors['price_hour'] }}</small>
                 </div>
                 <div class="detail">
                   <div class="label-container">
@@ -87,11 +91,11 @@
                 <div class="detail">
                   <div class="label-container">
                     <i class="ri-calendar-event-line"></i>
-                    <label for="last_maintenance">Última manutenção</label>
+                    <label for="status">Última manutenção</label>
                   </div>
                   <input type="date" name="last_maintenance" [(ngModel)]="courtObj.last_maintenance"
-                  [value]="courtObj.last_maintenance">
-                  <small *ngIf="formErrors['last_maintenance']" class="small-error">{{ formErrors['last_maintenance'] }}</small> 
+                  [value]="courtObj.last_maintenance" [max]="todayDate">
+                  <small *ngIf="formErrors['last_maintenance']" class="small-error">{{ formErrors['last_maintenance'] }}</small>
                 </div>
             </div>
         </div>

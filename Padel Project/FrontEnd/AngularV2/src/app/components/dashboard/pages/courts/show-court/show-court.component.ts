@@ -81,7 +81,7 @@ export class ShowCourtComponent {
           const errorMessage = err?.error?.message
 
           this.dashboardComponent.showModal(
-            'Error',
+            'Erro',
             errorMessage,
             () => {
               this.router.navigate(['/dashboard/courts']);
@@ -97,7 +97,7 @@ export class ShowCourtComponent {
     this.courtsService.delete(this.court_id).subscribe({
       next: (res: any) => {
         this.dashboardComponent.showModal(
-          'Success',
+          'Successo',
           res.message,
           () => {
             this.router.navigate(['/dashboard/courts']);
@@ -108,7 +108,7 @@ export class ShowCourtComponent {
         const errorMessage = err?.error?.message
 
         this.dashboardComponent.showModal(
-          'Error',
+          'Erro',
           errorMessage
         );
       }

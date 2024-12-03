@@ -25,21 +25,21 @@
               <div class="detail">
                 <div class="label-container">
                   <i class="ri-user-3-line"></i>
-                  <label for="first_name">Nome utilizador</label>
+                  <label for="username">Nome utilizador</label>
                 </div>
                 <input type="text" name="username" value="{{ customerObj.username }}" disabled>
               </div>
               <div class="detail">
                   <div class="label-container">
                     <i class="ri-fingerprint-line"></i>
-                    <label for="first_name">NIF</label>
+                    <label for="nif">NIF</label>
                   </div>
                   <input type="text" name="nif" value="{{ customerObj.nif }}" disabled>
               </div>
               <div class="detail">
                   <div class="label-container">
                     <i class="ri-cake-2-line"></i>
-                    <label for="first_name">Data Nascimento</label>
+                    <label for="birthday">Data Nascimento</label>
                   </div>
                   <input type="text" name="birthday" value="{{ customerObj.birthday }}" disabled>
               </div>
@@ -48,7 +48,7 @@
               <div class="detail">
                   <div class="label-container">
                     <i class="ri-mail-line"></i>
-                    <label for="last_name">Email</label>
+                    <label for="email">Email</label>
                   </div>
                   <input type="text" name="email" value="{{ customerObj.email }}" disabled>
               </div>
@@ -65,7 +65,7 @@
               <div class="detail">
                   <div class="label-container">
                     <i class="ri-time-line"></i>
-                    <label for="last_name">Último Login</label>
+                    <label for="last_login">Último Login</label>
                   </div>
                   <input type="text" name="last_login" [value]="customerObj.last_login ? customerObj.last_login : 'Nunca fez login'" disabled>
               </div>
@@ -74,9 +74,10 @@
                 <div class="detail">
                     <div class="label-container">
                       <i class="ri-shield-user-line"></i>
-                      <label for="first_name">Role</label>
+                      <label for="role">Role</label>
                     </div>
                     <input type="text" name="role" [(ngModel)]="customerObj.role">
+                    <small *ngIf="formErrors['role']" class="small-error">{{ formErrors['role'] }}</small>
                 </div>
                 <div class="detail">
                   <div class="label-container">
@@ -97,10 +98,17 @@
                 <div class="detail">
                   <div class="label-container">
                     <i class="ri-information-line"></i>
-                    <label for="email-verified-at">Estado Utilizador</label>
+                    <label for="user_blocked">Estado Utilizador</label>
                   </div>
-                  <input type="text" name="blocked_at"
-                  [value]="customerObj.user_blocked ? customerObj.user_blocked : 'Ativo'">
+                  <dropdown
+                    [items]="userStateOptions"
+                    labelKey="label"
+                    valueKey="value"
+                    placeholder="Selecione o estado do utilizador"
+                    [value]="user_state" 
+                    (selectionChange)="onUserStateSelected($event)">
+                  </dropdown>
+                  <small *ngIf="formErrors['user_state']" class="small-error">{{ formErrors['user_state'] }}</small>
                 </div>
             </div>
         </div>

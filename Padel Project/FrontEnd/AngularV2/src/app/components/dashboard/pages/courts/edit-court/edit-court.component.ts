@@ -29,6 +29,7 @@ import { Court } from '../../../../../models/court';
 })
 export class EditCourtComponent {
 
+  todayDate: string = new Date().toISOString().split('T')[0];
   formErrors: { [key: string]: string } = {};
 
   courtObj: Court = {
@@ -94,10 +95,12 @@ export class EditCourtComponent {
 
   loadCourt(): void {
 
+    
+
     this.courtsService.show(this.court_id).subscribe({
       next: (court: any) => {
         const field = court.field;
-        console.log(field.company.name)
+        const formattedDate = this.convertToDateFormat(field.last_maintenance);
         this.courtObj = {
           name: field.name,
           company_id: field.company.id,
@@ -106,7 +109,7 @@ export class EditCourtComponent {
           status: field.status,
           illumination: field.illumination,
           cover: field.cover,
-          last_maintenance: field.last_maintenance,
+          last_maintenance: formattedDate,
           shower_room: field.shower_room,
           lockers: field.lockers,
           rent_equipment: field.rent_equipment
@@ -128,6 +131,13 @@ export class EditCourtComponent {
     });
   }
 
+  convertToDateFormat(date: string): string {
+    if (!date) return '';
+  
+    const [day, month, year] = date.split('/');
+    return `${year}-${month}-${day}`; 
+  }
+
   editCourt(): void {
     this.courtsService.edit(this.courtObj, this.court_id).subscribe({
       next: (res: any) => {
@@ -145,7 +155,6 @@ export class EditCourtComponent {
       error: (err: any) => {
         this.formErrors = {};
         const errorDetails = err.error?.['error(s)'] || {};
-
         for (const company in errorDetails) {
           if (errorDetails.hasOwnProperty(company)) {
             this.formErrors[company] = errorDetails[company][0];
@@ -185,6 +194,26 @@ export class EditCourtComponent {
     this.serviceTexts[serviceKey] = this.serviceStates[serviceKey]
       ? `Com ${this.getServiceName(serviceKey)}`
       : `Sem ${this.getServiceName(serviceKey)}`;
+  }
+
+  formatPriceHour(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let value = input.value;
+
+    value = value.replace(/[^0-9\.]/g, '');
+    if ((value.match(/\./g) || []).length > 1) {
+      value = value.replace(/\.$/, ''); 
+    }
+    if (value.length > 2 && !value.includes('.')) {
+      value = value.slice(0, 2) + '.' + value.slice(2);
+    }
+    if (value.includes('.')) {
+      const [integerPart, decimalPart] = value.split('.');
+      value = integerPart + '.' + (decimalPart.length > 2 ? decimalPart.substring(0, 2) : decimalPart);
+    }
+    
+    input.value = value;
+    this.courtObj.price_hour = value ? parseFloat(value) : 0;
   }
 
   private getServiceName(serviceKey: string): string {
