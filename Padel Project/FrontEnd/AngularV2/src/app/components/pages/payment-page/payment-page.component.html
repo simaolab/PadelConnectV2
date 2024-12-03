@@ -1,0 +1,192 @@
+<page-top></page-top>
+
+<div class="checkout">
+    <h1>Finalizar Compra</h1>
+
+    <div class="progress-bar">
+        <div class="step" [ngClass]="{'active': step >= 1}">
+            <div class="circle">1</div>
+            <p>Dados Cliente</p>
+        </div>
+        <div class="step" [ngClass]="{'active': step >= 2}">
+            <div class="circle">2</div>
+            <p>Método de Pagamento</p>
+        </div>
+        <div class="step" [ngClass]="{'active': step >= 3}">
+            <div class="circle">3</div>
+            <p>Confirmação</p>
+        </div>
+    </div>
+
+   <form #customerForm="ngForm" *ngIf="step === 1" (ngSubmit)="nextStep($event, customerForm)" novalidate>
+    <h2>Dados do Cliente:</h2>
+    <div class="div-form-group">
+        <div class="form-group">
+            <input 
+            type="text" 
+            name="name" 
+            ngModel 
+            placeholder="Nome" 
+            required minlength="3">
+
+            <input 
+            type="date" 
+            name="dob" 
+            ngModel 
+            required 
+            [max]="maxDate" 
+            placeholder="Data de Nascimento">
+        </div>
+        <div class="form-group">
+          <input 
+          type="tel" 
+          name="contact" 
+          ngModel 
+          placeholder="Contacto" 
+          required 
+          maxlength="9" 
+          pattern="[0-9]{9}" 
+          title="Número de telemóvel deve ter 9 dígitos"
+          (input)="validatePhoneNumber($event)">
+   
+   <!-- Campo de NIF com evento de validação -->
+          <input 
+          type="text" 
+          name="nif" 
+          ngModel placeholder="NIF" 
+          required 
+          maxlength="9" 
+          pattern="[0-9]{9}" 
+          title="NIF deve ter 9 dígitos" 
+          (input)="validateNif($event)">
+        </div>
+    </div>
+    
+    <button 
+    type="button" 
+    (click)="nextStep($event, customerForm)"
+   >
+    Confirmar Dados
+  </button>
+
+</form>
+
+<form #paymentForm="ngForm" *ngIf="step === 2" (ngSubmit)="nextStep($event, paymentForm)" novalidate class="payment-container">
+    <h2>Dados de Pagamento:</h2>
+
+    <div class="card-selection">
+        <label for="mastercard1">
+            <input 
+            type="radio" 
+            id="mastercard1" 
+            name="cardType" 
+            ngModel 
+            value="mastercard1" 
+            required> MasterCard 1
+        </label>
+        <label for="mastercard2">
+            <input 
+            type="radio" 
+            id="mastercard2" 
+            name="cardType" 
+            ngModel 
+            value="mastercard2" 
+            required> MasterCard 2
+        </label>
+        <label for="mastercard3">
+            <input 
+            type="radio" 
+            id="mastercard3" 
+            name="cardType" 
+            ngModel 
+            value="mastercard3" 
+            required> MasterCard 3
+        </label>
+    </div>
+
+    <div class="payment-form">
+        <div class="input-group full-width">
+          <input 
+          type="text" 
+          name="cardNumber" 
+          ngModel placeholder="Número do Cartão" 
+          required 
+          maxlength="19"
+          (input)="formatCardNumber($event)" 
+          pattern="\d{4}-\d{4}-\d{4}-\d{4}" 
+          title="Número do cartão deve ter 16 dígitos no formato XXXX-XXXX-XXXX-XXXX">        </div>
+
+        <div class="input-group third-width">
+            <input 
+            type="text" 
+            name="cardholderName" 
+            ngModel id="cardholder-name" 
+            placeholder="Nome Titular" 
+            required>
+        </div>
+
+        <div class="input-group third-width">
+          <input 
+          type="text" 
+          name="cvv" 
+          ngModel placeholder="CVV" 
+          required maxlength="3" 
+          pattern="\d{3}" 
+          title="CVV deve ter 3 dígitos" 
+          (input)="validateCVV($event)">        </div>
+
+        <div class="input-group third-width">
+          <input 
+          type="text" 
+          name="expiryDate" 
+          ngModel 
+          placeholder="Mês/Ano" 
+          required 
+          maxlength="5" 
+          (input)="formatExpiryDate($event)" 
+          pattern="\d{2}/\d{2}" 
+          title="Data de validade deve ser no formato MM/AA">        </div>
+    </div>
+
+    <div class="total-section">
+        <div class="section-things">
+            <p>Campo de Padel X (5 pessoas)</p>
+            <p>58€</p>
+        </div>
+        <div class="section-total-price">
+            <p class="text-payment">Total:</p>
+            <p><strong>58€</strong></p>
+        </div>
+    </div>
+
+    <button class="confirm-btn" 
+    type="submit" 
+    >Confirmar Pagamento</button>
+</form>
+
+<div class="confirmation" *ngIf="step === 3">
+    <h2 class="confimation-message">Confirmado com Sucesso !</h2>
+    <p class="confimation-resume">Obrigado pela sua reserva.</p>
+    <button (click)="showPopup()">Finalizar</button>
+</div>
+
+<div class="popup" *ngIf="showRatingPopup">
+  <div class="popup-content">
+      <h3>Avalie a sua reserva</h3>
+      <p>O que achou da sua experiência?</p>
+      
+      <div class="rating-stars">
+          <span (click)="rate(1)">&#9733;</span>
+          <span (click)="rate(2)">&#9733;</span>
+          <span (click)="rate(3)">&#9733;</span>
+          <span (click)="rate(4)">&#9733;</span>
+          <span (click)="rate(5)">&#9733;</span>
+      </div>
+      
+      <textarea placeholder="Deixe o seu feedback" [(ngModel)]="feedback"></textarea>
+      <div class="popup-buttons">
+          <button class="btn-feed" (click)="submitRating()">Enviar Avaliação</button>
+          <button class="btn-feed" (click)="closePopup()">Fechar</button>
+      </div>
+  </div>
+</div>

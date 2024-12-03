@@ -6,6 +6,7 @@ import { CourtsPageComponent } from './components/pages/courts-page/courts-page.
 import { PrivacyPolicyPageComponent } from './components/pages/privacy-policy-page/privacy-policy-page.component';
 import { PadelRulesComponent } from './components/pages/padel-rules/padel-rules.component';
 import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
+import { PaymentPageComponent } from './components/pages/payment-page/payment-page.component';
 
 import { LoginComponent } from './components/login/login.component';
 
@@ -82,6 +83,11 @@ export const routes: Routes = [
     path: 'cart',
     component: CartPageComponent,
     title: 'Carrinho'
+  },
+  {
+    path: 'payment',
+    component: PaymentPageComponent,
+    title: 'Pagamento'
   },
   {
     path: 'dashboard',
