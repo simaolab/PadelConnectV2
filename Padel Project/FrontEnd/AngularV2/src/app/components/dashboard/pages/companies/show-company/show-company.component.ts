@@ -86,7 +86,7 @@ export class ShowCompanyComponent {
           const errorMessage = err?.error?.message;
 
           this.dashboardComponent.showModal(
-            'Error',
+            'Erro',
             errorMessage,
             () => {
               this.router.navigate(['/dashboard/companies']);
@@ -103,7 +103,7 @@ export class ShowCompanyComponent {
       next: (res: any) => {
           if(this.router.url.includes('/company')) {
             this.dashboardComponent.showModal(
-              'Success',
+              'Successo',
               res.message,
               () => {
                 this.router.navigate(['/dashboard/companies']);
@@ -115,7 +115,7 @@ export class ShowCompanyComponent {
         const errorMessage = err?.error?.message;
 
         this.dashboardComponent.showModal(
-          'Error',
+          'Erro',
           errorMessage,
         );
       }

@@ -46,6 +46,12 @@ export class SettingsComponent {
     locality: '',
   }
 
+  passwordObj = {
+    current_password: '',
+    new_password: '',
+    confirm_password: ''
+  };
+
   genderOptions = [
     { label: 'Masculino', value: 'Masculino' },
     { label: 'Feminino', value: 'Feminino' },
@@ -129,7 +135,7 @@ export class SettingsComponent {
       next: (res: any) => {
         if(res.status === 'success') {
           this.dashboardComponent.showModal(
-            'Message',
+            'Mensagem',
             res.message,
             () => {
               window.location.reload();
@@ -162,7 +168,7 @@ export class SettingsComponent {
         const message = err.error?.message;
 
         this.dashboardComponent.showModal(
-          'Error',
+          'Erro',
           message
         )
       }
@@ -178,7 +184,7 @@ export class SettingsComponent {
       error: (err: any) => {
         const message = err.error?.message;
         this.dashboardComponent.showModal(
-          'Error',
+          'Erro',
           message
         );
       }

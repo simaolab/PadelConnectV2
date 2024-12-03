@@ -29,8 +29,8 @@ class StoreFieldRequest extends FormRequest
             'shower_room' => 'nullable|boolean',
             'lockers' => 'nullable|boolean',
             'rent_equipment' => 'nullable|boolean',
-            'status' => 'required|string|in:Disponivel,Indisponivel,Inativo|max:50',
-            'last_maintenance' => 'nullable|date',
+            'status' => 'required|string|in:Disponivel,Indisponivel,Inativo',
+            'last_maintenance' => 'nullable|date|before_or_equal:today',
         ];
     }
 
@@ -64,9 +64,9 @@ class StoreFieldRequest extends FormRequest
             'status.in'              => 'O estado do campo deve ser um dos seguintes Disponivel, Indisponivel, ou Inativo.',
             'status.required'        => 'O estado do campo é obrigatório.',
             'status.string'          => 'O estado do campo não pode ter caractéres especiais.',
-            'status.max'             => 'O estado do campo não pode exceder os 50 caracteres.',
 
             'last_maintenance.date'  => 'A data da última manutenção tem de ter um formato válido.',
+            'last_maintenance.before_or_equal' => 'A data da última manutenção não pode ser posterior a hoje.',
         ];
     }
 

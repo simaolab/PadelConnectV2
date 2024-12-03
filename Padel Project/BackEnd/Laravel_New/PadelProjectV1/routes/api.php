@@ -27,6 +27,7 @@ Route::name('api.')->group(function () {
 Route::middleware('auth:api')->group(function () {
     Route::get('user', [AuthenticationController::class, 'userInfo']);
     Route::post('logout', [AuthenticationController::class, 'logout']);
+    Route::put('user/update-password', [UserController::class, 'updatePassword']);
     Route::get('fields/{id}', [FieldController::class, 'show']);
     Route::apiResource('reservations', ReservationController::class);
     Route::post('/cart/add', [ReservationController::class, 'addCart']);
