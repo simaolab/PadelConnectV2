@@ -20,12 +20,14 @@ class StoreCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:companies|min:2|max:100',
-            'nif' => [
+            'name' => [
                 'required',
-                'regex:/^[5][0-9]{8}$/',
-                'unique:companies,nif'
+                'unique:companies',
+                'min:2',
+                'max:100',
+                'regex:/^[a-zA-ZÀ-ÿ0-9.,&\-/()\s]+$/'
             ],
+            'nif' => ['required', new NIFValidation()],
             'contact' => [
                 'required',
                 'regex:/^(91|92|93|96|94|95)[0-9]{7}$/',
