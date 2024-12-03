@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent implements OnInit {
 
   isScrolled = false;
+  isNavbarActive = false;
 
   constructor(private router: Router) {}
 
@@ -23,16 +24,25 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.handleNavbarScroll(); // Verifica o scroll na inicialização
+    this.handleNavbarScroll();
   }
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
-    this.handleNavbarScroll(); // Chama a função ao rolar
+    this.handleNavbarScroll();
   }
 
   handleNavbarScroll(): void {
     const scrollPosition = window.scrollY || window.pageYOffset;
     this.isScrolled = scrollPosition > 100;
   }
+
+  toggleNavbar(): void {
+    this.isNavbarActive = !this.isNavbarActive;
+  }
+
+  closeNavbar(): void {
+    this.isNavbarActive = false;
+  }
+
 }

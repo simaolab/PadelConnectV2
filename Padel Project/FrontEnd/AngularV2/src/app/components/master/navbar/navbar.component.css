@@ -11,8 +11,17 @@
   z-index: 1000;
 }
 
+#menu-icon {
+  display: none;
+  cursor: pointer;
+}
+
+.links i {
+  display: none;
+}
+
 .navbar.scrolled {
-  background: var(--color-primary);
+  background: rgba(0, 0, 0, 0.5);
   transition: all ease 300ms;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -82,4 +91,81 @@
 
 .bx-menu {
   display: none;
+}
+
+@media (max-width: 1250px) {
+  #menu-icon {
+    display: block;
+  }
+
+  .navbar {
+    top: 0;
+  }
+
+  .links {
+    width: 20%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+  }
+
+  .links i {
+    display: flex;
+  }
+
+  .links-box {
+    position: absolute;
+    top: 100%;
+    left: -100%;
+    width: 100%;
+    gap: 5%;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all ease 300ms;
+  }
+
+  .links-box.scrolled {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .links-box.active {
+    left: 0;
+  }
+
+  .links-box a {
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    transform: translateX(-20rem);
+    transition: all ease 300ms;
+  }
+
+  .links-box.active a {
+    transform: translateX(0);
+    transition-delay: 0.2s;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .btn.btn-reservation {
+    display: none !important;
+  }
+
+  .links-box a.active {
+    border-bottom: none;
+  }
+
+  .links-box a:hover.active {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .links p {
+    display: none;
+  }
 }

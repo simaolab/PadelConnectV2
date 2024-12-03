@@ -120,3 +120,23 @@
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 1200px) {
+  .card {
+      max-width: 24rem; /* Reduz a largura máxima */
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+      max-width: 20rem; /* Reduz ainda mais para dispositivos pequenos */
+      transform: translateY(-70%); /* Ajusta o deslocamento vertical */
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+      max-width: 90%; /* Usa 90% da largura disponível */
+      transform: translateY(-50%); /* Ajusta ainda mais o deslocamento */
+  }
+}

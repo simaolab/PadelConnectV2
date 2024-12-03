@@ -13,9 +13,11 @@ export const authGuard: CanActivateFn = (route, state) => {
     } else {
       router.navigate(['error-page'], {
         queryParams: {
-          error: '403',
-          message: 'Você não tem permissão para aceder a esta página!',
-          src: '../../../../../assets/images/icons/unauthorized.png'
+          error: '401',
+          message: 'Tem de fazer Login para aceder a esta página',
+          src: '../../../../../assets/images/icons/unauthorized.png',
+          href: '/login',
+          hrefP: 'Ir para a página de login'
         }
       });
       return false;
