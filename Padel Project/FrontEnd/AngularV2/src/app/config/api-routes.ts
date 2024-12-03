@@ -22,5 +22,8 @@ export const ApiRoutes = {
   nationalities: 'https://api.padelconnect.pt/api/nationalities/',
 
   //RESERVATIONS
-  reservations: 'https://api.padelconnect.pt/api/reservations/'
+  reservations: 'https://api.padelconnect.pt/api/reservations/',
+
+  //ROLES
+  roles: 'https://api.padelconnect.pt/api/roles/'
 }

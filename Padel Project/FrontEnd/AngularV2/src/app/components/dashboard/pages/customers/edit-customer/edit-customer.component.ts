@@ -1,3 +1,4 @@
+import { RolesService } from './../../../../../services/roles.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -42,16 +43,19 @@ export class EditCustomerComponent {
 
   customer_id: number = 0;
 
+  roles: any[] = [];
     constructor(
       private router: Router,
       private activatedRoute: ActivatedRoute,
       private usersService: UsersService,
+      private rolesService: RolesService,
       private dashboardComponent: DashboardComponent
     ) {}
 
     ngOnInit(): void {
       this.customer_id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
       this.showCustomer();
+      this.loadRoles();
     }
 
     showCustomer(): void {
@@ -111,6 +115,16 @@ export class EditCustomerComponent {
             }
           }
         }
+      })
+    }
+
+    loadRoles(): void {
+      this.rolesService.index().subscribe({
+        next: (res: any) => {
+          this.roles = res.roles;
+
+          console.log(this.roles)
+        },
       })
     }
 }
