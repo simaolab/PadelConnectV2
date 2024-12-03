@@ -22,7 +22,7 @@ class StoreFieldRequest extends FormRequest
         return [
             'company_id' => 'required|exists:companies,id',
             'name' => 'required|string|min:2|max:100|unique:fields,name',
-            'price_hour' => 'required|numeric|min:0',
+            'price_hour' => 'required|numeric|min:1',
             'type_floor' => 'required|string|in:Piso Cimento,Piso Madeira,Piso Acrílico,Piso Relva Sintética|max:30',
             'illumination' => 'nullable|boolean',
             'cover' => 'nullable|boolean',

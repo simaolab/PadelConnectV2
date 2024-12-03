@@ -4,11 +4,13 @@ import { NavbarComponent } from './components/master/navbar/navbar.component';
 import { FooterComponent } from './components/master/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app',
   standalone: true,
   imports: [
+    CommonModule,
     RouterOutlet,
     NavbarComponent,
     FooterComponent,
@@ -27,7 +29,8 @@ export class AppComponent implements OnInit{
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         const url = event.url as string;
-        this.showHeaderFooter = !(url === '/login' ||
+        this.showHeaderFooter = !(
+          url === '/login' ||
           url.startsWith('/dashboard') ||
           url.startsWith('/error-page'));
       }

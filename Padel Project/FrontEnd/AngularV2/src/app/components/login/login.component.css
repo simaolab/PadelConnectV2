@@ -195,9 +195,9 @@ input[type=number] {
     justify-content: space-between;
 }
 
-.box-btn .btn {
-    width: 30%;
-}
+/* .box-btn .btn {
+    width: 30% !important;
+} */
 
 .forgot-password {
    margin-bottom: 2rem;
@@ -225,6 +225,20 @@ input[type=number] {
     font-size: 16px;
     font-weight: 600;
 }
+
+.btn-login {
+  display: flex;
+  justify-content: center;
+}
+
+.btn.btn-next,
+.btn.btn-previous,
+.btn-sign-up {
+  display: flex;
+  justify-content: center !important;
+  width: 40% !important;
+}
+
 
 .toggle-box {
     position: absolute;
@@ -259,6 +273,7 @@ input[type=number] {
     z-index: 2;
     transition: .6s ease-in-out;
 }
+
 
 .logo-box {
     width: 130px;

@@ -13,147 +13,149 @@
   </div>
 </div>
 
-
 <card-form>
-  <form class="form">
+  <form class="form-show">
+    <div class="user-container-info">
+      <div class="container-description">
+          <p class="description-text">Informações do Campo</p>
+          <hr>
+      </div>
+      <div class="container-forms">
+          <div class="data-detail">
+              <div class="detail">
+                <div class="label-container">
+                  <i class="ri-input-field"></i>
+                  <label for="name">Nome Campo</label>
+                </div>
+                <input type="text" name="name" [(ngModel)]="courtObj.name">
+                <small *ngIf="formErrors['name']" class="small-error">{{ formErrors['name'] }}</small>
+              </div>
+              <div class="detail">
+                  <div class="label-container">
+                    <i class="ri-building-2-line"></i>
+                    <label for="company_id">Empresa</label>
+                  </div>
+                  <dropdown
+                      [items]="companies"
+                      labelKey="name"
+                      valueKey="id"
+                      placeholder="Selecione uma Empresa"
+                      [value]="courtObj.company_id"
+                      (selectionChange)="onCompanySelected($event)">
+                  </dropdown>
+                  <small *ngIf="formErrors['company_id']" class="small-error">{{ formErrors['company_id'] }}</small>
+              </div>
+            </div>
+            <div class="contact-detail">
+                <div class="detail">
+                    <div class="label-container">
+                      <i class="ri-money-euro-circle-line"></i>
+                      <label for="price_hour">Preço Hora</label>
+                    </div>
+                    <input type="text" name="price_hour" value="{{ courtObj.price_hour }}" disabled>
+                </div>
+                <div class="detail">
+                  <div class="label-container">
+                    <i class="ri-money-euro-circle-line"></i>
+                    <label for="status">Estado</label>
+                  </div>
+                  <dropdown
+                    [items]="statusOptions"
+                    labelKey="label"
+                    valueKey="value"
+                    placeholder="Selecione o estado"
+                    [value]="courtObj.status"
+                    (selectionChange)="onStatusSelected($event)">
+                  </dropdown>
+                </div>
+                <div class="detail">
+                  <div class="label-container">
+                    <i class="ri-layout-line"></i>
+                    <label for="status">Tipo Piso</label>
+                  </div>
+                  <dropdown
+                    [items]="floorOptions"
+                    labelKey="label"
+                    valueKey="value"
+                    placeholder="Selecione o tipo de piso"
+                    [value]="courtObj.type_floor"
+                    (selectionChange)="onTypeFloorSelected($event)">
+                  </dropdown>
+                </div>
+                <div class="detail">
+                  <div class="label-container">
+                    <i class="ri-calendar-event-line"></i>
+                    <label for="status">Última manutenção</label>
+                  </div>
+                  <input type="date" name="last_maintenance" [(ngModel)]="courtObj.last_maintenance"
+                  placeholder="Última manutenção" [value]="courtObj.last_maintenance | date: 'yyyy-MM-dd'">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="user-container-info">
+      <div class="container-description">
+        <p class="description-text">Serviços do Campo</p>
+        <hr>
+      </div>
+      <div class="container-forms">
 
-    <div class="flex-container">
-  
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class="ri-hotel-line"></i>
-            <p>Empresa</p>
-          </div>
-          <div class="input-container">
-            <input type="number" name="company_id" [(ngModel)]="courtObj.company_id"
-            placeholder="Empresa">
+        <div class="data-detail">
+          <div class="detail-services">
+            <div
+              class="service"
+              [ngClass]="{ 'danger': courtObj.illumination === 0, 'success': courtObj.illumination === 1 }"
+              (click)="toggleService('illumination')">
+              <i [ngClass]="{ 'ri-lightbulb-line': courtObj.illumination === 0, 'ri-lightbulb-flash-line': courtObj.illumination === 1 }"></i>
+              <span class="tooltip-text">
+                {{ courtObj.illumination === 1 ? 'Com Iluminação' : 'Sem Iluminação' }}
+              </span>
+            </div>
+        
+            <div
+              class="service"
+              [ngClass]="{ 'danger': courtObj.cover === 0, 'success': courtObj.cover === 1 }"
+              (click)="toggleService('cover')">
+              <i [ngClass]="{ 'ri-tree-line': courtObj.cover === 0, 'ri-building-2-line': courtObj.cover === 1 }"></i>
+              <span class="tooltip-text">
+                {{ courtObj.cover === 1 ? 'Interior' : 'Exterior' }}
+              </span>
+            </div>
+        
+            <div
+              class="service"
+              [ngClass]="{ 'danger': courtObj.shower_room === 0, 'success': courtObj.shower_room === 1 }"
+              (click)="toggleService('shower_room')">
+              <i [ngClass]="{ 'ri-blur-off-line': courtObj.shower_room === 0, 'ri-drop-line': courtObj.shower_room === 1 }"></i>
+              <span class="tooltip-text">
+                {{ courtObj.shower_room === 1 ? 'Com Balneário' : 'Sem Balneário' }}
+              </span>
+            </div>
+        
+            <div
+              class="service"
+              [ngClass]="{ 'danger': courtObj.lockers === 0, 'success': courtObj.lockers === 1 }"
+              (click)="toggleService('lockers')">
+              <i [ngClass]="{ 'ri-lock-unlock-line': courtObj.lockers === 0, 'ri-lock-line': courtObj.lockers === 1 }"></i>
+              <span class="tooltip-text">
+                {{ courtObj.lockers === 1 ? 'Com Cacifo' : 'Sem Cacifo' }}
+              </span>
+            </div>
+        
+            <div
+              class="service"
+              [ngClass]="{ 'danger': courtObj.rent_equipment === 0, 'success': courtObj.rent_equipment === 1 }"
+              (click)="toggleService('rent_equipment')">
+              <i [ngClass]="{ 'ri-prohibited-2-line': courtObj.rent_equipment === 0, 'ri-checkbox-circle-line': courtObj.rent_equipment === 1 }"></i>
+              <span class="tooltip-text">
+                {{ courtObj.rent_equipment === 1 ? 'Com Aluguer equipamento' : 'Sem Aluguer equipamento' }}
+              </span>
+            </div>
           </div>
         </div>
-        <small *ngIf="formErrors['company_id']" class="small-error">{{ formErrors['company_id'] }}</small>
       </div>
-  
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class="ri-input-field"></i>
-            <p>Nome</p>
-          </div>
-          <div class="input-container">
-            <input type="text" name="name" [(ngModel)]="courtObj.name"
-            placeholder="Nome">
-          </div>
-        </div>
-        <small *ngIf="formErrors['name']" class="small-error">{{ formErrors['name'] }}</small>
-      </div>
-  
     </div>
-  
-    <div class="flex-container">
-  
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class="ri-money-euro-circle-line"></i>
-            <p>Preço hora</p>
-          </div>
-          <div class="input-container">
-            <input type="number" name="price_hour" [(ngModel)]="courtObj.price_hour"
-            placeholder="Preço Hora">
-          </div>
-        </div>
-        <small *ngIf="formErrors['price_hour']" class="small-error">{{ formErrors['price_hour'] }}</small>
-      </div>
-  
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class="ri-tools-line"></i>
-            <p>Última manutenção</p>
-          </div>
-          <div class="input-container">
-            <input type="date" name="last_maintenance" [(ngModel)]="courtObj.last_maintenance"
-            placeholder="Última manutenção" [value]="courtObj.last_maintenance | date: 'yyyy-MM-dd'">
-          </div>
-        </div>
-        <small *ngIf="formErrors['last_maintenance']" class="small-error">{{ formErrors['last_maintenance'] }}</small>
-      </div>
-  
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class="ri-information-line"></i>
-            <p>Estado</p>
-          </div>
-          <div class="input-container">
-            <select name="status" [(ngModel)]="courtObj.status">
-              <option value="" disabled selected>Selecione o estado</option>
-              <option value="Disponivel">Disponivel</option>
-              <option value="Indisponivel">Indisponivel</option>
-              <option value="Inativo">Inativo</option>
-            </select>
-          </div>
-        </div>
-        <small *ngIf="formErrors['status']" class="small-error">{{ formErrors['status'] }}</small>
-      </div>
-  
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class="ri-layout-line"></i>
-            <p>Tipo de chão</p>
-          </div>
-          <div class="input-container">
-            <select name="type_floor" [(ngModel)]="courtObj.type_floor">
-              <option value="" disabled selected>Selecione o tipo de chão</option>
-              <option value="Piso Cimento">Piso Cimento</option>
-              <option value="Piso Madeira">Piso Madeira</option>
-              <option value="Piso Acrílico">Piso Acrílico</option>
-              <option value="Piso Relva Sintética">Piso Relva Sintética</option>
-            </select>
-          </div>
-        </div>
-        <small *ngIf="formErrors['type_floor']" class="small-error">{{ formErrors['type_floor'] }}</small>
-      </div>
-  
-    </div>
-  
-    <div class="flex-container">
-  
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class="ri-building-2-line"></i>
-            <p>Cobertura</p>
-          </div>
-          <div class="input-container">
-            <select name="cover" [(ngModel)]="courtObj.cover">
-              <option [ngValue]="1">Sim</option>
-              <option [ngValue]="0">Não</option>
-            </select>
-          </div>
-        </div>
-        <small *ngIf="formErrors['cover']" class="small-error">{{ formErrors['cover'] }}</small>
-      </div>
-      
-      <div class="wrap-attribute-container">
-        <div class="attribute-container">
-          <div class="label-container">
-            <i class="ri-lightbulb-line"></i>
-            <p>Iluminação</p>
-          </div>
-          <div class="input-container">
-            <select name="illumination" [(ngModel)]="courtObj.illumination">
-              <option [ngValue]="1">Sim</option>
-              <option [ngValue]="0">Não</option>
-            </select>
-          </div>
-        </div>
-        <small *ngIf="formErrors['illumination']" class="small-error">{{ formErrors['illumination'] }}</small>
-      </div>
-  
-    </div>
-
+    
     <div class="button">
       <button type="submit" (click)="editCourt()" class="btn edit">
         <i class="ri-check-line"></i>

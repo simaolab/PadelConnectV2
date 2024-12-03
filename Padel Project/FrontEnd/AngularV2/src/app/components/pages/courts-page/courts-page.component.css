@@ -16,11 +16,11 @@
   font-weight: 400;
   font-size: 1rem;
   background: transparent;
+  border-bottom: none !important;
 }
 
 .box-searchbar {
   display: inline-flex;
-  /* gap: 1rem; */
   font-size: 1rem;
   align-items: center;
 }
@@ -46,7 +46,7 @@
 
 .container {
   display: grid;
-  grid-template-columns: repeat(3, 0.4fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 40px;
   justify-items: center;
   padding: 20px;
@@ -56,4 +56,17 @@
 
 .courts-list {
 
+}
+
+
+@media screen and (max-width: 1200px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas para telas menores */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(1, 1fr); /* 1 coluna para telas muito pequenas */
+  }
 }

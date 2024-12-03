@@ -34,14 +34,19 @@
                     <i class="ri-fingerprint-line"></i>
                     <label for="first_name">NIF</label>
                   </div>
-                  <input type="number" name="nif" [(ngModel)]="companyObj.nif" disabled>
+                  <input type="text" name="nif" [(ngModel)]="companyObj.nif" disabled>
               </div>
               <div class="detail">
                   <div class="label-container">
                     <i class="ri-phone-line"></i>
                     <label for="first_name">Contacto</label>
                   </div>
-                  <input type="number" name="contact" [(ngModel)]="companyObj.contact">
+                  <input type="text" name="contact"
+                  (input)="formatContact($event)"   
+                  [(ngModel)]="companyObj.contact"
+                  maxlength="9"
+                  placeholder="Sem Contacto">
+                  <small *ngIf="formErrors['contact']" class="small-error">{{ formErrors['contact'] }}</small>
               </div>
             </div>
             <div class="contact-detail">
@@ -61,6 +66,7 @@
                   </div>
                   <input type="text" name="addressPort" value="{{ addressObj.addressPort }}"
                     [(ngModel)]="addressObj.addressPort">
+                  <small *ngIf="formErrors['addressPort']" class="small-error">{{ formErrors['addressPort'] }}</small>
               </div>
               <div class="detail">
                   <div class="label-container">
@@ -69,6 +75,7 @@
                   </div>
                   <input type="text" name="locality" value="{{ addressObj.locality }}"
                   [(ngModel)]="addressObj.locality">
+                  <small *ngIf="formErrors['locality']" class="small-error">{{ formErrors['locality'] }}</small>
               </div>
               <div class="detail">
                   <div class="label-container">
@@ -76,7 +83,10 @@
                       <label for="postalCode">Código Postal</label>
                   </div>
                   <input type="text" name="postalCode" value="{{ addressObj.postalCode }}"
-                    [(ngModel)]="addressObj.postalCode">
+                    (input)="formatPostalCode($event)"  
+                    [(ngModel)]="addressObj.postalCode" 
+                    maxlength="8">
+                  <small *ngIf="formErrors['postalCode']" class="small-error">{{ formErrors['postalCode'] }}</small>
               </div>
           </div>
         </div>
@@ -87,15 +97,32 @@
           <hr>
       </div>
       <div class="container-forms">
-          <div class="data-detail">
-              <div class="detail">
-                  <div class="label-container">
-                      <i class="ri-newspaper-line"></i>
-                      <label for="first_name">Newsletter</label>
+        <div class="data-detail">
+          <div class="detail">
+            <div class="label-container">
+              <i class="ri-newspaper-line"></i>
+              <label for="newsletter">Newsletter</label>
+            </div>
+            <div class="form-group">
+              <input
+                type="checkbox"
+                id="newsletterSwitch"
+                [(ngModel)]="companyObj.newsletter"
+                name="newsletter"
+                (change)="toggleNewsletter($event)"
+                [checked]="companyObj.newsletter === 1"
+                class="input-toggle">
+              <div class="display">
+                <label class="toggle" for="newsletterSwitch">
+                  <div class="circle">
+                    <i class="ri-chat-off-line i off no"></i>
+                    <i class="ri-chat-heart-line i on yes"></i>
                   </div>
-                  <input type="text" name="first_name" value="{{ companyObj.newsletter }}">
+                </label>
               </div>
+            </div>
           </div>
+        </div>
       </div>
     </div>
     <div class="button">

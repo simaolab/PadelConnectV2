@@ -29,7 +29,7 @@ import { CreateCompanyComponent } from './components/dashboard/pages/companies/c
 import { ShowCompanyComponent } from './components/dashboard/pages/companies/show-company/show-company.component';
 import { EditCompanyComponent } from './components/dashboard/pages/companies/edit-company/edit-company.component';
 
-//CRUD COMPANY
+//CRUD COURT
 import { CreateCourtComponent } from './components/dashboard/pages/courts/create-court/create-court.component';
 import { ShowCourtComponent } from './components/dashboard/pages/courts/show-court/show-court.component';
 import { EditCourtComponent } from './components/dashboard/pages/courts/edit-court/edit-court.component';
@@ -76,7 +76,8 @@ export const routes: Routes = [
   {
     path: 'court/:id',
     component: DetailsPageComponent,
-    title: 'Detalhes do Campo'
+    title: 'Detalhes do Campo',
+    canActivate: [authGuard]
   },
   {
     path: 'cart',
@@ -89,6 +90,7 @@ export const routes: Routes = [
     title: 'Dashboard',
     canActivate: [authGuard],
     children: [
+      //CRUD PAGES
       { path: 'main', component: MainComponent },
       { path: 'reservations', component: ReservationsComponent, title: 'Dashboard - Reservas' },
       { path: 'companies', component: CompaniesComponent, title: 'Dashboard - Empresas',
@@ -100,18 +102,37 @@ export const routes: Routes = [
       { path: 'promotions', component: PromotionsComponent, title: 'Dashboard - Promoções' },
       { path: 'settings', component: SettingsComponent, title: 'Dashboard - Definições' },
 
-      { path: 'create-company', component: CreateCompanyComponent, title: 'Dashboard - Adicionar Empresa' },
-      { path: 'company/:id', component: ShowCompanyComponent, title: 'Dashboard - Detalhes Empresa' },
-      { path: 'company/:id/edit', component: EditCompanyComponent, title: 'Dashboard - Editar Empresa' },
+      //CRUD COMPANY
+      { path: 'create-company', component: CreateCompanyComponent, title: 'Dashboard - Adicionar Empresa',
+        canActivate: [roleGuard]
+       },
+      { path: 'company/:id', component: ShowCompanyComponent, title: 'Dashboard - Detalhes Empresa',
+        canActivate: [roleGuard]
+      },
+      { path: 'company/:id/edit', component: EditCompanyComponent, title: 'Dashboard - Editar Empresa',
+        canActivate: [roleGuard]
+      },
 
-      { path: 'create-court', component: CreateCourtComponent, title: 'Dashboard - Adicionar Campo' },
-      { path: 'court/:id', component: ShowCourtComponent, title: 'Dashboard - Detalhes Campo' },
-      { path: 'court/:id/edit', component: EditCourtComponent, title: 'Dashboard - Editar Campo' },
+      //CRUD COURT
+      { path: 'create-court', component: CreateCourtComponent, title: 'Dashboard - Adicionar Campo',
+        canActivate: [roleGuard]
+      },
+      { path: 'court/:id', component: ShowCourtComponent, title: 'Dashboard - Detalhes Campo',
+        canActivate: [roleGuard]
+      },
+      { path: 'court/:id/edit', component: EditCourtComponent, title: 'Dashboard - Editar Campo',
+        canActivate: [roleGuard]
+      },
 
-      { path: 'customer/:id', component: ShowCustomerComponent, title: 'Dashboard - Detalhes Utilizador' },
-      { path: 'customer/:id/edit', component: EditCustomerComponent, title: 'Dashboard - Editar Utilizador' },
+      //CRUD CUSTOMER
+      { path: 'customer/:id', component: ShowCustomerComponent, title: 'Dashboard - Detalhes Utilizador',
+        canActivate: [roleGuard]
+      },
+      { path: 'customer/:id/edit', component: EditCustomerComponent, title: 'Dashboard - Editar Utilizador',
+        canActivate: [roleGuard]
+      },
 
-
+      //MAIN PAGE
       { path: '', redirectTo: 'main', pathMatch: 'full' },
     ]
   },
