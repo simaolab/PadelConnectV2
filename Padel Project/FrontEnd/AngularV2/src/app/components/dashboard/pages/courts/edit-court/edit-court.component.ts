@@ -4,10 +4,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CourtsService } from '../../../../../services/courts.service';
+import { CompaniesService } from '../../../../../services/companies.service';
 
 import { CardFormComponent } from '../../../utilities/card-form/card-form.component';
 import { TitlePageComponent } from '../../../utilities/title-page/title-page.component';
 import { DashboardComponent } from '../../../dashboard/dashboard.component';
+import { DropdownComponent } from '../../../utilities/dropdown/dropdown.component';
 import { Court } from '../../../../../models/court';
 
 @Component({
@@ -19,7 +21,8 @@ import { Court } from '../../../../../models/court';
     FormsModule,
     CardFormComponent,
     TitlePageComponent,
-    DashboardComponent
+    DashboardComponent,
+    DropdownComponent
   ],
   templateUrl: './edit-court.component.html',
   styleUrl: './edit-court.component.css'
@@ -42,17 +45,50 @@ export class EditCourtComponent {
     rent_equipment: 0
   }
 
+  serviceStates = {
+    illumination: false,
+    cover: false,
+    shower_room: false,
+    lockers: false,
+    rent_equipment: false,
+  };
+
+  serviceTexts = {
+    illumination: 'Sem Iluminação',
+    cover: 'Exterior',
+    shower_room: 'Sem Balneário',
+    lockers: 'Sem Cacifo',
+    rent_equipment: 'Sem Aluguer Equipamento',
+  };
+
+  statusOptions = [
+    { label: 'Disponível', value: 'Disponivel' },
+    { label: 'Indisponível', value: 'Indisponivel' },
+    { label: 'Inativo', value: 'Inativo' },
+  ];
+
+  floorOptions = [
+    { label: 'Piso Cimento', value: 'Piso Cimento' },
+    { label: 'Piso Madeira', value: 'Piso Madeira' },
+    { label: 'Piso Acrílico', value: 'Piso Acrílico' },
+    { label: 'Piso Relva Sintética', value: 'Piso Relva Sintética' },
+  ];
+
+  companies: any[] = [];
+
   court_id: number = 0;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private courtsService: CourtsService,
-    private dashboardComponent: DashboardComponent
+    private dashboardComponent: DashboardComponent,
+    private companiesService: CompaniesService
   ) {}
 
   ngOnInit(): void {
     this.court_id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.loadCompanies();
     this.loadCourt();
   }
 
@@ -97,7 +133,7 @@ export class EditCourtComponent {
       next: (res: any) => {
         if(res.status === 'success') {
           this.dashboardComponent.showModal(
-            'Message',
+            'Mensagem',
             res.message,
             () => {
               this.router.navigate(['/dashboard/courts']);
@@ -117,5 +153,48 @@ export class EditCourtComponent {
         }
       }
     })
+  }
+
+  loadCompanies(): void {
+    this.companiesService.index().subscribe({
+      next: (data: any) => {
+        this.companies = data.companies;
+      },
+      error: (err: any) => {
+        console.error('Erro ao carregar empresas:', err);
+      }
+    });
+  }
+
+  onCompanySelected(company: any): void {
+    this.courtObj.company_id = company.id;
+  }
+
+  onStatusSelected(selected: any): void {
+    this.courtObj.status = selected.value;
+  }
+
+  onTypeFloorSelected(selected: any): void {
+    this.courtObj.type_floor = selected.value;
+  }
+
+  toggleService(serviceKey: keyof typeof this.serviceStates): void {
+    this.serviceStates[serviceKey] = !this.serviceStates[serviceKey];
+    this.courtObj[serviceKey] = this.serviceStates[serviceKey] ? 1 : 0;
+
+    this.serviceTexts[serviceKey] = this.serviceStates[serviceKey]
+      ? `Com ${this.getServiceName(serviceKey)}`
+      : `Sem ${this.getServiceName(serviceKey)}`;
+  }
+
+  private getServiceName(serviceKey: string): string {
+    const names: { [key: string]: string } = {
+      illumination: 'Iluminação',
+      cover: 'Cobertura',
+      shower_room: 'Balneário',
+      lockers: 'Cacifo',
+      rent_equipment: 'Aluguer Equipamento',
+    };
+    return names[serviceKey] || serviceKey;
   }
 }

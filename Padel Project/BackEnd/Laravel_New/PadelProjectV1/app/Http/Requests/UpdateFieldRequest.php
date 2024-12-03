@@ -32,6 +32,9 @@ class UpdateFieldRequest extends FormRequest
             'type_floor' => 'required|string|in:Piso Cimento,Piso Madeira,Piso Acrílico,Piso Relva Sintética|max:50',
             'illumination' => 'nullable|boolean',
             'cover' => 'nullable|boolean',
+            'shower_room' => 'nullable|boolean',
+            'lockers' => 'nullable|boolean',
+            'rent_equipment' => 'nullable|boolean',
             'status' => 'required|string|max:50',
             'last_maintenance' => 'nullable|date',
         ];
