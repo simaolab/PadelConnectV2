@@ -12,7 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use App\Http\Requests\StoreCancellationRequest;
 use Carbon\Carbon;
-use Exception as GlobalException;
+use App\Models\Field;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -59,12 +60,18 @@ class ReservationController extends Controller
     {
         $validatedData = $request->validated();
 
-        // Extract and format the dates
+        // Formata as datas da reserva
         $reservationData = Arr::except($validatedData, ['fields']);
         $reservationData['start_date'] = Carbon::createFromFormat('d/m/Y', $reservationData['start_date'])->format('Y-m-d');
         $reservationData['end_date'] = Carbon::createFromFormat('d/m/Y', $reservationData['end_date'])->format('Y-m-d');
 
-         // Check if there is an existing reservation conflicting with the provided dates
+        // Verifica se o carrinho tem itens
+        $cart = session()->get('cart', []);
+        if (empty($cart)) {
+            return response()->json(['message' => 'Seu carrinho está vazio. Adicione campos antes de finalizar a reserva.'], 400);
+        }
+
+        // Verifica conflitos de datas
         $conflictDate = Reservation::where('start_date', '<=', $reservationData['end_date'])
             ->where('end_date', '>=', $reservationData['start_date'])
             ->exists();
@@ -76,9 +83,20 @@ class ReservationController extends Controller
             ], 409);
         }
 
-
+        // Cria a reserva
         $reservation = Reservation::create($reservationData);
-        $reservation->fields()->sync($request->input('fields'));
+
+        // Associa os campos do carrinho à reserva na tabela intermediária
+        foreach ($cart as $fieldId => $details) {
+            $reservation->fields()->attach($fieldId, [
+                'start_hour_date' => $details['start_hour_date'],
+                'end_hour_date' => $details['end_hour_date'],
+                'value' => $details['value'],
+            ]);
+        }
+
+        // Limpa o carrinho após finalizar a compra
+        session()->forget('cart');
 
         return response()->json([
             'status' => 'success',
@@ -276,6 +294,4 @@ class ReservationController extends Controller
             return response()->json(['error' => $exception->getMessage()], 500);
         }
     }
-
-
 }
