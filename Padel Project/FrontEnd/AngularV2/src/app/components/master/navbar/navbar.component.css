@@ -1,5 +1,6 @@
 .navbar {
   width: 100%;
+  max-width: 100vw;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -7,6 +8,7 @@
   background: transparent;
   padding: 2rem;
   position: fixed;
+  top: 0;
   transition: all ease 300ms;
   z-index: 1000;
 }
@@ -21,7 +23,7 @@
 }
 
 .navbar.scrolled {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.9);
   transition: all ease 300ms;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -38,7 +40,7 @@
   font-size: var(--font-size);
 }
 
-.links-box a {
+.links-box .links a{
   color: var(--color-white);
   transition: all ease 300ms;
 }
@@ -93,13 +95,9 @@
   display: none;
 }
 
-@media (max-width: 1250px) {
+@media screen and (max-width: 1250px) {
   #menu-icon {
     display: block;
-  }
-
-  .navbar {
-    top: 0;
   }
 
   .links {
@@ -124,12 +122,12 @@
     justify-content: center;
     background: transparent;
     padding: 1rem 2rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
     transition: all ease 300ms;
   }
 
   .links-box.scrolled {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.8);
   }
 
   .links-box.active {
@@ -164,8 +162,43 @@
   }
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 720px) {
   .links p {
     display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    position: fixed;
+    top: 0;
+    height: unset;
+  }
+
+  .links-box {
+    padding: 0;
+  }
+
+  .icon-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .user-box {
+    width: 100%;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  #menu-icon {
+    display: block;
+    top: 1rem;
   }
 }
