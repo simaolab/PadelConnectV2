@@ -7,20 +7,12 @@
     type="text"
     placeholder="Procure por nome do campo"
     (input)="onSearchInput($event)">
-    <div class="box-searchbar">
-        <div class="date-hour">
-            <span>Data / Hora</span>
-        </div>
-        <div class="filter">
-            <span>Filtrar</span>
-        </div>
-    </div>
   </div>
 
   <div class="container">
-    <div *ngFor="let court of courts">
+    <ng-container *ngFor="let court of courts">
         <courts-card [court]="court"></courts-card>
-    </div>
+    </ng-container>
   </div>
 
 </main-content>
