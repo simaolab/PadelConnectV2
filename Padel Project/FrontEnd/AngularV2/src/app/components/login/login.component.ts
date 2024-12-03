@@ -48,7 +48,7 @@ export class LoginComponent {
           localStorage.setItem('username', username);
 
           this.modalComponent?.showModal(
-            'Success',
+            'Successo',
             res.message
           );
 
@@ -60,7 +60,7 @@ export class LoginComponent {
       error: (err) => {
         const errorMessage = err.error?.message;
         this.modalComponent?.showModal(
-          'Error',
+          'Erro',
           errorMessage
         );
       }
