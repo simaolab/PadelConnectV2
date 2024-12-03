@@ -98,8 +98,6 @@ export class CreateCourtComponent {
         }
       }
 
-      console.log(this.courtObj)
-
       this.courtsService.create(this.courtObj).subscribe({
         next: (res: any) => {
           if(res.status === 'success') {

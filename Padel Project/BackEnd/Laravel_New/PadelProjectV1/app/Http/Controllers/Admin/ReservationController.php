@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use App\Http\Requests\StoreCancellationRequest;
 use Carbon\Carbon;
-
+use Exception as GlobalException;
 
 class ReservationController extends Controller
 {
@@ -229,7 +229,7 @@ class ReservationController extends Controller
                 'cancellation' => $cancellation,
             ], 200);
 
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             // Return a server error if an exception is thrown
             return response()->json(['error' => $exception->getMessage()], 500);
         }

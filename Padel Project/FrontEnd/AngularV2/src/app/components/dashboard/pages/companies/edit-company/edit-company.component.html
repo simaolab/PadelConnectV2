@@ -34,14 +34,15 @@
                     <i class="ri-fingerprint-line"></i>
                     <label for="first_name">NIF</label>
                   </div>
-                  <input type="number" name="nif" [(ngModel)]="companyObj.nif" disabled>
+                  <input type="text" name="nif" [(ngModel)]="companyObj.nif" disabled>
               </div>
               <div class="detail">
                   <div class="label-container">
                     <i class="ri-phone-line"></i>
                     <label for="first_name">Contacto</label>
                   </div>
-                  <input type="text" name="contact" 
+                  <input type="text" name="contact"
+                  (input)="formatContact($event)"   
                   [(ngModel)]="companyObj.contact"
                   maxlength="9"
                   placeholder="Sem Contacto">
@@ -82,7 +83,9 @@
                       <label for="postalCode">Código Postal</label>
                   </div>
                   <input type="text" name="postalCode" value="{{ addressObj.postalCode }}"
-                    [(ngModel)]="addressObj.postalCode">
+                    (input)="formatPostalCode($event)"  
+                    [(ngModel)]="addressObj.postalCode" 
+                    maxlength="8">
                   <small *ngIf="formErrors['postalCode']" class="small-error">{{ formErrors['postalCode'] }}</small>
               </div>
           </div>
