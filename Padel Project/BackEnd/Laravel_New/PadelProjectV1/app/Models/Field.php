@@ -40,7 +40,7 @@ class Field extends Model
     //The methods are automatically called by Laravel
 
     //This is a mutator which allows us to transform an attribute before saving
-    
+
     /* public function setLastMaintenanceAttribute($value)
     {
         //Converts the last maintenance date received as d/m/Y to a Carbon object
@@ -63,5 +63,9 @@ class Field extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function reservations(){
+        return $this->belongsToMany(Reservation::class);
     }
 }

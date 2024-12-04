@@ -40,6 +40,10 @@ class Reservation extends Model
         return $this->hasOne(Cancellation::class, 'reservation_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     //Save birthday with format Y-m-d
     //Carbon is a library that manipulates dates

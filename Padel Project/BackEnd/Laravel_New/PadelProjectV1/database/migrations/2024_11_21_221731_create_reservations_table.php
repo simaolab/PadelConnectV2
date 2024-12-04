@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->string('type_reservation');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('status');
             $table->string('additional_info')->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->decimal('total');
-            $table->boolean('privacy_policy');
+            $table->boolean('privacy_policy')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

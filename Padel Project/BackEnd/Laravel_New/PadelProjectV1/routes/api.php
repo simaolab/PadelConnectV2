@@ -30,9 +30,6 @@ Route::middleware('auth:api')->group(function () {
     Route::put('user/update-password', [UserController::class, 'updatePassword']);
     Route::get('fields/{id}', [FieldController::class, 'show']);
     Route::apiResource('reservations', ReservationController::class);
-    Route::post('/cart/add', [ReservationController::class, 'addCart']);
-    Route::post('/cart/remove', [ReservationController::class, 'removeFromCart']);
-    Route::get('/cart/view', [ReservationController::class, 'viewCart']);
     Route::get('reservations/search/{reservation?}', [ReservationController::class, 'search']);
     Route::get('/reservations/deleted', [ReservationController::class, 'indexDeleted']);
     Route::apiResource('cancellations', CancellationController::class);
