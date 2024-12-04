@@ -9,7 +9,6 @@ import { MainContentComponent } from '../../utilities/main-content/main-content.
 import Swal from 'sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
 import { CartItem, Cart } from '../../../interfaces/cart';
-import { console } from 'inspector';
 
 @Component({
   selector: 'app-payment-page',
