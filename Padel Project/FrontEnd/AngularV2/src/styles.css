@@ -63,6 +63,7 @@ body {
     background: var(--color-white);
     user-select: none;
     overflow-x: hidden;
+    touch-action: none;
 }
 
 table {
@@ -72,18 +73,18 @@ table {
 }
 
 .table-wrapper {
-  width: 100%; 
+  width: 100%;
 }
 
 table {
   border-collapse: collapse;
-  width: 100%; 
+  width: 100%;
 }
 
 tr .middle {
   text-align: center;
 }
-  
+
 td.middle.services{
   display: flex;
   align-items: center;
@@ -286,6 +287,14 @@ input{
   border-bottom: 1px solid var(--color-gray);
 }
 
+textarea {
+  font-size: var(--font-smaller);
+  color: var(--color-text);
+  padding-block: .5rem;
+  border-bottom: 1px solid var(--color-gray);
+  resize: none;
+}
+
 .contact-detail,
 .data-detail{
   display: flex;
@@ -454,17 +463,17 @@ input[type=number] {
 
 @media screen and (max-width: 1450px) {
   .table-wrapper {
-    display: block; 
+    display: block;
     overflow-x: auto;
     padding-bottom: 10px;
   }
 
   table {
-    min-width: 1200px; 
+    min-width: 1200px;
   }
 
   .table-wrapper::-webkit-scrollbar {
-    height: 7px; 
+    height: 7px;
   }
 
   .table-wrapper::-webkit-scrollbar-thumb {
@@ -559,7 +568,7 @@ input[type=number] {
   }
 
   table {
-    min-width: 0; 
+    min-width: 0;
   }
 
   .loading {
@@ -570,7 +579,7 @@ input[type=number] {
     padding: var(--card-padding);
     box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
   }
-  
+
   td, th{
     border-left: none;
   }

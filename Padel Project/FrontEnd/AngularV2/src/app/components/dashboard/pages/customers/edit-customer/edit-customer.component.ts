@@ -42,13 +42,13 @@ export class EditCustomerComponent {
     blocked_at: null,
     role: ''
   };
-  
+
   userStateOptions = [
     { label: 'Novo Utilizador', value: 'Novo Utilizador' },
     { label: 'Ativo', value: 'Ativo' },
-    { label: 'Bloqueado', value: 'Bloqueado' }, 
+    { label: 'Bloqueado', value: 'Bloqueado' },
   ];
-  
+
   user_state: string = '';
 
   customer_id: number = 0;
@@ -72,7 +72,7 @@ export class EditCustomerComponent {
 
       this.usersService.show(this.customer_id).subscribe({
         next: (customer: any) => {
-          
+
           this.customerObj = {
             email: customer.user.email,
             username: customer.user.username,
@@ -143,6 +143,7 @@ export class EditCustomerComponent {
           console.log(this.roles)
         },
       })
+    }
 
     getUserStatus(customer: any): string {
       if (customer.user_blocked) {
@@ -153,6 +154,7 @@ export class EditCustomerComponent {
       }
       return 'Ativo';
     }
+
 
     onUserStateSelected(selected: any): void {
       if (selected.value === 'Novo Utilizador') {

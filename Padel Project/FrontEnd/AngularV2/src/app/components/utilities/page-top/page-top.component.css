@@ -40,3 +40,9 @@
 .title-header small span {
   color: var(--color-primary);
 }
+
+@media screen and (max-width: 470px) {
+  .title-header h1 {
+    font-size: 4.5rem;
+  }
+}
