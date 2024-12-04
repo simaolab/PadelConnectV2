@@ -43,13 +43,13 @@ export class EditCustomerComponent {
     blocked_at: null,
     role_id: ''
   };
-  
+
   userStateOptions = [
     { label: 'Novo Utilizador', value: 'Novo Utilizador' },
     { label: 'Ativo', value: 'Ativo' },
-    { label: 'Bloqueado', value: 'Bloqueado' }, 
+    { label: 'Bloqueado', value: 'Bloqueado' },
   ];
-  
+
   user_state: string = '';
 
   customer_id: number = 0;
@@ -72,7 +72,7 @@ export class EditCustomerComponent {
 
       this.usersService.show(this.customer_id).subscribe({
         next: (customer: any) => {
-          
+
           this.customerObj = {
             email: customer.user.email,
             username: customer.user.username,
@@ -141,6 +141,7 @@ export class EditCustomerComponent {
         next: (res: any) => {
           this.roles = res.roles;
         },
+      })
         error: (err: any) => {
           const message = err.error?.message || 'Erro ao carregar as roles';
           console.error(message);
@@ -157,6 +158,7 @@ export class EditCustomerComponent {
       }
       return 'Ativo';
     }
+
 
     onUserStateSelected(selected: any): void {
       if (selected.value === 'Novo Utilizador') {
