@@ -112,7 +112,7 @@ export class EditCustomerComponent {
 
       this.usersService.edit(this.customerObj, this.customer_id).subscribe({
         next: (res: any) => {
-          if(res.status === 'success') {
+          if (res.status === 'success') {
             this.dashboardComponent.showModal(
               'Mensagem',
               res.message,
@@ -120,7 +120,7 @@ export class EditCustomerComponent {
                 this.router.navigate(['/dashboard/customers']);
               }
             );
-            this.formErrors = {}
+            this.formErrors = {};
           }
         },
         error: (err: any) => {
@@ -133,8 +133,9 @@ export class EditCustomerComponent {
             }
           }
         }
-      })
+      });
     }
+
 
     loadRoles(): void {
       this.rolesService.index().subscribe({
