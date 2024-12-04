@@ -45,17 +45,17 @@
   transition: all ease 300ms;
 }
 
-.links-box a:hover {
+.links-box .links a:hover {
   transform: scale(1.05);
   transition: all ease 300ms;
   color: var(--color-primary);
 }
 
-.links-box a.active {
+.links-box .links a.active {
   border-bottom: 2px solid var(--color-white);
 }
 
-.links-box a:hover.active {
+.links-box .links a:hover.active {
   border-bottom: 2px solid var(--color-primary);
 }
 
@@ -72,12 +72,14 @@
   border: 2px solid var(--color-white);
   border-radius: 99px;
   text-align: center;
+  font-size: var(--font-size);
 }
 
 .btn-box .btn-reservation:hover {
   transform: scale(1.05);
   transition: all ease 300ms;
   border: 2px solid var(--color-primary);
+  color: var(--color-primary);
 }
 
 .user-box {

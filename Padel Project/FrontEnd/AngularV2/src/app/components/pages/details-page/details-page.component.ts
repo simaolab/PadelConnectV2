@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CourtsService } from '../../../services/courts.service';
 import { PageTopComponent } from '../../utilities/page-top/page-top.component';
-import { FullCalendarModule } from '@fullcalendar/angular';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import ptLocale from '@fullcalendar/core/locales/pt';
+
 import { Court } from '../../../models/court';
 import { Address } from '../../../models/address';
+
 
 @Component({
   selector: 'app-details-page',
@@ -15,16 +14,13 @@ import { Address } from '../../../models/address';
   imports: [
     CommonModule,
     PageTopComponent,
-    FullCalendarModule
   ],
   providers: [],
   templateUrl: './details-page.component.html',
-  styleUrl: './details-page.component.css'
+  styleUrls: ['./details-page.component.css']
 })
 export class DetailsPageComponent implements OnInit {
-
-  calendarOptions: any;
-
+  
   courtObj: Court = {
     name: '',
     company_id: 0,
@@ -37,13 +33,13 @@ export class DetailsPageComponent implements OnInit {
     shower_room: 0,
     lockers: 0,
     rent_equipment: 0,
-  }
+  };
 
-    addressObj: Address = {
-      addressPort: '',
-      postalCode: '',
-      locality: '',
-    }
+  addressObj: Address = {
+    addressPort: '',
+    postalCode: '',
+    locality: '',
+  };
 
   court_id: number = 0;
 
@@ -57,28 +53,6 @@ export class DetailsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.calendarOptions = {
-      initialView: 'dayGridMonth',
-      plugins: [dayGridPlugin],
-      locale: ptLocale,
-      events: [
-        { title: 'event 1', date: '2024-12-01' },
-        { title: 'event 2', date: '2024-12-02' }
-      ],
-      buttonText: {
-        today:    'Hoje',    // Botão "Hoje"
-        month:    'Mês',     // Botão "Mês"
-        week:     'Semana',  // Botão "Semana"
-        day:      'Dia',     // Botão "Dia"
-        list:     'Agenda'   // Botão "Agenda" (se usar a visão de lista)
-      },
-      datesSet: () => {
-        // A função será chamada quando as datas do calendário forem definidas
-        this.changeTitleColor();
-        this.changeButtonStyles();
-      }
-    };
-
     this.court_id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.getCourtDetails();
   }
@@ -113,36 +87,6 @@ export class DetailsPageComponent implements OnInit {
           }
         }
       }
-    })
-  }
-
-  changeTitleColor(): void {
-    const calendarTitle = document.querySelector('.fc-toolbar-title');
-    if (calendarTitle) {
-      (calendarTitle as HTMLElement).style.color = '#57cc99'; // Altere para a cor que deseja
-    }
-  }
-
-  changeButtonStyles(): void {
-    const prevButton = document.querySelector('.fc-prev-button');
-    const nextButton = document.querySelector('.fc-next-button');
-    const todayButton = document.querySelector('.fc-today-button');
-    const allFcButtons = document.querySelectorAll('.fc-button');
-
-    if (prevButton) {
-      (prevButton as HTMLElement).style.backgroundColor = '#57cc99'; // Cor de fundo do botão anterior
-      (prevButton as HTMLElement).style.color = '#ffffff'; // Cor do texto
-    }
-    if (nextButton) {
-      (nextButton as HTMLElement).style.backgroundColor = '#57cc99'; // Cor de fundo do botão próximo
-      (nextButton as HTMLElement).style.color = '#ffffff'; // Cor do texto
-    }
-    if (todayButton) {
-      (todayButton as HTMLElement).style.backgroundColor = '#57cc99'; // Cor de fundo do botão "Hoje"
-      (todayButton as HTMLElement).style.color = '#ffffff'; // Cor do texto
-    }
-    allFcButtons.forEach(button => {
-      (button as HTMLElement).style.border = 'none';
     });
   }
 

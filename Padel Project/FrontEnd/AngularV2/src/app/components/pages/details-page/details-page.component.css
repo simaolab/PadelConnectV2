@@ -19,6 +19,8 @@
     transform: translateY(-50%);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-bottom: -28rem;
+    max-width: 100%;
+    width: 70rem;
 }
 
 .card-content-image {
@@ -26,10 +28,11 @@
 }
 
 .card-container-info--{
-    display: inline-flex;
+    display: flex;
     gap: 20px;
-    width: 60%;
-    justify-items: center;
+    max-width: 100%;
+    width: 70rem;
+    justify-content: center;
 }
 
 .card-content-image img {
@@ -42,7 +45,8 @@
 }
 
 .card-content-main{
-    width: 60%;
+    width: 100%;
+    max-width: 70rem;
     margin-bottom: 6rem;
     display: flex;
     flex-direction: column;
@@ -50,7 +54,8 @@
 }
 
 .divider {
-  width: 60%;
+  width: 100%;
+  max-width: 70rem;
   height: 2px;
   background: var(--color-primary);
 }
@@ -233,8 +238,24 @@
 
 /* Calendário */
 .calendar {
+    width: 100%;
+    max-width: 70rem;
     margin-top: 2rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calendar-container {
+  width: 100%; /* Ocupar toda a largura disponível */
+  max-width: inherit; /* Herdar o max-width do pai */
+  box-sizing: border-box; /* Garantir que padding e border não afetem o tamanho total */
+}
+
+.fc { /* Classe raiz do FullCalendar */
+  width: 100%; /* Garante que o FullCalendar ocupe toda a largura do contêiner */
+  max-width: 100%; /* Respeita o tamanho máximo do contêiner pai */
 }
 
 .calendar h4 {
@@ -393,3 +414,73 @@ full-calendar {
 .status-occupied {
   background: rgba(241, 16, 16, 0.5) !important;
 }
+
+
+@media screen and (max-width: 1450px) {
+  .card-container-info-- {
+    flex-direction: column;
+  }
+
+  .calendar-container {
+    width: 70%;
+    max-width: inherit;
+    box-sizing: border-box;
+    justify-content: start;
+  }
+
+  .calendar {
+    margin-top: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .calendar-container {
+    margin-top: unset;
+  }
+}
+
+
+/* Responsividade do calendário */
+.fc {
+  width: 100%;
+  overflow-x:scroll;
+}
+
+/* Tamanho das células do calendário */
+.fc-daygrid-day-frame {
+  width: 50px !important;  /* Define a largura das células */
+  height: 50px !important; /* Define a altura das células */
+}
+
+/* Opcionalmente, ajuste o número do dia para ficar dentro da célula */
+.fc-daygrid-day-number {
+  font-size: 0.9rem !important; /* Reduz o tamanho da fonte do número */
+}
+
+/* Ajuste a altura mínima das células que contém os eventos */
+.fc-daygrid-day-events {
+  min-height: 30px !important;  /* Tamanho mínimo para os eventos */
+}
+
+/* Ajusta os eventos para caber dentro das células */
+.fc-daygrid-event {
+  font-size: 0.8rem !important; /* Ajusta o tamanho da fonte dos eventos */
+}
+
+/* Melhorar a responsividade */
+@media (min-width: 1024px) {
+  .fc-daygrid-day-frame {
+      width: 80px;   /* Ajusta o tamanho das células em telas grandes */
+      height: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .fc-daygrid-day-frame {
+      width: 40px !important;
+      height: 40px !important;
+  }
+}
+
