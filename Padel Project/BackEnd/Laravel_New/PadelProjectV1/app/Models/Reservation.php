@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Cancellation;
 
 class Reservation extends Model
 {
@@ -14,7 +13,7 @@ class Reservation extends Model
     use HasFactory, softDeletes;
 
     protected $fillable = [
-        'type_reservation',
+      	'user_id',
         'status',
         'additional_info',
         'start_date',
@@ -35,7 +34,7 @@ class Reservation extends Model
         return $this->belongsToMany(Field::Class);
     }
 
-    public function cancellation()
+  	public function cancellation()
     {
         return $this->hasOne(Cancellation::class, 'reservation_id');
     }
@@ -45,6 +44,7 @@ class Reservation extends Model
         return $this->belongsTo(User::class);
     }
 
+
     //Save birthday with format Y-m-d
     //Carbon is a library that manipulates dates
     //Function Carbon example setAttributeAttribute and getAttributeAttribute
@@ -53,27 +53,24 @@ class Reservation extends Model
     //This is a mutator which allows us to transform an attribute before saving
     public function setStartDateAttribute($value)
     {
-        //Converts the birthday received as d/m/Y to a Carbon object
-        //Then converts the Carbon object into a string Y-m-d
-        $this->attributes['start_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        $this->attributes['start_date'] = Carbon::createFromFormat('d/m/Y H:i', $value)->format('Y-m-d H:i:s');
     }
+
+    // Mutador para formatar end_date para datetime
     public function setEndDateAttribute($value)
     {
-        //Converts the birthday received as d/m/Y to a Carbon object
-        //Then converts the Carbon object into a string Y-m-d
-        $this->attributes['end_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        $this->attributes['end_date'] = Carbon::createFromFormat('d/m/Y H:i', $value)->format('Y-m-d H:i:s');
     }
 
-    //Shows birthday with format d/m/Y
-    //Carbon is a library that manipulates dates
-    //This is an accessor which allows us to transform an attribute when accessing
+    // Accessor para mostrar start_date com formato d/m/Y H:i
     public function getStartDateAttribute($value)
     {
-        return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('d/m/Y H:i');
     }
 
+    // Accessor para mostrar end_date com formato d/m/Y H:i
     public function getEndDateAttribute($value)
     {
-        return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('d/m/Y H:i');
     }
 }
