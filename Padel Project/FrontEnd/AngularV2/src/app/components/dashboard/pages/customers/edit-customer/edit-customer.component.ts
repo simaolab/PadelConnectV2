@@ -143,7 +143,8 @@ export class EditCustomerComponent {
           console.log(this.roles)
         },
       })
-
+    }
+    
     getUserStatus(customer: any): string {
       if (customer.user_blocked) {
         return 'Bloqueado';
