@@ -22,27 +22,37 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        try
-        {
-            $reservations = Reservation::with('fields')->get();
-            // If table Reservation does not have any data echo a message else show data
-            if ($reservations->isEmpty()) {
-                return response()->json([
-                    'message'   => 'Esta lista ainda não contém dados.',
-                    'reservations'     => []
-                ]);
-            }
-            else {
-                return response()->json(
-                    [
-                        'reservations' => $reservations
-                    ], 200);
-            }
-        }
-        catch(\Exception $exception)
-        {
-            return response()->json(['error' => $exception], 500);
-        }
+      try {
+          // Recupera o ID do usuário autenticado
+          $userId = auth()->id();
+          // Recupera o usuário logado e verifica sua role
+          $user = auth()->user();
+
+          // Verifica se o usuário tem a role de admin (role_id = 1)
+          if ($user->role_id === 1) {
+              // Se for admin, retorna todas as reservas
+              $reservations = Reservation::with('fields')->get();
+          } else {
+              // Caso contrário, retorna apenas as reservas do usuário logado
+              $reservations = Reservation::with('fields')->where('user_id', $userId)->get();
+          }
+
+          // Se não houver reservas, retorna uma mensagem informando
+          if ($reservations->isEmpty()) {
+              return response()->json([
+                  'message' => 'Você ainda não tem reservas.',
+                  'reservations' => []
+              ]);
+          } else {
+              // Retorna as reservas do usuário
+              return response()->json([
+                  'reservations' => $reservations
+              ], 200);
+          }
+      } catch (\Exception $exception) {
+          // Caso haja erro, retorna uma mensagem de erro
+          return response()->json(['error' => $exception->getMessage()], 500);
+      }
     }
 
     /**
@@ -58,51 +68,49 @@ class ReservationController extends Controller
      */
     public function store(StoreReservationRequest $request)
     {
-        $validatedData = $request->validated();
+        try {
+            // Verifica os dados validados
+            $validatedData = $request->validated();
 
-        // Formata as datas da reserva
-        $reservationData = Arr::except($validatedData, ['fields']);
-        $reservationData['start_date'] = Carbon::createFromFormat('d/m/Y', $reservationData['start_date'])->format('Y-m-d');
-        $reservationData['end_date'] = Carbon::createFromFormat('d/m/Y', $reservationData['end_date'])->format('Y-m-d');
+            // Remove o campo 'fields' do array, pois será tratado separadamente
+            $reservationData = Arr::except($validatedData, ['fields']);
+            // Atribui o ID do usuário logado
+            $reservationData['user_id'] = auth()->id();
 
-        // Verifica se o carrinho tem itens
-        $cart = session()->get('cart', []);
-        if (empty($cart)) {
-            return response()->json(['message' => 'Seu carrinho está vazio. Adicione campos antes de finalizar a reserva.'], 400);
-        }
+            // Não há necessidade de formatar as datas aqui, o mutador no Model já faz isso
+            // O request envia as datas no formato d/m/Y, que o mutador converte para Y-m-d
 
-        // Verifica conflitos de datas
-        $conflictDate = Reservation::where('start_date', '<=', $reservationData['end_date'])
-            ->where('end_date', '>=', $reservationData['start_date'])
-            ->exists();
+            // Verifica se a reserva conflita com outra
+            $conflictDate = Reservation::where('start_date', '<=', $reservationData['end_date'])
+                ->where('end_date', '>=', $reservationData['start_date'])
+                ->exists();
 
-        if ($conflictDate) {
+            if ($conflictDate) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Já existe uma reserva para as datas selecionadas.',
+                ], 409);
+            }
+
+            // Cria a reserva
+            $reservation = Reservation::create($reservationData);
+
+            // Associa os campos à reserva diretamente, já que não usa mais o carrinho
+            if (isset($validatedData['fields']) && !empty($validatedData['fields'])) {
+                // Associa os campos passados no 'fields' ao modelo de reserva
+                $reservation->fields()->sync($validatedData['fields']);
+            }
+
             return response()->json([
-                'status' => 'error',
-                'message' => 'Já existe uma reserva para as datas selecionadas.',
-            ], 409);
+                'status' => 'success',
+                'message' => 'Reserva criada com sucesso.',
+                'reservation' => $reservation
+            ], 201);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'error' => 'Erro ao criar a reserva: ' . $exception->getMessage()
+            ], 500);
         }
-
-        // Cria a reserva
-        $reservation = Reservation::create($reservationData);
-
-        // Associa os campos do carrinho à reserva na tabela intermediária
-        foreach ($cart as $fieldId => $details) {
-            $reservation->fields()->attach($fieldId, [
-                'start_hour_date' => $details['start_hour_date'],
-                'end_hour_date' => $details['end_hour_date'],
-                'value' => $details['value'],
-            ]);
-        }
-
-        // Limpa o carrinho após finalizar a compra
-        session()->forget('cart');
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Reserva criada com sucesso.',
-            'reservation' => $reservation->load('fields'),
-        ], 201);
     }
 
     /**
