@@ -27,7 +27,8 @@ import { DropdownComponent } from '../../../utilities/dropdown/dropdown.componen
   styleUrl: './edit-customer.component.css'
 })
 export class EditCustomerComponent {
-
+  
+  roles: any[] = [];
   formErrors: { [key: string]: string } = {};
 
   customerObj = {
@@ -40,20 +41,19 @@ export class EditCustomerComponent {
     new_user: 0,
     user_blocked: 0,
     blocked_at: null,
-    role: ''
+    role_id: ''
   };
-  
+
   userStateOptions = [
     { label: 'Novo Utilizador', value: 'Novo Utilizador' },
     { label: 'Ativo', value: 'Ativo' },
-    { label: 'Bloqueado', value: 'Bloqueado' }, 
+    { label: 'Bloqueado', value: 'Bloqueado' },
   ];
-  
+
   user_state: string = '';
 
   customer_id: number = 0;
 
-  roles: any[] = [];
     constructor(
       private router: Router,
       private activatedRoute: ActivatedRoute,
@@ -72,7 +72,7 @@ export class EditCustomerComponent {
 
       this.usersService.show(this.customer_id).subscribe({
         next: (customer: any) => {
-          
+
           this.customerObj = {
             email: customer.user.email,
             username: customer.user.username,
@@ -83,7 +83,7 @@ export class EditCustomerComponent {
             new_user: customer.user.new_user,
             user_blocked: customer.user.user_blocked,
             blocked_at: customer.user.blocked_at,
-            role: customer.user.role.id,
+            role_id: customer.user.role.id,
           };
 
           if (this.customerObj.new_user) {
@@ -109,6 +109,7 @@ export class EditCustomerComponent {
     }
 
     editCustomer(): void {
+      
       this.usersService.edit(this.customerObj, this.customer_id).subscribe({
         next: (res: any) => {
           if(res.status === 'success') {
@@ -139,12 +140,16 @@ export class EditCustomerComponent {
       this.rolesService.index().subscribe({
         next: (res: any) => {
           this.roles = res.roles;
-
-          console.log(this.roles)
         },
       })
     }
-    
+        error: (err: any) => {
+          const message = err.error?.message || 'Erro ao carregar as roles';
+          console.error(message);
+        }
+      });
+    }
+
     getUserStatus(customer: any): string {
       if (customer.user_blocked) {
         return 'Bloqueado';
@@ -154,6 +159,7 @@ export class EditCustomerComponent {
       }
       return 'Ativo';
     }
+
 
     onUserStateSelected(selected: any): void {
       if (selected.value === 'Novo Utilizador') {
@@ -166,5 +172,9 @@ export class EditCustomerComponent {
         this.customerObj.new_user = 0;
         this.customerObj.user_blocked = 1;
       }
+    }
+
+    onRoleSelected(event: any): void {
+      this.customerObj.role_id = event.id;
     }
 }

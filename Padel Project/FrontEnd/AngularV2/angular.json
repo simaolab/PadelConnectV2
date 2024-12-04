@@ -35,12 +35,13 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/sweetalert2/dist/sweetalert2.min.css"
             ],
             "scripts": [
               "src/assets/scripts/slideshow.js",
               "src/assets/scripts/login.js",
-              "src/assets/scripts/count-fields.js"
+              "src/assets/scripts/count-fields.js",
               "src/assets/scripts/dropdownCompay.js"
             ],
             "server": "src/main.server.ts",

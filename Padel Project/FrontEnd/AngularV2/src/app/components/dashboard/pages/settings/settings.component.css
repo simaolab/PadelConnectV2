@@ -67,3 +67,31 @@
 .toggle:active .circle {
   width: 35px;
 }
+
+.password-strength-indicators {
+  margin-top: 10px;
+}
+
+.password-strength-indicators span {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #777;
+}
+
+.password-strength-indicators span.valid {
+  background-color: #2ecc71; /* Verde */
+  color: white;
+}
+
+.password-strength-indicators span {
+  background-color: #f1f1f1; /* Cor padrão (desmarcado) */
+}
+
+.small-error {
+  color: #e74c3c;
+  font-size: 12px;
+}
+
