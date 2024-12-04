@@ -8,7 +8,7 @@ export const ApiRoutes = {
   users: 'https://api.padelconnect.pt/api/users/',
   userInfo: 'https://api.padelconnect.pt/api/user',
   client: 'https://api.padelconnect.pt/api/clients/',
-  updatePassword: 'http://seu-api-url.com/api/user/update-password',
+  updatePassword: 'https://api.padelconnect.pt/api/user/update-password',
 
   //COURTS
   courts: 'https://api.padelconnect.pt/api/fields/',

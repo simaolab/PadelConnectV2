@@ -76,8 +76,15 @@
                       <i class="ri-shield-user-line"></i>
                       <label for="role">Role</label>
                     </div>
-                    <input type="text" name="role" [(ngModel)]="customerObj.role">
-                    <small *ngIf="formErrors['role']" class="small-error">{{ formErrors['role'] }}</small>
+                    <dropdown
+                      [items]="roles"                
+                      labelKey="name"                
+                      valueKey="id"                  
+                      placeholder="Selecione uma role"
+                      [value]="customerObj.role_id"     
+                      (selectionChange)="onRoleSelected($event)"> 
+                    </dropdown>
+                    <small *ngIf="formErrors['role_id']" class="small-error">{{ formErrors['role_id'] }}</small>
                 </div>
                 <div class="detail">
                   <div class="label-container">

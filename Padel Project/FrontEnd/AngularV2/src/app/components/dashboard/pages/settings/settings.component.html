@@ -193,31 +193,66 @@
                   <div class="detail">
                       <div class="label-container">
                         <i class="ri-lock-password-line"></i>
-                        <label for="last_name">Password Atual</label>
+                        <label for="current_password">Password Atual</label>
                       </div>
-                      <input type="password" placeholder="Insira a sua password atual">
+                      <input
+                        id="current_password"
+                        type="password"
+                        name="current_password"
+                        [(ngModel)]="passwordObj.current_password"
+                        placeholder="Insira a sua password atual"
+                        required
+                        />
+                        <small *ngIf="formErrors['current_password']" class="small-error">{{ formErrors['current_password'] }}</small>
                   </div>
                 </div>
                 <div class="data-detail">
                   <div class="detail">
                       <div class="label-container">
                         <i class="ri-lock-unlock-line"></i>
-                        <label for="first_name">Nova Password</label>
+                        <label for="new_password">Nova Password</label>
                       </div>
-                      <input type="password" placeholder="Coloque a nova password">
-                  </div>
+                      <input
+                        id="new_password"
+                        type="password"
+                        name="new_password"
+                        (input)="evaluatePasswordStrength(passwordObj.new_password)"
+                        [(ngModel)]="passwordObj.new_password"
+                        placeholder="Coloque a nova password"
+                        required
+                        />
+
+                        <div class="password-strength-indicators">
+                            <span [ngClass]="{ 'valid': passwordStrengthStatus.length }">8 caracteres</span>
+                            <span [ngClass]="{ 'valid': passwordStrengthStatus.lowercase }">Letra a-z</span>
+                            <span [ngClass]="{ 'valid': passwordStrengthStatus.uppercase }">Letra A-Z</span>
+                            <span [ngClass]="{ 'valid': passwordStrengthStatus.number }">Número</span>
+                            <span [ngClass]="{ 'valid': passwordStrengthStatus.symbol }">Símbolo</span>
+                          </div>
+
+                        <small *ngIf="formErrors['new_password']" class="small-error">{{ formErrors['new_password'] }}</small>
+                        
+                    </div>
                   <div class="detail">
                     <div class="label-container">
                       <i class="ri-lock-unlock-line"></i>
-                      <label for="first_name">Confrmação Nova Password</label>
+                      <label for="new_password_confirmation">Confirmação Nova Password</label>
                     </div>
-                    <input type="password" placeholder="Confirme a nova password">
+                    <input
+                      id="new_password_confirmation"
+                      type="password"
+                      [(ngModel)]="passwordObj.new_password_confirmation"
+                      name="new_password_confirmation"
+                      placeholder="Confirme a nova password"
+                      required
+                    />
+                    <small *ngIf="formErrors['new_password_confirmation']" class="small-error">{{ formErrors['new_password_confirmation'] }}</small>
                   </div>
                 </div>
             </div>
           </div>
           <div class="button left">
-            <button class="btn edit" (click)="editClient()">
+            <button class="btn edit" (click)="updatePassword()">
               <i class="ri-edit-line"></i>
               Salvar alterações
             </button>
