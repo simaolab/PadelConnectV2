@@ -69,29 +69,99 @@
 }
 
 .password-strength-indicators {
-  margin-top: 10px;
+  padding-block: .5rem;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .password-strength-indicators span {
-  display: inline-block;
-  margin-right: 10px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 14px;
-  color: #777;
+  padding: .5rem 1rem;
+  border-radius: 10px;
+  background-color: var(--color-white);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
 }
 
 .password-strength-indicators span.valid {
-  background-color: #2ecc71; /* Verde */
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-white);
 }
 
-.password-strength-indicators span {
-  background-color: #f1f1f1; /* Cor padrão (desmarcado) */
+.password-strength-bar {
+  display: none;
+  margin-block: .5rem;
+  height: .5rem;
+  border-radius: 10px;
+  transition: width 0.3s ease-in-out;
+}
+
+.password-strength-text{
+  display: none;
 }
 
 .small-error {
   color: #e74c3c;
   font-size: 12px;
+}
+
+@media (max-width: 550px) {
+  .password-strength-indicators {
+    overflow: hidden;
+    display: none;
+  }
+
+  .password-strength-indicators span {
+    display: none;
+  }
+
+  .password-strength-bar {
+    display: block;
+  }
+
+  .password-strength-bar.very-weak{
+    background-color: var(--color-danger);
+  }
+
+  .password-strength-bar.weak{
+    background-color: var(--color-danger);
+  }
+
+  .password-strength-bar.medium{
+    background-color: var(--color-warning);
+  }
+
+  .password-strength-bar.good{
+    background-color: var(--color-blue-2);
+  }
+
+  .password-strength-bar.perfect{
+    background-color: var(--color-primary);
+  }
+
+  .password-strength-text{
+    display: block;
+  }
+  
+  .password-strength-text.perfect {
+    color: var(--color-primary);
+  }
+  
+  .password-strength-text.good {
+    color: var(--color-blue-2);
+  }
+
+  .password-strength-text.medium {
+    color: var(--color-warning);
+  }
+  
+  .password-strength-text.weak {
+    color: var(--color-danger);
+  }
+  
+  .password-strength-text.very-weak {
+    color: var(--color-danger);
+  }
 }
 

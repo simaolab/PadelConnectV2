@@ -17,15 +17,41 @@
 
 <ng-template #showPromotion>
   <div *ngIf="promotions.length > 0; else noPromotions">
-  <ul>
-    <li *ngFor="let promotion of promotions" >
-      <strong>{{ promotion.description }}</strong><br>
-      Código: {{ promotion.promo_code }}<br>
-      Desconto: {{ promotion.discount }}<br>
-      Início: {{ promotion.start_date }}<br>
-      Fim: {{ promotion.end_date }}<br>
-    </li>
-  </ul>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th class="left">Descrição</th>
+            <th class="left">Código</th>
+            <th class="middle">Desconto</th>
+            <th class="middle">Inicio Promoção</th>
+            <th class="middle">Fim Promoção</th>
+            <th class="middle">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let promotion of promotions">
+            <td data-cell="Descrição" class="left">{{ promotion.description }}</td>
+            <td data-cell="Código" class="left">{{ promotion.promo_code }}</td>
+            <td data-cell="Desconto" class="middle">{{ promotion.discount }}%</td>
+            <td data-cell="Início Promoção" class="middle">{{ promotion.start_date }}</td>
+            <td data-cell="Fim Promoção" class="middle">{{ promotion.end_date }}</td>
+            <td data-cell="Ações" class="middle">
+              <div class="actions">
+                <div class="tooltip">
+                  <i class='ri-edit-line'></i>
+                  <span class="tooltip-text">Editar</span>
+                </div>
+                <div class="tooltip">
+                  <i class="ri-shopping-cart-line"></i>
+                  <span class="tooltip-text">Aplicar</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </ng-template>
 

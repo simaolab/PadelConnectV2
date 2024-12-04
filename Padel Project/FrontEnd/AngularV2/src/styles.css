@@ -212,6 +212,10 @@ tbody td {
   color: var(--color-blue-2);
 }
 
+.actions .ri-shopping-cart-line{
+  color: var(--color-primary);
+}
+
 .form {
   padding-block: 2rem;
   display: flex;
@@ -315,12 +319,12 @@ textarea {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
--webkit-appearance: none;
-margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 input[type=number] {
--moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 
@@ -421,7 +425,6 @@ input[type=number] {
   font-size: var(--font-smaller);
 }
 
-
 .tooltip .tooltip-text {
   visibility: hidden;
   background-color: var(--color-blue-2);
@@ -485,7 +488,6 @@ input[type=number] {
 
 @media screen and (max-width: 1250px) {
 
-
   .contact-detail,
   .data-detail{
     display: flex;
@@ -518,76 +520,135 @@ input[type=number] {
   }
 }
 
-@media screen and (max-width: 1055px) {
+@media screen and (max-width: 675px) {
+  
+  .services .tooltip:first-child .tooltip-text {
+    bottom: 50%;
+    left: 100%;
+    transform: translateY(50%);
+    white-space: nowrap;
+    margin-left: 5px;
+  }
+  
+  .services .tooltip:first-child .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 50%; 
+    left: -11px; 
+    transform: translateY(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent var(--color-blue-2) transparent transparent;
+  }
+
+  .table-wrapper {
+    overflow-x: hidden;
+  }
+
   table {
-      font-size: 1rem;
-      background: transparent;
-      border-radius: 0;
-      box-shadow: none;
-      padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    min-width: 0;
+  }
+
+  tbody td{
+    font-size: var(--font-smaller);
+  }
+
+  tr {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    gap: .7rem;
+  }
+
+  tr:not(:first-child) {
+    padding: 1rem 0 .3rem 0;
+  }
+
+  tr:not(:last-child) {
+    border-bottom: 1px solid var(--color-primary);
+  }
+
+  tr > td:last-child, 
+  tr > th:last-child {
+    order: -1;
+  }
+
+  th, td {
+    flex-direction: row;
+    display: flex;
+    padding-top: 20px;
   }
 
   table thead {
-      display: none;
+    display: none;
+  }
+
+  table tbody td {
+    display: block;
+    text-align: left;
+    padding-left: 0;
+    margin-bottom: 10px;
+    position: relative;
+    padding-top: 15px;
+    width: 100%; 
   }
 
   table tbody td,
   table tbody td a {
-      text-align: start;
-      border-bottom: 0;
-      display: block ruby;
-      padding: 0.5rem 1rem;
-  }
-
-  table tbody tr {
-      display:block;
-      text-align: start;
-      width: 100%;
-      margin-bottom: 2rem;
-      background: var(--color-white);
-      border-radius: var(--card-border-radius);
-      padding: var(--card-padding);
-      box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
+    text-align: start;
+    border-bottom: 0;
+    display: block ruby;
+    padding: .2rem 0;
   }
 
   table tbody td:before {
-      content: attr(data-cell) ": ";
-      font-weight: 600;
-      color: var(--color-primary);
+    content: attr(data-cell);
+    font-weight: bold;
+    position: absolute;
+    margin-top: -20px;
+    left: 0;
+    top: 0;
+    color: var(--color-text);
   }
 
-  tr .middle {
-    text-align: left;
+  th:not(:first-child), td:not(:first-child) {
+    border-left: none;
   }
 
-  td.middle.services{
-    display: flex;
-    align-items: center;
+  td:last-child::before {
+    display: none;
+  }
+
+  tr:last-child {
+    margin-bottom: 35px;
+  }
+
+  td.middle {
+    text-align: start;
+  }
+
+  td.middle.services {
     justify-content: flex-start;
-    gap: .5rem;
   }
 
-  table {
-    min-width: 0;
+  .actions {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    gap: 5px;
   }
 
-  .loading {
-    font-size: 1.1rem;
-    color: var(--color-primary);
-    background: var(--color-white);
-    border-radius: var(--border-radius-2);
-    padding: var(--card-padding);
-    box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
-  }
-
-  td, th{
-    border-left: none;
-  }
-
-  th:not(:first-child), td:not(:first-child){
-    border-left: none;
+  .actions button {
+    width: auto;
+    margin-bottom: 0;
   }
 }
+
 
 @media screen and (max-width: 850px) {
   .page-info-action{
