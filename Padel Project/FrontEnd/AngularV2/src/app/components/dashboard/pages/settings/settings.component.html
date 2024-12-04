@@ -221,18 +221,27 @@
                         placeholder="Coloque a nova password"
                         required
                         />
+                        
+                        <small *ngIf="formErrors['new_password']" class="small-error">{{ formErrors['new_password'] }}</small>
 
                         <div class="password-strength-indicators">
-                            <span [ngClass]="{ 'valid': passwordStrengthStatus.length }">8 caracteres</span>
-                            <span [ngClass]="{ 'valid': passwordStrengthStatus.lowercase }">Letra a-z</span>
-                            <span [ngClass]="{ 'valid': passwordStrengthStatus.uppercase }">Letra A-Z</span>
-                            <span [ngClass]="{ 'valid': passwordStrengthStatus.number }">Número</span>
-                            <span [ngClass]="{ 'valid': passwordStrengthStatus.symbol }">Símbolo</span>
+                          <span [ngClass]="{ 'valid': passwordStrengthStatus.length }">8 caracteres</span>
+                          <span [ngClass]="{ 'valid': passwordStrengthStatus.lowercase }">Letra a-z</span>
+                          <span [ngClass]="{ 'valid': passwordStrengthStatus.uppercase }">Letra A-Z</span>
+                          <span [ngClass]="{ 'valid': passwordStrengthStatus.number }">Número</span>
+                          <span [ngClass]="{ 'valid': passwordStrengthStatus.symbol }">Símbolo</span>
+                        </div>
+                        <div
+                          class="password-strength-bar"
+                          [style.width]="passwordStrengthProgress + '%'"
+                          [ngClass]="passwordStrengthLevel">
                           </div>
+                          <span class="password-strength-text" [ngClass]="passwordStrengthLevel">
+                            {{ passwordStrengthMessage }}
+                          </span>
 
-                        <small *ngIf="formErrors['new_password']" class="small-error">{{ formErrors['new_password'] }}</small>
                         
-                    </div>
+                  </div>
                   <div class="detail">
                     <div class="label-container">
                       <i class="ri-lock-unlock-line"></i>

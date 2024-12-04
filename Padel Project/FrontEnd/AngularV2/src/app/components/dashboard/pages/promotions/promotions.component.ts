@@ -43,7 +43,7 @@ export class PromotionsComponent {
         const message = err.error?.message;
 
         this.dashboardComponent.showModal(
-          'Error',
+          'Erro',
           message
         )
       }

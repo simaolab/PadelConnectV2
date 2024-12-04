@@ -71,7 +71,8 @@ a {
 }
 
 .home,
-.notifications {
+.notifications,
+.statistics {
     text-decoration: none;
 }
 

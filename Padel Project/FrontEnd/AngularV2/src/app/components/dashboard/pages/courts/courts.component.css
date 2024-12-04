@@ -64,7 +64,7 @@
   background: rgba(241, 16, 16, 0.5) !important;
 }
 
-@media screen and (max-width: 1055px) {
+@media screen and (max-width: 675px) {
   .no-courts {
     font-size: 1.1rem;
     color: var(--color-danger);
@@ -74,21 +74,7 @@
     box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
   }
 
-  .status-disponivel,
-  .status-inativo,
-  .status-occupied{
-    background: transparent !important;
-  }
-
-  .status-disponivel {
-    color: var(--color-success) !important;
-  }
-
-  .status-inativo {
-    color: var(--color-warning) !important;
-  }
-
-  .status-occupied {
-    color: var(--color-danger) !important;
-  }
+  .status-wrapper {
+    justify-content: flex-start;
+  } 
 }
