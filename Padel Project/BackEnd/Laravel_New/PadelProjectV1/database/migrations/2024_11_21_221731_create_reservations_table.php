@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('status');
             $table->string('additional_info')->nullable();
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
             $table->decimal('total');
             $table->boolean('privacy_policy')->nullable();
             $table->timestamps();
