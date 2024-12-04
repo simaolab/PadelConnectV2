@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdatePasswordRequest;
 
 class UserController extends Controller
 {
@@ -65,6 +67,7 @@ class UserController extends Controller
          $request->validate([
             'new_user'     => 'nullable|boolean',
             'user_blocked' => 'nullable|boolean',
+            'role_id'      => 'nullable|exists:roles,id'
         ]);
 
         //Search for the user
@@ -81,12 +84,17 @@ class UserController extends Controller
         }
 
         if ($request->has('user_blocked')) {
-          $user->user_blocked = $request->input('user_blocked');
-          if ($user->user_blocked) {
+            $user->user_blocked = $request->input('user_blocked');
+            if ($user->user_blocked) {
             $user->blocked_at = now(); 
-        } else {
-            $user->blocked_at = null;
+            } else {
+                $user->blocked_at = null;
+            }
         }
+
+        // Update role
+        if ($request->has('role_id')) {
+            $user->role_id = $request->input('role_id'); 
         }
 
         // Save changes
@@ -95,39 +103,36 @@ class UserController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Cliente '.$user->username.' atualizada com sucesso!'
+                'message' => 'Cliente '.$user->username.' atualizado com sucesso!'
                 ], 200);
         } catch (\Exception $exception) {
             return response()->json(['error' => $exception->getMessage()], 500);
         }
     }
 
-    public function updatePassword(Request $request)
+    public function updatePassword(UpdatePasswordRequest $request)
     {
-        // Validate the request data
-        $request->validate([
-            'current_password' => 'required',
-            'new_password'     => 'required|min:8|confirmed',
-        ]);
 
-        // Get the authenticated user (using Passport token)
-        $user = $request->user();
+    $user = $request->user();
 
-        // Check if the current password matches
-        if (!Hash::check($request->input('current_password'), $user->password)) {
-            return response()->json(['message' => 'A senha atual está incorreta.'], 400);
-        }
-
-        // Update the password
-        try {
-            $user->password = Hash::make($request->input('new_password'));
-            $user->save();
-
-            return response()->json([
-                'message' => 'Senha alterada com sucesso!',
-            ], 200);
-        } catch (\Exception $exception) {
-            return response()->json(['error' => $exception->getMessage()], 500);
-        }
+    if (!Hash::check($request->input('current_password'), $user->password)) {
+        return response()->json([
+            'message' => 'Erro ao atualizar a senha!',
+            'error(s)' => [
+                'current_password' => ['A senha atual está incorreta.']
+            ]
+        ], 422);
     }
+
+    try {
+        $user->password = Hash::make($request->input('new_password'));
+        $user->save();
+
+        return response()->json([
+            'message' => 'Senha alterada com sucesso!',
+        ], 200);
+    } catch (\Exception $exception) {
+        return response()->json(['error' => $exception->getMessage()], 500);
+    }
+}
 }

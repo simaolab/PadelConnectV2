@@ -40,23 +40,31 @@ export class SettingsComponent {
     newsletter: 0,
   };
 
+  passwordObj = {
+    current_password: '',
+    new_password: '',
+    new_password_confirmation: '',
+  };
+
   addressObj = {
     addressPort: '',
     postalCode: '',
     locality: '',
   }
 
-  passwordObj = {
-    current_password: '',
-    new_password: '',
-    confirm_password: ''
-  };
-
   genderOptions = [
     { label: 'Masculino', value: 'Masculino' },
     { label: 'Feminino', value: 'Feminino' },
     { label: 'Outro', value: 'Outro' },
   ];
+
+  passwordStrengthStatus = {
+    length: false,
+    lowercase: false,
+    uppercase: false,
+    number: false,
+    symbol: false,
+  };
 
   client_id: number = 0;
 
@@ -129,35 +137,81 @@ export class SettingsComponent {
     return `${this.addressObj.addressPort}, ${this.addressObj.postalCode}, ${this.addressObj.locality}`;
   }
 
-  editClient(): void {
+  updatePassword(): void {
+    
+    this.formErrors = {};
+
+    if (this.passwordObj.current_password) {
+    
+      const passwordData = {
+          current_password: this.passwordObj.current_password,
+          new_password: this.passwordObj.new_password,
+          new_password_confirmation: this.passwordObj.new_password_confirmation,
+      };
+      
+      this.usersService.updatePassword(passwordData).subscribe({
+          next: (res: any) => {
+              if (res.message) {
+                this.editClient(true);
+              }
+          },
+          error: (err: any) => {
+            const errorDetails = err.error?.['error(s)'] || {};
+        
+            for (const field in errorDetails) {
+                if (errorDetails.hasOwnProperty(field)) {
+                    // Redireciona o erro "new_password.confirmed" para "new_password_confirmation"
+                    if (field === 'new_password' && errorDetails[field][0].includes('não corresponde')) {
+                        this.formErrors['new_password_confirmation'] = errorDetails[field][0];
+                    } else {
+                        this.formErrors[field] = errorDetails[field][0];
+                    }
+                }
+            }
+        },
+      });  
+    }
+    else {
+      this.editClient(false);
+    }
+  }
+
+  editClient(passwordUpdated: boolean): void {
+    this.formErrors = {};
+
     this.clientObj.address = this.address;
+
     this.usersService.editClient(this.clientObj, this.client_id).subscribe({
       next: (res: any) => {
-        if(res.status === 'success') {
-          this.dashboardComponent.showModal(
-            'Mensagem',
-            res.message,
-            () => {
-              window.location.reload();
-            }
-          )
+        if (res.status === 'success') {
+          if (passwordUpdated) {
+            this.dashboardComponent.showModal(
+              'Mensagem',
+              'Dados e senha do cliente atualizados com sucesso!',  // Mensagem comum
+              () => window.location.reload()
+            );
+          } else {
+            this.dashboardComponent.showModal(
+              'Mensagem',
+              'Dados do cliente atualizados com sucesso!',  // Somente dados alterados
+              () => window.location.reload()
+            );
+          }
         }
       },
       error: (err: any) => {
         this.formErrors = {};
         const errorDetails = err.error?.['error(s)'] || {};
 
-        // console.error(err.error)
-
-        for (const company in errorDetails) {
-          if (errorDetails.hasOwnProperty(company)) {
-            this.formErrors[company] = errorDetails[company][0];
+        for (const field in errorDetails) {
+          if (errorDetails.hasOwnProperty(field)) {
+            this.formErrors[field] = errorDetails[field][0];
           }
         }
-      }
-    })
+      },
+    });
   }
-
+  
   userInfo(): void {
     this.usersService.userInfo().subscribe({
       next: (res: any) => {
@@ -202,5 +256,13 @@ export class SettingsComponent {
   toggleNewsletter(event: Event): void {
     this.clientObj.newsletter = (event.target as HTMLInputElement).checked ? 1 : 0;
   }
-
+  
+  evaluatePasswordStrength(password: string): void {
+    this.passwordStrengthStatus.length = password.length >= 8;
+    this.passwordStrengthStatus.lowercase = /[a-z]/.test(password);
+    this.passwordStrengthStatus.uppercase = /[A-Z]/.test(password);
+    this.passwordStrengthStatus.number = /\d/.test(password);
+    this.passwordStrengthStatus.symbol = /[\W_]/.test(password);
+  }
+  
 }
