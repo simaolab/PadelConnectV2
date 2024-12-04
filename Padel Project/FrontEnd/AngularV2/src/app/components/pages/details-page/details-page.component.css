@@ -206,7 +206,7 @@
 
 .card-content-button {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     text-align: center;
     background-color: #fff;
@@ -224,7 +224,7 @@
     color: var(--color-white);
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 50%;
 }
 
 .card-content-price {
@@ -324,4 +324,16 @@
 
 .status-occupied {
   background: rgba(241, 16, 16, 0.5) !important;
+}
+
+@media screen and (max-width: 840px) {
+  .services-icons {
+    gap: 25px;
+    flex-direction: column;
+  }
+
+  .info-box {
+    flex-direction: column;
+    gap: 2rem;
+  }
 }

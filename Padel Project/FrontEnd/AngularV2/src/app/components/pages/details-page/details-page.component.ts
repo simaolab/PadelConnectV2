@@ -26,7 +26,7 @@ import { PageTopComponent } from '../../utilities/page-top/page-top.component';
   styleUrls: ['./details-page.component.css']
 })
 export class DetailsPageComponent implements OnInit {
-  
+
   @ViewChild(ModalComponent) modalComponent: ModalComponent | undefined;
 
   courtObj: Court = {
@@ -128,6 +128,7 @@ export class DetailsPageComponent implements OnInit {
     }
 
     const reservationItem: CartItem = {
+      fieldId: this.court_id,
       name: this.courtObj.name,
       address: this.address,
       startDate: this.startDate,

@@ -1,3 +1,5 @@
+import { ReservationsService } from './../../../services/reservations.service';
+import { UsersService } from './../../../services/users.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -7,6 +9,7 @@ import { MainContentComponent } from '../../utilities/main-content/main-content.
 import Swal from 'sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
 import { CartItem, Cart } from '../../../interfaces/cart';
+import { console } from 'inspector';
 
 @Component({
   selector: 'app-payment-page',
@@ -17,17 +20,79 @@ import { CartItem, Cart } from '../../../interfaces/cart';
 })
 export class PaymentPageComponent {
   aboutImageUrl = "assets/images/about/renith-r-A9VpotrPr1k-unsplash.jpg";
+
   maxDate: string = new Date().toISOString().split('T')[0];
   step: number = 1;
   showRatingPopup: boolean = false;
   selectedRating: number = 0;
   feedback: string = '';
-  cartItems: any[] = [];  // Array para armazenar os itens do carrinho
-  totalPrice: number = 0;  // Variável para armazenar o preço total
 
-  constructor(private router: Router, private cookieService: CookieService) {}
+  cartItems: any[] = [];
+  totalPrice: number = 0;
 
-  // Método para formatar o número do cartão com traços
+  user_id: number = 0;
+
+  constructor(
+    private router: Router,
+    private cookieService: CookieService,
+    private usersService: UsersService,
+    private reservationsService: ReservationsService ) {}
+
+  ngOnInit() {
+    this.loadCartItems();
+    this.userId();
+  }
+
+  loadCartItems() {
+    const cartData = this.cookieService.get('cart');
+
+    if (cartData) {
+      try {
+        const parsedCart = JSON.parse(cartData);
+
+        if (Array.isArray(parsedCart.items)) {
+          this.cartItems = parsedCart.items;
+
+          this.totalPrice = this.cartItems.reduce((total, item) => {
+            const pricePerHour = parseFloat(item.pricePerHour);
+            const totalHours = parseFloat(item.totalHours);
+
+            if (isNaN(pricePerHour) || isNaN(totalHours)) {
+              return total;
+            }
+
+            return total + (pricePerHour * totalHours);
+          }, 0);
+          console.log("Preço total:", this.totalPrice);
+        } else {
+          console.error('Estrutura do carrinho inválida ou "items" não encontrado.');
+        }
+      } catch (error) {
+        console.error('Erro ao ler os dados do carrinho:', error);
+      }
+    } else {
+      console.warn('Carrinho vazio ou cookie não encontrado.');
+    }
+
+    console.log(this.cartItems)
+  }
+
+  userId() {
+    this.usersService.userInfo().subscribe({
+      next: (res: any) => {
+        this.user_id = res.user.id;
+        console.log(this.user_id)
+      },
+    })
+  }
+
+  // finalizePayment() {
+  //   this.showPopup();
+  //   this.reservationsService.create().subscribe({
+
+  //   });
+  // }
+
   formatCardNumber(event: any) {
     let input = event.target;
     let value = input.value.replace(/\D/g, '');
@@ -41,49 +106,6 @@ export class PaymentPageComponent {
     input.value = formattedValue;
   }
 
-  // Função para carregar os itens do carrinho do cookie
-  loadCartItems() {
-    const cartData = this.cookieService.get('cart');
-
-    if (cartData) {
-      try {
-        const parsedCart = JSON.parse(cartData);
-        console.log("Dados do carrinho:", parsedCart); // Verifique o conteúdo do cartData
-
-        // Verifique se 'items' está presente no cartData e se é um array
-        if (Array.isArray(parsedCart.items)) {
-          this.cartItems = parsedCart.items;
-
-          // Recalcular o preço total
-          this.totalPrice = this.cartItems.reduce((total, item) => {
-            // Garantir que pricePerHour e totalHours são números
-            const pricePerHour = parseFloat(item.pricePerHour);
-            const totalHours = parseFloat(item.totalHours);
-
-            // Verifique se os valores são válidos
-            if (isNaN(pricePerHour) || isNaN(totalHours)) {
-              console.error('Valor inválido de pricePerHour ou totalHours', item);
-              return total;  // Se houver algum valor inválido, continue com o total atual
-            }
-
-            // Calcula o preço do item
-            return total + (pricePerHour * totalHours);
-          }, 0);  // Inicializa a soma total com 0
-
-          console.log("Preço total:", this.totalPrice); // Verifique o preço calculado
-        } else {
-          console.error('Estrutura do carrinho inválida ou "items" não encontrado.');
-        }
-      } catch (error) {
-        console.error('Erro ao ler os dados do carrinho:', error);
-      }
-    } else {
-      console.warn('Carrinho vazio ou cookie não encontrado.');
-    }
-  }
-
-
-  // Método para validar o número do cartão
   validateCardNumber(cardNumber: string): boolean {
     const cleaned = cardNumber.replace(/\D/g, '');
     return cleaned.length === 16;
@@ -98,7 +120,6 @@ export class PaymentPageComponent {
     }
   }
 
-  // Método para formatar a data de validade no formato MM/AA
   formatExpiryDate(event: any) {
     let input = event.target;
     let value = input.value.replace(/\D/g, '');
@@ -113,13 +134,11 @@ export class PaymentPageComponent {
     input.value = value;
   }
 
-  // Valida se o número de telefone é um número de telemóvel português válido
   validatePhoneNumber(event: any) {
     const input = event.target;
-    let phoneNumber = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    let phoneNumber = input.value.replace(/\D/g, '');
 
-    const validPrefixes = ['91', '92', '93', '96']; // Prefixos válidos de números de telemóveis portugueses
-
+    const validPrefixes = ['91', '92', '93', '96'];
     if (phoneNumber.length >= 2) {
       const prefix = phoneNumber.substring(0, 2);
       if (!validPrefixes.includes(prefix)) {
@@ -254,14 +273,5 @@ export class PaymentPageComponent {
     }).then(() => {
       this.router.navigate(['/']);
     });
-  }
-
-  finalizePayment() {
-    this.showPopup();
-  }
-
-  ngOnInit() {
-    // Carregar os itens do carrinho ao iniciar o componente
-    this.loadCartItems();
   }
 }
