@@ -8,8 +8,8 @@ import { CompaniesService } from '../../../../../services/companies.service';
 import { CardFormComponent } from '../../../utilities/card-form/card-form.component';
 import { TitlePageComponent } from '../../../utilities/title-page/title-page.component';
 import { DashboardComponent } from '../../../dashboard/dashboard.component';
-import { Company } from '../../../../../models/company';
-import { Address } from '../../../../../models/address';
+import { Company } from '../../../../../interfaces/company';
+import { Address } from '../../../../../interfaces/address';
 
 @Component({
   selector: 'app-edit-company',
@@ -106,10 +106,10 @@ export class EditCompanyComponent {
     const regexAddressPort = /^[a-zA-ZÀ-ÿ0-9.,\-/\s]+$/;
     const localityRegex = /^[a-zA-ZÀ-ÿ\s\-]+$/;
     const postalCodeRegex = /^\d{4}-\d{3}$/;
-  
+
     if (!regexAddressPort.test(this.addressObj.addressPort)
-        || !localityRegex.test(this.addressObj.locality) 
-        || !postalCodeRegex.test(this.addressObj.postalCode)) 
+        || !localityRegex.test(this.addressObj.locality)
+        || !postalCodeRegex.test(this.addressObj.postalCode))
       {
       if (!regexAddressPort.test(this.addressObj.addressPort)) {
         this.formErrors['addressPort'] = 'A morada não pode conter caractéres especiais.';
@@ -123,7 +123,7 @@ export class EditCompanyComponent {
       return;
     }
 
-    if (!this.addressObj['addressPort'] || !this.addressObj['postalCode'] || !this.addressObj['locality']) {      
+    if (!this.addressObj['addressPort'] || !this.addressObj['postalCode'] || !this.addressObj['locality']) {
       if (!this.addressObj['addressPort']) {
         this.formErrors['addressPort'] = 'Endereço e número da porta são obrigatórios.';
       } else { this.formErrors['addressPort'] = ''; }
@@ -137,7 +137,7 @@ export class EditCompanyComponent {
       } else { this.formErrors['locality'] = ''; }
       return;
     }
-    
+
     this.companyObj.address = this.address;
 
     this.companiesService.edit(this.companyObj, this.company_id).subscribe({
@@ -174,13 +174,13 @@ export class EditCompanyComponent {
   formatPostalCode(event: Event): void {
     const input = event.target as HTMLInputElement;
     let value = input.value;
-  
+
     value = value.replace(/[^0-9]/g, '');
-  
+
     if (value.length > 4) {
       value = `${value.slice(0, 4)}-${value.slice(4, 7)}`;
     }
-  
+
     input.value = value;
     this.addressObj.postalCode = value;
   }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiRoutes } from '../config/api-routes';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Court } from '../models/court';
+import { Court } from '../interfaces/court';
 
 @Injectable({
   providedIn: 'root'

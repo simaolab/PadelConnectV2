@@ -1,3 +1,5 @@
+<modal></modal>
+
 <page-top title="{{ courtObj.name }}"></page-top>
 
 <div class="container">
@@ -17,57 +19,81 @@
 
         <div class="second-info">
               <h2 class="info-title">Informações</h2>
-              <div class="sub-info">
-                <h4 class="title-info">Tipo de chão</h4>
-                <div *ngIf="courtObj.illumination === 1" class="service success">
-                  <i class="ri-lightbulb-flash-line"></i>
-                  <p>Com Iluminação</p>
+              <div class="info-box">
+                <div class="sub-info">
+                  <h4 class="title-info">Tipo de chão</h4>
+                  <div *ngIf="courtObj.illumination === 1" class="service success">
+                    <i class="ri-lightbulb-flash-line"></i>
+                    <p>Com Iluminação</p>
+                  </div>
+                  <div *ngIf="courtObj.illumination === 0" class="service danger">
+                    <i class="ri-lightbulb-line"></i>
+                    <p>Sem Iluminação</p>
+                  </div>
                 </div>
-                <div *ngIf="courtObj.illumination === 0" class="service danger">
-                  <i class="ri-lightbulb-line"></i>
-                  <p>Sem Iluminação</p>
-                </div>
-              </div>
 
-              <div class="sub-info">
-                <h4 class="title-info">Cobertura</h4>
-                <div *ngIf="courtObj.cover === 1" class="service success">
-                  <i class="ri-building-2-line"></i>
-                  <p>Interior</p>
+                <div class="sub-info">
+                  <h4 class="title-info">Cobertura</h4>
+                  <div *ngIf="courtObj.cover === 1" class="service success">
+                    <i class="ri-building-2-line"></i>
+                    <p>Interior</p>
+                  </div>
+                  <div *ngIf="courtObj.cover === 0" class="service danger">
+                    <i class="ri-tree-line"></i>
+                    <p>Exterior</p>
+                  </div>
                 </div>
-                <div *ngIf="courtObj.cover === 0" class="service danger">
-                  <i class="ri-tree-line"></i>
-                  <p>Exterior</p>
-                </div>
-              </div>
 
-              <div class="sub-info">
-                <h4 class="title-info">Estado</h4>
-                <div *ngIf="courtObj.status === 'Disponivel'" class="service success">
-                  <i class="ri-checkbox-circle-line"></i>
-                  <p>Disponível</p>
-                </div>
-                <div *ngIf="courtObj.status === 'Indisponivel'" class="service danger">
-                  <i class="ri-close-circle-line"></i>
-                  <p>Indisponível</p>
+                <div class="sub-info">
+                  <h4 class="title-info">Estado</h4>
+                  <div *ngIf="courtObj.status === 'Disponivel'" class="service success">
+                    <i class="ri-checkbox-circle-line"></i>
+                    <p>Disponível</p>
+                  </div>
+                  <div *ngIf="courtObj.status === 'Indisponivel'" class="service danger">
+                    <i class="ri-close-circle-line"></i>
+                    <p>Indisponível</p>
+                  </div>
                 </div>
               </div>
         </div>
-      </div>
 
-      <div class="calendar">
-          <div class="calendar-container">
+        <div class="reservation">
+          <h2 class="info-title">Reservar</h2>
+          <div class="inputs-container">
+            
+            <div class="input-box">
+              <h4 class="title-info" for="startDate">Data de Início:</h4>
+              <input
+                id="startDate"
+                type="datetime-local"
+                [(ngModel)]="startDate"
+                (change)="calculatePrice()"
+                [min]="today"/>
+            </div>
+
+            <div class="input-box">
+              <h4 class="title-info" for="endDate">Data de Fim:</h4>
+              <input
+                id="endDate"
+                type="datetime-local"
+                [(ngModel)]="endDate"
+                (change)="calculatePrice()"
+                [min]="startDate || today"/>
+            </div>
             
           </div>
+          
           <div class="card-content-price">
             <div class="price">
                 <span>Preço: 10€/h</span>
             </div>
             <div class="card-content-button">
-                <a class="btn reserve">Adicionar ao carrinho</a>
+                <a class="btn reserve" (click)="addToCart()">Adicionar ao carrinho</a>
             </div>
         </div>
       </div>
+     </div>
 
     </div>
 

@@ -2,7 +2,7 @@
 async function obterCamposDaAPI() {
     try {
         const response = await fetch('https://api.padelconnect.pt/api/fields/');
-        
+
         if (!response.ok) {
             throw new Error(`Erro na resposta da API: ${response.status}`);
         }
