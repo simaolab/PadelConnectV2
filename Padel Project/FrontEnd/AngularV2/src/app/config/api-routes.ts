@@ -8,6 +8,7 @@ export const ApiRoutes = {
   users: 'https://api.padelconnect.pt/api/users/',
   userInfo: 'https://api.padelconnect.pt/api/user',
   client: 'https://api.padelconnect.pt/api/clients/',
+  updatePassword: 'https://api.padelconnect.pt/api/user/update-password',
 
   //COURTS
   courts: 'https://api.padelconnect.pt/api/fields/',
@@ -22,5 +23,8 @@ export const ApiRoutes = {
   nationalities: 'https://api.padelconnect.pt/api/nationalities/',
 
   //RESERVATIONS
-  reservations: 'https://api.padelconnect.pt/api/reservations/'
+  reservations: 'https://api.padelconnect.pt/api/reservations/',
+
+  //ROLES
+  roles: 'https://api.padelconnect.pt/api/roles/'
 }

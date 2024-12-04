@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\NIFValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -20,11 +21,17 @@ class StoreCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:companies|min:2|max:100',
+            'name' => [
+                'required',
+                'unique:companies',
+                'min:2',
+                'max:100',
+                'regex:/^[a-zA-ZÀ-ÿ0-9.,&\-\(\)\/\s]+$/'
+            ],
             'nif' => [
                 'required',
-                'regex:/^[5][0-9]{8}$/',
-                'unique:companies,nif'
+                new NifValidationRule(),
+                'unique:companies,nif',
             ],
             'contact' => [
                 'required',

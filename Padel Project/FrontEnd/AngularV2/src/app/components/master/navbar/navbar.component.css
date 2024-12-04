@@ -1,5 +1,6 @@
 .navbar {
   width: 100%;
+  max-width: 100vw;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -7,12 +8,22 @@
   background: transparent;
   padding: 2rem;
   position: fixed;
+  top: 0;
   transition: all ease 300ms;
   z-index: 1000;
 }
 
+#menu-icon {
+  display: none;
+  cursor: pointer;
+}
+
+.links i {
+  display: none;
+}
+
 .navbar.scrolled {
-  background: var(--color-primary);
+  background: rgba(0, 0, 0, 0.9);
   transition: all ease 300ms;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -29,7 +40,7 @@
   font-size: var(--font-size);
 }
 
-.links-box a {
+.links-box .links a{
   color: var(--color-white);
   transition: all ease 300ms;
 }
@@ -82,4 +93,112 @@
 
 .bx-menu {
   display: none;
+}
+
+@media screen and (max-width: 1250px) {
+  #menu-icon {
+    display: block;
+  }
+
+  .links {
+    width: 20%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+  }
+
+  .links i {
+    display: flex;
+  }
+
+  .links-box {
+    position: absolute;
+    top: 100%;
+    left: -100%;
+    width: 100%;
+    gap: 5%;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    transition: all ease 300ms;
+  }
+
+  .links-box.scrolled {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .links-box.active {
+    left: 0;
+  }
+
+  .links-box a {
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    transform: translateX(-20rem);
+    transition: all ease 300ms;
+  }
+
+  .links-box.active a {
+    transform: translateX(0);
+    transition-delay: 0.2s;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .btn.btn-reservation {
+    display: none !important;
+  }
+
+  .links-box a.active {
+    border-bottom: none;
+  }
+
+  .links-box a:hover.active {
+    border-bottom: none;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .links p {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    position: fixed;
+    top: 0;
+    height: unset;
+  }
+
+  .links-box {
+    padding: 0;
+  }
+
+  .icon-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .user-box {
+    width: 100%;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  #menu-icon {
+    display: block;
+    top: 1rem;
+  }
 }

@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,9 +15,9 @@
 
 
 .modal-card {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
+  background-color: var(--color-white);
+  padding: 2rem;
+  border-radius: var(--border-radius-2);
   width: 80%;
   max-width: 500px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -26,27 +26,19 @@
   flex-direction: column;
 }
 
-/* .modal-error {
-  border: 1px solid var(--color-danger);
-}
-
-.modal-success {
-  border: 1px solid var(--color-success);
-} */
-
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .modal-header h2 {
   margin: 0;
+  font-size: var(--font-subtitle);
 }
 
 .success {
-  color: var(--color-success);
+  color: var(--color-primary);
 }
 
 .error {
@@ -62,10 +54,16 @@
   border: none;
   font-size: 25px;
   cursor: pointer;
-  color: var(--color-gray);
+  color: var(--color-danger);
 }
 
 .modal-body {
-  font-size: 16px;
-  color: var(--color-dark);
+  font-size: var(--font-smalls);
+  padding-top: 1.5rem;
+}
+
+button{
+  display: flex;
+  align-items: center;
+  justify-self: center;
 }

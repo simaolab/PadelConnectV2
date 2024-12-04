@@ -28,6 +28,8 @@ import { Court } from '../../../../../models/court';
 })
 
 export class CreateCourtComponent {
+
+  todayDate: string = new Date().toISOString().split('T')[0];
   formErrors: { [key: string]: string } = {};
 
   courtObj: Court = {
@@ -87,19 +89,6 @@ export class CreateCourtComponent {
     }
 
     create() {
-
-      // this.formatLastMaintenanceDate();
-
-      if (this.courtObj.last_maintenance) {
-        const dateParts = this.courtObj.last_maintenance.split('-');
-        if (dateParts.length === 3) {
-          const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
-          this.courtObj.last_maintenance = formattedDate;
-        }
-      }
-
-      console.log(this.courtObj)
-
       this.courtsService.create(this.courtObj).subscribe({
         next: (res: any) => {
           if(res.status === 'success') {
@@ -128,14 +117,25 @@ export class CreateCourtComponent {
       })
     }
 
-    // private formatLastMaintenanceDate(): void {
-    //   if (this.courtObj.last_maintenance) {
-    //     const dateParts = this.courtObj.last_maintenance.split('-');
-    //     if (dateParts.length === 3) {
-    //       this.courtObj.last_maintenance = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
-    //     }
-    //   }
-    // }
+    formatPriceHour(event: Event): void {
+      const input = event.target as HTMLInputElement;
+      let value = input.value;
+  
+      value = value.replace(/[^0-9\.]/g, '');
+      if ((value.match(/\./g) || []).length > 1) {
+        value = value.replace(/\.$/, ''); 
+      }
+      if (value.length > 2 && !value.includes('.')) {
+        value = value.slice(0, 2) + '.' + value.slice(2);
+      }
+      if (value.includes('.')) {
+        const [integerPart, decimalPart] = value.split('.');
+        value = integerPart + '.' + (decimalPart.length > 2 ? decimalPart.substring(0, 2) : decimalPart);
+      }
+      
+      input.value = value;
+      this.courtObj.price_hour = value ? parseFloat(value) : 0;
+    }
 
     loadCompanies(): void {
       this.companiesService.index().subscribe({

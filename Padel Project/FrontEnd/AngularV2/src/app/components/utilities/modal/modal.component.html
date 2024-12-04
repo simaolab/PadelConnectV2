@@ -5,7 +5,7 @@
       'modal-success': type === 'Success'
     }">
       <div class="modal-header">
-        <h2 [ngClass]="{'error': type === 'Error', 'success': type === 'Success', 'message': type === 'Message'}">{{ type }}</h2>
+        <h2 [ngClass]="{'error': type === 'Erro', 'success': type === 'Successo', 'message': type === 'Mensagem'}">{{ type }}</h2>
         <button (click)="closeModal()">
           <i class='bx bx-x'></i>
         </button>

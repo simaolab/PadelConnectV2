@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\NIFValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -33,13 +34,13 @@ class UpdateCompanyRequest extends FormRequest
             ],
             'nif'           => [
                 'required',
-                'regex:/^(5)[0-9]{8}$/',
+                new NifValidationRule(),
                 Rule::unique('companies')->ignore($this->route('company')),
             ],
             'contact'           => [
                 'nullable',
                 'regex:/^(91|92|93|96|94|95)[0-9]{7}$/',
-                Rule::unique('companies')->ignore($this->route('company')),
+                Rule::unique('companies')->ignore($this->route('company'))
             ],
             'email' => [
                 'required',
@@ -64,13 +65,11 @@ class UpdateCompanyRequest extends FormRequest
             'name.unique'           => 'O nome da empresa já existe, use outro nome',
             'name.required'         => 'O nome da empresa é um campo obrigatório',
 
-            'nif.regex'             => 'O NIF tem de ter exatamente 9 digitos e começar por 5',
             'nif.unique'            => 'O NIF inserido já se encontra associado a outra empresa.',
             'nif.required'          => 'O NIF é um campo obrigatório',
 
             'contact.regex'         => 'O contacto tem de ser um contacto válido português.',
             'contact.unique'        => 'O contacto inserido já está associado a outro cliente.',
-            'contact.required'      => 'O contacto é um campo obrigatório.',
 
             'email.email'           => 'Coloque um email válido (ex.: user@padelconnect.pt).',
             'email.unique'          => 'O email inserido já está associado a outro cliente.',
@@ -84,7 +83,7 @@ class UpdateCompanyRequest extends FormRequest
         //We need to use HttpResponse to break the current task execution and show the errors
         throw new HttpResponseException(response()->json([
             'message' => 'Erro ao atualizar a empresa:',
-            'errors' => $validator->errors()
+            'error(s)' => $validator->errors()
         ], 422));
     }
 }

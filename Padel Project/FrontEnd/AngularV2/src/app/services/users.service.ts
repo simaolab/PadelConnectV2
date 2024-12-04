@@ -33,14 +33,14 @@ export class UsersService {
       birthday: '',
       last_login: '',
       email_verified_at: '',
-      new_user: false,
-      user_blocked: false,
-      blocked_at: '',
-      role: ''
+      new_user: 0,
+      user_blocked: 0,
+      blocked_at: null,
+      role_id: ''
     }, user_id: number): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
+    
     return this.http.put(`${ApiRoutes.users}${user_id}`, customerObj, { headers });
   }
 
@@ -64,5 +64,11 @@ export class UsersService {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.put<any>(`${ApiRoutes.client}${client_id}`, clientObj, { headers });
+  }
+
+  updatePassword(passwordData: { current_password: string, new_password: string, new_password_confirmation: string }): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put(`${ApiRoutes.updatePassword}`, passwordData, { headers });
   }
 }

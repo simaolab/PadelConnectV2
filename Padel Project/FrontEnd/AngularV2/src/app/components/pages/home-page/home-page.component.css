@@ -236,28 +236,28 @@
     .titleSlogan h1 {
       font-size: 3.5rem;
     }
-  
+
     .titleSlogan p {
       font-size: 1rem;
     }
-  
+
     .menu {
       font-size: 1rem;
     }
-  
+
     .menu button {
       font-size: 1rem;
     }
-  
+
     .numCourts h3 {
       font-size: 1.5rem;
     }
-    
+
     .numCourts p {
       font-size: 1rem;
     }
   }
-  
+
   @media screen and (max-width: 1000px) {
     .middlePageMenu {
       height: 90vh;
@@ -267,7 +267,7 @@
       margin: auto;
       text-align: center;
     }
-  
+
     .title {
       width: 100%;
       margin: auto;
@@ -276,21 +276,21 @@
       transform: translateY(-400px);
       transition: all ease 400ms;
     }
-  
+
     .titleSlogan h1 {
       font-size: 2rem !important;
       color: var(--color-white);
     }
-  
+
     .titleSlogan p {
       font-size: 1rem;
       color: var(--color-white);
     }
-  
+
     .menu button {
       font-size: 1rem;
     }
-  
+
     .numCourts {
       width: 100%;
       display: flex;
@@ -298,13 +298,13 @@
       transform: translateY(300px);
       transition: transform ease 700ms;
     }
-  
+
     .numCourts h3 {
       color: var(--color-warning);
       font-size: 1.8rem;
       text-align: center;
     }
-  
+
     .numCourts p {
       color: var(--color-white);
       font-size: 1rem;
@@ -312,26 +312,26 @@
       flex-direction: column;
       align-items: center;
     }
-  
+
     .menu {
       display: none;
     }
-  
+
     .courts {
       width: 10%;
     }
   }
-  
+
   /* =============================
      ABOUT US MEDIA QUERY
      ============================= */
-  
+
      @media screen and (max-width: 1000px) {
       .block-2 {
         flex-direction: column;
         padding: 0 2rem;
       }
-    
+
       .left-column {
         width: 100%;
         flex-direction: column;
@@ -339,30 +339,30 @@
         justify-content: center;
         height: auto;
       }
-      
+
       .left-column .block-2-img {
         display: none;
       }
-      
+
       .right-column {
         width: 100%;
         align-items: center;
         justify-content: center;
         height: auto;
       }
-      
+
       .right-column .block-title {
         font-size: 2rem;
         text-align: center;
         margin-bottom: 1rem;
       }
-      
+
       .right-column .block-text .text {
-        font-size: 1rem;
+        font-size: 1.5rem;
         color: var(--color-gray);
         text-align: center;
       }
-      
+
       .btn.about-us {
         width: 12rem;
         margin: auto;
@@ -372,66 +372,85 @@
   /* =============================
      SERVICES MEDIA QUERY
      ============================= */
-  
+
      @media screen and (max-width: 1000px) {
       .servicesSection {
-        padding: 2rem 1rem; /* Reduzindo o espaçamento interno */
+        padding: 2rem 1rem;
       }
-    
+
       .contentService {
         flex-direction: column;
-        align-items: center; /* Centralizando os itens na coluna */
+        align-items: center;
         padding-top: 5rem;
       }
-    
+
       .contentService h2 {
-        font-size: 2.5rem; /* Reduzindo o tamanho da fonte para se ajustar melhor */
+        font-size: 2.5rem;
         text-align: center;
-        width: 100%; /* Garantindo que o título ocupe toda a largura disponível */
-      }
-    
-      .contentService p {
-        font-size: 1rem; /* Reduzindo o tamanho da fonte do parágrafo */
-        text-align: center;
-        width: 100%; /* Aumentando a largura do texto para 90% para melhor visualização */
-      }
-    
-      .titleService {
-        text-align: center; /* Centralizando o título */
         width: 100%;
       }
-    
+
+      .contentService p {
+        font-size: 1rem;
+        text-align: center;
+        width: 100%;
+      }
+
+      .titleService {
+        text-align: center;
+        width: 100%;
+      }
+
       .iconService {
         margin-top: 2rem;
-        justify-content: center; /* Centralizando os ícones */
-        padding-bottom: 5rem; /* Ajustando o espaçamento inferior */
+        justify-content: center;
+        padding-bottom: 5rem;
       }
-    
+
       .iconService div {
-        width: 45%; /* Ajustando a largura dos ícones para se ajustarem melhor em telas pequenas */
+        width: 45%;
         margin-bottom: 2rem;
       }
-    
+
       .iconService i {
-        font-size: 3rem; /* Reduzindo o tamanho dos ícones */
+        font-size: 3rem;
       }
-    
+
       .iconService h3 {
-        font-size: 1.2rem; /* Reduzindo o tamanho do título abaixo de cada ícone */
+        font-size: 1.2rem;
       }
     }
 
     @media screen and (max-width: 600px) {
-      /* Ajuste para exibir os ícones em coluna */
       .iconService {
-        flex-direction: column; /* Alinha todos os ícones na coluna */
-        justify-content: flex-start; /* Coloca os ícones no topo da coluna */
+        flex-direction: column;
+        justify-content: flex-start;
         align-items: center;
 
       }
-    
+
       .iconService div {
-        width: 100%; /* Garantindo que cada ícone ocupe a largura inteira */
+        width: 100%;
         margin-bottom: 2rem;
+      }
+
+      .title h1 {
+        font-size: 4.5rem;
+      }
+    }
+
+    @media screen and (max-width: 490px) {
+      .title h1 {
+        font-size: 3.5rem;
+      }
+    }
+
+    @media screen and (max-width: 390px) {
+      .title h1 {
+        font-size: 3rem;
+      }
+
+      .title p {
+        font-size: 1.2rem;
       }
     }

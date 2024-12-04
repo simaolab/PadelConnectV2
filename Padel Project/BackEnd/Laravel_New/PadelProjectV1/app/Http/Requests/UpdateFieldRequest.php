@@ -28,12 +28,15 @@ class UpdateFieldRequest extends FormRequest
                 'max:120',
                 Rule::unique('fields')->ignore($this->route('field')),
             ],
-            'price_hour' => 'required|numeric|min:0',
+            'price_hour' => 'required|numeric|min:1|max:99.99',
             'type_floor' => 'required|string|in:Piso Cimento,Piso Madeira,Piso Acrílico,Piso Relva Sintética|max:50',
             'illumination' => 'nullable|boolean',
             'cover' => 'nullable|boolean',
+            'shower_room' => 'nullable|boolean',
+            'lockers' => 'nullable|boolean',
+            'rent_equipment' => 'nullable|boolean',
             'status' => 'required|string|max:50',
-            'last_maintenance' => 'nullable|date',
+            'last_maintenance' => 'nullable|date|before_or_equal:today',
         ];
     }
 
@@ -51,7 +54,8 @@ class UpdateFieldRequest extends FormRequest
 
             'price_hour.required'   => 'O preço/hora é um campo obrigatório.',
             'price_hour.numeric'    => 'O valor introduzido é inválido.',
-            'price_hour.min'        => 'O preço/hora tem de ser maior que 0€.',
+            'price_hour.min'        => 'O preço/hora tem de ser maior que 1€.',
+            'price_hour.max'        => 'O preço/hora não pode exceder os 99.99€.',
 
             'type_floor.required'   => 'O tipo de piso é um campo obrigatório',
             'type_floor.string'     => 'O tipo de piso não aceita caractéres especiais.',
@@ -64,7 +68,8 @@ class UpdateFieldRequest extends FormRequest
             'status.string'         => 'O estado do campo não pode ter caractéres especiais.',
             'status.max'            => 'O estado do campo não pode exceder os 50 caracteres.',
 
-            'last_maintenance.date' => 'A data da última manutenção tem de ter um formato válido.',
+            'last_maintenance.date' => 'A data da última manutenção está inválida.',
+            'last_maintenance.before_or_equal' => 'A data da última manutenção não pode ser posterior a hoje.',
         ];
     }
 

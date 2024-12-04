@@ -40,14 +40,15 @@ class Field extends Model
     //The methods are automatically called by Laravel
 
     //This is a mutator which allows us to transform an attribute before saving
-    public function setLastMaintenanceAttribute($value)
+    
+    /* public function setLastMaintenanceAttribute($value)
     {
         //Converts the last maintenance date received as d/m/Y to a Carbon object
         //Then converts the Carbon object into a string Y-m-d
         if (!empty($value)) {
             $this->attributes['last_maintenance'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
         }
-    }
+    } */
 
     //Shows the last maintenance date with format d/m/Y
     //Carbon is a library that manipulates dates

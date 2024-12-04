@@ -20,15 +20,19 @@ Route::name('api.')->group(function () {
     Route::post('register', [AuthenticationController::class, 'register'])->name('register');
     Route::post('login', [AuthenticationController::class, 'login'])->name('login');
     Route::get('fields', [FieldController::class, 'index'])->name('fields');
+    Route::get('/fields/search/{name?}', [FieldController::class, 'search']);
 });
 
 //With authentication
 Route::middleware('auth:api')->group(function () {
     Route::get('user', [AuthenticationController::class, 'userInfo']);
     Route::post('logout', [AuthenticationController::class, 'logout']);
-    Route::get('/fields/search/{name?}', [FieldController::class, 'search']);
+    Route::put('user/update-password', [UserController::class, 'updatePassword']);
     Route::get('fields/{id}', [FieldController::class, 'show']);
     Route::apiResource('reservations', ReservationController::class);
+    Route::post('/cart/add', [ReservationController::class, 'addCart']);
+    Route::post('/cart/remove', [ReservationController::class, 'removeFromCart']);
+    Route::get('/cart/view', [ReservationController::class, 'viewCart']);
     Route::get('reservations/search/{reservation?}', [ReservationController::class, 'search']);
     Route::get('/reservations/deleted', [ReservationController::class, 'indexDeleted']);
     Route::apiResource('cancellations', CancellationController::class);

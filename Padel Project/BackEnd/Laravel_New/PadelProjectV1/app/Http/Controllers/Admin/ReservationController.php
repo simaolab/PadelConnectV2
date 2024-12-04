@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use App\Http\Requests\StoreCancellationRequest;
 use Carbon\Carbon;
+use App\Models\Field;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -56,28 +58,53 @@ class ReservationController extends Controller
      */
     public function store(StoreReservationRequest $request)
     {
-        // Verify the data sent
-        // validated() follows the StoreReservationRequest rules
         $validatedData = $request->validated();
 
-        // Remove the 'fields' key from the validated data
-        //Use of Arr::except: This helper is designed to exclude specified keys from an array.
+        // Formata as datas da reserva
         $reservationData = Arr::except($validatedData, ['fields']);
+        $reservationData['start_date'] = Carbon::createFromFormat('d/m/Y', $reservationData['start_date'])->format('Y-m-d');
+        $reservationData['end_date'] = Carbon::createFromFormat('d/m/Y', $reservationData['end_date'])->format('Y-m-d');
 
-        // Create a new reservation with the verified data
+        // Verifica se o carrinho tem itens
+        $cart = session()->get('cart', []);
+        if (empty($cart)) {
+            return response()->json(['message' => 'Seu carrinho está vazio. Adicione campos antes de finalizar a reserva.'], 400);
+        }
+
+        // Verifica conflitos de datas
+        $conflictDate = Reservation::where('start_date', '<=', $reservationData['end_date'])
+            ->where('end_date', '>=', $reservationData['start_date'])
+            ->exists();
+
+        if ($conflictDate) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Já existe uma reserva para as datas selecionadas.',
+            ], 409);
+        }
+
+        // Cria a reserva
         $reservation = Reservation::create($reservationData);
 
-        // Sync the fields relationship
-        $reservation->fields()->sync($request->input('fields'));
+        // Associa os campos do carrinho à reserva na tabela intermediária
+        foreach ($cart as $fieldId => $details) {
+            $reservation->fields()->attach($fieldId, [
+                'start_hour_date' => $details['start_hour_date'],
+                'end_hour_date' => $details['end_hour_date'],
+                'value' => $details['value'],
+            ]);
+        }
 
-        // Fetch the newly created reservation with its related fields
-        $newReservation = Reservation::where('id', $reservation->id)->with('fields')->get();
+        // Limpa o carrinho após finalizar a compra
+        session()->forget('cart');
 
         return response()->json([
             'status' => 'success',
             'message' => 'Reserva criada com sucesso.',
+            'reservation' => $reservation->load('fields'),
         ], 201);
     }
+
     /**
      * Display the specified resource.
      */
@@ -220,7 +247,7 @@ class ReservationController extends Controller
                 'cancellation' => $cancellation,
             ], 200);
 
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             // Return a server error if an exception is thrown
             return response()->json(['error' => $exception->getMessage()], 500);
         }
@@ -267,6 +294,4 @@ class ReservationController extends Controller
             return response()->json(['error' => $exception->getMessage()], 500);
         }
     }
-
-
 }

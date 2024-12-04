@@ -44,6 +44,9 @@
 .card-content-main{
     width: 60%;
     margin-bottom: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
 }
 
 .divider {
@@ -95,6 +98,10 @@
   font-size: var(--font-size);
 }
 
+.sub-info i {
+  font-size: 2rem;
+}
+
 .card-content-address {
     font-size: 1.3rem;
     color: #666;
@@ -140,26 +147,32 @@
 }
 
 .services-icons {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: start;
-    align-items: center;
+    display: inline-flex;
     margin-top: 2rem;
+    gap: 60px;
 }
 
-.services-icons p {
-    font-size: 1.3rem;
-    margin-left: 1rem;
-    color: #666;
+.services {
+  display: inline-flex;
+  align-items: center;
+}
+
+.service {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.services span {
+  font-size: var(--font-size);
 }
 
 .services-icons i {
     font-size: 2.8rem;
-    display: flex;
-    flex-direction: row;
+    display: inline-flex;
     align-items: center;
-    color: var(--color-primary);
     margin-right: 5px;
+    color: var(--color-gray);
 }
 
 /* Botão de reservar */
@@ -312,3 +325,71 @@ full-calendar {
 /* @media screen and (max-width: ) {
 
 } */
+
+.ri-lightbulb-flash-line{
+  color: var(--color-warning) !important;
+}
+
+
+.ri-drop-line{
+  color: var(--color-blue-2) !important;
+}
+
+.ri-tree-line{
+  color: var(--color-primary) !important;
+}
+
+.ri-building-2-line,
+.ri-lightbulb-line,
+.ri-blur-off-line{
+  color: var(--color-gray) !important;
+}
+
+.ri-checkbox-circle-line{
+  color: var(--color-primary) !important;
+}
+
+.ri-prohibited-2-line,
+.ri-close-circle-line,
+.ri-lock-unlock-line{
+  color: var(--color-danger) !important;
+}
+
+.status-wrapper {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  min-width: 125px;
+}
+
+.no-courts {
+  font-size: 1.1rem;
+  color: var(--color-danger);
+}
+
+.status-disponivel,
+.status-inativo,
+.status-occupied {
+  display: flex;
+  color: var(--color-white);
+  padding: 0.2rem 0.5rem;
+  width: 75%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  font-size: var(--font-smaller);
+}
+
+.status-disponivel {
+  background: rgba(20, 182, 20, 0.5) !important;
+}
+
+.status-inativo {
+  background: rgba(255, 165, 0, 0.5) !important;
+}
+
+.status-occupied {
+  background: rgba(241, 16, 16, 0.5) !important;
+}

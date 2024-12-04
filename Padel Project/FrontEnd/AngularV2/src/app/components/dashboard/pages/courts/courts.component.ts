@@ -46,7 +46,7 @@ export class CourtsComponent {
             if (data && data.message) {
               if(this.router.url.includes('/courts')) {
                 this.dashboardComponent.showModal(
-                  'Message',
+                  'Mensagem',
                   data.message
                 );
               }
@@ -60,7 +60,7 @@ export class CourtsComponent {
         error: (err: any) => {
           if(this.router.url.includes('/courts')) {
             this.dashboardComponent.showModal(
-              'Error',
+              'Erro',
               'Erro ao tentar carregar a lista de campos'
             );
           }

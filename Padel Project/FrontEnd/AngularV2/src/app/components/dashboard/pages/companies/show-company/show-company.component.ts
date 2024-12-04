@@ -74,13 +74,7 @@ export class ShowCompanyComponent {
 
           const addressParts = company.address.split(', ');
 
-          if (addressParts.length === 4) {
-            this.addressObj = {
-              addressPort: addressParts[0] + ', ' + addressParts[1],
-              postalCode: addressParts[2],
-              locality: addressParts[3],
-            };
-          } else if (addressParts.length === 3) {
+          if (addressParts.length === 3) {
             this.addressObj = {
               addressPort: addressParts[0],
               postalCode: addressParts[1],
@@ -92,7 +86,7 @@ export class ShowCompanyComponent {
           const errorMessage = err?.error?.message;
 
           this.dashboardComponent.showModal(
-            'Error',
+            'Erro',
             errorMessage,
             () => {
               this.router.navigate(['/dashboard/companies']);
@@ -109,7 +103,7 @@ export class ShowCompanyComponent {
       next: (res: any) => {
           if(this.router.url.includes('/company')) {
             this.dashboardComponent.showModal(
-              'Success',
+              'Successo',
               res.message,
               () => {
                 this.router.navigate(['/dashboard/companies']);
@@ -121,7 +115,7 @@ export class ShowCompanyComponent {
         const errorMessage = err?.error?.message;
 
         this.dashboardComponent.showModal(
-          'Error',
+          'Erro',
           errorMessage,
         );
       }

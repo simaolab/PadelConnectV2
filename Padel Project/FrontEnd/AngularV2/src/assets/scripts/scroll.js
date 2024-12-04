@@ -1,4 +1,5 @@
     // Função para verificar se o elemento está visível na viewport
+
     function isElementInViewport(el) {
         const rect = el.getBoundingClientRect();
         return (

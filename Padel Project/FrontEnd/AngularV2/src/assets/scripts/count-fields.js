@@ -3,18 +3,15 @@ async function obterCamposDaAPI() {
     try {
         const response = await fetch('https://api.padelconnect.pt/api/fields/');
         
-        if (!response.ok) {  // Verifica se a resposta foi bem-sucedida
+        if (!response.ok) {
             throw new Error(`Erro na resposta da API: ${response.status}`);
         }
 
-        const data = await response.json();  // Parseia a resposta JSON
-        console.log('Resposta da API:', data);  // Verifique a resposta completa
+        const data = await response.json();
 
-        // Acesse o array de campos diretamente através de 'data.fields'
-        const campos = data.fields || [];  // Use 'fields' como chave
-        console.log('Campos:', campos);  // Verifique os campos
+        const campos = data.fields || [];
 
-        contarCampos(campos);  // Chame a função para processar os campos
+        contarCampos(campos);
     } catch (error) {
         console.error('Erro ao obter os dados da API', error);
     }

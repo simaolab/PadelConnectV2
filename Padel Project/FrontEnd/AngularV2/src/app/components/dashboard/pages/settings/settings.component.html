@@ -21,32 +21,33 @@
                             <i class="ri-user-3-line"></i>
                             <label for="username">Nome utilizador</label>
                         </div>
-                        <input type="text" name="username" value="{{ clientObj.username }}" readonly>
+                        <input type="text" name="username" value="{{ clientObj.username }}" disabled>
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-fingerprint-line"></i>
                             <label for="nif">NIF</label>
                         </div>
-                        <input type="text" name="nif" value="{{ clientObj.nif }}" readonly>
+                        <input type="text" name="nif" value="{{ clientObj.nif }}" disabled>
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-cake-2-line"></i>
                             <label for="birthday">Data Nascimento</label>
                         </div>
-                        <input type="text" name="birthday" value="{{ clientObj.birthday }}" readonly>
+                        <input type="text" name="birthday" value="{{ clientObj.birthday }}" disabled>
                     </div>
                 </div>
                 <div class="contact-detail">
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-phone-line"></i>
-                            <label for="phone">Contacto</label>
+                            <label for="contact">Contacto</label>
                         </div>
-                        <input type="text" name="phone"
+                        <input type="text" name="contact"
                         value="{{ clientObj.contact !== 0 ? clientObj.contact : 'Não definido' }}"
                         [(ngModel)]="clientObj.contact" placeholder="Contacto">
+                        <small *ngIf="formErrors['contact']" class="small-error">{{ formErrors['contact'] }}</small>
                     </div>
                 </div>
                 <div class="contact-detail">
@@ -55,7 +56,7 @@
                             <i class="ri-mail-line"></i>
                             <label for="email">Email</label>
                         </div>
-                        <input type="text" name="email" value="{{ clientObj.email }}" readonly>
+                        <input type="text" name="email" value="{{ clientObj.email }}" disabled>
                     </div>
                 </div>
             </div>
@@ -75,6 +76,7 @@
                         </div>
                         <input type="text" name="first_name" value="{{ clientObj.first_name }}"
                         [(ngModel)]="clientObj.first_name" placeholder="Primeiro Nome">
+                        <small *ngIf="formErrors['first_name']" class="small-error">{{ formErrors['first_name'] }}</small>
                     </div>
                     <div class="detail">
                         <div class="label-container">
@@ -83,29 +85,37 @@
                         </div>
                         <input type="text" name="last_name" value="{{ clientObj.last_name }}"
                         [(ngModel)]="clientObj.last_name" placeholder="Último Nome">
+                        <small *ngIf="formErrors['last_name']" class="small-error">{{ formErrors['last_name'] }}</small>
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-flag-line"></i>
-                            <label for="nacionality">Nacionalidade</label>
+                            <label for="nationality_id">Nacionalidade</label>
                         </div>
                         <dropdown
                             [items]="nationalities"
                             labelKey="name"
                             valueKey="id"
                             placeholder="Selecione uma nacionalidade"
+                            [value]="clientObj.nationality_id"
                             (selectionChange)="onNationalitySelected($event)">
                         </dropdown>
-                        <!-- <input type="text" name="nationality" value="{{ clientObj.nationality }}"
-                        [(ngModel)]="clientObj.nationality" placeholder="Nacionalidade"> -->
+                        <small *ngIf="formErrors['nationality_id']" class="small-error">{{ formErrors['nationality_id'] }}</small>
                     </div>
                     <div class="detail">
                         <div class="label-container">
                             <i class="ri-men-line"></i>
-                            <label for="first_name">Género</label>
+                            <label for="gender">Género</label>
                         </div>
-                        <input type="text" name="gender" value="{{ clientObj.gender }}"
-                        [(ngModel)]="clientObj.gender" placeholder="Género">
+                        <dropdown
+                            [items]="genderOptions"
+                            labelKey="label"
+                            valueKey="value"
+                            placeholder="Selecione o género"
+                            [value]="clientObj.gender"
+                            (selectionChange)="onGenderSelected($event)">
+                        </dropdown>
+                        <small *ngIf="formErrors['gender']" class="small-error">{{ formErrors['gender'] }}</small>
                     </div>
                 </div>
                 <div class="data-detail">
@@ -142,17 +152,6 @@
                 <p class="description-text">Informações Comunicação</p>
                 <hr>
             </div>
-            <!-- <div class="container-forms">
-                <div class="data-detail">
-                    <div class="detail">
-                        <div class="label-container">
-                            <i class="ri-newspaper-line"></i>
-                            <label for="newsletter">Newsletter</label>
-                        </div>
-                        <input type="text" name="newsletter" value="{{ clientObj.newsletter }}" [(ngModel)]="clientObj.newsletter">
-                    </div>
-                </div>
-            </div> -->
             <div class="container-forms">
               <div class="data-detail">
                 <div class="detail">
@@ -169,12 +168,9 @@
                       (change)="toggleNewsletter($event)"
                       [checked]="clientObj.newsletter === 1"
                       class="input-toggle">
-
                     <div class="display">
                       <label class="toggle" for="newsletterSwitch">
                         <div class="circle">
-                          <!-- <span class="material-icons-sharp span off">clear</span>
-                          <span class="material-icons-sharp span on">done</span> -->
                           <i class="ri-chat-off-line i off no"></i>
                           <i class="ri-chat-heart-line i on yes"></i>
                         </div>
@@ -197,31 +193,66 @@
                   <div class="detail">
                       <div class="label-container">
                         <i class="ri-lock-password-line"></i>
-                        <label for="last_name">Password Atual</label>
+                        <label for="current_password">Password Atual</label>
                       </div>
-                      <input type="password" placeholder="Insira a sua password atual">
+                      <input
+                        id="current_password"
+                        type="password"
+                        name="current_password"
+                        [(ngModel)]="passwordObj.current_password"
+                        placeholder="Insira a sua password atual"
+                        required
+                        />
+                        <small *ngIf="formErrors['current_password']" class="small-error">{{ formErrors['current_password'] }}</small>
                   </div>
                 </div>
                 <div class="data-detail">
                   <div class="detail">
                       <div class="label-container">
                         <i class="ri-lock-unlock-line"></i>
-                        <label for="first_name">Nova Password</label>
+                        <label for="new_password">Nova Password</label>
                       </div>
-                      <input type="password" placeholder="Coloque a nova password">
-                  </div>
+                      <input
+                        id="new_password"
+                        type="password"
+                        name="new_password"
+                        (input)="evaluatePasswordStrength(passwordObj.new_password)"
+                        [(ngModel)]="passwordObj.new_password"
+                        placeholder="Coloque a nova password"
+                        required
+                        />
+
+                        <div class="password-strength-indicators">
+                            <span [ngClass]="{ 'valid': passwordStrengthStatus.length }">8 caracteres</span>
+                            <span [ngClass]="{ 'valid': passwordStrengthStatus.lowercase }">Letra a-z</span>
+                            <span [ngClass]="{ 'valid': passwordStrengthStatus.uppercase }">Letra A-Z</span>
+                            <span [ngClass]="{ 'valid': passwordStrengthStatus.number }">Número</span>
+                            <span [ngClass]="{ 'valid': passwordStrengthStatus.symbol }">Símbolo</span>
+                          </div>
+
+                        <small *ngIf="formErrors['new_password']" class="small-error">{{ formErrors['new_password'] }}</small>
+                        
+                    </div>
                   <div class="detail">
                     <div class="label-container">
                       <i class="ri-lock-unlock-line"></i>
-                      <label for="first_name">Confrmação Nova Password</label>
+                      <label for="new_password_confirmation">Confirmação Nova Password</label>
                     </div>
-                    <input type="password" placeholder="Confirme a nova password">
+                    <input
+                      id="new_password_confirmation"
+                      type="password"
+                      [(ngModel)]="passwordObj.new_password_confirmation"
+                      name="new_password_confirmation"
+                      placeholder="Confirme a nova password"
+                      required
+                    />
+                    <small *ngIf="formErrors['new_password_confirmation']" class="small-error">{{ formErrors['new_password_confirmation'] }}</small>
                   </div>
                 </div>
             </div>
           </div>
           <div class="button left">
-            <button class="btn edit" (click)="editClient()">
+            <button class="btn edit" (click)="updatePassword()">
               <i class="ri-edit-line"></i>
               Salvar alterações
             </button>
