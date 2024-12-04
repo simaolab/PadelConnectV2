@@ -142,13 +142,11 @@ export class EditCustomerComponent {
           this.roles = res.roles;
         },
       })
-    }
         error: (err: any) => {
           const message = err.error?.message || 'Erro ao carregar as roles';
           console.error(message);
         }
-      });
-    }
+      };
 
     getUserStatus(customer: any): string {
       if (customer.user_blocked) {
