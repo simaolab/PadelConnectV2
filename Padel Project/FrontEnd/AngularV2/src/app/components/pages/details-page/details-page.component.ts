@@ -12,6 +12,7 @@ import { formatDate } from '@angular/common';
 
 import { PageTopComponent } from '../../utilities/page-top/page-top.component';
 
+
 @Component({
   selector: 'app-details-page',
   standalone: true,
@@ -25,7 +26,7 @@ import { PageTopComponent } from '../../utilities/page-top/page-top.component';
   styleUrls: ['./details-page.component.css']
 })
 export class DetailsPageComponent implements OnInit {
-
+  
   @ViewChild(ModalComponent) modalComponent: ModalComponent | undefined;
 
   courtObj: Court = {

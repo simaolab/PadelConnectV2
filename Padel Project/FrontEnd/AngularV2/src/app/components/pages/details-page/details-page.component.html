@@ -61,6 +61,7 @@
         <div class="reservation">
           <h2 class="info-title">Reservar</h2>
           <div class="inputs-container">
+            
             <div class="input-box">
               <h4 class="title-info" for="startDate">Data de Início:</h4>
               <input
@@ -68,8 +69,7 @@
                 type="datetime-local"
                 [(ngModel)]="startDate"
                 (change)="calculatePrice()"
-                [min]="today"
-              />
+                [min]="today"/>
             </div>
 
             <div class="input-box">
@@ -79,11 +79,11 @@
                 type="datetime-local"
                 [(ngModel)]="endDate"
                 (change)="calculatePrice()"
-                [min]="startDate || today"
-              />
+                [min]="startDate || today"/>
             </div>
+            
           </div>
-
+          
           <div class="card-content-price">
             <div class="price">
                 <span>Preço: 10€/h</span>
@@ -93,7 +93,7 @@
             </div>
         </div>
       </div>
-      </div>
+     </div>
 
     </div>
 
