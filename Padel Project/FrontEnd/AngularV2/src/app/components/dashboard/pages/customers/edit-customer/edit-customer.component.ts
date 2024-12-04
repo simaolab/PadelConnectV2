@@ -27,7 +27,7 @@ import { DropdownComponent } from '../../../utilities/dropdown/dropdown.componen
   styleUrl: './edit-customer.component.css'
 })
 export class EditCustomerComponent {
-  
+
   roles: any[] = [];
   formErrors: { [key: string]: string } = {};
 
@@ -109,7 +109,7 @@ export class EditCustomerComponent {
     }
 
     editCustomer(): void {
-      
+
       this.usersService.edit(this.customerObj, this.customer_id).subscribe({
         next: (res: any) => {
           if(res.status === 'success') {
@@ -141,12 +141,11 @@ export class EditCustomerComponent {
         next: (res: any) => {
           this.roles = res.roles;
         },
-      })
         error: (err: any) => {
           const message = err.error?.message || 'Erro ao carregar as roles';
           console.error(message);
         }
-      });
+      })
     }
 
     getUserStatus(customer: any): string {

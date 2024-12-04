@@ -98,13 +98,14 @@
 .form-contact-row {
   display: inline-flex;
   width: 100%;
-  margin: 3rem;
+  gap: 2rem;
+  margin: 2rem;
 }
 
 input.name,
 input.email,
 input.topic {
-  width: 95%;
+  width: 100%;
 }
 
 textarea.message {
@@ -140,6 +141,7 @@ input[type=number] {
     height: 2px;
     width: 100%;
     background: var(--color-primary);
+    margin-top: 2rem;
 }
 
 
