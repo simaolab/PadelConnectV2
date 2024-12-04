@@ -136,7 +136,6 @@ export class EditCustomerComponent {
       });
     }
 
-
     loadRoles(): void {
       this.rolesService.index().subscribe({
         next: (res: any) => {
@@ -158,7 +157,6 @@ export class EditCustomerComponent {
       }
       return 'Ativo';
     }
-
 
     onUserStateSelected(selected: any): void {
       if (selected.value === 'Novo Utilizador') {

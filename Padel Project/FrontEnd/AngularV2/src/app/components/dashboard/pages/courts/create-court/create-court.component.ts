@@ -9,7 +9,7 @@ import { CardFormComponent } from '../../../utilities/card-form/card-form.compon
 import { TitlePageComponent } from '../../../utilities/title-page/title-page.component';
 import { DashboardComponent } from '../../../dashboard/dashboard.component';
 import { DropdownComponent } from '../../../utilities/dropdown/dropdown.component';
-import { Court } from '../../../../../models/court';
+import { Court } from '../../../../../interfaces/court';
 
 @Component({
   selector: 'app-create-court',
@@ -120,10 +120,10 @@ export class CreateCourtComponent {
     formatPriceHour(event: Event): void {
       const input = event.target as HTMLInputElement;
       let value = input.value;
-  
+
       value = value.replace(/[^0-9\.]/g, '');
       if ((value.match(/\./g) || []).length > 1) {
-        value = value.replace(/\.$/, ''); 
+        value = value.replace(/\.$/, '');
       }
       if (value.length > 2 && !value.includes('.')) {
         value = value.slice(0, 2) + '.' + value.slice(2);
@@ -132,7 +132,7 @@ export class CreateCourtComponent {
         const [integerPart, decimalPart] = value.split('.');
         value = integerPart + '.' + (decimalPart.length > 2 ? decimalPart.substring(0, 2) : decimalPart);
       }
-      
+
       input.value = value;
       this.courtObj.price_hour = value ? parseFloat(value) : 0;
     }

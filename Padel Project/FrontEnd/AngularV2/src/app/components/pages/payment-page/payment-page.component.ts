@@ -5,6 +5,8 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { PageTopComponent } from './../../utilities/page-top/page-top.component';
 import { MainContentComponent } from '../../utilities/main-content/main-content.component';
 import Swal from 'sweetalert2';
+import { CookieService } from 'ngx-cookie-service';
+import { CartItem, Cart } from '../../../interfaces/cart';
 
 @Component({
   selector: 'app-payment-page',
@@ -20,8 +22,10 @@ export class PaymentPageComponent {
   showRatingPopup: boolean = false;
   selectedRating: number = 0;
   feedback: string = '';
+  cartItems: any[] = [];  // Array para armazenar os itens do carrinho
+  totalPrice: number = 0;  // Variável para armazenar o preço total
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cookieService: CookieService) {}
 
   // Método para formatar o número do cartão com traços
   formatCardNumber(event: any) {
@@ -29,14 +33,55 @@ export class PaymentPageComponent {
     let value = input.value.replace(/\D/g, '');
 
     if (value.length > 16) {
-        value = value.substring(0, 16); 
+        value = value.substring(0, 16);
     }
 
-    // Adiciona traços a cada 4 dígitos
-    let formattedValue = value.match(/.{1,4}/g)?.join('-') || ''; 
+    let formattedValue = value.match(/.{1,4}/g)?.join('-') || '';
 
     input.value = formattedValue;
   }
+
+  // Função para carregar os itens do carrinho do cookie
+  loadCartItems() {
+    const cartData = this.cookieService.get('cart');
+
+    if (cartData) {
+      try {
+        const parsedCart = JSON.parse(cartData);
+        console.log("Dados do carrinho:", parsedCart); // Verifique o conteúdo do cartData
+
+        // Verifique se 'items' está presente no cartData e se é um array
+        if (Array.isArray(parsedCart.items)) {
+          this.cartItems = parsedCart.items;
+
+          // Recalcular o preço total
+          this.totalPrice = this.cartItems.reduce((total, item) => {
+            // Garantir que pricePerHour e totalHours são números
+            const pricePerHour = parseFloat(item.pricePerHour);
+            const totalHours = parseFloat(item.totalHours);
+
+            // Verifique se os valores são válidos
+            if (isNaN(pricePerHour) || isNaN(totalHours)) {
+              console.error('Valor inválido de pricePerHour ou totalHours', item);
+              return total;  // Se houver algum valor inválido, continue com o total atual
+            }
+
+            // Calcula o preço do item
+            return total + (pricePerHour * totalHours);
+          }, 0);  // Inicializa a soma total com 0
+
+          console.log("Preço total:", this.totalPrice); // Verifique o preço calculado
+        } else {
+          console.error('Estrutura do carrinho inválida ou "items" não encontrado.');
+        }
+      } catch (error) {
+        console.error('Erro ao ler os dados do carrinho:', error);
+      }
+    } else {
+      console.warn('Carrinho vazio ou cookie não encontrado.');
+    }
+  }
+
 
   // Método para validar o número do cartão
   validateCardNumber(cardNumber: string): boolean {
@@ -47,9 +92,9 @@ export class PaymentPageComponent {
   validateCVV(event: any) {
     const input = event.target;
     input.value = input.value.replace(/\D/g, '');
-    
+
     if (input.value.length > 3) {
-      input.value = input.value.substring(0, 3); 
+      input.value = input.value.substring(0, 3);
     }
   }
 
@@ -58,7 +103,7 @@ export class PaymentPageComponent {
     let input = event.target;
     let value = input.value.replace(/\D/g, '');
     if (value.length > 4) {
-        value = value.substring(0, 4); 
+        value = value.substring(0, 4);
     }
 
     if (value.length > 2) {
@@ -73,15 +118,12 @@ export class PaymentPageComponent {
     const input = event.target;
     let phoneNumber = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
 
-    // Verifica o primeiro e segundo dígito
     const validPrefixes = ['91', '92', '93', '96']; // Prefixos válidos de números de telemóveis portugueses
 
     if (phoneNumber.length >= 2) {
       const prefix = phoneNumber.substring(0, 2);
-
-      // Se os dois primeiros dígitos não forem de um prefixo válido, limpa o campo e alerta o usuário
       if (!validPrefixes.includes(prefix)) {
-        input.value = ''; // Limpa o input
+        input.value = '';
         Swal.fire({
           icon: 'error',
           title: 'Número inválido',
@@ -91,15 +133,13 @@ export class PaymentPageComponent {
       }
     }
 
-    // Limita a 9 dígitos
     if (phoneNumber.length > 9) {
       phoneNumber = phoneNumber.substring(0, 9);
     }
 
-    input.value = phoneNumber; // Atualiza o valor no campo de input
+    input.value = phoneNumber;
   }
 
-  // Método de validação para o campo NIF
   validateNif(event: any) {
     const input = event.target;
     if (input.value.length > 9) {
@@ -107,23 +147,20 @@ export class PaymentPageComponent {
     }
   }
 
-  // Valida se o nome tem pelo menos 3 caracteres
   validateName(name: string): boolean {
     return name.trim().length >= 3;
   }
 
-  // Valida se a data de nascimento indica pelo menos 18 anos
   validateAge(dob: string): boolean {
     const birthDate = new Date(dob);
     const today = new Date();
     const age = today.getFullYear() - birthDate.getFullYear();
     const monthDiff = today.getMonth() - birthDate.getMonth();
     const dayDiff = today.getDate() - birthDate.getDate();
-    
+
     return age > 18 || (age === 18 && (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)));
   }
 
-  // Valida se a data de expiração é válida (formato e data futura)
   validateExpiryDate(expiry: string): boolean {
     const [month, year] = expiry.split('/').map(Number);
     if (isNaN(month) || isNaN(year) || month < 1 || month > 12) return false;
@@ -134,7 +171,6 @@ export class PaymentPageComponent {
     return expiryDate > today;
   }
 
-  // Função chamada ao enviar o formulário
   nextStep(event: Event, form: NgForm) {
     event.preventDefault();
 
@@ -144,7 +180,7 @@ export class PaymentPageComponent {
         title: 'Formulário inválido',
         text: 'Por favor, preencha todos os campos obrigatórios!',
       });
-      return; // Não avança se o formulário não for válido
+      return;
     }
 
     const formValues = form.value;
@@ -188,10 +224,8 @@ export class PaymentPageComponent {
       }
     }
     this.step++;
-  console.log("Step:", this.step);
   }
 
-  // Outros métodos existentes
   goToStep(stepNumber: number) {
     this.step = stepNumber;
   }
@@ -224,5 +258,10 @@ export class PaymentPageComponent {
 
   finalizePayment() {
     this.showPopup();
+  }
+
+  ngOnInit() {
+    // Carregar os itens do carrinho ao iniciar o componente
+    this.loadCartItems();
   }
 }

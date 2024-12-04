@@ -3,8 +3,8 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CompaniesService } from '../../../../../services/companies.service';
 import { FormsModule } from '@angular/forms';
-import { Address } from '../../../../../models/address';
-import { Company } from '../../../../../models/company';
+import { Address } from '../../../../../interfaces/address';
+import { Company } from '../../../../../interfaces/company';
 
 import { CardFormComponent } from '../../../utilities/card-form/card-form.component';
 import { TitlePageComponent } from '../../../utilities/title-page/title-page.component';
@@ -54,14 +54,14 @@ export class CreateCompanyComponent {
   ) {}
 
   create() {
-    
+
     this.formErrors = {};
 
     const regexAddressPort = /^[a-zA-ZÀ-ÿ0-9.,\-/\s]+$/;
     const localityRegex = /^[a-zA-ZÀ-ÿ\s\-]+$/;
     const postalCodeRegex = /^\d{4}-\d{3}$/;
 
-    if (!this.addressObj['addressPort'] || !this.addressObj['postalCode'] || !this.addressObj['locality']) {      
+    if (!this.addressObj['addressPort'] || !this.addressObj['postalCode'] || !this.addressObj['locality']) {
       if (!this.addressObj['addressPort']) {
         this.formErrors['addressPort'] = 'Endereço e número da porta são obrigatórios.';
       } else { this.formErrors['addressPort'] = ''; }
@@ -77,8 +77,8 @@ export class CreateCompanyComponent {
     }
 
     if (!regexAddressPort.test(this.addressObj.addressPort)
-      || !localityRegex.test(this.addressObj.locality) 
-      || !postalCodeRegex.test(this.addressObj.postalCode)) 
+      || !localityRegex.test(this.addressObj.locality)
+      || !postalCodeRegex.test(this.addressObj.postalCode))
     {
       if (!regexAddressPort.test(this.addressObj.addressPort)) {
         this.formErrors['addressPort'] = 'A morada não pode conter caractéres especiais.';
@@ -91,7 +91,7 @@ export class CreateCompanyComponent {
       } else { this.formErrors['postalCode'] = ''; }
       return;
     }
-    
+
     this.companyObj.address = this.address;
 
     this.companiesService.create(this.companyObj).subscribe({
@@ -127,13 +127,13 @@ export class CreateCompanyComponent {
   formatPostalCode(event: Event): void {
     const input = event.target as HTMLInputElement;
     let value = input.value;
-  
+
     value = value.replace(/[^0-9]/g, '');
-  
+
     if (value.length > 4) {
       value = `${value.slice(0, 4)}-${value.slice(4, 7)}`;
     }
-  
+
     input.value = value;
     this.addressObj.postalCode = value;
   }

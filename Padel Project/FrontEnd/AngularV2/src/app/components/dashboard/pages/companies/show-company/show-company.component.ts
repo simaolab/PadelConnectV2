@@ -8,8 +8,8 @@ import { CompaniesService } from '../../../../../services/companies.service';
 import { CardFormComponent } from '../../../utilities/card-form/card-form.component';
 import { TitlePageComponent } from '../../../utilities/title-page/title-page.component';
 import { DashboardComponent } from '../../../dashboard/dashboard.component';
-import { Company } from '../../../../../models/company';
-import { Address } from '../../../../../models/address';
+import { Company } from '../../../../../interfaces/company';
+import { Address } from '../../../../../interfaces/address';
 
 @Component({
   selector: 'app-show-company',
