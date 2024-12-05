@@ -29,13 +29,30 @@ export class CreateCompanyComponent {
   formErrors: { [key: string]: string } = {};
 
   companyObj: Company = {
-    name: '',
-    email: '',
+    user_name: '',
+    user_email: '',
     contact: 0,
-    nif: 0,
+    user_nif: 0,
     newsletter: 0,
     address: '',
+    name: ''
   }
+
+  passwordObj = {
+    user_password: '',
+    user_password_confirmation: '',
+  };
+
+  passwordStrengthProgress = 0;
+  passwordStrengthLevel: string = '';
+  passwordStrengthMessage: string = '';
+  passwordStrengthStatus = {
+    length: false,
+    lowercase: false,
+    uppercase: false,
+    number: false,
+    symbol: false,
+  };
 
   addressObj: Address = {
     addressPort: '',
@@ -151,6 +168,46 @@ export class CreateCompanyComponent {
     let value = input.value;
     value = value.replace(/[^0-9]/g, '');
     input.value = value;
-    this.companyObj.nif = value ? parseInt(value, 10) : 0;
+    this.companyObj.user_nif = value ? parseInt(value, 10) : 0;
+  }
+
+  evaluatePasswordStrength(password: string): void {
+    
+    this.formErrors = {};
+    let strength = 0;
+
+    this.passwordStrengthStatus.length = password.length >= 8;
+    this.passwordStrengthStatus.lowercase = /[a-z]/.test(password);
+    this.passwordStrengthStatus.uppercase = /[A-Z]/.test(password);
+    this.passwordStrengthStatus.number = /\d/.test(password);
+    this.passwordStrengthStatus.symbol = /[\W_]/.test(password);
+
+    strength += this.passwordStrengthStatus.length ? 20 : 0;
+    strength += this.passwordStrengthStatus.lowercase ? 20 : 0;
+    strength += this.passwordStrengthStatus.uppercase ? 20 : 0;
+    strength += this.passwordStrengthStatus.number ? 20 : 0;
+    strength += this.passwordStrengthStatus.symbol ? 20 : 0;
+
+    this.passwordStrengthProgress = strength;
+
+    if (strength === 0) {
+      this.passwordStrengthLevel = 'none';
+      this.passwordStrengthMessage = '';
+    } else if (strength <= 20) {
+      this.passwordStrengthLevel = 'very-weak';
+      this.passwordStrengthMessage = 'Estado password: Péssima';
+    } else if (strength <= 40) {
+      this.passwordStrengthLevel = 'weak';
+      this.passwordStrengthMessage = 'Estado password: Fraca';
+    } else if (strength <= 60) {
+      this.passwordStrengthLevel = 'medium';
+      this.passwordStrengthMessage = 'Estado password: Média';
+    } else if (strength <= 80) {
+      this.passwordStrengthLevel = 'good';
+      this.passwordStrengthMessage = 'Estado password: Boa';
+    } else {
+      this.passwordStrengthLevel = 'perfect';
+      this.passwordStrengthMessage = 'Estado password: Excelente';
+    }
   }
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class CompanyController extends Controller
 {
@@ -17,7 +19,7 @@ class CompanyController extends Controller
         //Try to get all Companies from table Company
         try
         {
-            $companies = Company::withCount('fields')->get();
+            $companies = Company::withCount('fields')->with('user')->get();
             // If table Company does not have any data echo a message, else show data
             if ($companies->isEmpty()) { return response()->json(
                 [
@@ -55,8 +57,23 @@ class CompanyController extends Controller
         //validated() follows the StoreCompanyRequest rules
         $validatedData = $request->validated();
 
-        //Create a new company with the verified data
-        $company = Company::create($validatedData);
+        $user = new User();
+        $user->username = $validatedData['user_name'];
+        $user->email    = $validatedData['user_email'];
+        $user->password = Hash::make($validatedData['user_password']);
+        $user->nif      = $validatedData['user_nif'];
+        $user->birthday = '01/01/2000';
+        $user->role_id  = 2; 
+
+        $user->save();
+
+        $company = Company::create([
+            'name' => $validatedData['name'],
+            'contact' => $validatedData['contact'],
+            'address' => $validatedData['address'],
+            'user_id' => $user->id,
+        ]);
+
         return response()->json([
             'status' => 'success',
             'message' => 'Empresa '.$company->name.' criada com sucesso!',
@@ -81,7 +98,7 @@ class CompanyController extends Controller
         {
             return response()->json(
                 [
-                    'company' => $company
+                    'company' => $company->load('user')
                 ], 200);
         }
     }

@@ -13,21 +13,26 @@ class Company extends Model
 
     protected $fillable = [
         'name',
-        'email',
         'contact',
-        'nif',
         'newsletter',
-        'address'
+        'address',
+        'user_id'
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'user_id'
     ];
 
     public function fields()
     {
         return $this->hasMany(Field::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -32,9 +32,9 @@
               <div class="detail">
                   <div class="label-container">
                     <i class="ri-fingerprint-line"></i>
-                    <label for="first_name">NIF</label>
+                    <label for="user_nif">NIF</label>
                   </div>
-                  <input type="text" name="nif" [(ngModel)]="companyObj.nif" disabled>
+                  <input type="text" name="user_nif" [(ngModel)]="companyObj.user_nif" disabled>
               </div>
               <div class="detail">
                   <div class="label-container">
@@ -55,7 +55,7 @@
                       <i class="ri-mail-line"></i>
                       <label for="last_name">Email</label>
                     </div>
-                    <input type="text" name="email" value="{{ companyObj.email }}" disabled>
+                    <input type="text" name="email" value="{{ companyObj.user_email }}" disabled>
                 </div>
             </div>
             <div class="data-detail">

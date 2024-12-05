@@ -28,19 +28,22 @@ class StoreCompanyRequest extends FormRequest
                 'max:100',
                 'regex:/^[a-zA-ZÀ-ÿ0-9.,&\-\(\)\/\s]+$/'
             ],
-            'nif' => [
-                'required',
-                new NifValidationRule(),
-                'unique:companies,nif',
-            ],
             'contact' => [
                 'required',
                 'regex:/^(91|92|93|96|94|95)[0-9]{7}$/',
                 'unique:companies,contact'
             ],
-            'email' => 'required|email|unique:companies,email',
             'newsletter' => 'nullable',
-            'address' => 'required'
+            'address' => 'required',
+            
+            'user_name' => 'required|string|min:2|max:50|unique:users,username',
+            'user_email' => 'required|email|unique:users,email',
+            'user_password' => 'required|min:8|confirmed',
+            'user_nif' => [
+                'required',
+                new NIFValidationRule(),
+                'unique:users,nif',
+            ],
         ];
     }
 
@@ -66,6 +69,17 @@ class StoreCompanyRequest extends FormRequest
             'email.email'           => 'Coloque um email válido (ex.: user@padelconnect.pt).',
             'email.unique'          => 'O email inserido já está associado a outro cliente.',
             'email.required'        => 'O email é um campo obrigatório.',
+
+            'user_name.required' => 'O nome do usuário é obrigatório.',
+            'user_name.unique' => 'O nome do usuário já está em uso.',
+            'user_email.required' => 'O email do usuário é obrigatório.',
+            'user_email.email' => 'Insira um email válido para o usuário.',
+            'user_email.unique' => 'O email do usuário já está em uso.',
+            'user_password.required' => 'A senha do usuário é obrigatória.',
+            'user_password.confirmed' => 'As senhas não coincidem.',
+            'user_nif.required'          => 'O NIF é um campo obrigatório.',
+            'user_nif.regex'             => 'O NIF deve ser válido e ter exatamente 9 digitos.',
+            'user_nif.unique'            => 'O NIF inserido já está associado a outro usuário.',
         ];
     }
 

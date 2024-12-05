@@ -16,6 +16,91 @@
   <form class="form-show">
     <div class="user-container-info">
       <div class="container-description">
+          <p class="description-text">Informações Utilizador</p>
+          <hr>
+      </div>
+      <div class="container-forms">
+          <div class="data-detail">
+            <div class="detail">
+              <div class="label-container">
+                <i class="ri-user-line"></i>
+                <label for="user_name">Name</label>
+              </div>
+              <input type="text" name="user_name" value="{{ companyObj.user_name }}"
+                placeholder="PadelConnect" [(ngModel)]="companyObj.user_name">
+                <small *ngIf="formErrors['user_name']" class="small-error">{{ formErrors['user_name'] }}</small>
+            </div>
+            <div class="detail">
+              <div class="label-container">
+                <i class="ri-fingerprint-line"></i>
+                <label for="user_nif">NIF</label>
+              </div>
+              <input type="text" name="user_nif"
+              (input)="formatNif($event)"
+              [value]="companyObj.user_nif === 0 ? '' : companyObj.user_nif"
+              maxlength="9"
+              placeholder="Sem NIF">
+              <small *ngIf="formErrors['user_nif']" class="small-error">{{ formErrors['user_nif'] }}</small>
+            </div>
+            <div class="detail">
+                <div class="label-container">
+                  <i class="ri-mail-line"></i>
+                  <label for="user_email">Email</label>
+                </div>
+                <input type="text" name="user_email" value="{{ companyObj.user_email }}"
+                placeholder="email@padelconnect.pt"
+                [(ngModel)]="companyObj.user_email">
+                <small *ngIf="formErrors['user_email']" class="small-error">{{ formErrors['user_email'] }}</small>
+            </div>
+          </div>
+          <div class="container-forms">
+            <div class="data-detail">
+              <div class="detail">
+                <div class="label-container">
+                  <i class="ri-lock-unlock-line"></i>
+                  <label for="new_password">Password</label>
+                </div>
+                <input
+                  id="user_password"
+                  type="password"
+                  name="user_password"
+                  (input)="evaluatePasswordStrength(passwordObj.user_password)"
+                  [(ngModel)]="passwordObj.user_password"
+                  placeholder="Coloque a password"
+                  required
+                  />
+                  
+                <small *ngIf="formErrors['user_password']" class="small-error">{{ formErrors['user_password'] }}</small>
+
+                <div class="password-strength-indicators">
+                  <span [ngClass]="{ 'valid': passwordStrengthStatus.length }">8 caracteres</span>
+                  <span [ngClass]="{ 'valid': passwordStrengthStatus.lowercase }">Letra a-z</span>
+                  <span [ngClass]="{ 'valid': passwordStrengthStatus.uppercase }">Letra A-Z</span>
+                  <span [ngClass]="{ 'valid': passwordStrengthStatus.number }">Número</span>
+                  <span [ngClass]="{ 'valid': passwordStrengthStatus.symbol }">Símbolo</span>
+                </div>
+                <div
+                  class="password-strength-bar"
+                  [style.width]="passwordStrengthProgress + '%'"
+                  [ngClass]="passwordStrengthLevel">
+                </div>
+                <span class="password-strength-text" [ngClass]="passwordStrengthLevel">
+                  {{ passwordStrengthMessage }}
+                </span>
+              </div>
+              <div class="detail">
+                <div class="label-container">
+                  <i class="ri-lock-unlock-line"></i>
+                  <label for="first_name">Confrmação Password</label>
+                </div>
+                <input type="password" placeholder="Confirme a nova password">
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="user-container-info">
+      <div class="container-description">
           <p class="description-text">Informações da Empresa</p>
           <hr>
       </div>
@@ -32,18 +117,6 @@
               </div>
               <div class="detail">
                   <div class="label-container">
-                    <i class="ri-fingerprint-line"></i>
-                    <label for="nif">NIF</label>
-                  </div>
-                  <input type="text" name="nif"
-                  (input)="formatNif($event)"
-                  [value]="companyObj.nif === 0 ? '' : companyObj.nif"
-                  maxlength="9"
-                  placeholder="Sem NIF">
-                  <small *ngIf="formErrors['nif']" class="small-error">{{ formErrors['nif'] }}</small>
-              </div>
-              <div class="detail">
-                  <div class="label-container">
                     <i class="ri-phone-line"></i>
                     <label for="contact">Contacto</label>
                   </div>
@@ -54,18 +127,6 @@
                   placeholder="Sem Contacto">
                   <small *ngIf="formErrors['contact']" class="small-error">{{ formErrors['contact'] }}</small>
               </div>
-            </div>
-            <div class="contact-detail">
-                <div class="detail">
-                    <div class="label-container">
-                      <i class="ri-mail-line"></i>
-                      <label for="email">Email</label>
-                    </div>
-                    <input type="text" name="email" value="{{ companyObj.email }}"
-                    placeholder="email@padelconnect.pt"
-                      [(ngModel)]="companyObj.email">
-                    <small *ngIf="formErrors['email']" class="small-error">{{ formErrors['email'] }}</small>
-                </div>
             </div>
             <div class="data-detail">
               <div class="detail">
