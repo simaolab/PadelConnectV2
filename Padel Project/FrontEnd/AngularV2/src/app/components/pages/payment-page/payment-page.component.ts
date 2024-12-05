@@ -85,12 +85,22 @@ export class PaymentPageComponent {
     })
   }
 
-  // finalizePayment() {
-  //   this.showPopup();
-  //   this.reservationsService.create().subscribe({
+  finalizePayment() {
+    this.showPopup();
 
-  //   });
-  // }
+    const cart = this.cookieService.get('cart') ? JSON.parse(this.cookieService.get('cart')) : { items: [], totalPrice: 0 };
+    const user_id = this.user_id; // Aqui você vai passar o user_id que já está carregado
+
+    this.reservationsService.create(cart).subscribe({
+      next: () => {
+        this.showPopup();
+      },
+      error: (err) => {
+        this.showPopup();
+      }
+    });
+  }
+
 
   formatCardNumber(event: any) {
     let input = event.target;

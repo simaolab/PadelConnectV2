@@ -18,20 +18,36 @@ export class ReservationsService {
     return this.http.get<any>(ApiRoutes.reservations, { headers });
   }
 
-  create(cart: Cart, user_id: number): Observable<any> {
+  create(cart: Cart): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     const reservationPayload = {
-      user_id: user_id,
-      status: 'pendente',
-      start_date: cart.items[0]?.startDate,
-      end_date: cart.items[0]?.endDate,
-      total: cart.totalPrice,
-      privacy_policy: true,
-      fields: cart.items.map(item => item.fieldId),
-  };
+        status: 'pendente',
+        privacy_policy: true,
+        reservations: cart.items.map(item => {
+            const startDate = this.formatDate(item.startDate);
+            const endDate = this.formatDate(item.endDate);
 
-    return this.http.put<any>(ApiRoutes.reservations, reservationPayload, { headers });
+            return {
+                start_date: startDate,
+                end_date: endDate,
+                total: item.totalPrice,
+                fields: [item.fieldId],
+                additional_info: 'Informações adicionais, se necessário'
+            };
+        })
+    };
+    return this.http.post<any>(ApiRoutes.reservations, reservationPayload, { headers });
+  }
+
+  private formatDate(date: string): string {
+    const d = new Date(date);
+    const day = ('0' + d.getDate()).slice(-2);
+    const month = ('0' + (d.getMonth() + 1)).slice(-2);
+    const year = d.getFullYear();
+    const hours = ('0' + d.getHours()).slice(-2);
+    const minutes = ('0' + d.getMinutes()).slice(-2);
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
   }
 }
