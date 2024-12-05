@@ -31,7 +31,7 @@ class Reservation extends Model
 
     public function fields()
     {
-        return $this->belongsToMany(Field::Class);
+        return $this->belongsToMany(Field::Class, 'field_reservation');
     }
 
   	public function cancellation()
@@ -50,17 +50,18 @@ class Reservation extends Model
     //Function Carbon example setAttributeAttribute and getAttributeAttribute
     //The methods are automatically called by Laravel
 
-    //This is a mutator which allows us to transform an attribute before saving
     public function setStartDateAttribute($value)
     {
-        $this->attributes['start_date'] = Carbon::createFromFormat('d/m/Y H:i', $value)->format('Y-m-d H:i:s');
+        // Tenta formatar a data com qualquer formato válido
+        $this->attributes['start_date'] = Carbon::parse($value)->format('Y-m-d H:i:s');
     }
 
-    // Mutador para formatar end_date para datetime
     public function setEndDateAttribute($value)
     {
-        $this->attributes['end_date'] = Carbon::createFromFormat('d/m/Y H:i', $value)->format('Y-m-d H:i:s');
+        // Tenta formatar a data com qualquer formato válido
+        $this->attributes['end_date'] = Carbon::parse($value)->format('Y-m-d H:i:s');
     }
+
 
     // Accessor para mostrar start_date com formato d/m/Y H:i
     public function getStartDateAttribute($value)
