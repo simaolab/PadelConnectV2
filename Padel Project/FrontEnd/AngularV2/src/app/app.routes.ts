@@ -39,6 +39,10 @@ import { EditCourtComponent } from './components/dashboard/pages/courts/edit-cou
 import { ShowCustomerComponent } from './components/dashboard/pages/customers/show-customer/show-customer.component';
 import { EditCustomerComponent } from './components/dashboard/pages/customers/edit-customer/edit-customer.component';
 
+//CRUD PROMOTIONS
+import { CreatePromotionComponent } from './components/dashboard/pages/promotions/create-promotion/create-promotion.component';
+import { EditPromotionComponent } from './components/dashboard/pages/promotions/edit-promotion/edit-promotion.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -138,6 +142,13 @@ export const routes: Routes = [
         canActivate: [roleGuard]
       },
 
+      //CRUD PROMOTION
+      { path: 'create-promotion', component: CreatePromotionComponent, title: 'Dashboard - Adicionar Promoção',
+        canActivate: [roleGuard]
+      },
+      { path: 'promotion/:id', component: EditPromotionComponent, title: 'Dashboard - Detalhes Promoção',
+        canActivate: [roleGuard]
+      },
       //MAIN PAGE
       { path: '', redirectTo: 'main', pathMatch: 'full' },
     ]
