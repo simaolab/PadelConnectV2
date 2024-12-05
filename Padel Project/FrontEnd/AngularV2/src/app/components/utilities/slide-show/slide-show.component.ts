@@ -1,5 +1,8 @@
+import { CourtsService } from './../../../services/courts.service';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 import { Inject, PLATFORM_ID } from '@angular/core';
 import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
@@ -7,30 +10,41 @@ import 'swiper/swiper-bundle.css';
 @Component({
   selector: 'slide-show',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    RouterModule,
+    CommonModule],
   templateUrl: './slide-show.component.html',
   styleUrls: ['./slide-show.component.css']
 })
 export class SlideShowComponent implements OnInit, AfterViewInit {
-  fields = [
-    { name: 'Campo 1', image: 'assets/images/slideshow/1.jpg', rating: 4.5 },
-    { name: 'Campo 2', image: 'assets/images/slideshow/2.jpg', rating: 4.5 },
-    { name: 'Campo 3', image: 'assets/images/slideshow/3.jpg', rating: 4.5 },
-    { name: 'Campo 4', image: 'assets/images/slideshow/4.jpg', rating: 4.5 },
-    { name: 'Campo 5', image: 'assets/images/slideshow/5.jpg', rating: 4.5 },
-  ];
 
   swiper!: Swiper;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private courtsService: CourtsService) {}
 
-  ngOnInit(): void {}
+  courts: any[] = [];
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.initializeSwiper();
       this.attachNavigationHandlers();
     }
+  }
+
+    ngOnInit(): void {
+      this.loadCourts();
+    }
+
+  loadCourts(): void {
+    this.courtsService.index().subscribe({
+      next: (data: any) => {
+        this.courts = data.fields;
+      },
+      error: (err: any) => {
+      }
+    })
   }
 
   initializeSwiper(): void {

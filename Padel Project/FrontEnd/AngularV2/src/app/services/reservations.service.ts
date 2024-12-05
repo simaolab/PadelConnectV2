@@ -41,6 +41,15 @@ export class ReservationsService {
     return this.http.post<any>(ApiRoutes.reservations, reservationPayload, { headers });
   }
 
+  checkAvailability(params: any): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    const queryParams = new URLSearchParams(params).toString();
+
+    return this.http.get<any>(`${ApiRoutes.checkAvailability}${queryParams}`, { headers });
+}
+
   private formatDate(date: string): string {
     const d = new Date(date);
     const day = ('0' + d.getDate()).slice(-2);

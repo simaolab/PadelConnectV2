@@ -15,9 +15,10 @@ export const authGuard: CanActivateFn = (route, state) => {
         queryParams: {
           error: '401',
           message: 'Tem de fazer Login para aceder a esta página',
-          src: '../../../../../assets/images/icons/unauthorized.png',
+          src: '../../../../../assets/images/icons/unknown.png',
           href: '/login',
-          hrefP: 'Ir para a página de login'
+          hrefP: 'Ir para a página de login',
+          class: 'unauthenticated'
         }
       });
       return false;

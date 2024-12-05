@@ -1,6 +1,6 @@
+import { ReservationsService } from './../../../../services/reservations.service';
 import { resolve } from 'node:path';
 import { DashboardComponent } from './../../dashboard/dashboard.component';
-import { PromotionsService } from './../../../../services/promotions.service';
 import { Component } from '@angular/core';
 import { TitlePageComponent } from '../../utilities/title-page/title-page.component';
 import { CommonModule } from '@angular/common';
@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ReservationsComponent {
   constructor(
-    private promotionsService: PromotionsService,
+    private reservationsService: ReservationsService,
     private dashboardComponent: DashboardComponent
   ) {}
 
@@ -29,13 +29,12 @@ export class ReservationsComponent {
   }
 
   loadReservations(): void {
-    this.promotionsService.index().subscribe({
+    this.reservationsService.index().subscribe({
       next: (data: any) => {
-        setTimeout(() => {
-          this.reservations = data.reservations || [];
+          this.reservations = data.reservations;
           this.isLoading = false;
-        }, 1500)
-
+          console.log('Reservas back:', data)
+          console.log('Reservas:', this.reservations)
       },
       error: (err: any) => {
         const message = err.error?.message;

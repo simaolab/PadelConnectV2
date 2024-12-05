@@ -18,6 +18,9 @@ export const roleGuard: CanActivateFn = (route, state): Observable<boolean> => {
             error: '403',
             message: 'Você não tem permissão para aceder a esta página!',
             src: '../../../../../assets/images/icons/unauthorized.png',
+            href: '/',
+            hrefP: 'Ir para a página inicial',
+            class: 'unauthorizaed'
           },
         });
         return false;

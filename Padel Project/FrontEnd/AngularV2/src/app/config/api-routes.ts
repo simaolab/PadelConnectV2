@@ -24,6 +24,7 @@ export const ApiRoutes = {
 
   //RESERVATIONS
   reservations: 'https://api.padelconnect.pt/api/reservations/',
+  checkAvailability: 'https://api.padelconnect.pt/api/reservations/check-availability?',
 
   //ROLES
   roles: 'https://api.padelconnect.pt/api/roles/'

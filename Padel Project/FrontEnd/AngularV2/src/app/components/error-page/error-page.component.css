@@ -28,9 +28,14 @@
   gap: 2rem;
 }
 
-h1 {
+h1.unauthorizaed {
   font-size: var(--font-title);
   color: var(--color-danger);
+}
+
+h1.unauthenticated {
+  font-size: var(--font-title);
+  color: var(--color-primary);
 }
 
 h2 {
@@ -43,10 +48,38 @@ a {
   display: flex;
   align-items: center;
   justify-content: start;
-  background: var(--color-danger);
   border-radius: var(--border-radius-1);
   padding: 10px;
   gap: 5px;
   color: var(--color-white);
   font-size: 1rem;
+}
+
+a.unauthorizaed {
+  background: var(--color-danger);
+}
+
+a.unauthenticated {
+  background: var(--color-primary);
+}
+
+@media screen and (max-width: 1250px) {
+  .error-page {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  img {
+    width: 60%;
+  }
+
+  .text {
+    align-items: center;
+  }
+}
+
+@media screen and (max-width:  650px) {
+  .text {
+    padding: 20px;
+  }
 }
