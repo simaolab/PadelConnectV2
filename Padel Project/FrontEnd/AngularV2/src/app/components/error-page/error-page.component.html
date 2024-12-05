@@ -4,9 +4,9 @@
       <img [src]="src" alt="">
     </div>
     <div class="text">
-      <h1>{{ error }}</h1>
+      <h1 [ngClass]="class">{{ error }}</h1>
       <h2>{{ message }}</h2>
-      <a [routerLink]="href">
+      <a [ngClass]="class" [routerLink]="href">
         <p>{{ hrefP }}</p>
         <i class='bx bx-right-arrow-alt'></i>
       </a>

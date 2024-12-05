@@ -1,3 +1,4 @@
+import { ReservationsService } from './../../../services/reservations.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CourtsService } from '../../../services/courts.service';
@@ -59,6 +60,7 @@ export class DetailsPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private courtsService: CourtsService,
     private cookieService: CookieService,
+    private reservationsService: ReservationsService
   ) {}
 
   get address(): string {
@@ -123,38 +125,78 @@ export class DetailsPageComponent implements OnInit {
 
   addToCart(): void {
     if (!this.startDate || !this.endDate || this.totalPrice === 0) {
-      alert('Por favor, preencha datas válidas antes de adicionar ao carrinho.');
-      return;
+        this.modalComponent?.showModal(
+            'Error',
+            'Por favor, preencha datas válidas antes de adicionar ao carrinho'
+        );
+        return;
     }
 
-    const reservationItem: CartItem = {
-      fieldId: this.court_id,
-      name: this.courtObj.name,
-      address: this.address,
-      startDate: this.startDate,
-      endDate: this.endDate,
-      pricePerHour: this.courtObj.price_hour,
-      totalPrice: this.totalPrice,
-      totalHours: (new Date(this.endDate).getTime() - new Date(this.startDate).getTime()) / (1000 * 60 * 60),
+    const formatDateToPT = (date: any) => {
+        const formattedDate = new Date(date);
+        const day = String(formattedDate.getDate()).padStart(2, '0');
+        const month = String(formattedDate.getMonth() + 1).padStart(2, '0');
+        const year = formattedDate.getFullYear();
+        const hours = String(formattedDate.getHours()).padStart(2, '0');
+        const minutes = String(formattedDate.getMinutes()).padStart(2, '0');
+        const seconds = String(formattedDate.getSeconds()).padStart(2, '0');
+        return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
     };
 
-    let cart: Cart = this.cookieService.get('cart') ? JSON.parse(this.cookieService.get('cart')) : { items: [], totalPrice: 0 };
+    const availabilityParams = {
+        start_date: formatDateToPT(this.startDate),
+        end_date: formatDateToPT(this.endDate),
+        field: this.court_id,
+    };
 
-    if (!Array.isArray(cart.items)) {
-      cart.items = [];
-    }
+    this.reservationsService.checkAvailability(availabilityParams).subscribe({
+        next: (response: any) => {
+            if (response.available) {
+                const reservationItem: CartItem = {
+                    fieldId: this.court_id,
+                    name: this.courtObj.name,
+                    address: this.address,
+                    startDate: this.startDate,
+                    endDate: this.endDate,
+                    pricePerHour: this.courtObj.price_hour,
+                    totalPrice: this.totalPrice,
+                    totalHours: (new Date(this.endDate).getTime() - new Date(this.startDate).getTime()) / (1000 * 60 * 60),
+                };
 
-    cart.items.push(reservationItem);
+                let cart: Cart = this.cookieService.get('cart')
+                    ? JSON.parse(this.cookieService.get('cart'))
+                    : { items: [], totalPrice: 0 };
 
-    cart.totalPrice = cart.items.reduce((total, item: CartItem) => {
-      return total + item.totalPrice;
-    }, 0);
+                if (!Array.isArray(cart.items)) {
+                    cart.items = [];
+                }
 
-    this.cookieService.set('cart', JSON.stringify(cart), 1, '/');
+                cart.items.push(reservationItem);
 
-    this.modalComponent?.showModal(
-      'Success',
-      `${reservationItem.name} adicionado ao carrinho`
-    );
+                cart.totalPrice = cart.items.reduce((total, item: CartItem) => {
+                    return total + item.totalPrice;
+                }, 0);
+
+                this.cookieService.set('cart', JSON.stringify(cart), 1, '/');
+
+                this.modalComponent?.showModal(
+                    'Success',
+                    `${reservationItem.name} adicionado ao carrinho`
+                );
+            } else {
+                this.modalComponent?.showModal(
+                    'Error',
+                    response.message || 'As datas selecionadas não estão disponíveis.'
+                );
+            }
+        },
+        error: (err: any) => {
+            console.error('Erro ao verificar disponibilidade:', err);
+            this.modalComponent?.showModal(
+                'Error',
+                err.error.message
+            );
+        },
+    });
   }
 }

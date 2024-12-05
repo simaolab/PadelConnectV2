@@ -1,3 +1,4 @@
+import { Court } from './../../../interfaces/court';
 import { ReservationsService } from './../../../services/reservations.service';
 import { UsersService } from './../../../services/users.service';
 import { Component } from '@angular/core';
@@ -9,6 +10,7 @@ import { MainContentComponent } from '../../utilities/main-content/main-content.
 import Swal from 'sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
 import { CartItem, Cart } from '../../../interfaces/cart';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-payment-page',
@@ -31,6 +33,13 @@ export class PaymentPageComponent {
 
   user_id: number = 0;
 
+  clientObj = {
+    name: '',
+    nif: 0,
+    birthday: '',
+    contact: 0
+  }
+
   constructor(
     private router: Router,
     private cookieService: CookieService,
@@ -39,7 +48,7 @@ export class PaymentPageComponent {
 
   ngOnInit() {
     this.loadCartItems();
-    this.userId();
+    this.userInfo();
   }
 
   loadCartItems() {
@@ -76,24 +85,38 @@ export class PaymentPageComponent {
     console.log(this.cartItems)
   }
 
-  userId() {
-    this.usersService.userInfo().subscribe({
-      next: (res: any) => {
+  userInfo() {
+    this.usersService.userInfo().pipe(
+      switchMap((res: any) => {
         this.user_id = res.user.id;
-        console.log(this.user_id)
+        return this.usersService.clientInfo(this.user_id);
+      })
+    ).subscribe({
+      next: (clientRes: any) => {
+        this.clientObj = {
+          name: `${clientRes.client.first_name} ${clientRes.client.last_name}`,
+          contact: clientRes.client.contact, // Caso 'contact' seja null
+          nif: clientRes.client.user.nif,
+          birthday: clientRes.client.user.birthday, // Caso 'birthday' seja null
+        };
+
+        console.log(this.clientObj)
       },
-    })
+      error: (err) => {
+      }
+    });
   }
 
   finalizePayment() {
     this.showPopup();
 
     const cart = this.cookieService.get('cart') ? JSON.parse(this.cookieService.get('cart')) : { items: [], totalPrice: 0 };
-    const user_id = this.user_id; // Aqui você vai passar o user_id que já está carregado
+    const user_id = this.user_id;
 
     this.reservationsService.create(cart).subscribe({
       next: () => {
         this.showPopup();
+        this.cookieService.delete('cart', '/');
       },
       error: (err) => {
         this.showPopup();

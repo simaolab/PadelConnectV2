@@ -7,19 +7,15 @@
   <div class="container">
     <div class="swiper slide-show-slider">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" *ngFor="let field of fields">
-          <a href="#" class="slide-link">
+        <div class="swiper-slide" *ngFor="let court of courts">
+          <a [routerLink]="['/court', court.id]" class="slide-link">
             <div class="slide-img">
-              <img [src]="field.image" [alt]="field.name">
+              <img src="assets/images/slideshow/1.jpg" [alt]="court.name">
             </div>
             <div class="slide-content-bottom">
-              <h3 class="field-name">{{ field.name }}</h3>
+              <h3 class="field-name">{{ court.name }}</h3>
               <h3 class="field-rating">
-                <span>{{ field.rating }}</span>
-                <div class="rating">
-                  <i class='bx bxs-star' *ngFor="let star of [1, 2, 3, 4];"></i>
-                  <i class='bx bxs-star-half'></i>
-                </div>
+                <span>{{ court.company.address }}</span>
               </h3>
             </div>
           </a>
