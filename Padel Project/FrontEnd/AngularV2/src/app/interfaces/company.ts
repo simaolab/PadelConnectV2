@@ -1,8 +1,9 @@
 export interface Company {
-  name: string;
-  email: string;
-  contact: number | null;
-  nif: number;
+  user_name: '',
+  user_email: '',
+  user_nif: number,
+  contact: number | null,
+  name: '',
   newsletter: number;
   address: string;
 }

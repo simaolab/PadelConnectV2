@@ -21,11 +21,6 @@ class ClientSeeder extends Seeder
             ],
             [
                 'user_id' => '2',
-                'first_name' => 'Gestor',
-                'last_name' => 'Teste',
-            ],
-            [
-                'user_id' => '3',
                 'first_name' => 'Cliente',
                 'last_name' => 'Teste',
             ],

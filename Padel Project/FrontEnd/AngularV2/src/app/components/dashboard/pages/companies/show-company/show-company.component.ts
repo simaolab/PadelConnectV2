@@ -28,12 +28,13 @@ import { Address } from '../../../../../interfaces/address';
 export class ShowCompanyComponent {
 
   companyObj: Company = {
-    name: '',
-    email: '',
+    user_name: '',
+    user_email: '',
     contact: 0,
-    nif: 0,
+    user_nif: 0,
     newsletter: 0,
     address: '',
+    name: ''
   }
 
   addressObj: Address = {
@@ -65,9 +66,10 @@ export class ShowCompanyComponent {
 
           this.companyObj = {
             name: company.name,
-            email: company.email,
+            user_email: company.user_email,
             contact: company.contact,
-            nif: company.nif,
+            user_nif: company.user_nif,
+            user_name: company.user_name,
             newsletter: company.newsletter,
             address: company.address
           };
