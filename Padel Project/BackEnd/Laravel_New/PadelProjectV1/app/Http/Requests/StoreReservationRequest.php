@@ -25,12 +25,12 @@ class StoreReservationRequest extends FormRequest
     {
         return [
             'status'           => 'required|string|in:pendente,confirmado,cancelado',
-            'additional_info'  => 'nullable|string|max:500',
-            'start_date'       => 'required|date_format:d/m/Y H:i|before_or_equal:end_date',
-            'end_date'         => 'required|date_format:d/m/Y H:i|after_or_equal:start_date',
-            'total'            => 'required|numeric|min:0',
-            'privacy_policy'   => 'nullable|boolean',
-            'fields'           => 'required|array',
+            'privacy_policy'   => 'required|boolean',
+            'reservations'     => 'required|array',
+            'reservations.*.start_date' => 'required|date_format:d/m/Y H:i',
+            'reservations.*.end_date'   => 'required|date_format:d/m/Y H:i',
+            'reservations.*.total'      => 'required|numeric',
+            'reservations.*.fields'     => 'required|array',  // Certifique-se que fields é um array
         ];
     }
 

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('field_id');
             $table->foreignId('reservation_id');
-            $table->decimal('value');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
             $table->timestamps();
         });
     }
