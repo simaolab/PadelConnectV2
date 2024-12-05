@@ -95,8 +95,6 @@ export class EditCourtComponent {
 
   loadCourt(): void {
 
-
-
     this.courtsService.show(this.court_id).subscribe({
       next: (court: any) => {
         const field = court.field;

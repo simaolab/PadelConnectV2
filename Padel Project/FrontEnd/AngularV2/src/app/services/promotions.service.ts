@@ -25,6 +25,13 @@ export class PromotionsService {
     return this.http.post<any>(ApiRoutes.promotions, promotionObj, { headers })
   }
 
+  show(promotion_id: number): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<any>(`${ApiRoutes.promotions}${promotion_id}`, { headers });
+  }
+
   edit(promotionObj: Promotion, promotion_id: number): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
