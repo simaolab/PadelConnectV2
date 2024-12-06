@@ -17,6 +17,7 @@ class Payment extends Model
         'status',
         'payment_date',
         'payment_method_id',
+        // 'stripe_payment_intent_id',
     ];
 
     protected $hidden = ['payment_method_id', 'updated_at', 'deleted_at'];
