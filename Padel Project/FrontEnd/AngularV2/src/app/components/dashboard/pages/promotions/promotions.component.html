@@ -37,31 +37,31 @@
             <td data-cell="Desconto" class="middle">{{ promotion?.discount }}%</td>
             <td data-cell="Visibilidade" class="middle services">
               <div *ngIf="promotion?.active === 1" class="tooltip">
-                <i class="ri-eye-2-line" (click)="toggleVisibility(promotion, $event)"></i>
+                <i class="ri-eye-2-line" (click)="togglePromotionField(promotion, 'active', $event)"></i>
                 <span class="tooltip-text">Visível</span>
               </div>
               <div *ngIf="promotion?.active === 0" class="tooltip">
-                <i class="ri-eye-close-line" (click)="toggleVisibility(promotion, $event)"></i>
+                <i class="ri-eye-close-line" (click)="togglePromotionField(promotion, 'active', $event)"></i>
                 <span class="tooltip-text">Não visível</span>
               </div>
               <div *ngIf="promotion?.for_new_users === 1" class="tooltip">
-                <i class="ri-user-add-line" (click)="toggleNewUserStatus(promotion, $event)"></i>
+                <i class="ri-user-add-line" (click)="togglePromotionField(promotion,'for_new_users', $event)"></i>
                 <span class="tooltip-text">Novos Utilizadores: Sim</span>
               </div>
               <div *ngIf="promotion?.for_new_users === 0 && promotion.generic === 0" class="tooltip">
-                <i class="ri-user-add-line not-active" (click)="toggleNewUserStatus(promotion, $event)"></i>
+                <i class="ri-user-add-line not-active" (click)="togglePromotionField(promotion, 'for_new_users', $event)"></i>
                 <span class="tooltip-text">Novos Utilizadores: Não</span>
               </div>
               <div *ngIf="promotion?.for_inactive_users === 1" class="tooltip">
-                <i class="ri-user-forbid-line" (click)="toggleInactiveUserStatus(promotion, $event)"></i>
+                <i class="ri-user-forbid-line" (click)="togglePromotionField(promotion,'for_inactive_users', $event)"></i>
                 <span class="tooltip-text">Utilizadores Inativos: Sim</span>
               </div>
               <div *ngIf="promotion?.for_inactive_users === 0 && promotion.generic === 0" class="tooltip">
-                <i class="ri-user-forbid-line not-active" (click)="toggleInactiveUserStatus(promotion, $event)"></i>
+                <i class="ri-user-forbid-line not-active" (click)="togglePromotionField(promotion, 'for_inactive_users', $event)"></i>
                 <span class="tooltip-text">Utilizadores Inativos: Não</span>
               </div>
               <div *ngIf="promotion?.generic === 1" class="tooltip">
-                <i class="ri-global-line" (click)="toggleVisibility(promotion, $event)"></i>
+                <i class="ri-global-line" (click)="togglePromotionField(promotion, 'generic', $event)"></i>
                 <span class="tooltip-text">Genérica</span>
               </div>
             </td>

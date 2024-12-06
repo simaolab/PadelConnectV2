@@ -37,6 +37,13 @@ export class CourtsService {
       return this.http.put<any>(`${ApiRoutes.courts}${court_id}`, courtObj, { headers });
   }
 
+  update(court_id: number, courtObj: Partial<Court>): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  
+    return this.http.patch<any>(`${ApiRoutes.courts}${court_id}`, courtObj, { headers });
+  }
+
   delete(court_id: number): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
