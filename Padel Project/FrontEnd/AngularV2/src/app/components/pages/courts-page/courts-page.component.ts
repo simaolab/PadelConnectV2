@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CourtsService } from '../../../services/courts.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -24,6 +24,8 @@ import { ModalComponent } from '../../utilities/modal/modal.component';
   styleUrl: './courts-page.component.css'
 })
 export class CourtsPageComponent {
+  @ViewChild(ModalComponent) modalComponent: ModalComponent | undefined;
+
   courts: any[] = [];
 
   searchSubject: Subject<string> = new Subject<string>();
@@ -48,13 +50,17 @@ export class CourtsPageComponent {
         console.log(this.courts)
       },
       error: (err: any) => {
+        const message = err.error?.message;
+        this.modalComponent?.showModal(
+          'Erro',
+          message
+        );
       }
     })
   }
 
   searchCourts(term: string): void {
     if (term.trim() === '') {
-      // Se o termo de busca estiver vazio, recarregar todos os campos
       this.loadCourts();
     } else {
       this.courtsService.search(term).subscribe({
@@ -62,6 +68,11 @@ export class CourtsPageComponent {
           this.courts = data.fields;
         },
         error: (err: any) => {
+          const message = err.error?.message;
+          this.modalComponent?.showModal(
+            'Erro',
+            message
+          );
         }
       });
     }
@@ -69,6 +80,6 @@ export class CourtsPageComponent {
 
   onSearchInput(event: Event): void {
     const searchTerm = (event.target as HTMLInputElement).value;
-    this.searchSubject.next(searchTerm); // Envia o valor para o debounce
+    this.searchSubject.next(searchTerm);
   }
 }

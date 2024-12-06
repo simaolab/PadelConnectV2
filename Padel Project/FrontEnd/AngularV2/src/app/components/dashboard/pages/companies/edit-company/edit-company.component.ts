@@ -93,7 +93,7 @@ export class EditCompanyComponent {
           const errorMessage = err?.error?.message;
 
           this.dashboardComponent.showModal(
-            'Error',
+            'Erro',
             errorMessage,
             () => {
               this.router.navigate(['/dashboard/companies']);

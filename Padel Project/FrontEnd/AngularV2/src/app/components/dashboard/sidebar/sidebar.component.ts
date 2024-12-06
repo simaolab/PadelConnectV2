@@ -57,7 +57,7 @@ export class SidebarComponent implements OnInit {
       next: (res: any) => {
         if (res.status === 'success') {
           localStorage.clear();
-          this.dashboardComponent.showModal('Success', res.message);
+          this.dashboardComponent.showModal('Sucesso', res.message);
 
           if (this.dashboardComponent.modalComponent) {
             const subscription = this.dashboardComponent.modalComponent.modalClosed.subscribe(() => {
@@ -69,7 +69,7 @@ export class SidebarComponent implements OnInit {
       },
       error: (err) => {
         const errorMessage = err.error?.message;
-        this.dashboardComponent.showModal('Error', errorMessage);
+        this.dashboardComponent.showModal('Erro', errorMessage);
       },
     });
   }
