@@ -44,7 +44,6 @@ export class PromotionsComponent {
           this.promotions = data.promotions || [];
           this.isLoading = false;
         }, 1500)
-
       },
       error: (err: any) => {
         const message = err.error?.message;
@@ -73,10 +72,24 @@ export class PromotionsComponent {
   }
 
 
-  toggleVisibility(promotion: any, event: Event): void {
+  togglePromotionField(promotion: any, field: string, event: Event): void {
+    
     event.preventDefault();
-    promotion.discount = parseInt(promotion.discount.replace('%', ''), 10);
-    promotion.active = promotion.active === 1 ? 0 : 1; 
+    promotion.discount = parseInt(promotion.discount.replace('%', ''), 10); 
+    promotion[field] = promotion[field] === 1 ? 0 : 1;
+  
+    if (field === 'for_new_users' || field === 'for_inactive_users') {
+      if (promotion.for_new_users === 0 && promotion.for_inactive_users === 0) {
+        promotion.generic = 1;
+      }
+    }
+
+    if (field === 'generic') {
+      if (promotion.generic === 0) {
+        promotion.active = 0;
+      }
+    }
+  
     this.promotionsService.update(promotion.id, promotion).subscribe({
       next: (res: any) => {
         const index = this.promotions.findIndex(p => p.id === promotion.id);
@@ -84,68 +97,12 @@ export class PromotionsComponent {
           setTimeout(() => {
             this.promotions[index] = res.promotion;
             this.loadQuickPromotions();
-          }, 200)
+          }, 200);
         }
       },
       error: (err: any) => {
         console.log(err);
         const message = err.error?.message || 'Erro ao atualizar a promoção.';
-        this.dashboardComponent.showModal('Erro', message);
-      }
-    });
-  }
-  
-  toggleNewUserStatus(promotion: any, event: Event): void {
-    event.preventDefault();
-
-    promotion.discount = parseInt(promotion.discount.replace('%', ''), 10);
-    promotion.for_new_users = promotion.for_new_users === 1 ? 0 : 1;
-
-    if (promotion.for_new_users === 0 && promotion.for_inactive_users === 0) {
-      promotion.generic = 1;
-    }
-
-    this.promotionsService.update(promotion.id, promotion).subscribe({
-      next: (res: any) => {
-        const index = this.promotions.findIndex(p => p.id === promotion.id);
-        if (index !== -1) {
-          setTimeout(() => {
-            this.promotions[index] = res.promotion;
-            this.loadQuickPromotions();
-          }, 200)
-        }
-      },
-      error: (err: any) => {
-        const message = err.error?.message || 'Erro ao atualizar o status de novos usuários.';
-        this.dashboardComponent.showModal('Erro', message);
-      }
-    });
-  }
-    
-  
-  toggleInactiveUserStatus(promotion: any, event: Event): void {
-    event.preventDefault();
-
-    promotion.discount = parseInt(promotion.discount.replace('%', ''), 10); 
-    promotion.for_inactive_users = promotion.for_inactive_users === 1 ? 0 : 1;
-
-    if (promotion.for_new_users === 0 && promotion.for_inactive_users === 0) {
-      promotion.generic = 1;
-    }
-    
-    this.promotionsService.update(promotion.id, promotion).subscribe({
-      next: (res: any) => {
-        const index = this.promotions.findIndex(p => p.id === promotion.id);
-        if (index !== -1) {
-          setTimeout(() => {
-            this.promotions[index] = res.promotion;
-            this.loadQuickPromotions();
-          }, 200)
-        }
-      },
-      error: (err: any) => {
-        console.log(err);
-        const message = err.error?.message || 'Erro ao atualizar o status de usuários inativos.';
         this.dashboardComponent.showModal('Erro', message);
       }
     });

@@ -114,7 +114,6 @@ export class EditCourtComponent {
           rent_equipment: field.rent_equipment,
           file_path: field.file_path
         };
-
       },
       error: (err) => {
         const errorMessage = err?.error?.message

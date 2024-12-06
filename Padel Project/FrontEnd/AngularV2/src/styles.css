@@ -435,6 +435,7 @@ input[type=number] {
   bottom: 150%;
   left: 50%;
   transform: translateX(-50%);
+  white-space: nowrap;
   opacity: 0;
   transition: opacity 0.3s;
   white-space: nowrap;
@@ -486,6 +487,12 @@ input[type=number] {
 
 @media screen and (max-width: 1250px) {
 
+  .tooltip:active .tooltip-text, 
+  .tooltip:focus-within .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+  
   .contact-detail,
   .data-detail{
     display: flex;
