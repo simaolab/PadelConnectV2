@@ -61,7 +61,7 @@
         <div class="reservation">
           <h2 class="info-title">Reservar</h2>
           <div class="inputs-container">
-            
+
             <div class="input-box">
               <h4 class="title-info" for="startDate">Data de Início:</h4>
               <input
@@ -81,12 +81,12 @@
                 (change)="calculatePrice()"
                 [min]="startDate || today"/>
             </div>
-            
+
           </div>
-          
+
           <div class="card-content-price">
             <div class="price">
-                <span>Preço: 10€/h</span>
+                <span>{{ courtObj.price_hour }} € por hora</span>
             </div>
             <div class="card-content-button">
                 <a class="btn reserve" (click)="addToCart()">Adicionar ao carrinho</a>
@@ -103,8 +103,62 @@
       <div class="schedule">
           <h2 class="info-title">Horário</h2>
           <div class="schedule-info">
-              <p class="schedule-hour">Seg-Sex: 09:00 - 23:00</p>
-              <p class="schedule-hour">Sáb: 11:00 - 21:00</p>
+
+            <div class="week-day" *ngIf="schedules.weekdays && schedules.weekdays.length">
+              <h4 class="title-info">Segunda a Sexta</h4>
+              <div  class="tooltip">
+                <i class="ri-door-open-line"></i>
+                <div class="schedule-hour">
+                  {{ schedules.weekdays[0].opening_time }} - {{ schedules.weekdays[0].closing_time }}
+                </div>
+                <span class="tooltip-text">Aberto</span>
+              </div>
+            </div>
+
+            <div class="week-day" *ngIf="schedules.saturday?.is_closed == 0">
+              <h4 class="title-info">Sábado</h4>
+              <div  class="tooltip">
+                <i class="ri-door-closed-line"></i>
+                <div class="schedule-hour">
+                  {{ schedules.saturday.opening_time }} - {{ schedules.saturday.closing_time }}
+                </div>
+                <span class="tooltip-text">Aberto</span>
+              </div>
+            </div>
+
+            <div class="week-day" *ngIf="schedules.saturday?.is_closed == 1">
+              <h4 class="title-info">Sábado</h4>
+              <div  class="tooltip">
+                <i class="ri-door-closed-line"></i>
+                <div class="schedule-hour">
+                  Fechado
+                </div>
+                <span class="tooltip-text">Fechado ao sábado</span>
+              </div>
+            </div>
+
+            <div class="week-day" *ngIf="schedules.sunday?.is_closed == 0">
+              <h4 class="title-info">Domingo</h4>
+              <div  class="tooltip">
+                <i class="ri-door-open-line"></i>
+                <div class="schedule-hour">
+                  {{ schedules.sunday.opening_time }} - {{ schedules.sunday.closing_time }}
+                </div>
+                <span class="tooltip-text">Aberto</span>
+              </div>
+            </div>
+
+            <div class="week-day" *ngIf="schedules.sunday?.is_closed == 1">
+              <h4 class="title-info">Domingo</h4>
+              <div  class="tooltip">
+                <i class="ri-door-open-line"></i>
+                <div class="schedule-hour">
+                  Fechado
+                </div>
+                <span class="tooltip-text">Fechado ao domingo</span>
+              </div>
+            </div>
+
           </div>
       </div>
 

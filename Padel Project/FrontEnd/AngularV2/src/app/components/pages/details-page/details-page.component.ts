@@ -44,6 +44,16 @@ export class DetailsPageComponent implements OnInit {
     rent_equipment: 0,
   };
 
+  schedules: {
+    weekdays: any[]; // array de objetos
+    saturday: any | null; // pode ser um objeto ou null
+    sunday: any | null; // pode ser um objeto ou null
+  } = {
+    weekdays: [],
+    saturday: null,
+    sunday: null,
+  };
+
   addressObj: Address = {
     addressPort: '',
     postalCode: '',
@@ -70,7 +80,14 @@ export class DetailsPageComponent implements OnInit {
   ngOnInit(): void {
     this.court_id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.getCourtDetails();
-    this.today = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+  }
+
+  formatHour(hour: string): string {
+    if (hour) {
+      const parts = hour.split(':');
+      return `${parts[0]}:${parts[1]}`;
+    }
+    return hour;
   }
 
   getCourtDetails(): void {
@@ -91,6 +108,34 @@ export class DetailsPageComponent implements OnInit {
           lockers: field.lockers,
           rent_equipment: field.rent_equipment,
         };
+
+        console.log(this.courtObj)
+
+        this.schedules = {
+          weekdays: court.schedules.weekdays || [],
+          saturday: court.schedules.saturday || null,
+          sunday: court.schedules.sunday || null,
+        };
+
+        if (this.schedules.weekdays.length > 0) {
+          this.schedules.weekdays.forEach(schedule => {
+            schedule.opening_time = this.formatHour(schedule.opening_time);
+            schedule.closing_time = this.formatHour(schedule.closing_time);
+          });
+        }
+
+        if (this.schedules.saturday) {
+          this.schedules.saturday.opening_time = this.formatHour(this.schedules.saturday.opening_time);
+          this.schedules.saturday.closing_time = this.formatHour(this.schedules.saturday.closing_time);
+        }
+
+        if (this.schedules.sunday) {
+          this.schedules.sunday.opening_time = this.formatHour(this.schedules.sunday.opening_time);
+          this.schedules.sunday.closing_time = this.formatHour(this.schedules.sunday.closing_time);
+        }
+
+        console.log(this.schedules)
+
 
         if (field.company.address) {
           const addressParts = field.company.address.split(', ');
@@ -191,7 +236,6 @@ export class DetailsPageComponent implements OnInit {
             }
         },
         error: (err: any) => {
-            console.error('Erro ao verificar disponibilidade:', err);
             this.modalComponent?.showModal(
                 'Error',
                 err.error.message
