@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('payment_method_id')->constrained();
             $table->decimal('amount', 10, 2);
-            $table->enum('status', ['pending', 'paid', 'failed']);
+            $table->enum('status', ['pending', 'paid', 'failed'])->default('pending');
             $table->date('payment_date')->nullable();
+         //   $table->string('stripe_payment_intent_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

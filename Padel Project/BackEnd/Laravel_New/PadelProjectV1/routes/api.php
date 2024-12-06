@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\FieldController;
 use App\Http\Controllers\Admin\NationalityController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\PaymentMethodController;
-use app\Http\Controllers\Admin\PromotionController;
+use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -33,6 +33,16 @@ Route::middleware('auth:api')->group(function () {
     Route::get('reservations/search/{reservation?}', [ReservationController::class, 'search']);
     Route::get('/reservations/deleted', [ReservationController::class, 'indexDeleted']);
     Route::apiResource('cancellations', CancellationController::class);
+
+
+    // STRIPE ROUTES
+    Route::post('/payment-intent', [PaymentController::class, 'createPaymentIntent']);
+    Route::post('/setup-intent', [PaymentController::class, 'createSetupIntent']);
+    Route::post('/process-payment', [PaymentController::class, 'processPayment']);
+    Route::post('/payment-intent/{id}/confirm', [PaymentController::class, 'confirmPaymentIntent']);
+    Route::get('/payment-intent/{id}', [PaymentController::class, 'showPaymentIntent']);
+    // END STRIPE ROUTES
+
 });
 
 //With authentication and role check
@@ -70,4 +80,11 @@ Route::middleware('auth:api')->group(function () {
         ->middleware(RoleCheck::class);
     Route::get('/promotions/search/{string?}', [PromotionController::class, 'search'])
         ->middleware(RoleCheck::class);
+
+    Route::post('/payment/setup-intent', [PaymentController::class, 'createSetupIntent']);
+    Route::post('/payment/process', [PaymentController::class, 'processPayment']);
+    
 });
+
+Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook'])
+    ->middleware('verify.stripe.signature');
