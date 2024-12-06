@@ -44,7 +44,6 @@ export class PromotionsComponent {
           this.promotions = data.promotions || [];
           this.isLoading = false;
         }, 1500)
-
       },
       error: (err: any) => {
         const message = err.error?.message;
@@ -57,4 +56,77 @@ export class PromotionsComponent {
     });
   }
 
+  loadQuickPromotions(): void {
+    this.promotionsService.index().subscribe({
+      next: (data: any) => {
+        this.promotions = data.promotions || [];
+      },
+      error: (err: any) => {
+        const message = err.error?.message;
+        this.dashboardComponent.showModal(
+          'Erro',
+          message
+        )
+      }
+    });
+  }
+
+
+  togglePromotionField(promotion: any, field: string, event: Event): void {
+    
+    event.preventDefault();
+    promotion.discount = parseInt(promotion.discount.replace('%', ''), 10); 
+    promotion[field] = promotion[field] === 1 ? 0 : 1;
+  
+    if (field === 'for_new_users' || field === 'for_inactive_users') {
+      if (promotion.for_new_users === 0 && promotion.for_inactive_users === 0) {
+        promotion.generic = 1;
+      }
+    }
+
+    if (field === 'generic') {
+      if (promotion.generic === 0) {
+        promotion.active = 0;
+      }
+    }
+  
+    this.promotionsService.update(promotion.id, promotion).subscribe({
+      next: (res: any) => {
+        const index = this.promotions.findIndex(p => p.id === promotion.id);
+        if (index !== -1) {
+          setTimeout(() => {
+            this.promotions[index] = res.promotion;
+            this.loadQuickPromotions();
+          }, 200);
+        }
+      },
+      error: (err: any) => {
+        console.log(err);
+        const message = err.error?.message || 'Erro ao atualizar a promoção.';
+        this.dashboardComponent.showModal('Erro', message);
+      }
+    });
+  }
+
+  deletePromotion(promotionId: number, event: Event): void {
+    event.preventDefault();
+    this.promotionsService.delete(promotionId).subscribe({
+      next: (res: any) => {
+        if (res.status === 'success') {
+          this.promotions = this.promotions.filter(promotion => promotion.id !== promotionId);
+          this.dashboardComponent.showModal(
+            'Mensagem',
+            res.message,
+            () => {
+              this.router.navigate(['/dashboard/promotions']);
+            }
+          );
+        }
+      },
+      error: (err: any) => {
+        const message = err.error?.message || 'Erro ao apagar a promoção.';
+        this.dashboardComponent.showModal('Erro', message);
+      }
+    });
+  }  
 }

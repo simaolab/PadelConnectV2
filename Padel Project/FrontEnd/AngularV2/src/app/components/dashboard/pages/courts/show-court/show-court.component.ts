@@ -74,8 +74,6 @@ export class ShowCourtComponent {
             lockers: field.lockers,
             rent_equipment: field.rent_equipment
           };
-
-          console.log('courtObj:', this.courtObj);
         },
         error: (err) => {
           const errorMessage = err?.error?.message

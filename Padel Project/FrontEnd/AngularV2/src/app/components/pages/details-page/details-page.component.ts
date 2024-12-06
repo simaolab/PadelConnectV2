@@ -30,7 +30,7 @@ export class DetailsPageComponent implements OnInit {
 
   @ViewChild(ModalComponent) modalComponent: ModalComponent | undefined;
 
-  courtObj: Court = {
+  courtObj = {
     name: '',
     company_id: 0,
     price_hour: 0,
@@ -42,6 +42,17 @@ export class DetailsPageComponent implements OnInit {
     shower_room: 0,
     lockers: 0,
     rent_equipment: 0,
+    file_path: '',
+  };
+
+  schedules: {
+    weekdays: any[];
+    saturday: any | null;
+    sunday: any | null;
+  } = {
+    weekdays: [],
+    saturday: null,
+    sunday: null,
   };
 
   addressObj: Address = {
@@ -70,7 +81,14 @@ export class DetailsPageComponent implements OnInit {
   ngOnInit(): void {
     this.court_id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.getCourtDetails();
-    this.today = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+  }
+
+  formatHour(hour: string): string {
+    if (hour) {
+      const parts = hour.split(':');
+      return `${parts[0]}:${parts[1]}`;
+    }
+    return hour;
   }
 
   getCourtDetails(): void {
@@ -90,7 +108,33 @@ export class DetailsPageComponent implements OnInit {
           shower_room: field.shower_room,
           lockers: field.lockers,
           rent_equipment: field.rent_equipment,
+          file_path: field.file_path
         };
+
+        console.log(this.courtObj)
+
+        this.schedules = {
+          weekdays: court.schedules.weekdays || [],
+          saturday: court.schedules.saturday || null,
+          sunday: court.schedules.sunday || null,
+        };
+
+        if (this.schedules.weekdays.length > 0) {
+          this.schedules.weekdays.forEach(schedule => {
+            schedule.opening_time = this.formatHour(schedule.opening_time);
+            schedule.closing_time = this.formatHour(schedule.closing_time);
+          });
+        }
+
+        if (this.schedules.saturday) {
+          this.schedules.saturday.opening_time = this.formatHour(this.schedules.saturday.opening_time);
+          this.schedules.saturday.closing_time = this.formatHour(this.schedules.saturday.closing_time);
+        }
+
+        if (this.schedules.sunday) {
+          this.schedules.sunday.opening_time = this.formatHour(this.schedules.sunday.opening_time);
+          this.schedules.sunday.closing_time = this.formatHour(this.schedules.sunday.closing_time);
+        }
 
         if (field.company.address) {
           const addressParts = field.company.address.split(', ');
@@ -106,6 +150,10 @@ export class DetailsPageComponent implements OnInit {
     });
   }
 
+  getCourtImage(filePath: string): string {
+    return this.courtsService.getCourtImage(filePath);
+  }
+
   calculatePrice(): void {
     if (this.startDate && this.endDate) {
       const start = new Date(this.startDate);
@@ -118,7 +166,10 @@ export class DetailsPageComponent implements OnInit {
         this.totalPrice = diffInHours * this.courtObj.price_hour;
       } else {
         this.totalPrice = 0;
-        alert('A data de fim deve ser posterior à data de início.');
+        this.modalComponent?.showModal(
+          'Erro',
+          'A data de fim deve ser posterior à data de início.'
+        );
       }
     }
   }
@@ -126,7 +177,7 @@ export class DetailsPageComponent implements OnInit {
   addToCart(): void {
     if (!this.startDate || !this.endDate || this.totalPrice === 0) {
         this.modalComponent?.showModal(
-            'Error',
+            'Erro',
             'Por favor, preencha datas válidas antes de adicionar ao carrinho'
         );
         return;
@@ -180,20 +231,19 @@ export class DetailsPageComponent implements OnInit {
                 this.cookieService.set('cart', JSON.stringify(cart), 1, '/');
 
                 this.modalComponent?.showModal(
-                    'Success',
+                    'Sucesso',
                     `${reservationItem.name} adicionado ao carrinho`
                 );
             } else {
                 this.modalComponent?.showModal(
-                    'Error',
+                    'Erro',
                     response.message || 'As datas selecionadas não estão disponíveis.'
                 );
             }
         },
         error: (err: any) => {
-            console.error('Erro ao verificar disponibilidade:', err);
             this.modalComponent?.showModal(
-                'Error',
+                'Erro',
                 err.error.message
             );
         },

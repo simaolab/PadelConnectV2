@@ -77,7 +77,8 @@ class PromotionController extends Controller
         if ($promotion->for_inactive_users) {
             //Get all inactive users with last login 30 days ago
             $inactiveClients = Client::whereHas('user', function ($query) {
-                $query->where('last_login', '<', now()->subDays(30));
+                $query->whereNull('last_login_at')
+                ->orWhere('last_login_at', '<', now()->subDays(30));
             })->get();
             //Attach the promotion to the inactive users
             foreach ($inactiveClients as $user) {
@@ -86,6 +87,7 @@ class PromotionController extends Controller
         }
 
         return response()->json([
+            'status' => 'success',
             'message' => 'Promoção criada com sucesso!'
         ], 201);
     }
@@ -136,6 +138,7 @@ class PromotionController extends Controller
         $promotion->update($request->validated());
         return response()->json(
         [
+            'status' => 'success',
             'message' => 'Promoção atualizada com sucesso!'
         ], 200);
     }
@@ -166,6 +169,7 @@ class PromotionController extends Controller
         //Deletes promotion and show message
         $promotion->delete();
         return response()->json([
+            'status' => 'success',
             'message' => 'Promoção eliminada com sucesso!'
         ]);
     }

@@ -33,9 +33,9 @@
           <tbody>
             <tr *ngFor="let company of companies">
               <td data-cell="Nome" class="left">{{ company.name }}</td>
-              <td data-cell="Email" class="left">{{ company.email }}</td>
+              <td data-cell="Email" class="left">{{ company.user?.email }}</td>
               <td data-cell="Contacto" class="middle">{{ company.contact || 'Sem contacto' }}</td>
-              <td data-cell="NIF" class="middle">{{ company.nif }}</td>
+              <td data-cell="NIF" class="middle">{{ company.user?.nif }}</td>
               <td data-cell="Morada" class="left">{{ company.address }}</td>
               <td data-cell="Campos" class="middle">
                 <div class="tooltip">

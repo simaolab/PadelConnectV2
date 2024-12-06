@@ -129,7 +129,7 @@ export class SettingsComponent {
         const message = err.error?.message;
 
         this.dashboardComponent.showModal(
-          'Error',
+          'Erro',
           message
         )
       }
@@ -141,17 +141,17 @@ export class SettingsComponent {
   }
 
   updatePassword(): void {
-    
+
     this.formErrors = {};
 
     if (this.passwordObj.current_password) {
-    
+
       const passwordData = {
           current_password: this.passwordObj.current_password,
           new_password: this.passwordObj.new_password,
           new_password_confirmation: this.passwordObj.new_password_confirmation,
       };
-      
+
       this.usersService.updatePassword(passwordData).subscribe({
           next: (res: any) => {
               if (res.message) {
@@ -160,10 +160,9 @@ export class SettingsComponent {
           },
           error: (err: any) => {
             const errorDetails = err.error?.['error(s)'] || {};
-        
+
             for (const field in errorDetails) {
                 if (errorDetails.hasOwnProperty(field)) {
-                    // Redireciona o erro "new_password.confirmed" para "new_password_confirmation"
                     if (field === 'new_password' && errorDetails[field][0].includes('não corresponde')) {
                         this.formErrors['new_password_confirmation'] = errorDetails[field][0];
                     } else {
@@ -172,7 +171,7 @@ export class SettingsComponent {
                 }
             }
         },
-      });  
+      });
     }
     else {
       this.editClient(false);
@@ -214,7 +213,7 @@ export class SettingsComponent {
       },
     });
   }
-  
+
   userInfo(): void {
     this.usersService.userInfo().subscribe({
       next: (res: any) => {
@@ -259,9 +258,9 @@ export class SettingsComponent {
   toggleNewsletter(event: Event): void {
     this.clientObj.newsletter = (event.target as HTMLInputElement).checked ? 1 : 0;
   }
-  
+
   evaluatePasswordStrength(password: string): void {
-    
+
     this.formErrors = {};
     let strength = 0;
 
@@ -299,5 +298,5 @@ export class SettingsComponent {
       this.passwordStrengthMessage = 'Estado password: Excelente';
     }
   }
-  
+
 }

@@ -1,7 +1,7 @@
 import { Court } from './../../../interfaces/court';
 import { ReservationsService } from './../../../services/reservations.service';
 import { UsersService } from './../../../services/users.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -11,18 +11,27 @@ import Swal from 'sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
 import { CartItem, Cart } from '../../../interfaces/cart';
 import { switchMap } from 'rxjs/operators';
+
 import { PaymentService } from '../../../services/payment.service';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { ElementRef, ViewChild } from '@angular/core'; 
+import { ModalComponent } from '../../utilities/modal/modal.component';
 
 @Component({
   selector: 'app-payment-page',
   standalone: true,
-  imports: [CommonModule, PageTopComponent, MainContentComponent, FormsModule],
+  imports: [
+    CommonModule,
+    PageTopComponent,
+    MainContentComponent,
+    FormsModule,
+    ModalComponent],
   templateUrl: './payment-page.component.html',
   styleUrls: ['./payment-page.component.css']
 })
 export class PaymentPageComponent {
+  @ViewChild(ModalComponent) modalComponent: ModalComponent | undefined;
+
   aboutImageUrl = "assets/images/about/renith-r-A9VpotrPr1k-unsplash.jpg";
 
   @ViewChild('cardElement') cardElement!: ElementRef; 
@@ -100,18 +109,24 @@ export class PaymentPageComponent {
 
             return total + (pricePerHour * totalHours);
           }, 0);
-          console.log("Preço total:", this.totalPrice);
         } else {
-          console.error('Estrutura do carrinho inválida ou "items" não encontrado.');
+          this.modalComponent?.showModal(
+            'Erro',
+            'Estrutura do carrinho inválida ou "items" não encontrado.'
+          );
         }
       } catch (error) {
-        console.error('Erro ao ler os dados do carrinho:', error);
+        this.modalComponent?.showModal(
+          'Erro',
+          'Erro ao ler os dados do carrinho:' + error
+        );
       }
     } else {
-      console.warn('Carrinho vazio ou cookie não encontrado.');
+      this.modalComponent?.showModal(
+        'Erro',
+        'Carrinho vazio ou cookie não encontrado.'
+      );
     }
-
-    console.log(this.cartItems)
   }
 
   userInfo() {
@@ -124,14 +139,17 @@ export class PaymentPageComponent {
       next: (clientRes: any) => {
         this.clientObj = {
           name: `${clientRes.client.first_name} ${clientRes.client.last_name}`,
-          contact: clientRes.client.contact, // Caso 'contact' seja null
+          contact: clientRes.client.contact,
           nif: clientRes.client.user.nif,
-          birthday: clientRes.client.user.birthday, // Caso 'birthday' seja null
+          birthday: clientRes.client.user.birthday,
         };
-
-        console.log(this.clientObj)
       },
       error: (err) => {
+        const message = err.error?.message;
+        this.modalComponent?.showModal(
+          'Erro',
+          message
+        );
       }
     });
   }
@@ -152,7 +170,6 @@ export class PaymentPageComponent {
       }
     });
   }
-
 
   formatCardNumber(event: any) {
     let input = event.target;

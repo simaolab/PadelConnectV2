@@ -16,12 +16,38 @@ export class CourtsService {
     return this.http.get<any>(ApiRoutes.courts);
   }
 
-  create(courtObj: Court): Observable<any> {
-      const token = localStorage.getItem('authToken');
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  // create(courtObj: Court): Observable<any> {
+  //     const token = localStorage.getItem('authToken');
+  //     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-      return this.http.post<any>(ApiRoutes.courts, courtObj, { headers });
+  //     return this.http.post<any>(ApiRoutes.courts, courtObj, { headers });
+  // }
+  create(courtObj: Court): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    // Criar o FormData
+    const formData = new FormData();
+    formData.append('name', courtObj.name);
+    formData.append('company_id', courtObj.company_id.toString());
+    formData.append('price_hour', courtObj.price_hour.toString());
+    formData.append('type_floor', courtObj.type_floor);
+    formData.append('status', courtObj.status);
+    formData.append('illumination', courtObj.illumination.toString());
+    formData.append('cover', courtObj.cover.toString());
+    formData.append('last_maintenance', courtObj.last_maintenance || '');
+    formData.append('shower_room', courtObj.shower_room.toString());
+    formData.append('lockers', courtObj.lockers.toString());
+    formData.append('rent_equipment', courtObj.rent_equipment.toString());
+
+    // Apenas adiciona o arquivo se ele existir
+    if (courtObj.file_path) {
+      formData.append('file_path', courtObj.file_path);
+    }
+
+    return this.http.post<any>(ApiRoutes.courts, formData, { headers });
   }
+
 
   show(court_id: number): Observable<any> {
     const token = localStorage.getItem('authToken');
@@ -30,11 +56,22 @@ export class CourtsService {
     return this.http.get<any>(`${ApiRoutes.courts}${court_id}`, { headers });
   }
 
+  getCourtImage(filePath: string): string {
+    return filePath ? `https://api.padelconnect.pt/storage/${filePath}` : 'assets/images/default-image.jpg';
+  }
+
   edit(courtObj: Court, court_id: number): Observable<any> {
       const token = localStorage.getItem('authToken');
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
       return this.http.put<any>(`${ApiRoutes.courts}${court_id}`, courtObj, { headers });
+  }
+
+  update(court_id: number, courtObj: Partial<Court>): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  
+    return this.http.patch<any>(`${ApiRoutes.courts}${court_id}`, courtObj, { headers });
   }
 
   delete(court_id: number): Observable<any> {

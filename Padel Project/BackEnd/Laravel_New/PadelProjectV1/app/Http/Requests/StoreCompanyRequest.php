@@ -36,9 +36,9 @@ class StoreCompanyRequest extends FormRequest
             'newsletter' => 'nullable',
             'address' => 'required',
             
-            'user_name' => 'required|string|min:2|max:50|unique:users,username',
+            'user_name' => 'required|string|min:2|max:20|unique:users,username',
             'user_email' => 'required|email|unique:users,email',
-            'user_password' => 'required|min:8|confirmed',
+            'user_password' => 'required|string|min:8|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/',
             'user_nif' => [
                 'required',
                 new NIFValidationRule(),
@@ -70,16 +70,18 @@ class StoreCompanyRequest extends FormRequest
             'email.unique'          => 'O email inserido já está associado a outro cliente.',
             'email.required'        => 'O email é um campo obrigatório.',
 
-            'user_name.required' => 'O nome do usuário é obrigatório.',
-            'user_name.unique' => 'O nome do usuário já está em uso.',
-            'user_email.required' => 'O email do usuário é obrigatório.',
-            'user_email.email' => 'Insira um email válido para o usuário.',
-            'user_email.unique' => 'O email do usuário já está em uso.',
-            'user_password.required' => 'A senha do usuário é obrigatória.',
-            'user_password.confirmed' => 'As senhas não coincidem.',
-            'user_nif.required'          => 'O NIF é um campo obrigatório.',
-            'user_nif.regex'             => 'O NIF deve ser válido e ter exatamente 9 digitos.',
-            'user_nif.unique'            => 'O NIF inserido já está associado a outro usuário.',
+            'user_name.required'    => 'O username é um campo obrigatório.',
+            'user_name.unique'      => 'O username já está em uso.',
+            'user_email.required'   => 'O email é um campo obrigatório.',
+            'user_email.email'      => 'Insira um email válido para o utilizador.',
+            'user_email.unique'     => 'O email do usuário já está em uso.',
+            'user_password.required' => 'A nova senha é obrigatória.',
+            'user_password.min' => 'A nova senha não é segura.',
+            'user_password.confirmed' => 'A confirmação de senha não corresponde.',
+            'user_password.regex' => 'Tenha em atenção as verificações acima.',
+            'user_nif.required'     => 'O NIF é um campo obrigatório.',
+            'user_nif.regex'        => 'O NIF deve ser válido e ter exatamente 9 digitos.',
+            'user_nif.unique'       => 'O NIF inserido já está associado a outro usuário.',
         ];
     }
 

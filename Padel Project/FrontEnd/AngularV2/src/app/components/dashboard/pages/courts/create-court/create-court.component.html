@@ -13,7 +13,7 @@
 </div>
 
 <card-form>
-  <form class="form-show">
+  <form class="form-show" enctype="multipart/form-data">
     <div class="user-container-info">
       <div class="container-description">
           <p class="description-text">Informações do Campo</p>
@@ -51,10 +51,10 @@
                       <i class="ri-money-euro-circle-line"></i>
                       <label for="price_hour">Preço Hora</label>
                     </div>
-                    <input type="text" name="price_hour" 
+                    <input type="text" name="price_hour"
                     (input)="formatPriceHour($event)"
                     placeholder="Indique preço hora"
-                    [value]="courtObj.price_hour || ''" 
+                    [value]="courtObj.price_hour || ''"
                     maxlength="5">
                     <small *ngIf="formErrors['price_hour']" class="small-error">{{ formErrors['price_hour'] }}</small>
                 </div>
@@ -71,7 +71,7 @@
                     [(ngModel)]="courtObj.status"
                     (selectionChange)="onStatusSelected($event)">
                   </dropdown>
-                  <small *ngIf="formErrors['status']" class="small-error">{{ formErrors['status'] }}</small> 
+                  <small *ngIf="formErrors['status']" class="small-error">{{ formErrors['status'] }}</small>
                 </div>
                 <div class="detail">
                   <div class="label-container">
@@ -86,7 +86,7 @@
                     [(ngModel)]="courtObj.type_floor"
                     (selectionChange)="onTypeFloorSelected($event)">
                   </dropdown>
-                  <small *ngIf="formErrors['type_floor']" class="small-error">{{ formErrors['type_floor'] }}</small> 
+                  <small *ngIf="formErrors['type_floor']" class="small-error">{{ formErrors['type_floor'] }}</small>
                 </div>
                 <div class="detail">
                   <div class="label-container">
@@ -157,6 +157,8 @@
 
       </div>
     </div>
+
+    <input type="file" [(ngModel)]="courtObj.file_path" (change)="onFileSelected($event)">
 
     <div class="button">
       <button type="submit" (click)="create()" class="btn create">

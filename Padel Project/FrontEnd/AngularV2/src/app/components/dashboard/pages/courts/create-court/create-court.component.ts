@@ -44,6 +44,7 @@ export class CreateCourtComponent {
     shower_room: 0,
     lockers: 0,
     rent_equipment: 0,
+    file_path: null,
   }
 
   serviceStates = {
@@ -93,7 +94,7 @@ export class CreateCourtComponent {
         next: (res: any) => {
           if(res.status === 'success') {
             this.dashboardComponent.showModal(
-              'Success',
+              'Sucesso',
               res.message,
               () => {
                 this.router.navigate(['/dashboard/courts']);
@@ -106,8 +107,6 @@ export class CreateCourtComponent {
           this.formErrors = {};
           const errorDetails = err.error?.['error(s)'] || {};
 
-          console.error(err.error)
-
           for (const court in errorDetails) {
             if (errorDetails.hasOwnProperty(court)) {
               this.formErrors[court] = errorDetails[court][0];
@@ -115,6 +114,14 @@ export class CreateCourtComponent {
           }
         }
       })
+    }
+
+    onFileSelected(event: Event): void {
+      const input = event.target as HTMLInputElement;
+      if (input.files && input.files.length > 0) {
+        const file = input.files[0];
+        this.courtObj.file_path = file;
+      }
     }
 
     formatPriceHour(event: Event): void {

@@ -1,0 +1,117 @@
+.input-toggle {
+    display: none;
+  }
+  
+  .display {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    background: transparent;
+  }
+  
+  .toggle {
+    width: 50px;
+    height: 30px;
+    border-radius: 999px;
+    background: var(--color-light-grey);
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .circle {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--color-white);
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(10%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .no {
+    color: var(--color-danger);
+    opacity: 1;
+  }
+  
+  .yes {
+    margin-top: -170%;
+    color: var(--color-primary);
+  }
+  
+  .i {
+    position: absolute;
+  }
+  
+  .input-toggle:checked + .display label .circle {
+    left: 100%;
+    transform: translate(-110%, -50%);
+  }
+  
+  .input-toggle:checked + .display label .circle .no {
+      margin-top: 150%;
+      opacity: 0;
+  }
+  
+  .input-toggle:checked + .display label .circle .yes {
+      margin-top: 0%;
+  }
+  
+  .toggle:active .circle {
+    width: 35px;
+  }
+
+  .display{
+    margin-top: 0;
+  }
+
+  .data-detail.views{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .data-detail.views .detail{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .data-detail.views .detail .label-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  @media screen and (max-width: 1250px){
+    .data-detail.views{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  @media screen and (max-width: 600px){
+    .data-detail.views{
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+    }
+    
+  }
