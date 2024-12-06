@@ -112,8 +112,6 @@ export class EditCourtComponent {
           lockers: field.lockers,
           rent_equipment: field.rent_equipment
         };
-
-        console.log(this.courtObj)
       },
       error: (err) => {
         const errorMessage = err?.error?.message

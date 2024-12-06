@@ -31,10 +31,10 @@ export class ReservationsComponent {
   loadReservations(): void {
     this.reservationsService.index().subscribe({
       next: (data: any) => {
+        setTimeout(() => {
           this.reservations = data.reservations;
           this.isLoading = false;
-          console.log('Reservas back:', data)
-          console.log('Reservas:', this.reservations)
+        }, 1500)
       },
       error: (err: any) => {
         const message = err.error?.message;

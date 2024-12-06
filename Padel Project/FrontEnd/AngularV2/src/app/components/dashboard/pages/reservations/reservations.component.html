@@ -1,33 +1,81 @@
 <div class="page-info-action">
   <div class="page-info">
-    <title-page pageText="Listagem de Reservas"></title-page>
-    <p class="description-page">Esta lista apresenta todas as suas reservas</p>
+      <title-page pageText="Listagem de Reservas"></title-page>
+      <p class="description-page">Aqui pode ver todas as reservas associadas ao
+          <span>Padel Connect</span>
+      </p>
   </div>
 </div>
 
-<!-- Tela de carregamento -->
 <div *ngIf="isLoading; else showReservation" class="loading-screen">
   <div class="spinner"></div>
   <p class="loading">A carregar a lista de reservas, por favor aguarde ...</p>
 </div>
 
+
 <ng-template #showReservation>
   <div *ngIf="reservations.length > 0; else noReservations">
-    <ul>
-      <li *ngFor="let reservation of reservations">
-        <div><strong>ID:</strong> {{ reservation.id }}</div>
-        <div><strong>Tipo de Reserva:</strong> {{ reservation.type_reservation }}</div>
-        <div><strong>Status:</strong> {{ reservation.status }}</div>
-        <div><strong>Informações Adicionais:</strong> {{ reservation.additional_info || 'N/A' }}</div>
-        <div><strong>Data Início:</strong> {{ reservation.start_date }}</div>
-        <div><strong>Data Fim:</strong> {{ reservation.end_date }}</div>
-        <div><strong>Total:</strong> {{ reservation.total | currency }}</div>
-        <div><strong>Política de Privacidade:</strong> {{ reservation.privacy_policy }}</div>
-        <div><strong>Criado em:</strong> {{ reservation.created_at }}</div>
-        <div><strong>Atualizado em:</strong> {{ reservation.updated_at }}</div>
-        <div><strong>Deletado em:</strong> {{ reservation.deleted_at || 'N/A' }}</div>
-      </li>
-    </ul>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th class="left">Tipo</th>
+            <th class="middle">Total</th>
+            <th class="middle">Inicio Reserva</th>
+            <th class="middle">Fim Reserva</th>
+            <th class="middle">Estado</th>
+            <th class="middle">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reservation of reservations">
+            <td data-cell="Tipo" class="left">{{ reservation.type_reservation }}</td>
+            <td data-cell="Total" class="middle"> {{ reservation.total}}€</td>
+            <td data-cell="Inicio Reserva" class="middle date">
+              <span class="reservation-start">
+                <div>
+                  <i class="ri-calendar-line"></i> {{ reservation.start_date.split(' ')[0] }}
+                </div>
+                <div>
+                  <i class="ri-time-line"></i> {{ reservation.start_date.split(' ')[1] }}
+                </div>
+              </span>
+            </td>
+            <td data-cell="Fim Reserva" class="middle date">
+              <span class="reservation-end">
+                <div>
+                  <i class="ri-calendar-line"></i> {{ reservation.end_date.split(' ')[0] }}
+                </div>
+                <div>
+                  <i class="ri-time-line"></i> {{ reservation.end_date.split(' ')[1] }}
+                </div>
+              </span>
+            </td>
+            <td data-cell="Estado" class="middle">
+              <div class="status-wrapper">
+                <div [ngClass]="{
+                    'status-disponivel': reservation.status === 'Concluída',
+                    'status-inativo': reservation.status === 'pendente',
+                    'status-occupied': reservation.status === 'Cancelada'
+                  }">
+                    {{ reservation?.status }}
+                </div>
+              </div>
+            </td>
+            <td data-cell="Ações" class="middle">
+              <div class="actions">
+                <!-- <form method="post"  (submit)="deleteReservation(reservation?.id, $event)">
+                  <button type="submit">
+                    <i class="ri-delete-bin-2-line"></i>
+                    <span class="tooltip-text">Apagar</span>
+                  </button>
+                </form> -->
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </ng-template>
 
