@@ -40,7 +40,7 @@
     position: relative;
     width: 100%;
     height: 70vh;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
 }
 
@@ -110,6 +110,7 @@
 .title-info {
   font-size: var(--font-size);
   color: var(--color-primary);
+  width: 200%;
 }
 
 .info-box {
@@ -163,7 +164,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 14%;
+  max-width: 20%;
+  width: 14%;
 }
 
 .schedule-hour {
@@ -171,6 +173,10 @@
   font-size: var(--font-size);
   display: inline-flex;
   align-items: centers;
+}
+
+.hour {
+  display: inline-flex;
 }
 
 .ri-door-open-line {
@@ -221,6 +227,17 @@
     align-items: center;
     margin-right: 5px;
     color: var(--color-gray);
+}
+
+.tooltip {
+  width: 200% !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 15px !important;
+}
+
+.tooltip .tooltip-text {
+  left: 27% !important;
 }
 
 .card-content-button {
@@ -345,7 +362,21 @@
   background: rgba(241, 16, 16, 0.5) !important;
 }
 
-@media screen and (max-width: 840px) {
+@media screen and (max-width: 1160px) {
+  .week-day {
+    max-width: 30%;
+    width: 18%;
+  }
+}
+
+@media screen and (max-width: 915px) {
+  .week-day {
+    max-width: 30%;
+    width: 19%;
+  }
+}
+
+@media screen and (max-width: 850px) {
   .services-icons {
     gap: 25px;
     flex-direction: column;
@@ -354,5 +385,16 @@
   .info-box {
     flex-direction: column;
     gap: 2rem;
+  }
+
+  .week-day {
+    max-width: 30%;
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 915px) {
+  .schedule-hour {
+    width: 200%;
   }
 }

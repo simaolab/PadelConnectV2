@@ -44,6 +44,7 @@ export class CreateCourtComponent {
     shower_room: 0,
     lockers: 0,
     rent_equipment: 0,
+    file_path: null,
   }
 
   serviceStates = {
@@ -115,6 +116,14 @@ export class CreateCourtComponent {
           }
         }
       })
+    }
+
+    onFileSelected(event: Event): void {
+      const input = event.target as HTMLInputElement;
+      if (input.files && input.files.length > 0) {
+        const file = input.files[0];
+        this.courtObj.file_path = file;
+      }
     }
 
     formatPriceHour(event: Event): void {

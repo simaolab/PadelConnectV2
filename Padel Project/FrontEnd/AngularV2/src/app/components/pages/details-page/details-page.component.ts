@@ -30,7 +30,7 @@ export class DetailsPageComponent implements OnInit {
 
   @ViewChild(ModalComponent) modalComponent: ModalComponent | undefined;
 
-  courtObj: Court = {
+  courtObj = {
     name: '',
     company_id: 0,
     price_hour: 0,
@@ -42,12 +42,13 @@ export class DetailsPageComponent implements OnInit {
     shower_room: 0,
     lockers: 0,
     rent_equipment: 0,
+    file_path: '',
   };
 
   schedules: {
-    weekdays: any[]; // array de objetos
-    saturday: any | null; // pode ser um objeto ou null
-    sunday: any | null; // pode ser um objeto ou null
+    weekdays: any[];
+    saturday: any | null;
+    sunday: any | null;
   } = {
     weekdays: [],
     saturday: null,
@@ -107,6 +108,7 @@ export class DetailsPageComponent implements OnInit {
           shower_room: field.shower_room,
           lockers: field.lockers,
           rent_equipment: field.rent_equipment,
+          file_path: field.file_path
         };
 
         console.log(this.courtObj)
@@ -149,6 +151,10 @@ export class DetailsPageComponent implements OnInit {
         }
       }
     });
+  }
+
+  getCourtImage(filePath: string): string {
+    return this.courtsService.getCourtImage(filePath);
   }
 
   calculatePrice(): void {
