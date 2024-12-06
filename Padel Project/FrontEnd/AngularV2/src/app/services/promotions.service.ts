@@ -25,6 +25,20 @@ export class PromotionsService {
     return this.http.post<any>(ApiRoutes.promotions, promotionObj, { headers })
   }
 
+  delete(promotion_id: number): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.delete<any>(`${ApiRoutes.promotions}${promotion_id}`, { headers });
+  }
+
+  update(id: number, promotion: any): Observable<any> {
+    const token = localStorage.getItem('authToken'); 
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  return this.http.put<any>(`${ApiRoutes.promotions}${id}`, promotion, { headers });
+  }
+
   show(promotion_id: number): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

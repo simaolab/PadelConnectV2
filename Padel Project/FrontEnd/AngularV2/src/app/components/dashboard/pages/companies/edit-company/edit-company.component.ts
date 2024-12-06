@@ -71,10 +71,10 @@ export class EditCompanyComponent {
 
           this.companyObj = {
             name: company.name,
-            user_email: company.user_email,
+            user_email: company.user?.email,
             user_name: company.user_name,
             contact: company.contact,
-            user_nif: company.user_nif,
+            user_nif: company.user?.nif,
             newsletter: company.newsletter,
             address: company.address
           };

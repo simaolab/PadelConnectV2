@@ -24,7 +24,7 @@
             <div class="detail">
               <div class="label-container">
                 <i class="ri-user-line"></i>
-                <label for="user_name">Name</label>
+                <label for="user_name">Nome</label>
               </div>
               <input type="text" name="user_name" value="{{ companyObj.user_name }}"
                 placeholder="PadelConnect" [(ngModel)]="companyObj.user_name">
@@ -91,9 +91,19 @@
               <div class="detail">
                 <div class="label-container">
                   <i class="ri-lock-unlock-line"></i>
-                  <label for="first_name">Confrmação Password</label>
+                  <label for="user_password_confirmation">Confirmação Password</label>
                 </div>
-                <input type="password" placeholder="Confirme a nova password">
+                <input
+                  id="user_password_confirmation"
+                  type="password"
+                  name="user_password_confirmation"
+                  [(ngModel)]="passwordObj.user_password_confirmation"
+                  placeholder="Confirme a nova password"
+                  required
+                />
+                <small *ngIf="formErrors['user_password_confirmation']" class="small-error">
+                  {{ formErrors['user_password_confirmation'] }}
+                </small>
               </div>
             </div>
         </div>
@@ -183,7 +193,6 @@
                       (change)="toggleNewsletter($event)"
                       [checked]="companyObj.newsletter === 1"
                       class="input-toggle">
-
                     <div class="display">
                       <label class="toggle" for="newsletterSwitch">
                         <div class="circle">

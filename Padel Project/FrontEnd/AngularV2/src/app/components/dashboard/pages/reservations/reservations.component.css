@@ -1,0 +1,5 @@
+.no-reservations{
+    padding-block: 2rem;
+    color: var(--color-text);
+    font-size: var(--font-smalls);
+}

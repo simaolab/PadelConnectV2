@@ -1,1 +1,221 @@
-<p>edit-promotion works!</p>
+<div class="page-info-title">
+    <div class="page-action">
+      <button type="submit" class="btn-round back" [routerLink]="['/dashboard/promotions']">
+        <i class="ri-arrow-left-line"></i>
+      </button>
+    </div>
+    <div class="page-info">
+      <title-page pageText="Criação de uma empresa"></title-page>
+      <p class="description-page">Bem vindo á página de criação de promoção,
+        por favor preencha os dados obrigatório.
+      </p>
+    </div>
+  </div>
+  
+  <card-form>
+    <form class="form-show">
+      <div class="user-container-info">
+        <div class="container-description">
+            <p class="description-text">Informações Promoção</p>
+            <hr>
+        </div>
+        <div class="container-forms">
+            <div class="data-detail">
+              <div class="detail">
+                <div class="label-container">
+                  <i class="ri-file-list-3-line"></i>
+                  <label for="description">Descrição</label>
+                </div>
+                <input type="text" name="description" value="{{ promotionObj.description }}"
+                  placeholder="Promoção de Natal" [(ngModel)]="promotionObj.description">
+                  <small *ngIf="formErrors['description']" class="small-error">{{ formErrors['description'] }}</small>
+              </div>
+              <div class="detail">
+                <div class="label-container">
+                  <i class="ri-qr-code-line"></i>
+                  <label for="promo_code">Código</label>
+                </div>
+                <input type="text" name="promo_code" value="{{ promotionObj.promo_code }}"
+                  placeholder="NATAL24" [(ngModel)]="promotionObj.promo_code">
+                  <small *ngIf="formErrors['promo_code']" class="small-error">{{ formErrors['promo_code'] }}</small>
+              </div>
+            </div>
+            <div class="data-detail">
+                <div class="detail">
+                  <div class="label-container">
+                    <i class="ri-discount-percent-line"></i>
+                    <label for="discount">Desconto</label>
+                  </div>
+                  <input type="text" name="discount" 
+                  (input)="formatDiscount($event)"
+                  placeholder="Percentagem de desconto"
+                  [value]="promotionObj.discount || ''" 
+                  maxlength="5">
+                  <small *ngIf="formErrors['discount']" class="small-error">{{ formErrors['discount'] }}</small>
+                </div>
+                <div class="detail">
+                  <div class="label-container">
+                    <i class="ri-timer-flash-line"></i>
+                    <label for="usage_limit">Limite Uso</label>
+                  </div>
+                  <input type="text" name="usage_limit"
+                  (input)="formatUseLimit($event)"
+                  [value]="promotionObj.usage_limit === 1 ? '' : promotionObj.usage_limit"
+                  maxlength="9"
+                  placeholder="Limite de Uso">
+                  <small *ngIf="formErrors['usage_limit']" class="small-error">{{ formErrors['usage_limit'] }}</small>
+                </div>
+                <div class="detail">
+                    <div class="label-container">
+                      <i class="ri-money-euro-circle-line"></i>
+                      <label for="min_spend">Mínimo Gasto</label>
+                    </div>
+                    <input type="text" name="min_spend" 
+                    (input)="formatMinSpend($event)"
+                    placeholder="Valor mínimo a gastar"
+                    [value]="promotionObj.min_spend === 1 ? '' : promotionObj.min_spend" 
+                    maxlength="6">
+                    <small *ngIf="formErrors['min_spend']" class="small-error">{{ formErrors['min_spend'] }}</small>
+                </div>
+                <div class="detail">
+                    <div class="label-container">
+                        <i class="ri-calendar-2-line"></i>
+                      <label for="start_date">Inicio</label>
+                    </div>
+                    <input type="date" name="start_date" [(ngModel)]="promotionObj.start_date"
+                    [value]="promotionObj.start_date" [min]="todayDate" disabled>
+                    <small *ngIf="formErrors['start_date']" class="small-error">{{ formErrors['start_date'] }}</small>
+                </div>
+                <div class="detail">
+                    <div class="label-container">
+                        <i class="ri-calendar-2-line"></i>
+                      <label for="end_date">Fim</label>
+                    </div>
+                    <input type="date" name="end_date" [(ngModel)]="promotionObj.end_date"
+                    [value]="promotionObj.end_date" [min]="todayDate">
+                    <small *ngIf="formErrors['end_date']" class="small-error">{{ formErrors['end_date'] }}</small>
+                  </div>
+                </div>
+              </div>
+        </div>
+        
+      <div class="user-container-info">
+        <div class="container-description">
+            <p class="description-text">Informações Visualização</p>
+            <hr>
+        </div>
+        <div class="container-forms">
+            <div class="data-detail views">
+                <div class="detail">
+                    <div class="label-container">
+                        <i class="ri-global-line"></i>
+                        <label for="generic">Prom. Genérica</label>
+                    </div>
+                    <div class="form-group">
+                      <input
+                        type="checkbox"
+                        id="genericSwitch"
+                        [(ngModel)]="promotionObj.generic"
+                        name="generic"
+                        (change)="toggleGeneric($event)"
+                        [checked]="promotionObj.generic === 1"
+                        class="input-toggle">
+  
+                      <div class="display">
+                        <label class="toggle" for="genericSwitch">
+                          <div class="circle">
+                            <i class="ri-global-line i off no"></i>
+                            <i class="ri-global-line i on yes"></i>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                </div>
+                <div class="detail">
+                    <div class="label-container">
+                        <i class="ri-user-add-line"></i>
+                        <label for="for_new_users">Novos Clientes</label>
+                    </div>
+                    <div class="form-group">
+                      <input
+                        type="checkbox"
+                        id="newUsersSwitch"
+                        [(ngModel)]="promotionObj.for_new_users"
+                        name="for_new_users"
+                        (change)="toggleNewUsers($event)"
+                        [checked]="promotionObj.for_new_users === 1"
+                        class="input-toggle">
+  
+                      <div class="display">
+                        <label class="toggle" for="newUsersSwitch">
+                          <div class="circle">
+                            <i class="ri-user-unfollow-line i off no"></i>
+                            <i class="ri-user-follow-line i on yes"></i>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                </div>
+                <div class="detail">
+                    <div class="label-container">
+                        <i class="ri-user-forbid-line"></i>
+                        <label for="for_inactive_users">Cliente Inativos</label>
+                    </div>
+                    <div class="form-group">
+                      <input
+                        type="checkbox"
+                        id="inactiveUsersSwitch"
+                        [(ngModel)]="promotionObj.for_inactive_users"
+                        name="for_inactive_users"
+                        (change)="toggleInactiveUsers($event)"
+                        [checked]="promotionObj.for_inactive_users === 1"
+                        class="input-toggle">
+  
+                      <div class="display">
+                        <label class="toggle" for="inactiveUsersSwitch">
+                          <div class="circle">
+                            <i class="ri-user-unfollow-line i off no"></i>
+                            <i class="ri-user-follow-line i on yes"></i>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                </div>
+                <div class="detail">
+                    <div class="label-container">
+                        <i class="ri-user-forbid-line"></i>
+                        <label for="active">Prom. Visivel</label>
+                    </div>
+                    <div class="form-group">
+                      <input
+                        type="checkbox"
+                        id="visibilitySwitch"
+                        [(ngModel)]="promotionObj.active"
+                        name="active"
+                        (change)="toggleVisibility($event)"
+                        [checked]="promotionObj.active === 1"
+                        class="input-toggle">
+  
+                      <div class="display">
+                        <label class="toggle" for="visibilitySwitch">
+                          <div class="circle">
+                            <i class="ri-eye-close-line i off no"></i>
+                            <i class="ri-eye-2-line i on yes"></i>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="button">
+        <button type="submit" (click)="edit()" class="btn create">
+          <i class="ri-save-line"></i>
+          Atualizar Promoção
+        </button>
+      </div>
+    </form>
+  </card-form>
+  
+  

@@ -53,12 +53,12 @@ class Field extends Model
     //Shows the last maintenance date with format d/m/Y
     //Carbon is a library that manipulates dates
     //This is an accessor which allows us to transform an attribute when accessing
-    public function getLastMaintenanceAttribute($value)
-    {
-        if (!empty($value)) {
-            return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-        }
-    }
+    // public function getLastMaintenanceAttribute($value)
+    // {
+    //     if (!empty($value)) {
+    //         return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+    //     }
+    // }
 
     public function company()
     {

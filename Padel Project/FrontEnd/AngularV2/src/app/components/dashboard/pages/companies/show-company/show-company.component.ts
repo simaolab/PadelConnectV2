@@ -66,10 +66,10 @@ export class ShowCompanyComponent {
 
           this.companyObj = {
             name: company.name,
-            user_email: company.user_email,
+            user_email: company.user?.email,
             contact: company.contact,
-            user_nif: company.user_nif,
-            user_name: company.user_name,
+            user_nif: company.user?.nif,
+            user_name: company.user?.username,
             newsletter: company.newsletter,
             address: company.address
           };

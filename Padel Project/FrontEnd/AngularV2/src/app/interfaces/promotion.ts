@@ -4,11 +4,11 @@ export interface Promotion {
   usage_limit: number;
   min_spend: number;
   discount: number;
-  for_inactive_users: boolean;
-  for_new_users: boolean;
+  for_inactive_users: number;
+  for_new_users: number;
   additional_info?: string | null;
   start_date: string;
   end_date: string;
-  generic: boolean;
-  active: boolean;
+  generic: number;
+  active: number;
 }
