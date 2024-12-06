@@ -11,6 +11,9 @@ import Swal from 'sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
 import { CartItem, Cart } from '../../../interfaces/cart';
 import { switchMap } from 'rxjs/operators';
+import { PaymentService } from '../../../services/payment.service';
+import { loadStripe, Stripe } from '@stripe/stripe-js';
+import { ElementRef, ViewChild } from '@angular/core'; 
 
 @Component({
   selector: 'app-payment-page',
@@ -21,6 +24,21 @@ import { switchMap } from 'rxjs/operators';
 })
 export class PaymentPageComponent {
   aboutImageUrl = "assets/images/about/renith-r-A9VpotrPr1k-unsplash.jpg";
+
+  @ViewChild('cardElement') cardElement!: ElementRef; 
+
+  stripe: Stripe | null = null;
+  card: any;  // Para armazenar o Stripe Card Element
+  clientSecret: string = '';
+
+  paymentDetails = {
+    cardNumber: '',        // User input: card number
+    cvv: '',               // User input: CVV
+    cardExpiry: '',        // User input: Card expiry date (MM/YY)
+    cardHolderName: '',    // User input: Name on the card
+    paymentMethod: '' ,     // User-selected payment method (e.g., 'stripe', 'paypal', etc.)
+    totalAmount: 0  
+  };
 
   maxDate: string = new Date().toISOString().split('T')[0];
   step: number = 1;
@@ -44,11 +62,22 @@ export class PaymentPageComponent {
     private router: Router,
     private cookieService: CookieService,
     private usersService: UsersService,
-    private reservationsService: ReservationsService ) {}
+    private reservationsService: ReservationsService,
+    private paymentService: PaymentService ) {}
 
   ngOnInit() {
     this.loadCartItems();
     this.userInfo();
+    this.loadStripe();
+    this.createPaymentIntent();
+  }
+
+  async loadStripe() {
+    this.stripe = await loadStripe('pk_live_51QQFtJ01xYUXZHToeuTTDahK6nLpYhhZEXPEFcwWLubH6QumWVoUJo1yv5ITQyQdjr7zxaEHtswBPj6KLUpyvHrb008t33XSHN');
+    if (!this.stripe) {
+      console.error('Falha ao carregar o Stripe.');
+      return;
+    }
   }
 
   loadCartItems() {
@@ -305,5 +334,74 @@ export class PaymentPageComponent {
     }).then(() => {
       this.router.navigate(['/']);
     });
+  }
+
+  createPaymentIntent() {
+    this.paymentService.createPaymentIntent(this.totalPrice).subscribe(
+      (response) => {
+        console.log('Payment Intent criado com sucesso:', response);
+        this.clientSecret = response.client_secret;
+      },
+      (error) => {
+        console.error('Erro ao criar o Payment Intent:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro ao processar pagamento',
+          text: 'Ocorreu um erro ao processar o pagamento. Por favor, tente novamente.',
+        });
+      }
+    );
+  }
+  
+  async submitStripePayment() {
+    // Verifique se o stripe foi carregado corretamente
+    if (!this.stripe) {
+      console.error('Stripe não está carregado.');
+      return;
+    }
+  
+    const { error, paymentMethod } = await this.stripe.createPaymentMethod({
+      type: 'card',
+      card: this.card,  // Se você tiver campos de cartão integrados (CardElement)
+      billing_details: {
+        name: this.paymentDetails.cardHolderName,
+      },
+    });
+  
+    if (error) {
+      console.error('Erro ao criar método de pagamento:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro ao processar pagamento',
+        text: error.message,
+      });
+      return;
+    }
+  
+    // Caso tenha sucesso, pode enviar o paymentMethod para o servidor para processar o PaymentIntent
+    this.paymentService.processPayment({
+      paymentMethodId: paymentMethod.id,
+      amount: this.totalPrice,
+      user_id: this.user_id
+    }).subscribe(
+      (response) => {
+        console.log('Pagamento processado com sucesso:', response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Pagamento bem-sucedido',
+          text: 'O seu pagamento foi processado com sucesso!',
+        });
+        this.cookieService.delete('cart', '/');  // Limpar carrinho após sucesso
+        this.router.navigate(['/']);  // Navegar para outra página após pagamento
+      },
+      (error) => {
+        console.error('Erro ao processar pagamento:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro no pagamento',
+          text: 'Ocorreu um problema ao processar o pagamento.',
+        });
+      }
+    );
   }
 }

@@ -73,7 +73,7 @@
     <h2>Dados de Pagamento:</h2>
 
     <!-- Seção de seleção do cartão -->
-    <div class="card-selection">
+    <div [(ngModel)]="paymentDetails.paymentMethod" class="card-selection">
       <label for="mastercard1">
         <input
           type="radio"
@@ -110,6 +110,7 @@
           type="text"
           name="cardNumber"
           ngModel placeholder="Número do Cartão"
+          [(ngModel)]="paymentDetails.cardNumber"
           required
           maxlength="19"
           (input)="formatCardNumber($event)"
@@ -121,6 +122,7 @@
           type="text"
           name="cardholderName"
           ngModel id="cardholder-name"
+          [(ngModel)]="paymentDetails.cardHolderName"
           placeholder="Nome Titular"
           required>
       </div>
@@ -129,6 +131,7 @@
           type="text"
           name="cvv"
           ngModel placeholder="CVV"
+          [(ngModel)]="paymentDetails.cvv"
           required maxlength="3"
           pattern="\d{3}"
           title="CVV deve ter 3 dígitos"
@@ -139,6 +142,7 @@
           type="text"
           name="expiryDate"
           ngModel
+          [(ngModel)]="paymentDetails.cardExpiry"
           placeholder="Mês/Ano"
           required
           maxlength="5"
@@ -152,17 +156,17 @@
     <div class="total-section">
       <div *ngFor="let item of cartItems" class="section-things">
         <p>{{ item.name }} ({{ item.totalHours }} horas)</p>
-        <p>{{ item.pricePerHour | currency }}</p>
+        <p [(ngModel)]="paymentDetails.totalAmount">{{ item.pricePerHour | currency }}</p>
       </div>
 
       <!-- Exibindo o preço total -->
       <div class="section-total-price">
         <p class="text-payment">Total:</p>
-        <p><strong>{{ totalPrice | currency }}</strong></p>
+        <p ><strong>{{ totalPrice | currency }}</strong></p>
       </div>
     </div>
 
-    <button class="confirm-btn" type="submit">Confirmar Pagamento</button>
+    <button (click)="submitStripePayment()" class="confirm-btn" type="submit">Confirmar Pagamento</button>
   </form>
 
   <!-- Confirmado com Sucesso -->
