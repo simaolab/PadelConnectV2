@@ -136,9 +136,6 @@ export class DetailsPageComponent implements OnInit {
           this.schedules.sunday.closing_time = this.formatHour(this.schedules.sunday.closing_time);
         }
 
-        console.log(this.schedules)
-
-
         if (field.company.address) {
           const addressParts = field.company.address.split(', ');
           if (addressParts.length === 3) {
@@ -169,7 +166,10 @@ export class DetailsPageComponent implements OnInit {
         this.totalPrice = diffInHours * this.courtObj.price_hour;
       } else {
         this.totalPrice = 0;
-        alert('A data de fim deve ser posterior à data de início.');
+        this.modalComponent?.showModal(
+          'Erro',
+          'A data de fim deve ser posterior à data de início.'
+        );
       }
     }
   }
@@ -177,7 +177,7 @@ export class DetailsPageComponent implements OnInit {
   addToCart(): void {
     if (!this.startDate || !this.endDate || this.totalPrice === 0) {
         this.modalComponent?.showModal(
-            'Error',
+            'Erro',
             'Por favor, preencha datas válidas antes de adicionar ao carrinho'
         );
         return;
@@ -231,19 +231,19 @@ export class DetailsPageComponent implements OnInit {
                 this.cookieService.set('cart', JSON.stringify(cart), 1, '/');
 
                 this.modalComponent?.showModal(
-                    'Success',
+                    'Sucesso',
                     `${reservationItem.name} adicionado ao carrinho`
                 );
             } else {
                 this.modalComponent?.showModal(
-                    'Error',
+                    'Erro',
                     response.message || 'As datas selecionadas não estão disponíveis.'
                 );
             }
         },
         error: (err: any) => {
             this.modalComponent?.showModal(
-                'Error',
+                'Erro',
                 err.error.message
             );
         },

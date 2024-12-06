@@ -58,10 +58,11 @@ export class CourtsComponent {
       },
 
       error: (err: any) => {
+        const message = err.error?.message;
         if(this.router.url.includes('/courts')) {
           this.dashboardComponent.showModal(
             'Erro',
-            'Erro ao tentar carregar a lista de campos'
+            message
           );
         }
         this.isLoading = false;
@@ -93,7 +94,7 @@ export class CourtsComponent {
   updateCourt(court: any): void {
     const updatedCourt = {
       ...court,
-      company_id: court.company.id 
+      company_id: court.company.id
     };
 
     this.courtsService.update(court.id, updatedCourt).subscribe({
@@ -107,8 +108,9 @@ export class CourtsComponent {
         }
       },
       error: (err: any) => {
+        const message = err.error?.message;
         console.error('Erro ao atualizar campo:', err);
-        this.dashboardComponent.showModal('Erro', 'Erro ao atualizar campo.');
+        this.dashboardComponent.showModal('Erro', message);
       }
     });
   }

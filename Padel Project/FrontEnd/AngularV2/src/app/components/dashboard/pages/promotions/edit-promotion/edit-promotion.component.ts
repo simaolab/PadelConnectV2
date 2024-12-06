@@ -36,7 +36,7 @@ export class EditPromotionComponent {
   todayDate: string = new Date().toISOString().split('T')[0];
   formErrors: { [key: string]: string } = {};
 
-  promotionObj: Promotion = { 
+  promotionObj: Promotion = {
     description: '',
     promo_code: '',
     usage_limit: 0,
@@ -82,7 +82,7 @@ export class EditPromotionComponent {
         const errorMessage = err?.error?.message
 
         this.dashboardComponent.showModal(
-          'Error',
+          'Erro',
           errorMessage,
           () => {
             this.router.navigate(['/dashboard/courts']);

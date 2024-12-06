@@ -94,7 +94,7 @@ export class CreateCourtComponent {
         next: (res: any) => {
           if(res.status === 'success') {
             this.dashboardComponent.showModal(
-              'Success',
+              'Sucesso',
               res.message,
               () => {
                 this.router.navigate(['/dashboard/courts']);
@@ -106,8 +106,6 @@ export class CreateCourtComponent {
         error: (err: any) => {
           this.formErrors = {};
           const errorDetails = err.error?.['error(s)'] || {};
-
-          console.error(err.error)
 
           for (const court in errorDetails) {
             if (errorDetails.hasOwnProperty(court)) {

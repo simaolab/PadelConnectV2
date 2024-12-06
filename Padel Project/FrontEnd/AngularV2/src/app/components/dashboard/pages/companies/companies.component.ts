@@ -43,7 +43,7 @@ export class CompaniesComponent {
           if(data && data.message) {
             if(this.router.url.includes('/companies')) {
               this.dashboardComponent.showModal(
-                'Message',
+                'Mensagem',
                 data.message
               );
             }
@@ -58,7 +58,7 @@ export class CompaniesComponent {
         if(this.router.url.includes('/companies')) {
           const errorMessage = err.error?.message;
           this.dashboardComponent.showModal(
-            'Error',
+            'Erro',
             errorMessage
           );
         }

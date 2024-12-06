@@ -65,7 +65,7 @@ export class CustomersComponent {
           alert('Erro: ' + err.message);
           if (this.router.url.includes('/courts')) {
             this.dashboardComponent.showModal(
-              'Error',
+              'Erro',
               'Erro ao tentar carregar a lista de usuários'
             );
           }
