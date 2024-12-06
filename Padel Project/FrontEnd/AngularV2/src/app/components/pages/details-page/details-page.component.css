@@ -156,12 +156,31 @@
 .schedule-info {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
+}
+
+.week-day {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 14%;
 }
 
 .schedule-hour {
   color: var(--color-text);
   font-size: var(--font-size);
+  display: inline-flex;
+  align-items: centers;
+}
+
+.ri-door-open-line {
+  font-size: var(--font-size);
+  color: var(--color-blue-2);
+}
+
+.ri-door-closed-line {
+  font-size: var(--font-size);
+  color: var(--color-danger);;
 }
 
 .additional-services {
