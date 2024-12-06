@@ -45,6 +45,7 @@ export class CourtsPageComponent {
     this.courtsService.index().subscribe({
       next: (data: any) => {
         this.courts = data.fields;
+        console.log(this.courts)
       },
       error: (err: any) => {
       }

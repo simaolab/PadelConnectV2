@@ -43,7 +43,8 @@ export class EditCourtComponent {
     last_maintenance: '',
     shower_room: 0,
     lockers: 0,
-    rent_equipment: 0
+    rent_equipment: 0,
+    file_path: null,
   }
 
   serviceStates = {
@@ -110,10 +111,10 @@ export class EditCourtComponent {
           last_maintenance: formattedDate,
           shower_room: field.shower_room,
           lockers: field.lockers,
-          rent_equipment: field.rent_equipment
+          rent_equipment: field.rent_equipment,
+          file_path: field.file_path
         };
 
-        console.log(this.courtObj)
       },
       error: (err) => {
         const errorMessage = err?.error?.message

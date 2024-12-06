@@ -10,4 +10,5 @@ export interface Court {
   shower_room: number,
   lockers: number,
   rent_equipment: number,
+  file_path: File | null;
 }

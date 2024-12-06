@@ -5,7 +5,7 @@
 <div class="container">
     <div class="card-image">
         <div class="card-content-image">
-            <img src="assets/images/slideshow/1.jpg" alt="img" class="campo-img">
+          <img [src]="getCourtImage(courtObj.file_path)" alt="Campo" class="campo-img">
         </div>
     </div>
 
@@ -118,9 +118,11 @@
             <div class="week-day" *ngIf="schedules.saturday?.is_closed == 0">
               <h4 class="title-info">Sábado</h4>
               <div  class="tooltip">
-                <i class="ri-door-closed-line"></i>
+                <i class="ri-door-open-line"></i>
                 <div class="schedule-hour">
-                  {{ schedules.saturday.opening_time }} - {{ schedules.saturday.closing_time }}
+                  <div class="hour">
+                    {{ schedules.saturday.opening_time }} - {{ schedules.saturday.closing_time }}
+                  </div>
                 </div>
                 <span class="tooltip-text">Aberto</span>
               </div>
@@ -142,7 +144,9 @@
               <div  class="tooltip">
                 <i class="ri-door-open-line"></i>
                 <div class="schedule-hour">
-                  {{ schedules.sunday.opening_time }} - {{ schedules.sunday.closing_time }}
+                  <div class="hour">
+                    {{ schedules.sunday.opening_time }} - {{ schedules.sunday.closing_time }}
+                  </div>
                 </div>
                 <span class="tooltip-text">Aberto</span>
               </div>
@@ -151,7 +155,7 @@
             <div class="week-day" *ngIf="schedules.sunday?.is_closed == 1">
               <h4 class="title-info">Domingo</h4>
               <div  class="tooltip">
-                <i class="ri-door-open-line"></i>
+                <i class="ri-door-closed-line"></i>
                 <div class="schedule-hour">
                   Fechado
                 </div>
