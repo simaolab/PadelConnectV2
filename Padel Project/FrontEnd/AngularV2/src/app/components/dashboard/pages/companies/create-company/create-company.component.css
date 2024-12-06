@@ -55,17 +55,22 @@
   transform: translate(-110%, -50%);
 }
 
-  .input-toggle:checked + .display label .circle .no {
-      margin-top: 150%;
-      opacity: 0;
-  }
+.input-toggle:checked + .display label .circle .no {
+    margin-top: 150%;
+    opacity: 0;
+}
 
-  .input-toggle:checked + .display label .circle .yes {
-      margin-top: 0%;
-  }
+.input-toggle:checked + .display label .circle .yes {
+    margin-top: 0%;
+}
 
 .toggle:active .circle {
   width: 35px;
+}
+
+.small-error {
+  color: #e74c3c;
+  font-size: 12px;
 }
 
 .password-strength-indicators {
@@ -99,11 +104,6 @@
 
 .password-strength-text{
   display: none;
-}
-
-.small-error {
-  color: #e74c3c;
-  font-size: 12px;
 }
 
 @media (max-width: 550px) {

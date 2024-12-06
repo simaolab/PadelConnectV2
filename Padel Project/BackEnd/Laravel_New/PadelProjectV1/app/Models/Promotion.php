@@ -39,44 +39,44 @@ class Promotion extends Model
     //The methods are automatically called by Laravel
 
     //This is a mutator which allows us to transform an attribute before saving
-    public function setStartDateAttribute($value)
-    {
-        //Converts the start_date received as d/m/Y to a Carbon object
-        //Then converts the Carbon object into a string Y-m-d
-        if (!empty($value)) {
-            $this->attributes['start_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
-        }
-    }
+    // public function setStartDateAttribute($value)
+    // {
+    //     //Converts the start_date received as d/m/Y to a Carbon object
+    //     //Then converts the Carbon object into a string Y-m-d
+    //     if (!empty($value)) {
+    //         $this->attributes['start_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    //     }
+    // }
 
-    //This is a mutator which allows us to transform an attribute before saving
-    public function setEndDateAttribute($value)
-    {
-        //Converts the end_date received as d/m/Y to a Carbon object
-        //Then converts the Carbon object into a string Y-m-d
-        if (!empty($value)) {
-            $this->attributes['end_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
-        }
-    }
+    // //This is a mutator which allows us to transform an attribute before saving
+    // public function setEndDateAttribute($value)
+    // {
+    //     //Converts the end_date received as d/m/Y to a Carbon object
+    //     //Then converts the Carbon object into a string Y-m-d
+    //     if (!empty($value)) {
+    //         $this->attributes['end_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    //     }
+    // }
 
     //Shows start_date with format d/m/Y
     //Carbon is a library that manipulates dates
     //This is an accessor which allows us to transform an attribute when accessing
-    public function getStartDateAttribute($value)
-    {
-        if (!empty($value)) {
-            return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-        }
-    }
+    // public function getStartDateAttribute($value)
+    // {
+    //     if (!empty($value)) {
+    //         return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+    //     }
+    // }
 
     //Shows end_date with format d/m/Y
     //Carbon is a library that manipulates dates
     //This is an accessor which allows us to transform an attribute when accessing
-    public function getEndDateAttribute($value)
-    {
-        if (!empty($value)) {
-            return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-        }
-    }
+    // public function getEndDateAttribute($value)
+    // {
+    //     if (!empty($value)) {
+    //         return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+    //     }
+    // }
 
     public function clients()
     {

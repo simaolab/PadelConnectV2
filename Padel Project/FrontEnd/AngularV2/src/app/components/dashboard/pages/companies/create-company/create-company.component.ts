@@ -35,7 +35,7 @@ export class CreateCompanyComponent {
     user_nif: 0,
     newsletter: 0,
     address: '',
-    name: ''
+    name: '',
   }
 
   passwordObj = {
@@ -111,7 +111,11 @@ export class CreateCompanyComponent {
 
     this.companyObj.address = this.address;
 
-    this.companiesService.create(this.companyObj).subscribe({
+    this.companiesService.create({
+      ...this.companyObj,
+      user_password: this.passwordObj.user_password,
+      user_password_confirmation: this.passwordObj.user_password_confirmation,
+    }as any).subscribe({
       next: (res: any) => {
         if(res.status === 'success') {
           this.dashboardComponent.showModal(
@@ -128,11 +132,16 @@ export class CreateCompanyComponent {
         this.formErrors = {};
         const errorDetails = err.error?.['error(s)'] || {};
 
-        for (const company in errorDetails) {
-          if (errorDetails.hasOwnProperty(company)) {
-            this.formErrors[company] = errorDetails[company][0];
+        for (const field in errorDetails) {
+          if (errorDetails.hasOwnProperty(field)) {
+              // Redireciona o erro "user_password.confirmed" para "user_password_confirmation"
+              if (field === 'user_password' && errorDetails[field][0].includes('não corresponde')) {
+                  this.formErrors['user_password_confirmation'] = errorDetails[field][0];
+              } else {
+                  this.formErrors[field] = errorDetails[field][0];
+              }
           }
-        }
+      }
       }
     })
   }

@@ -1,3 +1,35 @@
+form, button{
+    background: none;
+    border: none;
+}
+
 .table-wrapper{
     padding-block: 2rem;
+}
+
+.ri-eye-2-line{
+    color: var(--color-primary);
+}
+
+.ri-eye-close-line{
+    color: var(--color-warning);
+}
+
+.ri-global-line,
+.ri-user-add-line,
+.ri-user-forbid-line{
+    color: var(--color-primary);
+}
+
+.ri-global-line.not-active,
+.ri-user-add-line.not-active,
+.ri-user-forbid-line.not-active,
+.ri-delete-bin-2-line{
+    color: var(--color-danger);
+}
+
+.no-promotions{
+    padding-block: 2rem;
+    color: var(--color-text);
+    font-size: var(--font-smalls);
 }
