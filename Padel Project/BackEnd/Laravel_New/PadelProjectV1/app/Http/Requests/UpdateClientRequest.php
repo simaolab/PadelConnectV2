@@ -21,17 +21,17 @@ class UpdateClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address'           => 'nullable',
-            'first_name'        => 'nullable|string|max:50',
-            'last_name'         => 'nullable|string|max:50',
-            'gender'            => 'nullable|string|in:Masculino,Feminino,Outro',
-            'contact'           => [
+            'address'               => 'nullable',
+            'first_name'            => 'nullable|string|max:50',
+            'last_name'             => 'nullable|string|max:50',
+            'gender'                => 'nullable|string|in:Masculino,Feminino,Outro',
+            'contact'               => [
                 'nullable',
                 'regex:/^(91|92|93|96|94|95)[0-9]{7}$/',
                 Rule::unique('clients')->ignore($this->route('client')),
             ],
-            'nationality_id'    => 'nullable|exists:nationalities,id',
-            'newsletter'        => 'boolean',
+            'nationality_id'        => 'nullable|exists:nationalities,id',
+            'newsletter'            => 'boolean',
         ];
     }
 

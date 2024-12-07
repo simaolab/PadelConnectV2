@@ -17,10 +17,11 @@ class UpdateNationalityRequest extends FormRequest
         return true;
     }
 
+    //Rules to update a Nationality
     public function rules(): array
     {
         return [
-            'name' => [
+            'name'                  => [
                 'required',
                 'min:1',
                 'max:50',
@@ -29,7 +30,7 @@ class UpdateNationalityRequest extends FormRequest
                 //This Rule is saying that the role im editing is unique, but I want to ignore this specific role
                 Rule::unique('nationalities')->ignore($this->route('nationality')),
             ],
-            'continent' => 'required|in:Africa,Asia,Europa,America Norte,America Sul,Oceania',
+            'continent'             => 'required|in:Africa,Asia,Europa,America Norte,America Sul,Oceania',
         ];
     }
 

@@ -25,7 +25,7 @@ class StoreCompanyRequest extends FormRequest
                 'required',
                 'unique:companies',
                 'min:2',
-                'max:100',
+                'max:30',
                 'regex:/^[a-zA-ZÀ-ÿ0-9.,&\-\(\)\/\s]+$/'
             ],
             'contact'                   => [
@@ -77,13 +77,16 @@ class StoreCompanyRequest extends FormRequest
 
             'user_name.required'        => 'O username é um campo obrigatório.',
             'user_name.unique'          => 'O username já está em uso.',
+
             'user_email.required'       => 'O email é um campo obrigatório.',
             'user_email.email'          => 'Insira um email válido para o utilizador.',
             'user_email.unique'         => 'O email do usuário já está em uso.',
+
             'user_password.required'    => 'A nova senha é obrigatória.',
             'user_password.min'         => 'A nova senha não é segura.',
             'user_password.confirmed'   => 'A confirmação de senha não corresponde.',
             'user_password.regex'       => 'Tenha em atenção as verificações acima.',
+
             'user_nif.required'         => 'O NIF é um campo obrigatório.',
             'user_nif.regex'            => 'O NIF deve ser válido e ter exatamente 9 digitos.',
             'user_nif.unique'           => 'O NIF inserido já está associado a outro usuário.',

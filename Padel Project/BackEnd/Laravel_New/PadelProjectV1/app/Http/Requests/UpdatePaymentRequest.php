@@ -16,14 +16,14 @@ class UpdatePaymentRequest extends FormRequest
         return true;
     }
 
-    //Rules to create a payment
+    //Rules to update a payment
     public function rules(): array
     {
         return [
-            'amount'            => 'required|regex:/^\d+(\.\d{1,2})?$/|min:0',
-            'status'            => 'required|in:pendente,pago,falha',
-            'payment_date'       => ['required', 'date_format:d/m/Y', 'after_or_equal:today'],
-            'payment_method_id' => 'required|exists:payment_methods,id',
+            'amount'                        => 'required|regex:/^\d+(\.\d{1,2})?$/|min:0',
+            'status'                        => 'required|in:pendente,pago,falha',
+            'payment_date'                  => 'required|date_format:d/m/Y|after_or_equal:today',
+            'payment_method_id'             => 'required|exists:payment_methods,id',
         ];
     }
 
