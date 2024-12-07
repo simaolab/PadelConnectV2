@@ -111,10 +111,6 @@ export class CreateCourtComponent {
           }
         },
         error: (err: any) => {
-          this.formErrors = {};
-        }
-      },
-      error: (err: any) => {
         this.formErrors = {};
         const errorDetails = err.error?.['error(s)'] || {};
           for (const court in errorDetails) {
@@ -123,8 +119,7 @@ export class CreateCourtComponent {
             }
           }
         }
-      }
-    })
+      });
   }
 
   onFileSelected(event: Event): void {
