@@ -1,7 +1,7 @@
 import { Court } from './../../../interfaces/court';
 import { ReservationsService } from './../../../services/reservations.service';
 import { UsersService } from './../../../services/users.service';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -14,7 +14,6 @@ import { switchMap } from 'rxjs/operators';
 
 import { PaymentService } from '../../../services/payment.service';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
-import { ElementRef, ViewChild } from '@angular/core'; 
 import { ModalComponent } from '../../utilities/modal/modal.component';
 
 @Component({
