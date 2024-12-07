@@ -20,8 +20,8 @@ class StoreNationalityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:nationalities|min:2|max:25',
-            'continent' => 'required|in:Africa,Asia,Europa,America Norte,America Sul,Oceania',
+            'name'                  => 'required|unique:nationalities|min:2|max:25',
+            'continent'             => 'required|in:Africa,Asia,Europa,America Norte,America Sul,Oceania',
         ];
     }
 

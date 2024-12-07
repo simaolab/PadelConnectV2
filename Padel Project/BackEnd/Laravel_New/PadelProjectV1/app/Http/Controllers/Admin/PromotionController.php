@@ -58,11 +58,11 @@ class PromotionController extends Controller
 
         //Create a new promotion with the verified data
         $promotion = Promotion::create($validatedData);
-        
+
         //Verify if the promotion is for new users
         if ($promotion->for_new_users) {
 
-            //Get all new users 
+            //Get all new users
             $newClients = Client::whereHas('user', function ($query) {
                 $query->where('new_user', true);
             })->get();
@@ -150,7 +150,7 @@ class PromotionController extends Controller
     {
         //Search for the Promotion
         $promotion = Promotion::find($promotionId);
-        
+
         //If the promotion does not exist, show message error
         if(!$promotion){
             return response()->json(
@@ -162,7 +162,7 @@ class PromotionController extends Controller
         if($promotion->active == true) {
             return response()->json(
             [
-                'message' => 'Não pode eliminar uma promoção que ainda está ativa!'
+                'message' => 'Não pode eliminar uma promoção visivel!'
             ], 404);
         }
 
@@ -179,7 +179,7 @@ class PromotionController extends Controller
         try{
             //If something was sent in the route
             if ($string) {
-                $promotions = Promotion::withCount('clients')     
+                $promotions = Promotion::withCount('clients')
                     ->where('description', 'LIKE', '%' . $string . '%')
                     ->orWhere('promo_code', 'LIKE', '%' . $string . '%')
                     ->get();
