@@ -26,8 +26,8 @@ export class CourtsService {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    // Criar o FormData
     const formData = new FormData();
+
     formData.append('name', courtObj.name);
     formData.append('company_id', courtObj.company_id.toString());
     formData.append('price_hour', courtObj.price_hour.toString());
@@ -40,7 +40,18 @@ export class CourtsService {
     formData.append('lockers', courtObj.lockers.toString());
     formData.append('rent_equipment', courtObj.rent_equipment.toString());
 
-    // Apenas adiciona o arquivo se ele existir
+    formData.append('schedules[weekdays][opening_time]', courtObj.schedules.weekdays.opening_time || '');
+    formData.append('schedules[weekdays][closing_time]', courtObj.schedules.weekdays.closing_time || '');
+    formData.append('schedules[weekdays][is_closed]', courtObj.schedules.weekdays.is_closed.toString());
+
+    formData.append('schedules[saturday][opening_time]', courtObj.schedules.saturday.opening_time || '');
+    formData.append('schedules[saturday][closing_time]', courtObj.schedules.saturday.closing_time || '');
+    formData.append('schedules[saturday][is_closed]', courtObj.schedules.saturday.is_closed.toString());
+
+    formData.append('schedules[sunday][opening_time]', courtObj.schedules.sunday.opening_time || '');
+    formData.append('schedules[sunday][closing_time]', courtObj.schedules.sunday.closing_time || '');
+    formData.append('schedules[sunday][is_closed]', courtObj.schedules.sunday.is_closed.toString());
+
     if (courtObj.file_path) {
       formData.append('file_path', courtObj.file_path);
     }

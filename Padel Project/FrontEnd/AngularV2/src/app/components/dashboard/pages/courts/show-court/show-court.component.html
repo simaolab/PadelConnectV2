@@ -20,55 +20,163 @@
           <p class="description-text">Informações do Campo</p>
           <hr>
       </div>
-      <div class="container-forms">
-          <div class="data-detail">
-              <div class="detail">
-                <div class="label-container">
-                  <i class="ri-input-field"></i>
-                  <label for="name">Nome Campo</label>
-                </div>
-                <input type="text" name="name" [(ngModel)]="courtObj.name" disabled>
-              </div>
-              <div class="detail">
-                  <div class="label-container">
-                    <i class="ri-building-2-line"></i>
-                    <label for="company_name">Empresa</label>
-                  </div>
-                  <input type="text" name="company_name" [(ngModel)]="courtObj.company_name" disabled>
-              </div>
+      <div class="container-forms-info">
+        <div class="left-column">
+          <div class="image-preview">
+            <div *ngIf="courtObj.image">
+              <img [src]="courtObj.image" alt="{{ courtObj.name }}" class="court-image" />
             </div>
-            <div class="contact-detail">
-                <div class="detail">
-                    <div class="label-container">
-                      <i class="ri-money-euro-circle-line"></i>
-                      <label for="price_hour">Preço Hora</label>
-                    </div>
-                    <input type="text" name="price_hour" value="{{ courtObj.price_hour }}" disabled>
-                </div>
-                <div class="detail">
-                  <div class="label-container">
-                    <i class="ri-money-euro-circle-line"></i>
-                    <label for="status">Estado</label>
-                  </div>
-                  <input type="text" name="status" [(ngModel)]="courtObj.status" disabled>
-                </div>
-                <div class="detail">
-                  <div class="label-container">
-                    <i class="ri-layout-line"></i>
-                    <label for="status">Tipo Piso</label>
-                  </div>
-                  <input type="text" name="type_floor" [(ngModel)]="courtObj.type_floor" disabled>
-                </div>
-                <div class="detail">
-                  <div class="label-container">
-                    <i class="ri-calendar-event-line"></i>
-                    <label for="status">Última manutenção</label>
-                  </div>
-                  <input type="text" name="last_maintenance"
-                    [value]="courtObj.last_maintenance ? courtObj.last_maintenance : 'Nunca'" disabled>
-                </div>
-            </div>
+          </div>
         </div>
+        
+        <div class="right-column">  
+          <div class="contact-detail">
+            <div class="detail">
+              <div class="label-container">
+                <i class="ri-input-field"></i>
+                <label for="name">Nome Campo</label>
+              </div>
+              <input type="text" name="name" [(ngModel)]="courtObj.name" disabled>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="detail">
+                <div class="label-container">
+                  <i class="ri-building-2-line"></i>
+                  <label for="company_name">Empresa</label>
+                </div>
+                <input type="text" name="company_name" [(ngModel)]="courtObj.company_name" disabled>
+            </div>
+          </div>
+          <div class="data-detail">
+            <div class="detail">
+              <div class="label-container">
+                <i class="ri-money-euro-circle-line"></i>
+                <label for="price_hour">Preço Hora</label>
+              </div>
+              <input type="text" name="price_hour" value="{{ courtObj.price_hour }}" disabled>
+            </div>
+            <div class="detail">
+              <div class="label-container">
+                <i class="ri-calendar-event-line"></i>
+                <label for="status">Última manutenção</label>
+              </div>
+              <input type="text" name="last_maintenance"
+                [value]="courtObj.last_maintenance ? courtObj.last_maintenance : 'Nunca'" disabled>
+            </div>
+          </div>
+          <div class="data-detail">
+            <div class="detail">
+              <div class="label-container">
+                <i class="ri-money-euro-circle-line"></i>
+                <label for="status">Estado</label>
+              </div>
+              <input type="text" name="status" [(ngModel)]="courtObj.status" disabled>
+            </div>
+            <div class="detail">
+              <div class="label-container">
+                <i class="ri-layout-line"></i>
+                <label for="status">Tipo Piso</label>
+              </div>
+              <input type="text" name="type_floor" [(ngModel)]="courtObj.type_floor" disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="user-container-info">
+      <div class="container-description">
+        <p class="description-text">Informações Gerais</p>
+        <hr>
+      </div>
+      <div class="container-forms">
+        <div class="data-detail-field">
+          
+          <div class="data-detail">
+            <div class="detail">
+              <div class="label-schedule-container">
+                <label>Semana</label>
+                <span 
+                [ngClass]="{
+                  'small-success': courtObj.schedules.weekdays.opening_time && courtObj.schedules.weekdays.closing_time,
+                  'small-error': !courtObj.schedules.weekdays.opening_time || !courtObj.schedules.weekdays.closing_time
+                }">
+                  {{ courtObj.schedules.weekdays.opening_time && courtObj.schedules.weekdays.closing_time ? 'Aberto' : 'Fechado' }}
+                </span> 
+              </div>
+              <div class="data-schedule-container">
+                <div class="opening-schedule">
+                  <div class="label-container">      
+                    <span *ngIf="courtObj.schedules.weekdays.opening_time && courtObj.schedules.weekdays.closing_time">
+                      {{ courtObj.schedules.weekdays.opening_time }}
+                      <i class="ri-arrow-right-s-line"></i>
+                      {{ courtObj.schedules.weekdays.closing_time }}
+                    </span>
+                    <span *ngIf="!courtObj.schedules.weekdays.opening_time || !courtObj.schedules.weekdays.closing_time">
+                      Sem horário
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail">
+              <div class="label-schedule-container">
+                <label>Sabado</label>
+                <span 
+                [ngClass]="{
+                  'small-success': courtObj.schedules.saturday.opening_time && courtObj.schedules.saturday.closing_time,
+                  'small-error': !courtObj.schedules.saturday.opening_time || !courtObj.schedules.saturday.closing_time
+                }">
+                  {{ courtObj.schedules.saturday.opening_time && courtObj.schedules.saturday.closing_time ? 'Aberto' : 'Fechado' }}
+                </span> 
+              </div>
+              <div class="data-schedule-container">
+                <div class="opening-schedule">
+                  <div class="label-container">      
+                    <span *ngIf="courtObj.schedules.saturday.opening_time && courtObj.schedules.saturday.closing_time">
+                      {{ courtObj.schedules.saturday.opening_time }}
+                      <i class="ri-arrow-right-s-line"></i>
+                      {{ courtObj.schedules.saturday.closing_time }}
+                    </span>
+                    <span *ngIf="!courtObj.schedules.saturday.opening_time || !courtObj.schedules.saturday.closing_time">
+                      Sem horário
+                    </span>                  
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail">
+              <div class="label-schedule-container">
+                <label>Domingo</label>
+                <span 
+                [ngClass]="{
+                  'small-success': courtObj.schedules.sunday.opening_time && courtObj.schedules.sunday.closing_time,
+                  'small-error': !courtObj.schedules.sunday.opening_time || !courtObj.schedules.sunday.closing_time
+                }">
+                  {{ courtObj.schedules.sunday.opening_time && courtObj.schedules.sunday.closing_time ? 'Aberto' : 'Fechado' }}
+                </span>              
+              </div>
+              <div class="data-schedule-container">
+                <div class="opening-schedule">
+                  <div class="label-container">      
+                    <span *ngIf="courtObj.schedules.sunday.opening_time && courtObj.schedules.sunday.closing_time">
+                      {{ courtObj.schedules.sunday.opening_time }}
+                      <i class="ri-arrow-right-s-line"></i>
+                      {{ courtObj.schedules.sunday.closing_time }}
+                    </span>
+                    <span *ngIf="!courtObj.schedules.sunday.opening_time || !courtObj.schedules.sunday.closing_time">
+                      Sem horário
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
     <div class="user-container-info">
       <div class="container-description">
@@ -138,3 +246,4 @@
     </div>
   </form>
 </card-form>
+

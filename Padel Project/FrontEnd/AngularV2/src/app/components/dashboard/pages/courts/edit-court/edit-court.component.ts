@@ -45,6 +45,11 @@ export class EditCourtComponent {
     lockers: 0,
     rent_equipment: 0,
     file_path: null,
+    schedules: {
+      weekdays: { opening_time: '', closing_time: '', is_closed: 0 },
+      saturday: { opening_time: '', closing_time: '', is_closed: 1 }, 
+      sunday: { opening_time: '', closing_time: '', is_closed: 1 },
+    }
   }
 
   serviceStates = {
@@ -112,14 +117,31 @@ export class EditCourtComponent {
           shower_room: field.shower_room,
           lockers: field.lockers,
           rent_equipment: field.rent_equipment,
-          file_path: field.file_path
+          file_path: field.file_path,
+          schedules: {
+            weekdays: {
+              opening_time: field.schedules?.weekdays?.opening_time || '',
+              closing_time: field.schedules?.weekdays?.closing_time || '',
+              is_closed: field.schedules?.weekdays?.is_closed || 0,
+            },
+            saturday: {
+              opening_time: field.schedules?.saturday?.opening_time || '',
+              closing_time: field.schedules?.saturday?.closing_time || '',
+              is_closed: field.schedules?.saturday?.is_closed || 1,
+            },
+            sunday: {
+              opening_time: field.schedules?.sunday?.opening_time || '',
+              closing_time: field.schedules?.sunday?.closing_time || '',
+              is_closed: field.schedules?.sunday?.is_closed || 1,
+            },
+          },
         };
       },
       error: (err) => {
         const errorMessage = err?.error?.message
 
         this.dashboardComponent.showModal(
-          'Error',
+          'Erro',
           errorMessage,
           () => {
             this.router.navigate(['/dashboard/courts']);
