@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ModalComponent } from '../utilities/modal/modal.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'login',
@@ -34,7 +35,8 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {}
 
   login() {
@@ -47,8 +49,10 @@ export class LoginComponent {
           const username = res.user_info.username;
           localStorage.setItem('username', username);
 
+          this.clearCart();
+
           this.modalComponent?.showModal(
-            'Successo',
+            'Sucesso',
             res.message
           );
 
@@ -79,10 +83,14 @@ export class LoginComponent {
       error: (err) => {
         const errorMessage = err.error?.message;
         this.modalComponent?.showModal(
-          'Error',
+          'Erro',
           errorMessage
         );
       }
     });
+  }
+
+  private clearCart() {
+    this.cookieService.delete('cart');
   }
 }

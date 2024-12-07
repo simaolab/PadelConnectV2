@@ -90,8 +90,6 @@ export class ShowCourtComponent {
               sunday: schedules.sunday
             },
           };
-
-          console.log(this.courtObj);
         },
         error: (err) => {
           const errorMessage = err?.error?.message

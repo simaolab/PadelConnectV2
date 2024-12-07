@@ -95,32 +95,32 @@ export class CreateCourtComponent {
   ngOnInit(): void {
     this.loadCompanies();
   }
-
-  create() {
-    this.updateSchedules();
-    this.courtsService.create(this.courtObj).subscribe({
-      next: (res: any) => {
-        console.log(res);
-        if(res.status === 'success') {
-          this.dashboardComponent.showModal(
-            'Successo',
-            res.message,
-            () => {
-              this.router.navigate(['/dashboard/courts']);
-            }
-          );
+    create() {
+      this.updateSchedules();
+      this.courtsService.create(this.courtObj).subscribe({
+        next: (res: any) => {
+          if(res.status === 'success') {
+            this.dashboardComponent.showModal(
+              'Sucesso',
+              res.message,
+              () => {
+                this.router.navigate(['/dashboard/courts']);
+              }
+            );
+            this.formErrors = {};
+          }
+        },
+        error: (err: any) => {
           this.formErrors = {};
         }
       },
       error: (err: any) => {
         this.formErrors = {};
         const errorDetails = err.error?.['error(s)'] || {};
-
-        console.error(err.error);
-
-        for (const court in errorDetails) {
-          if (errorDetails.hasOwnProperty(court)) {
-            this.formErrors[court] = errorDetails[court][0];
+          for (const court in errorDetails) {
+            if (errorDetails.hasOwnProperty(court)) {
+              this.formErrors[court] = errorDetails[court][0];
+            }
           }
         }
       }

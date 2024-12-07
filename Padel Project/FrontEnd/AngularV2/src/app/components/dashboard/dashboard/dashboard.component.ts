@@ -59,6 +59,5 @@ export class DashboardComponent implements AfterViewInit{
 
     onMenuToggled(): void {
       this.isSidebarClosed = !this.isSidebarClosed;
-      console.log(this.isSidebarClosed);
     }
 }

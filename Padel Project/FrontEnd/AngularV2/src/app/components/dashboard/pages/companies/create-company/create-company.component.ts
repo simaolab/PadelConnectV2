@@ -134,7 +134,6 @@ export class CreateCompanyComponent {
 
         for (const field in errorDetails) {
           if (errorDetails.hasOwnProperty(field)) {
-              // Redireciona o erro "user_password.confirmed" para "user_password_confirmation"
               if (field === 'user_password' && errorDetails[field][0].includes('não corresponde')) {
                   this.formErrors['user_password_confirmation'] = errorDetails[field][0];
               } else {
@@ -181,7 +180,7 @@ export class CreateCompanyComponent {
   }
 
   evaluatePasswordStrength(password: string): void {
-    
+
     this.formErrors = {};
     let strength = 0;
 
