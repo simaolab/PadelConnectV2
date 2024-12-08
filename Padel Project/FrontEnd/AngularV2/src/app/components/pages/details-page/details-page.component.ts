@@ -174,6 +174,7 @@ export class DetailsPageComponent implements OnInit {
     }
   }
 
+
   addToCart(): void {
     if (!this.startDate || !this.endDate || this.totalPrice === 0) {
         this.modalComponent?.showModal(
