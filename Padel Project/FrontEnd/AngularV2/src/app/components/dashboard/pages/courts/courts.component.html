@@ -1,12 +1,9 @@
 <div class="page-info-action">
   <div class="page-info">
     <title-page pageText="Listagem de Campos"></title-page>
-    <p class="description-page">Esta lista apresenta todas as suas 
+    <p class="description-page">Esta lista apresenta todas as suas
       campos associadas ao <span>Padel Connect</span>
     </p>
-  </div>
-  <div class="page-action">
-    <add-button href="/dashboard/create-court"></add-button>
   </div>
 </div>
 
@@ -65,7 +62,7 @@
                   <i class="ri-lock-line"></i>
                   <span class="tooltip-text">Com Cacifo</span>
                 </div>
-                <div *ngIf="court?.lockers === 0" class="tooltip" (click)="toggleService(court, 'lockers', $event)"> 
+                <div *ngIf="court?.lockers === 0" class="tooltip" (click)="toggleService(court, 'lockers', $event)">
                   <i class="ri-lock-unlock-line"></i>
                   <span class="tooltip-text">Sem Cacifo</span>
                 </div>
