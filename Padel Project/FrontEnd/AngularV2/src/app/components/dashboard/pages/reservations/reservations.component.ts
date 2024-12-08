@@ -1,16 +1,16 @@
 import { ReservationsService } from './../../../../services/reservations.service';
-import { resolve } from 'node:path';
+import { Router, RouterModule } from '@angular/router';
 import { DashboardComponent } from './../../dashboard/dashboard.component';
 import { Component } from '@angular/core';
 import { TitlePageComponent } from '../../utilities/title-page/title-page.component';
 import { CommonModule } from '@angular/common';
-
 @Component({
   selector: 'reservations',
   standalone: true,
   imports: [
     CommonModule,
-    TitlePageComponent
+    TitlePageComponent,
+    RouterModule
   ],
   templateUrl: './reservations.component.html',
   styleUrl: './reservations.component.css'
@@ -34,7 +34,30 @@ export class ReservationsComponent {
         setTimeout(() => {
           this.reservations = data.reservations;
           this.isLoading = false;
+          console.log(this.reservations)
         }, 1500)
+      },
+      error: (err: any) => {
+        const message = err.error?.message;
+
+        this.dashboardComponent.showModal(
+          'Erro',
+          message
+        )
+      }
+    });
+  }
+
+  deleteReservation(reservation_id: number): void {
+    this.reservationsService.delete(reservation_id).subscribe({
+      next: (res: any) => {
+        if(res.status === 'success') {
+          this.reservations = this.reservations.filter(reservation => reservation.id !== reservation_id);
+          this.dashboardComponent.showModal(
+            'Sucesso',
+            res.message
+          )
+        }
       },
       error: (err: any) => {
         const message = err.error?.message;

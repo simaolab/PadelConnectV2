@@ -4,6 +4,27 @@
     font-size: var(--font-smalls);
 }
 
+.button-add-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancellations-button {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size);
+  background: var(--color-danger);
+  color: var(--color-white);
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
+}
+
+
 .table-wrapper{
     padding-block: 2rem;
 }
@@ -57,9 +78,17 @@
 .status-occupied {
     background: rgba(241, 16, 16, 0.5) !important;
 }
-  
+
+.user, .court {
+  color: var(--color-gray);
+}
+
+.ri-delete-bin-2-line:hover {
+  color: var(--color-danger);
+}
+
 @media screen and (max-width: 675px) {
     .status-wrapper {
         justify-content: flex-start;
-    } 
+    }
 }
