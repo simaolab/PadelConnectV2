@@ -48,7 +48,9 @@ export class ReservationsService {
     const queryParams = new URLSearchParams(params).toString();
 
     return this.http.get<any>(`${ApiRoutes.checkAvailability}${queryParams}`, { headers });
-}
+  }
+
+
 
   private formatDate(date: string): string {
     const d = new Date(date);
