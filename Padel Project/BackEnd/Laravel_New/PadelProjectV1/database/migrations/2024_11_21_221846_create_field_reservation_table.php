@@ -13,8 +13,14 @@ return new class extends Migration
     {
         Schema::create('field_reservation', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('field_id');
-            $table->foreignId('reservation_id');
+            $table->foreignId('field_id')
+                  ->constrained('fields')
+                  ->onDelete('cascade');
+
+            $table->foreignId('reservation_id')
+                  ->constrained('reservations')
+                  ->onDelete('cascade');
+
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->timestamps();

@@ -23,7 +23,8 @@ class Field extends Model
         'cover',
         'shower_room',
         'lockers',
-        'rent_equipment'
+        'rent_equipment',
+      	'file_path',
     ];
 
     protected $hidden = [
@@ -53,19 +54,25 @@ class Field extends Model
     //Shows the last maintenance date with format d/m/Y
     //Carbon is a library that manipulates dates
     //This is an accessor which allows us to transform an attribute when accessing
-    // public function getLastMaintenanceAttribute($value)
-    // {
-    //     if (!empty($value)) {
-    //         return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-    //     }
-    // }
+    public function getLastMaintenanceAttribute($value)
+    {
+        if (!empty($value)) {
+            return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+        }
+    }
 
     public function company()
     {
         return $this->belongsTo(Company::class);
     }
 
-    public function reservations(){
-        return $this->belongsToMany(Reservation::class);
+    public function reservations()
+    {
+        return $this->belongsToMany(Reservation::class, 'field_reservation')
+                    ->withPivot('start_date', 'end_date')
+                    ->withTimestamps();
+    }
+  	public function schedules() {
+		return $this->hasMany(FieldSchedule::class);
     }
 }
