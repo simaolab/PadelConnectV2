@@ -17,10 +17,11 @@ class UpdateRoleRequest extends FormRequest
         return true;
     }
 
+    //Rules to update a role
     public function rules(): array
     {
         return [
-            'name' => [
+            'name'          => [
                 'required',
                 'min:1',
                 'max:20',

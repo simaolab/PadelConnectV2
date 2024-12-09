@@ -25,7 +25,7 @@ class UpdateFieldRequest extends FormRequest
             'name' => [
                 'required',
                 'string',
-                'max:120',
+                'max:30',
                 Rule::unique('fields')->ignore($this->route('field')),
             ],
             'price_hour'                        	=> 'required|numeric|min:1|max:99.99',

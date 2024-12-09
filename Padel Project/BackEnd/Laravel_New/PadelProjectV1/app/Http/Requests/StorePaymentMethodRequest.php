@@ -20,7 +20,7 @@ class StorePaymentMethodRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description' => 'required|string|max:50|unique:payment_methods,description|regex:/^[a-zA-Z0-9\s\-]+$/',
+            'description'           => 'required|string|max:50|unique:payment_methods,description|regex:/^[a-zA-Z0-9\s\-]+$/',
         ];
     }
 

@@ -1,0 +1,40 @@
+<div class="page-info-action">
+  <div class="page-info">
+      <title-page pageText="Listagem de Cancelamentos"></title-page>
+      <p class="description-page">Aqui pode ver todas as reservas que foram canceladas associadas ao
+          <span>Padel Connect</span>
+      </p>
+  </div>
+</div>
+
+<ng-template #showCancelations>
+  <div *ngIf="cancellations.length > 0; else noCancellations">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th class="left">Reserva</th>
+            <th class="left">Razão</th>
+            <th class="middle">Total Devolvido</th>
+            <th class="middle">Estado</th>
+            <th class="middle">Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cancellation of cancellations">
+            <td>{{ cancellation.reservation_id }}</td>
+            <td>{{ cancellation.reason }}</td>
+            <td>{{ cancellation.total_refunded }}€</td>
+            <td>{{ cancellation.status }}</td>
+            <td>{{ cancellation.cancellation_date }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #noCancellations>
+  <p class="no-reservations">Não existe nenhuma reserva</p>
+</ng-template>

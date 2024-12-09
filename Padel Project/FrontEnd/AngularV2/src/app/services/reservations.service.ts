@@ -48,7 +48,16 @@ export class ReservationsService {
     const queryParams = new URLSearchParams(params).toString();
 
     return this.http.get<any>(`${ApiRoutes.checkAvailability}${queryParams}`, { headers });
-}
+  }
+
+
+  delete(reservation_id: number): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.delete<any>(`${ApiRoutes.reservations}${reservation_id}`, { headers });
+  }
+
 
   private formatDate(date: string): string {
     const d = new Date(date);

@@ -20,18 +20,18 @@ class StorePromotionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description'           => 'required|string|max:100|min:5',
-            'promo_code'            => 'required|string|max:20|min:2|unique:promotions,promo_code',
-            'usage_limit'           => 'required|integer|min:1',
-            'min_spend'             => 'required|numeric|min:0',
-            'discount'              => 'required|numeric|max:100|min:1',
-            'for_inactive_users'    => 'required|boolean',
-            'for_new_users'         => 'required|boolean',
-            'additional_info'       => 'nullable|string|max:500',
-            'start_date'            => 'required|date|after_or_equal:today',
-            'end_date'              => 'required|date|after_or_equal:start_date',
-            'generic'               => 'required|boolean',
-            'active'                => 'required|boolean',
+            'description'                   => 'required|string|max:100|min:5',
+            'promo_code'                    => 'required|string|max:20|min:2|unique:promotions,promo_code',
+            'usage_limit'                   => 'required|integer|min:1',
+            'min_spend'                     => 'required|numeric|min:0',
+            'discount'                      => 'required|numeric|max:100|min:1',
+            'for_inactive_users'            => 'required|boolean',
+            'for_new_users'                 => 'required|boolean',
+            'additional_info'               => 'nullable|string|max:500',
+            'start_date'                    => 'required|date|after_or_equal:today',
+            'end_date'                      => 'required|date|after_or_equal:start_date',
+            'generic'                       => 'required|boolean',
+            'active'                        => 'required|boolean',
         ];
     }
 
