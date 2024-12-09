@@ -16,12 +16,6 @@ export class CourtsService {
     return this.http.get<any>(ApiRoutes.courts);
   }
 
-  // create(courtObj: Court): Observable<any> {
-  //     const token = localStorage.getItem('authToken');
-  //     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-  //     return this.http.post<any>(ApiRoutes.courts, courtObj, { headers });
-  // }
   create(courtObj: Court): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -75,7 +69,37 @@ export class CourtsService {
       const token = localStorage.getItem('authToken');
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-      return this.http.put<any>(`${ApiRoutes.courts}${court_id}`, courtObj, { headers });
+      const formData = new FormData();
+
+      formData.append('name', courtObj.name);
+      formData.append('company_id', courtObj.company_id.toString());
+      formData.append('price_hour', courtObj.price_hour.toString());
+      formData.append('type_floor', courtObj.type_floor);
+      formData.append('status', courtObj.status);
+      formData.append('illumination', courtObj.illumination.toString());
+      formData.append('cover', courtObj.cover.toString());
+      formData.append('last_maintenance', courtObj.last_maintenance || '');
+      formData.append('shower_room', courtObj.shower_room.toString());
+      formData.append('lockers', courtObj.lockers.toString());
+      formData.append('rent_equipment', courtObj.rent_equipment.toString());
+  
+      formData.append('schedules[weekdays][opening_time]', courtObj.schedules.weekdays.opening_time || '');
+      formData.append('schedules[weekdays][closing_time]', courtObj.schedules.weekdays.closing_time || '');
+      formData.append('schedules[weekdays][is_closed]', courtObj.schedules.weekdays.is_closed.toString());
+  
+      formData.append('schedules[saturday][opening_time]', courtObj.schedules.saturday.opening_time || '');
+      formData.append('schedules[saturday][closing_time]', courtObj.schedules.saturday.closing_time || '');
+      formData.append('schedules[saturday][is_closed]', courtObj.schedules.saturday.is_closed.toString());
+  
+      formData.append('schedules[sunday][opening_time]', courtObj.schedules.sunday.opening_time || '');
+      formData.append('schedules[sunday][closing_time]', courtObj.schedules.sunday.closing_time || '');
+      formData.append('schedules[sunday][is_closed]', courtObj.schedules.sunday.is_closed.toString());
+  
+      if (courtObj.file_path) {
+        formData.append('file_path', courtObj.file_path);
+      }
+  
+      return this.http.put<any>(`${ApiRoutes.courts}${court_id}`, formData, { headers });
   }
 
   update(court_id: number, courtObj: Partial<Court>): Observable<any> {
