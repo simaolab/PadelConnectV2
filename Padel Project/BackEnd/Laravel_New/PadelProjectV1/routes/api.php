@@ -33,7 +33,6 @@ Route::middleware('auth:api')->group(function () {
 
     //Specific routes
     Route::get('reservations/check-availability', [ReservationController::class, 'checkAvailability']);
-    Route::get('/reservations/deleted', [ReservationController::class, 'indexDeleted']);
     Route::get('reservations/', [ReservationController::class, 'search']);
     Route::get('reservations/search/{reservation?}', [ReservationController::class, 'search']);
 
@@ -98,6 +97,3 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/payment/process', [PaymentController::class, 'processPayment']);
 
 });
-
-Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook'])
-    ->middleware('verify.stripe.signature');

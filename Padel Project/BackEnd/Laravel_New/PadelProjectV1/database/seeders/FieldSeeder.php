@@ -13,7 +13,7 @@ class FieldSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('fields')->insert([
+        $fields = [
             [
                 'company_id'     => 1,
                 'name'           => 'Campo de Padel S',
@@ -86,6 +86,43 @@ class FieldSeeder extends Seeder
                 'lockers'        => false,
                 'rent_equipment' => false,
             ],
-        ]);
+        ];
+
+        foreach ($fields as $field) {
+            $fieldId = DB::table('fields')->insertGetId($field);
+
+            $weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+            foreach ($weekdays as $day) {
+                DB::table('field_schedule')->insert([
+                    'field_id'    => $fieldId,
+                    'day_of_week' => $day,
+                    'opening_time'=> '09:00',
+                    'closing_time'=> '20:00',
+                    'is_closed'   => false,
+                    'created_at'  => now(),
+                    'updated_at'  => now(),
+                ]);
+            }
+
+            DB::table('field_schedule')->insert([
+                'field_id'    => $fieldId,
+                'day_of_week' => 'saturday',
+                'opening_time'=> '10:00',
+                'closing_time'=> '20:00',
+                'is_closed'   => false,
+                'created_at'  => now(),
+                'updated_at'  => now(),
+            ]);
+
+            DB::table('field_schedule')->insert([
+                'field_id'    => $fieldId,
+                'day_of_week' => 'sunday',
+                'opening_time'=> null,
+                'closing_time'=> null,
+                'is_closed'   => true,
+                'created_at'  => now(),
+                'updated_at'  => now(),
+            ]);
+        }
     }
 }

@@ -317,7 +317,6 @@ class ReservationController extends Controller
     public function checkAvailability(Request $request)
     {
         try {
-            // Validação dos dados recebidos
             $validatedData = $request->validate([
                 'start_date' => 'required|date_format:d/m/Y H:i:s',
                 'end_date' => 'required|date_format:d/m/Y H:i:s',
