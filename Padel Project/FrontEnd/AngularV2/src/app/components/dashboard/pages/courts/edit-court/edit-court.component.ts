@@ -85,6 +85,9 @@ export class EditCourtComponent {
 
   court_id: number = 0;
 
+  defaultImagePath: string = 'assets/images/default-image.jpg';
+  currentImagePath: string = this.defaultImagePath;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -100,11 +103,16 @@ export class EditCourtComponent {
   }
 
   loadCourt(): void {
-
     this.courtsService.show(this.court_id).subscribe({
-      next: (court: any) => {
+      next: (court: any) => {        
         const field = court.field;
         const formattedDate = this.convertToDateFormat(field.last_maintenance);
+
+        const weekdays = this.formatTimeFields(court.schedules?.weekdays?.[0] || {});
+        const saturday = this.formatTimeFields(court.schedules?.saturday || {});
+        const sunday = this.formatTimeFields(court.schedules?.sunday || {});
+
+        console.log('court:', court);
         this.courtObj = {
           name: field.name,
           company_id: field.company.id,
@@ -119,23 +127,13 @@ export class EditCourtComponent {
           rent_equipment: field.rent_equipment,
           file_path: field.file_path,
           schedules: {
-            weekdays: {
-              opening_time: field.schedules?.weekdays?.opening_time || '',
-              closing_time: field.schedules?.weekdays?.closing_time || '',
-              is_closed: field.schedules?.weekdays?.is_closed || 0,
-            },
-            saturday: {
-              opening_time: field.schedules?.saturday?.opening_time || '',
-              closing_time: field.schedules?.saturday?.closing_time || '',
-              is_closed: field.schedules?.saturday?.is_closed || 1,
-            },
-            sunday: {
-              opening_time: field.schedules?.sunday?.opening_time || '',
-              closing_time: field.schedules?.sunday?.closing_time || '',
-              is_closed: field.schedules?.sunday?.is_closed || 1,
-            },
+            weekdays: weekdays,
+            saturday: saturday,
+            sunday: sunday,
           },
         };
+        
+        this.currentImagePath = field.file_path || this.defaultImagePath;
       },
       error: (err) => {
         const errorMessage = err?.error?.message
@@ -151,6 +149,22 @@ export class EditCourtComponent {
     });
   }
 
+  formatTimeFields(schedule: any): any {
+    if (!schedule) return schedule;
+  
+    const formatTime = (time: string | null): string => {
+      if (!time) return '';
+      const [hours, minutes] = time.split(':');
+      return `${hours}:${minutes}`;
+    };
+  
+    return {
+      opening_time: formatTime(schedule.opening_time),
+      closing_time: formatTime(schedule.closing_time),
+      is_closed: schedule.is_closed ?? 0,
+    };
+  }
+
   convertToDateFormat(date: string): string {
     if (!date) return '';
 
@@ -159,6 +173,7 @@ export class EditCourtComponent {
   }
 
   editCourt(): void {
+    console.log('Court', this.courtObj);
     this.courtsService.edit(this.courtObj, this.court_id).subscribe({
       next: (res: any) => {
         if(res.status === 'success') {
@@ -175,6 +190,9 @@ export class EditCourtComponent {
       error: (err: any) => {
         this.formErrors = {};
         const errorDetails = err.error?.['error(s)'] || {};
+
+        console.log('errorDetails:', errorDetails);
+
         for (const company in errorDetails) {
           if (errorDetails.hasOwnProperty(company)) {
             this.formErrors[company] = errorDetails[company][0];
@@ -205,6 +223,22 @@ export class EditCourtComponent {
 
   onTypeFloorSelected(selected: any): void {
     this.courtObj.type_floor = selected.value;
+  }
+
+  toggleSaturday(): void {
+    this.courtObj.schedules.saturday.is_closed = this.courtObj.schedules.saturday.is_closed === 0 ? 1 : 0;
+    if (this.courtObj.schedules.saturday.is_closed === 0) {
+      this.courtObj.schedules.saturday.opening_time = '';
+      this.courtObj.schedules.saturday.closing_time = '';
+    }
+  }
+  
+  toggleSunday(): void {
+    this.courtObj.schedules.sunday.is_closed = this.courtObj.schedules.sunday.is_closed === 0 ? 1 : 0;
+    if (this.courtObj.schedules.sunday.is_closed === 0) {
+      this.courtObj.schedules.sunday.opening_time = '';
+      this.courtObj.schedules.sunday.closing_time = '';
+    }
   }
 
   toggleService(serviceKey: keyof typeof this.serviceStates): void {
@@ -245,5 +279,17 @@ export class EditCourtComponent {
       rent_equipment: 'Aluguer Equipamento',
     };
     return names[serviceKey] || serviceKey;
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      this.currentImagePath = URL.createObjectURL(file);
+      this.courtObj.file_path = file; 
+    } else {
+      this.currentImagePath = this.defaultImagePath;
+      this.courtObj.file_path = null;
+    }
   }
 }

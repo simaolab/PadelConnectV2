@@ -196,14 +196,6 @@ export class CreateCourtComponent {
     };
     return names[serviceKey] || serviceKey;
   }
-
-  toggleWeekdays(): void {
-    this.courtObj.schedules.weekdays.is_closed = this.courtObj.schedules.weekdays.is_closed === 0 ? 1 : 0;
-    if (this.courtObj.schedules.weekdays.is_closed === 0) {
-      this.courtObj.schedules.weekdays.opening_time = '';
-      this.courtObj.schedules.weekdays.closing_time = '';
-    }
-  }
   
   toggleSaturday(): void {
     this.courtObj.schedules.saturday.is_closed = this.courtObj.schedules.saturday.is_closed === 0 ? 1 : 0;
