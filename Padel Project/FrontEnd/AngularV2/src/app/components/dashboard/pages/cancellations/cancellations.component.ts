@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 export class CancellationsComponent {
 
   cancellations: any[] = [];
+  isLoading = true;
 
   constructor(
     private cancellationsService: CancellationsService,
@@ -30,8 +31,10 @@ export class CancellationsComponent {
   loadCancellations(): void {
     this.cancellationsService.index().subscribe({
       next: (res: any) => {
-        this.cancellations = res;
-        console.log(this.cancellations)
+        setTimeout(() => {
+          this.cancellations = res.cancellations;
+          this.isLoading = false;
+      }, 1500)
       },
       error: (err: any) => {
         const message = err.error?.message;

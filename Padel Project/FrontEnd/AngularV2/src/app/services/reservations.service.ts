@@ -51,11 +51,13 @@ export class ReservationsService {
   }
 
 
-  delete(reservation_id: number): Observable<any> {
+  delete(reservation_id: number, reason: string | null = null): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.delete<any>(`${ApiRoutes.reservations}${reservation_id}`, { headers });
+    const body = { reason };
+
+    return this.http.delete<any>(`${ApiRoutes.reservations}${reservation_id}`, { headers, body });
   }
 
 
