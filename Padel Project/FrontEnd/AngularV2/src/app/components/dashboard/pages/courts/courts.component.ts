@@ -94,7 +94,7 @@ export class CourtsComponent {
   updateCourt(court: any): void {
     const updatedCourt = {
       ...court,
-      company_id: court.company.id
+      company_id: court.company.id,
     };
 
     this.courtsService.update(court.id, updatedCourt).subscribe({

@@ -102,7 +102,7 @@ export class EditCourtComponent {
     this.loadCourt();
   }
 
-  loadCourt(): void {
+  loadCourt(): void {    
     this.courtsService.show(this.court_id).subscribe({
       next: (court: any) => {        
         const field = court.field;
@@ -112,7 +112,6 @@ export class EditCourtComponent {
         const saturday = this.formatTimeFields(court.schedules?.saturday || {});
         const sunday = this.formatTimeFields(court.schedules?.sunday || {});
 
-        console.log('court:', court);
         this.courtObj = {
           name: field.name,
           company_id: field.company.id,
@@ -134,6 +133,8 @@ export class EditCourtComponent {
         };
         
         this.currentImagePath = field.file_path || this.defaultImagePath;
+        console.log('courtObj:', this.courtObj);
+        
       },
       error: (err) => {
         const errorMessage = err?.error?.message
@@ -173,7 +174,6 @@ export class EditCourtComponent {
   }
 
   editCourt(): void {
-    console.log('Court', this.courtObj);
     this.courtsService.edit(this.courtObj, this.court_id).subscribe({
       next: (res: any) => {
         if(res.status === 'success') {
