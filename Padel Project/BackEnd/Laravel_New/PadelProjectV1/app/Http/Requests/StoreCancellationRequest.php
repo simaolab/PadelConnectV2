@@ -21,10 +21,7 @@ class StoreCancellationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'reason'            => 'nullable|string|max:255',
-            'status'            => 'required|string|max:50',
-            'cancellation_date' => 'nullable|date',
-            'field_id'          => 'nullable|exists:fields,id',
+            'field_id'          => 'required|exists:fields,id',
         ];
     }
 
@@ -32,11 +29,7 @@ class StoreCancellationRequest extends FormRequest
     public function messages()
     {
         return [
-            'status.required'   => 'O status é obrigatório.',
-            'status.string'     => 'O status deve ser uma string.',
-            'status.max'        => 'O status não pode exceder 50 caracteres.',
-
-            'field_id.exists'   => 'O campo fornecido não existe.',
+          'field_id.exists'   => 'O campo fornecido não existe.',
         ];
     }
 
