@@ -263,6 +263,11 @@
     width: 50%;
 }
 
+.info-danger {
+  font-size: var(--font-size);
+  color: var(--color-danger);
+}
+
 .card-content-price {
     display: flex;
     flex-direction: column;

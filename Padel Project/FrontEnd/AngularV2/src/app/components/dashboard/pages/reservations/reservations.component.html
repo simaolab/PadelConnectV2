@@ -40,7 +40,7 @@
                 <a class="user" [routerLink]="['/dashboard/customer', reservation.user?.id]">
                   {{ reservation.user?.username }}
                 </a>
-                <span class="tooltip-text">Visuzlizar utilizador</span>
+                <span class="tooltip-text">Visualizar utilizador</span>
               </div>
             </td>
             <td data-cell="Campo" class="left">
@@ -48,7 +48,7 @@
               <a class="court" [routerLink]="['/dashboard/court', reservation.fields[0]?.id]">
                 {{ reservation.fields[0]?.name }}
               </a>
-              <span class="tooltip-text">Visuzlizar Campo</span>
+              <span class="tooltip-text">Visualizar Campo</span>
               </div>
             </td>
             <td data-cell="Total" class="middle"> {{ reservation.total }}€</td>
@@ -86,7 +86,7 @@
             <td data-cell="Ações" class="middle">
               <div class="actions">
                 <div class="tooltip">
-                  <i class='ri-delete-bin-2-line' (click)="deleteReservation(reservation?.id)"></i>
+                  <i class='ri-delete-bin-2-line' (click)="openModal(reservation)"></i>
                   <span class="tooltip-text">Eliminar</span>
                 </div>
               </div>
@@ -102,3 +102,32 @@
 <ng-template #noReservations>
   <p class="no-reservations">Não existe nenhuma reserva</p>
 </ng-template>
+
+<div *ngIf="showModal" class="modal-overlay">
+  <div class="modal">
+    <div class="top-modal">
+      <h2>Confirmar Cancelamento</h2>
+      <i class='bx bx-x' (click)="closeModal()"></i>
+    </div>
+    <p>Tem certeza de que deseja cancelar a reserva de {{ selectedReservation?.user?.username }}?</p>
+
+    <form (ngSubmit)="submitCancel()">
+      <div class="form-group">
+        <label for="reason">Motivo do Cancelamento (opcional)</label>
+        <textarea
+          id="reason"
+          [(ngModel)]="cancelReason"
+          name="reason"
+          rows="3"
+          placeholder="Escreva o motivo, se necessário"
+          rows="10"
+          cols="30"
+        ></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="submit" class="btn btn-primary">Confirmar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
