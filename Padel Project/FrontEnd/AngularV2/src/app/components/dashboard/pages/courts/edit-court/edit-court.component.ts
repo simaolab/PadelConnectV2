@@ -47,7 +47,7 @@ export class EditCourtComponent {
     file_path: null,
     schedules: {
       weekdays: { opening_time: '', closing_time: '', is_closed: 0 },
-      saturday: { opening_time: '', closing_time: '', is_closed: 1 }, 
+      saturday: { opening_time: '', closing_time: '', is_closed: 1 },
       sunday: { opening_time: '', closing_time: '', is_closed: 1 },
     }
   }
@@ -87,6 +87,7 @@ export class EditCourtComponent {
 
   defaultImagePath: string = 'assets/images/default-image.jpg';
   currentImagePath: string = this.defaultImagePath;
+  uploadedImage: File | null = null;
 
   constructor(
     private router: Router,
@@ -102,9 +103,9 @@ export class EditCourtComponent {
     this.loadCourt();
   }
 
-  loadCourt(): void {    
+  loadCourt(): void {
     this.courtsService.show(this.court_id).subscribe({
-      next: (court: any) => {        
+      next: (court: any) => {
         const field = court.field;
         const formattedDate = this.convertToDateFormat(field.last_maintenance);
 
@@ -131,14 +132,15 @@ export class EditCourtComponent {
             sunday: sunday,
           },
         };
-        
+
+        console.log(this.courtObj.schedules)
+
+        console.log(this.courtObj.file_path)
+
         this.currentImagePath = field.file_path || this.defaultImagePath;
-        console.log('courtObj:', this.courtObj);
-        
       },
       error: (err) => {
-        const errorMessage = err?.error?.message
-
+        const errorMessage = err?.error?.message;
         this.dashboardComponent.showModal(
           'Erro',
           errorMessage,
@@ -152,13 +154,13 @@ export class EditCourtComponent {
 
   formatTimeFields(schedule: any): any {
     if (!schedule) return schedule;
-  
+
     const formatTime = (time: string | null): string => {
       if (!time) return '';
       const [hours, minutes] = time.split(':');
       return `${hours}:${minutes}`;
     };
-  
+
     return {
       opening_time: formatTime(schedule.opening_time),
       closing_time: formatTime(schedule.closing_time),
@@ -168,7 +170,6 @@ export class EditCourtComponent {
 
   convertToDateFormat(date: string): string {
     if (!date) return '';
-
     const [day, month, year] = date.split('/');
     return `${year}-${month}-${day}`;
   }
@@ -176,7 +177,7 @@ export class EditCourtComponent {
   editCourt(): void {
     this.courtsService.edit(this.courtObj, this.court_id).subscribe({
       next: (res: any) => {
-        if(res.status === 'success') {
+        if (res.status === 'success') {
           this.dashboardComponent.showModal(
             'Mensagem',
             res.message,
@@ -184,22 +185,21 @@ export class EditCourtComponent {
               this.router.navigate(['/dashboard/courts']);
             }
           );
-          this.formErrors = {}
         }
       },
-      error: (err: any) => {
+      error: (err) => {
         this.formErrors = {};
         const errorDetails = err.error?.['error(s)'] || {};
 
-        console.log('errorDetails:', errorDetails);
+        console.log(err);
 
-        for (const company in errorDetails) {
-          if (errorDetails.hasOwnProperty(company)) {
-            this.formErrors[company] = errorDetails[company][0];
+        for (const field in errorDetails) {
+          if (errorDetails.hasOwnProperty(field)) {
+            this.formErrors[field] = errorDetails[field][0];
           }
         }
       }
-    })
+    });
   }
 
   loadCompanies(): void {
@@ -232,7 +232,7 @@ export class EditCourtComponent {
       this.courtObj.schedules.saturday.closing_time = '';
     }
   }
-  
+
   toggleSunday(): void {
     this.courtObj.schedules.sunday.is_closed = this.courtObj.schedules.sunday.is_closed === 0 ? 1 : 0;
     if (this.courtObj.schedules.sunday.is_closed === 0) {
@@ -285,11 +285,11 @@ export class EditCourtComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
-      this.currentImagePath = URL.createObjectURL(file);
-      this.courtObj.file_path = file; 
+      this.uploadedImage = file; // Salvar a imagem selecionada
+      this.currentImagePath = URL.createObjectURL(file); // Pre-visualização da imagem
     } else {
+      this.uploadedImage = null; // Caso o usuário desmarque a imagem
       this.currentImagePath = this.defaultImagePath;
-      this.courtObj.file_path = null;
     }
   }
 }
