@@ -6,15 +6,15 @@
   </div>
   <div class="page-info">
     <title-page pageText="Detalhes do campo"></title-page>
-    <p class="description-page">Bem vindo á página do campo 
-      <span>{{ courtObj.name }}</span>, 
+    <p class="description-page">Bem vindo á página do campo
+      <span>{{ courtObj.name }}</span>,
       aqui pode editar os dados deste campo.
     </p>
   </div>
 </div>
 
 <card-form>
-  <form class="form-show" enctype="multipart/form-data">
+  <form class="form-show" enctype="multipart/form-data" (ngSubmit)="editCourt()">
     <div class="user-container-info">
       <div class="container-description">
           <p class="description-text">Informações do Campo</p>
@@ -23,19 +23,19 @@
       <div class="container-forms-info">
         <div class="left-column">
           <div class="image-container">
-            <input 
-              type="file" 
-              (change)="onFileSelected($event)" 
-              class="file-custom" 
+            <input
+              type="file"
+              (change)="onFileSelected($event)"
+              class="file-custom"
               id="fileInput" />
             <div class="image-preview">
-              <img 
-                [src]="currentImagePath" 
+              <img
+                [src]="currentImagePath"
                 class="preview-image" />
             </div>
           </div>
         </div>
-        <div class="right-column">       
+        <div class="right-column">
           <div class="contact-detail">
             <div class="detail">
               <div class="label-container">
@@ -69,9 +69,9 @@
                     <i class="ri-money-euro-circle-line"></i>
                     <label for="price_hour">Preço Hora</label>
                   </div>
-                  <input type="text" name="price_hour" 
-                    [(ngModel)]=" courtObj.price_hour "  
-                    (input)="formatPriceHour($event)" 
+                  <input type="text" name="price_hour"
+                    [(ngModel)]=" courtObj.price_hour "
+                    (input)="formatPriceHour($event)"
                     placeholder="Indique preço hora"
                     maxlength="5">
                   <small *ngIf="formErrors['price_hour']" class="small-error">{{ formErrors['price_hour'] }}</small>
@@ -154,7 +154,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="detail">
               <div class="label-schedule-container">
                 <label>Sábado</label>
@@ -173,7 +173,7 @@
                     </div>
                   </label>
                 </div>
-                <span 
+                <span
                   [ngClass]="courtObj.schedules.saturday.is_closed ? 'small-error' : 'small-success'">
                   {{ courtObj.schedules.saturday.is_closed ? 'Fechado' : 'Aberto' }}
                 </span>
@@ -201,7 +201,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="detail">
               <div class="label-schedule-container">
                 <label>Domingo</label>
@@ -220,7 +220,7 @@
                     </div>
                   </label>
                 </div>
-                <span 
+                <span
                   [ngClass]="courtObj.schedules.sunday.is_closed ? 'small-error' : 'small-success'">
                   {{ courtObj.schedules.sunday.is_closed ? 'Fechado' : 'Aberto' }}
                 </span>
@@ -248,7 +248,7 @@
                 </div>
               </div>
             </div>
-  
+
           </div>
         </div>
       </div>
@@ -258,7 +258,7 @@
           <hr>
         </div>
         <div class="container-forms">
-  
+
           <div class="data-detail">
             <div class="detail-services">
               <div
@@ -270,7 +270,7 @@
                   {{ courtObj.illumination === 1 ? 'Com Iluminação' : 'Sem Iluminação' }}
                 </span>
               </div>
-          
+
               <div
                 class="service"
                 [ngClass]="{ 'danger': courtObj.cover === 0, 'success': courtObj.cover === 1 }"
@@ -280,7 +280,7 @@
                   {{ courtObj.cover === 1 ? 'Interior' : 'Exterior' }}
                 </span>
               </div>
-          
+
               <div
                 class="service"
                 [ngClass]="{ 'danger': courtObj.shower_room === 0, 'success': courtObj.shower_room === 1 }"
@@ -290,7 +290,7 @@
                   {{ courtObj.shower_room === 1 ? 'Com Balneário' : 'Sem Balneário' }}
                 </span>
               </div>
-          
+
               <div
                 class="service"
                 [ngClass]="{ 'danger': courtObj.lockers === 0, 'success': courtObj.lockers === 1 }"
@@ -300,7 +300,7 @@
                   {{ courtObj.lockers === 1 ? 'Com Cacifo' : 'Sem Cacifo' }}
                 </span>
               </div>
-          
+
               <div
                 class="service"
                 [ngClass]="{ 'danger': courtObj.rent_equipment === 0, 'success': courtObj.rent_equipment === 1 }"
@@ -314,14 +314,13 @@
           </div>
         </div>
       </div>
-      
+
       <div class="button">
-        <button type="submit" (click)="editCourt()" class="btn edit">
+        <button type="submit"  class="btn edit">
           <i class="ri-check-line"></i>
           Guardar alterações
         </button>
       </div>
   </form>
 <card-form>
- 
-  
+
