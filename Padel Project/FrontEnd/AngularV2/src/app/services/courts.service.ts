@@ -68,6 +68,7 @@ export class CourtsService {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
+
     return this.http.put<any>(`${ApiRoutes.courts}${court_id}`, courtObj, { headers });
   }
 
