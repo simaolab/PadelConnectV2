@@ -16,6 +16,13 @@ export class CourtsService {
     return this.http.get<any>(ApiRoutes.courts);
   }
 
+  indexRestricted(): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<any>(ApiRoutes.DashboardCourtsList, { headers });
+  }
+
   create(courtObj: Court): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
