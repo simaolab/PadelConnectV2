@@ -40,9 +40,8 @@ export class CourtsComponent {
   }
 
   loadCourts(): void {
-    
     this.courtsService.index().subscribe({
-      next: (data: any) => {        
+      next: (data: any) => {
         setTimeout(() => {
           if (data && data.message) {
             if (this.router.url.includes('/courts')) {
