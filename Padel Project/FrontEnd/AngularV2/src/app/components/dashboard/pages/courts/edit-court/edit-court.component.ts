@@ -132,12 +132,9 @@ export class EditCourtComponent {
             sunday: sunday,
           },
         };
-
-        console.log(this.courtObj.schedules)
-
-        console.log(this.courtObj.file_path)
-
+        
         this.currentImagePath = field.file_path || this.defaultImagePath;
+        
       },
       error: (err) => {
         const errorMessage = err?.error?.message;
