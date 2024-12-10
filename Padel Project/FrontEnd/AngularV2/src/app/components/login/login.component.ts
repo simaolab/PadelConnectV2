@@ -29,6 +29,7 @@ export class LoginComponent {
     username: '',
     email: '',
     nif: 0,
+    birthday: '',
     password: '',
     password_confirmation: ''
   };
@@ -72,10 +73,15 @@ export class LoginComponent {
   }
 
   register() {
+    console.log(this.registerObj.birthday)
     this.authService.register(this.registerObj).subscribe({
       next: (res: any) => {
         if (res.status === 'success') {
           this.modalComponent?.modalClosed.subscribe(() => {
+            this.modalComponent?.showModal(
+              'Erro',
+              res.message
+            );
             location.reload();
           });
         }
@@ -89,6 +95,22 @@ export class LoginComponent {
       }
     });
   }
+
+  // convertToDateFormat(date: any): string {
+  //   if (!date) return '';
+
+  //   if (date instanceof Date) {
+  //     // Caso seja um objeto Date
+  //     const day = date.getDate().toString().padStart(2, '0');  // Adiciona zero à esquerda se necessário
+  //     const month = (date.getMonth() + 1).toString().padStart(2, '0');  // Meses começam do zero
+  //     const year = date.getFullYear();
+  //     return `${year}-${month}-${day}`;
+  //   }
+
+  //   // Caso seja uma string no formato dd/mm/yyyy
+  //   const [day, month, year] = date.split('/');
+  //   return `${year}-${month}-${day}`;
+  // }
 
   private clearCart() {
     this.cookieService.delete('cart');
