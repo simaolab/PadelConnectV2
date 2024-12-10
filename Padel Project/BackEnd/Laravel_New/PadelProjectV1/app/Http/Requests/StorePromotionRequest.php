@@ -27,7 +27,7 @@ class StorePromotionRequest extends FormRequest
             'discount'                      => 'required|numeric|max:100|min:1',
             'for_inactive_users'            => 'required|boolean',
             'for_new_users'                 => 'required|boolean',
-            'additional_info'               => 'nullable|string|max:500',
+            'additional_info'               => 'nullable|string|max:255',
             'start_date'                    => 'required|date|after_or_equal:today',
             'end_date'                      => 'required|date|after_or_equal:start_date',
             'generic'                       => 'required|boolean',

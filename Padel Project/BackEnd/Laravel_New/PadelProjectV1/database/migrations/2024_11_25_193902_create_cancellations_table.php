@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('reservation_id');
             $table->string('reason')->nullable();
-            $table->decimal('total_refunded');
+            $table->decimal('total_refunded', 10, 2);
             $table->string('status');
             $table->date('cancellation_date')->nullable();
             $table->timestamps();
