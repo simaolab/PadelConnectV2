@@ -40,7 +40,7 @@ export class CourtsComponent {
   }
 
   loadCourts(): void {
-    this.courtsService.index().subscribe({
+    this.courtsService.indexRestricted().subscribe({
       next: (data: any) => {
         setTimeout(() => {
           if (data && data.message) {
@@ -52,7 +52,6 @@ export class CourtsComponent {
               if (court.schedules) {
                 const schedules = this.transformSchedules(court.schedules);
                 court.schedules = schedules;
-                console.log(schedules)
               } else {
                 court.schedules = {
                   weekdays: { opening_time: null, closing_time: null, is_closed: false },
@@ -113,7 +112,7 @@ export class CourtsComponent {
   }
 
   loadQuickCourts(): void {
-    this.courtsService.index().subscribe({
+    this.courtsService.indexRestricted().subscribe({
       next: (data: any) => {
         this.courts = data.fields || [];
 
@@ -131,7 +130,6 @@ export class CourtsComponent {
           }
           return court;
         });
-        console.log('cheguei')
       },
       error: (err: any) => {
         const message = err.error?.message;
@@ -187,7 +185,6 @@ export class CourtsComponent {
       error: (err: any) => {
         console.error('Erro ao atualizar campo:', err);
         const message = err.error?.message || 'Erro desconhecido.';
-        this.dashboardComponent.showModal('Erro', message);
       },
     });
   }

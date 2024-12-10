@@ -5,7 +5,7 @@
         associadas ao <span>Padel Connect</span>
       </p>
     </div>
-    <div class="page-action">
+    <div class="page-action" *ngIf="isAdmin">
       <add-button  href="/dashboard/create-promotion"></add-button>
     </div>
 </div>
@@ -27,7 +27,7 @@
             <th class="middle">Visibilidade</th>
             <th class="middle">Inicio Promoção</th>
             <th class="middle">Fim Promoção</th>
-            <th class="middle">Ações</th>
+            <th class="middle" *ngIf="isAdmin">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -67,7 +67,7 @@
             </td>
             <td data-cell="Início Promoção" class="middle">{{ promotion?.start_date }}</td>
             <td data-cell="Fim Promoção" class="middle">{{ promotion?.end_date }}</td>
-            <td data-cell="Ações" class="middle">
+            <td data-cell="Ações" class="middle" *ngIf="isAdmin">
               <div class="actions">
                 <div class="tooltip">
                   <i class='ri-edit-line' [routerLink]="['/dashboard/promotion', promotion?.id]"></i>
