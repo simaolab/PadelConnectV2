@@ -2,25 +2,37 @@
       <div class="card reservations">
           <div class="card-title reservations">
               <span class="material-icons-sharp">book_online</span>
-              <h3>Reservas</h3>
+              <a [routerLink]="['/dashboard/reservations']">
+                <h3>Reservas</h3>
+              </a>
+              {{ totalReservations }}
           </div>
       </div>
-      <div class="card courts">
+      <div class="card courts" *ngIf="userRole === 1 || userRole === 2">
           <div class="card-title courts">
               <span class="material-icons-sharp">sports_tennis</span>
-              <h3>Campos</h3>
+              <a [routerLink]="['/dashboard/courts']">
+                <h3>Campos</h3>
+              </a>
+              {{ totalCourts }}
           </div>
       </div>
       <div class="card promotions">
           <div class="card-title promotions">
               <span class="material-icons-sharp">sell</span>
-              <h3>Promoções</h3>
+              <a [routerLink]="['/dashboard/promotions']">
+                <h3>Promoções</h3>
+              </a>
+              {{ totalPromotions }}
           </div>
       </div>
-      <div class="card customers">
+      <div class="card customers" *ngIf="isAdmin">
           <div class="card-title customers">
               <span class="material-icons-sharp">group</span>
-              <h3>Clientes</h3>
+              <a [routerLink]="['/dashboard/customers']">
+                <h3>Clientes</h3>
+              </a>
+              {{ totalUsers }}
           </div>
       </div>
     </div>

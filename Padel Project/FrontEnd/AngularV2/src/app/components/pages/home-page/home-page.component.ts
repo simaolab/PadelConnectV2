@@ -32,12 +32,11 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  // Function to get fields from the API using the service
+
   getCourts(): Observable<any> {
-    return this.courtsService.index(); // Call the service function here
+    return this.courtsService.index();
   }
 
-  // Function to count the fields
   countFields(fields: any[]): void {
     this.totalCourts = 0;
     this.totalIndoorCourts = 0;
@@ -53,13 +52,11 @@ export class HomePageComponent implements OnInit {
       }
     });
 
-    // Start counting the values gradually
     this.countIncrementally('totalCourts', 0, this.totalCourts);
     this.countIncrementally('totalIndoorCourts', 0, this.totalIndoorCourts);
     this.countIncrementally('totalOutdoorCourts', 0, this.totalOutdoorCourts);
   }
 
-  // Function to count values incrementally
   countIncrementally(elementId: string, start: number, end: number): void {
     let current = start;
     const interval = setInterval(() => {

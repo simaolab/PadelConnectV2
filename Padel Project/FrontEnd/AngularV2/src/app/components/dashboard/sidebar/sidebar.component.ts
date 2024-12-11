@@ -47,7 +47,6 @@ export class SidebarComponent implements OnInit {
       next: (data: any) => {
         this.isAdmin = data.isAdmin || false;
         this.userRole = data.user.role.id;
-        console.log(data)
       },
       error: () => {
         this.isAdmin = false;
