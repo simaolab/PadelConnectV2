@@ -50,10 +50,8 @@ export class CreatePromotionComponent {
     }
 
   create(): void {
-    console.log(this.promotionObj)
     this.promotionsService.create(this.promotionObj).subscribe({
       next: (res: any) => {
-        console.log(res)
         if(res) {
           this.dashboardComponent.showModal(
             'Successo',
@@ -65,8 +63,6 @@ export class CreatePromotionComponent {
           this.formErrors = {};
         }
         else {
-          // Caso a resposta não tenha o status esperado
-          console.log('cheguei')
           this.dashboardComponent.showModal(
             'Erro',
             'Resposta inesperada do servidor'
@@ -76,6 +72,7 @@ export class CreatePromotionComponent {
       error: (err: any) => {
         this.formErrors = {};
         const errorDetails = err.error?.['error(s)'] || {};
+        console.log('Detalhes do erro:', errorDetails);
         for (const promotion in errorDetails) {
           if (errorDetails.hasOwnProperty(promotion)) {
             this.formErrors[promotion] = errorDetails[promotion][0];

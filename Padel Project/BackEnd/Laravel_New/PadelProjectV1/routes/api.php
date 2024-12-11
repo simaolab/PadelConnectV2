@@ -81,7 +81,6 @@ Route::middleware(['auth:api', RoleCheck::class])->group(function () {
     Route::apiResource('users', UserController::class);
     Route::post('promotions', [PromotionController::class, 'create']);
     Route::get('/promotions/search/{string?}', [PromotionController::class, 'search']);
-
     // Payment setup and processing
     Route::post('/payment/setup-intent', [PaymentController::class, 'createSetupIntent']);
     Route::post('/payment/process', [PaymentController::class, 'processPayment']);
