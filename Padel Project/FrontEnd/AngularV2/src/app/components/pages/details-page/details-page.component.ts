@@ -174,12 +174,27 @@ export class DetailsPageComponent implements OnInit {
     }
   }
 
-
   addToCart(): void {
     if (!this.startDate || !this.endDate || this.totalPrice === 0) {
         this.modalComponent?.showModal(
             'Erro',
             'Por favor, preencha datas válidas antes de adicionar ao carrinho'
+        );
+        return;
+    }
+
+    let cart: Cart = this.cookieService.get('cart')
+        ? JSON.parse(this.cookieService.get('cart'))
+        : { items: [], totalPrice: 0 };
+
+    const isDuplicate = cart.items.some((item: CartItem) =>
+        item.startDate === this.startDate && item.endDate === this.endDate && item.fieldId === this.court_id
+    );
+
+    if (isDuplicate) {
+        this.modalComponent?.showModal(
+            'Erro',
+            'Já existe uma reserva com as mesmas datas no carrinho.'
         );
         return;
     }
@@ -215,10 +230,7 @@ export class DetailsPageComponent implements OnInit {
                     totalHours: (new Date(this.endDate).getTime() - new Date(this.startDate).getTime()) / (1000 * 60 * 60),
                 };
 
-                let cart: Cart = this.cookieService.get('cart')
-                    ? JSON.parse(this.cookieService.get('cart'))
-                    : { items: [], totalPrice: 0 };
-
+                // Atualiza o carrinho
                 if (!Array.isArray(cart.items)) {
                     cart.items = [];
                 }
@@ -249,5 +261,6 @@ export class DetailsPageComponent implements OnInit {
             );
         },
     });
-  }
+}
+
 }

@@ -71,6 +71,10 @@
     background: var(--color-warning);
 }
 
+a {
+  color: var(--color-gray);
+}
+
 @media screen and (max-width: 1250px) {
   .cards {
       display: grid;

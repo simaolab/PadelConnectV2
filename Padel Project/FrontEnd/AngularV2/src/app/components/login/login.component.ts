@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,6 +19,11 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent {
   @ViewChild(ModalComponent) modalComponent: ModalComponent | undefined;
+  @ViewChild('container', { static: false }) container: ElementRef | undefined;
+  @ViewChild('step1', { static: false }) step1: ElementRef | undefined;
+  @ViewChild('step2', { static: false }) step2: ElementRef | undefined;
+  @ViewChild('registerBtn', { static: false }) registerBtn: ElementRef | undefined;
+  @ViewChild('loginBtn', { static: false }) loginBtn: ElementRef | undefined;
 
   loginObj = {
     login: '',
@@ -73,17 +78,18 @@ export class LoginComponent {
   }
 
   register() {
-    console.log(this.registerObj.birthday)
     this.authService.register(this.registerObj).subscribe({
       next: (res: any) => {
+        console.log(res)
         if (res.status === 'success') {
-          this.modalComponent?.modalClosed.subscribe(() => {
+          console.log("cheguei")
             this.modalComponent?.showModal(
-              'Erro',
+              'Sucess',
               res.message
-            );
-            location.reload();
-          });
+            )
+            setTimeout(() => {
+              location.reload();
+            }, 1500);
         }
       },
       error: (err) => {
@@ -95,22 +101,6 @@ export class LoginComponent {
       }
     });
   }
-
-  // convertToDateFormat(date: any): string {
-  //   if (!date) return '';
-
-  //   if (date instanceof Date) {
-  //     // Caso seja um objeto Date
-  //     const day = date.getDate().toString().padStart(2, '0');  // Adiciona zero à esquerda se necessário
-  //     const month = (date.getMonth() + 1).toString().padStart(2, '0');  // Meses começam do zero
-  //     const year = date.getFullYear();
-  //     return `${year}-${month}-${day}`;
-  //   }
-
-  //   // Caso seja uma string no formato dd/mm/yyyy
-  //   const [day, month, year] = date.split('/');
-  //   return `${year}-${month}-${day}`;
-  // }
 
   private clearCart() {
     this.cookieService.delete('cart');
