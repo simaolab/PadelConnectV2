@@ -40,7 +40,7 @@ export class UsersService {
     }, user_id: number): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    
+
     return this.http.put(`${ApiRoutes.users}${user_id}`, customerObj, { headers });
   }
 
@@ -70,5 +70,12 @@ export class UsersService {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.put(`${ApiRoutes.updatePassword}`, passwordData, { headers });
+  }
+
+  search(name: string): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<any>(`${ApiRoutes.client}search/${name}`, { headers });
   }
 }

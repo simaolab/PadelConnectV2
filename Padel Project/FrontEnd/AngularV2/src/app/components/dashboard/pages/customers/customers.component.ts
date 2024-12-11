@@ -3,6 +3,7 @@ import { ModalComponent } from '../../../utilities/modal/modal.component';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UsersService } from './../../../../services/users.service';
+import { Subscription } from 'rxjs';
 
 import { CardTableComponent } from '../../utilities/card-table/card-table.component';
 import { TitlePageComponent } from '../../utilities/title-page/title-page.component';
@@ -28,6 +29,7 @@ export class CustomersComponent {
 
   users: any[] = [];
   isLoading = true;
+  searchSubscription: Subscription | null = null;
 
   src: string = '../../../../../assets/images/icons/unauthorized.png'
 
@@ -83,5 +85,24 @@ export class CustomersComponent {
         alert('Erro ao carregar detalhes do usuário: ' + err.message);
       }
     })
+  }
+
+  searchUsers(name: string): void {
+    if (name.trim() === '') {
+      this.loadUsers(); // Chama a função de carregar todos os usuários se o nameo estiver vazio
+    } else {
+      this.isLoading = true; // Define como verdadeiro enquanto busca
+      this.usersService.search(name).subscribe({
+        next: (data: any) => {
+          this.users = data; // Atualiza a lista de usuários com os resultados da busca
+          this.isLoading = false; // Define como falso quando a busca nameina
+        },
+        error: (err: any) => {
+          const message = err.error?.message || 'Erro ao realizar a busca';
+          alert(message); // Exibe o erro
+          this.isLoading = false; // Define como falso em caso de erro
+        }
+      });
+    }
   }
 }

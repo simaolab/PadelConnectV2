@@ -19,7 +19,9 @@
 
   --color-blue-1: #00296B;
   --color-blue-2: #00509D;
+  --color-blue-3: #2196f3;
   --color-yellow: #FFD500;
+  --color-orange: #ff5722;
 
   --card-border-radius: 2rem;
   --border-radius-1: 0.8rem;
@@ -492,12 +494,12 @@ input[type=number] {
 
 @media screen and (max-width: 1250px) {
 
-  .tooltip:active .tooltip-text, 
+  .tooltip:active .tooltip-text,
   .tooltip:focus-within .tooltip-text {
     visibility: visible;
     opacity: 1;
   }
-  
+
   .contact-detail,
   .data-detail{
     display: flex;
@@ -531,7 +533,7 @@ input[type=number] {
 }
 
 @media screen and (max-width: 675px) {
-  
+
   .services .tooltip:first-child .tooltip-text {
     bottom: 50%;
     left: 100%;
@@ -539,12 +541,12 @@ input[type=number] {
     white-space: nowrap;
     margin-left: 5px;
   }
-  
+
   .services .tooltip:first-child .tooltip-text::after {
     content: "";
     position: absolute;
-    top: 50%; 
-    left: -11px; 
+    top: 50%;
+    left: -11px;
     transform: translateY(-50%);
     border-width: 6px;
     border-style: solid;
@@ -582,7 +584,7 @@ input[type=number] {
     border-bottom: 1px solid var(--color-primary);
   }
 
-  tr > td:last-child, 
+  tr > td:last-child,
   tr > th:last-child {
     order: -1;
   }
@@ -604,7 +606,7 @@ input[type=number] {
     margin-bottom: 10px;
     position: relative;
     padding-top: 15px;
-    width: 100%; 
+    width: 100%;
   }
 
   table tbody td,

@@ -24,7 +24,7 @@
             <th class="left">Descrição</th>
             <th class="left">Código</th>
             <th class="middle">Desconto</th>
-            <th class="middle">Visibilidade</th>
+            <th class="middle" *ngIf="isAdmin">Visibilidade</th>
             <th class="middle">Inicio Promoção</th>
             <th class="middle">Fim Promoção</th>
             <th class="middle" *ngIf="isAdmin">Ações</th>
@@ -35,7 +35,7 @@
             <td data-cell="Descrição" class="left">{{ promotion?.description }}</td>
             <td data-cell="Código" class="left">{{ promotion?.promo_code }}</td>
             <td data-cell="Desconto" class="middle">{{ promotion?.discount }}%</td>
-            <td data-cell="Visibilidade" class="middle services">
+            <td data-cell="Visibilidade" class="middle services" *ngIf="isAdmin">
               <div *ngIf="promotion?.active === 1" class="tooltip">
                 <i class="ri-eye-2-line" (click)="togglePromotionField(promotion, 'active', $event)"></i>
                 <span class="tooltip-text">Visível</span>

@@ -23,6 +23,9 @@
     padding: 20px;
     text-align: center;
     transition: all ease 300ms;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .card.reservations,
@@ -33,9 +36,89 @@
     padding: 1.5rem;
 }
 
-.card.statistics {
-  margin-top: 20px;
-    height: 520px;
+.counts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.card-row {
+  display: inline-flex;
+  gap: 1rem;
+}
+
+.progress-title {
+  width: 20%;
+  display: inline-flex;
+  justify-content: center;
+}
+.progress-title p {
+  color: var(--color-text);
+  font-size: var(--font-smalls);
+}
+
+.progress-container {
+  position: relative;
+  width: 100%;
+  height: 20px;
+}
+
+.progress-value {
+  position: absolute;
+  top: 70%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  pointer-events: none;
+}
+
+.progress-bar {
+  border-radius: 99px;
+  background: var(--color-light-grey);
+  width: 80%;
+  height: 30px;
+}
+
+.progress-fill {
+  width: 100%;
+  height: 30px;
+  border-radius: 99px;
+}
+
+.progress-fill.t {
+  background: var(--color-success);
+}
+
+.progress-fill.i {
+  background: var(--color-blue-2);
+}
+
+.progress-fill.o {
+  background: var(--color-yellow);
+}
+
+.progress-fill.clients {
+  background: var(--color-orange);
+}
+
+.progress-fill.companys {
+  background: var(--color-blue-3);
+}
+
+.progress-fill.pending {
+  background: rgba(255, 165, 0, 0.5);
+}
+
+.progress-fill.cancellations {
+  background: rgba(241, 16, 16, 0.5);
+}
+
+.card-row {
+  display: inline-flex;
 }
 
 .card-title {

@@ -5,7 +5,52 @@
               <a [routerLink]="['/dashboard/reservations']">
                 <h3>Reservas</h3>
               </a>
-              {{ totalReservations }}
+           </div>
+           <div class="counts">
+            <div class="card-row">
+              <div class="progress-title">
+                <p>Reservas</p>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-container">
+                  <p class="progress-value">{{ totalReservationsCount }}</p>
+                    <div
+                    class="progress-fill t"
+                    [style.width]="getProgressPercentage(totalReservationsCount, totalReservationsCount) + '%'"
+                    ></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-row">
+              <div class="progress-title">
+                <p>Pendentes</p>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-container">
+                  <p class="progress-value">{{ totalAtivesReservationsCount }}</p>
+                    <div
+                    class="progress-fill pending"
+                    [style.width]="getProgressPercentage(totalAtivesReservationsCount, totalReservationsCount) + '%'"
+                    ></div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="card-row">
+              <div class="progress-title">
+                <p>Canceladas</p>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-container">
+                  <p class="progress-value">{{ totalCancellationsCount }}</p>
+                    <div
+                    class="progress-fill cancellations"
+                    [style.width]="getProgressPercentage(totalCancellationsCount, totalReservationsCount) + '%'"
+                    ></div>
+                  </div>
+              </div>
+            </div>
           </div>
       </div>
       <div class="card courts" *ngIf="userRole === 1 || userRole === 2">
@@ -14,10 +59,55 @@
               <a [routerLink]="['/dashboard/courts']">
                 <h3>Campos</h3>
               </a>
-              {{ totalCourts }}
+          </div>
+          <div class="counts">
+            <div class="card-row">
+              <div class="progress-title">
+                <p>Campos</p>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-container">
+                  <p class="progress-value">{{ totalCourtsCount }}</p>
+                    <div
+                    class="progress-fill t"
+                    [style.width]="getProgressPercentage(totalCourtsCount, totalCourtsCount) + '%'"
+                    ></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-row">
+              <div class="progress-title">
+                <p>Campos Indoor</p>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-container">
+                  <p class="progress-value">{{ totalIndoorCourtsCount }}</p>
+                    <div
+                    class="progress-fill i"
+                    [style.width]="getProgressPercentage(totalIndoorCourtsCount, totalCourtsCount) + '%'"
+                    ></div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="card-row">
+              <div class="progress-title">
+                <p>Campos Outdoor</p>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-container">
+                  <p class="progress-value">{{ totalOutdoorCourtsCount }}</p>
+                    <div
+                    class="progress-fill o"
+                    [style.width]="getProgressPercentage(totalOutdoorCourtsCount, totalCourtsCount) + '%'"
+                  ></div>
+                </div>
+              </div>
+            </div>
           </div>
       </div>
-      <div class="card promotions">
+      <!-- <div class="card promotions">
           <div class="card-title promotions">
               <span class="material-icons-sharp">sell</span>
               <a [routerLink]="['/dashboard/promotions']">
@@ -25,14 +115,59 @@
               </a>
               {{ totalPromotions }}
           </div>
-      </div>
+      </div> -->
       <div class="card customers" *ngIf="isAdmin">
           <div class="card-title customers">
               <span class="material-icons-sharp">group</span>
               <a [routerLink]="['/dashboard/customers']">
                 <h3>Clientes</h3>
               </a>
-              {{ totalUsers }}
+          </div>
+          <div class="counts">
+            <div class="card-row">
+              <div class="progress-title">
+                <p>Utilizadores</p>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-container">
+                  <p class="progress-value">{{ totalUsersCount }}</p>
+                    <div
+                    class="progress-fill t"
+                    [style.width]="getProgressPercentage(totalUsersCount, totalUsersCount) + '%'"
+                    ></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-row">
+              <div class="progress-title">
+                <p>Clientes</p>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-container">
+                  <p class="progress-value">{{ totalClientsCount }}</p>
+                    <div
+                    class="progress-fill clients"
+                    [style.width]="getProgressPercentage(totalClientsCount, totalUsersCount) + '%'"
+                    ></div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="card-row">
+              <div class="progress-title">
+                <p>Empresas</p>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-container">
+                  <p class="progress-value">{{ totalCompanysCount }}</p>
+                    <div
+                    class="progress-fill companys"
+                    [style.width]="getProgressPercentage(totalCompanysCount, totalUsersCount) + '%'"
+                  ></div>
+                </div>
+              </div>
+            </div>
           </div>
       </div>
     </div>

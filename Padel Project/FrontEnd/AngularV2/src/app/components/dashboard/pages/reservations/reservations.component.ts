@@ -1,3 +1,4 @@
+import { UsersService } from './../../../../services/users.service';
 import { ReservationsService } from './../../../../services/reservations.service';
 import { Router, RouterModule } from '@angular/router';
 import { DashboardComponent } from './../../dashboard/dashboard.component';
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
 export class ReservationsComponent {
   constructor(
     private reservationsService: ReservationsService,
-    private dashboardComponent: DashboardComponent
+    private dashboardComponent: DashboardComponent,
+    private usersService: UsersService
   ) {}
 
   reservations: any[] = [];
@@ -29,9 +31,22 @@ export class ReservationsComponent {
   showModal: boolean = false;
   selectedReservation: any = null;
   cancelReason: string = '';
+  isAdmin: boolean = false;
 
   ngOnInit(): void {
     this.loadReservations();
+    this.userInfo();
+  }
+
+  userInfo(): void {
+    this.usersService.userInfo().subscribe({
+      next: (data: any) => {
+        this.isAdmin = data.isAdmin || false;
+      },
+      error: () => {
+        this.isAdmin = false;
+      },
+    });
   }
 
   loadReservations(): void {

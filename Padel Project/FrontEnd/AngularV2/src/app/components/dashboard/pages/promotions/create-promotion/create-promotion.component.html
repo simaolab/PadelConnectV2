@@ -11,7 +11,7 @@
       </p>
     </div>
   </div>
-  
+
   <card-form>
     <form class="form-show">
       <div class="user-container-info">
@@ -46,10 +46,10 @@
                     <i class="ri-discount-percent-line"></i>
                     <label for="discount">Desconto</label>
                   </div>
-                  <input type="text" name="discount" 
+                  <input type="text" name="discount"
                   (input)="formatDiscount($event)"
                   placeholder="Percentagem de desconto"
-                  [value]="promotionObj.discount || ''" 
+                  [value]="promotionObj.discount || ''"
                   maxlength="5">
                   <small *ngIf="formErrors['discount']" class="small-error">{{ formErrors['discount'] }}</small>
                 </div>
@@ -70,10 +70,10 @@
                       <i class="ri-money-euro-circle-line"></i>
                       <label for="min_spend">Mínimo Gasto</label>
                     </div>
-                    <input type="text" name="min_spend" 
+                    <input type="text" name="min_spend"
                     (input)="formatMinSpend($event)"
                     placeholder="Valor mínimo a gastar"
-                    [value]="promotionObj.min_spend === 1 ? '' : promotionObj.min_spend" 
+                    [value]="promotionObj.min_spend === 1 ? '' : promotionObj.min_spend"
                     maxlength="6">
                     <small *ngIf="formErrors['min_spend']" class="small-error">{{ formErrors['min_spend'] }}</small>
                 </div>
@@ -98,7 +98,7 @@
                 </div>
               </div>
         </div>
-        
+
       <div class="user-container-info">
         <div class="container-description">
             <p class="description-text">Informações Visualização</p>
@@ -120,7 +120,7 @@
                         (change)="toggleGeneric($event)"
                         [checked]="promotionObj.generic === 1"
                         class="input-toggle">
-  
+
                       <div class="display">
                         <label class="toggle" for="genericSwitch">
                           <div class="circle">
@@ -145,7 +145,7 @@
                         (change)="toggleNewUsers($event)"
                         [checked]="promotionObj.for_new_users === 1"
                         class="input-toggle">
-  
+
                       <div class="display">
                         <label class="toggle" for="newUsersSwitch">
                           <div class="circle">
@@ -170,7 +170,7 @@
                         (change)="toggleInactiveUsers($event)"
                         [checked]="promotionObj.for_inactive_users === 1"
                         class="input-toggle">
-  
+
                       <div class="display">
                         <label class="toggle" for="inactiveUsersSwitch">
                           <div class="circle">
@@ -195,7 +195,7 @@
                         (change)="toggleVisibility($event)"
                         [checked]="promotionObj.active === 1"
                         class="input-toggle">
-  
+
                       <div class="display">
                         <label class="toggle" for="visibilitySwitch">
                           <div class="circle">
@@ -217,5 +217,4 @@
       </div>
     </form>
   </card-form>
-  
-  
+
