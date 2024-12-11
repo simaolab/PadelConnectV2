@@ -12,6 +12,11 @@
     transition: none !important;
 }
 
+.errors {
+  display: flex;
+  justify-content: start;
+}
+
 .container {
     position: relative;
     width: 850px;

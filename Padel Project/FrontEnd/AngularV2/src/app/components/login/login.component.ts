@@ -39,6 +39,8 @@ export class LoginComponent {
     password_confirmation: ''
   };
 
+  formErrors: { [key: string]: string } = {};
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -93,11 +95,19 @@ export class LoginComponent {
         }
       },
       error: (err) => {
-        const errorMessage = err.error?.message;
-        this.modalComponent?.showModal(
-          'Erro',
-          errorMessage
-        );
+        // const errorMessage = err.error?.message;
+        // this.modalComponent?.showModal(
+        //   'Erro',
+        //   errorMessage
+        // );
+
+        this.formErrors = {};
+        const errorDetails = err.error?.['error(s)'] || {};
+          for (const court in errorDetails) {
+            if (errorDetails.hasOwnProperty(court)) {
+              this.formErrors[court] = errorDetails[court][0];
+            }
+          }
       }
     });
   }

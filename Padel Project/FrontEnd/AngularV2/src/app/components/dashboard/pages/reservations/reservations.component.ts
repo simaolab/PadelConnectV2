@@ -30,7 +30,7 @@ export class ReservationsComponent {
   isLoading = true;
   showModal: boolean = false;
   selectedReservation: any = null;
-  cancelReason: string = '';
+  reason: string = '';
   isAdmin: boolean = false;
 
   ngOnInit(): void {
@@ -65,22 +65,23 @@ export class ReservationsComponent {
     });
   }
 
-  // Abre o modal para confirmar cancelamento
   openModal(reservation: any): void {
     this.selectedReservation = reservation;
-    this.cancelReason = ''; // Limpa o motivo do cancelamento
+    this.reason = '';
     this.showModal = true;
   }
 
-  // Fecha o modal
   closeModal(): void {
     this.showModal = false;
     this.selectedReservation = null;
-    this.cancelReason = '';
+    this.reason = '';
   }
 
-  // Função original ajustada para enviar a razão do cancelamento
   deleteReservation(reservation_id: number, reason: string | null = null): void {
+    if (!reason) {
+      reason = null;
+    }
+
     this.reservationsService.delete(reservation_id, reason).subscribe({
       next: (res: any) => {
         if (res.status === 'success') {
@@ -88,6 +89,7 @@ export class ReservationsComponent {
             (reservation) => reservation.id !== reservation_id
           );
           this.dashboardComponent.showModal('Sucesso', res.message);
+          console.log(reason)
           this.closeModal(); // Fecha o modal
         }
       },
@@ -100,10 +102,9 @@ export class ReservationsComponent {
     });
   }
 
-  // Submete o cancelamento (chama o método original com reason)
   submitCancel(): void {
     if (this.selectedReservation) {
-      this.deleteReservation(this.selectedReservation.id, this.cancelReason || null);
+      this.deleteReservation(this.selectedReservation.id, this.reason || null);
     }
   }
 }

@@ -57,17 +57,26 @@
       name="email" [(ngModel)]="registerObj.email">
     <i class='bx bx-user'></i>
   </div>
+  <div class="errors">
+    <small *ngIf="formErrors['email']" class="small-error">{{ formErrors['email'] }}</small>
+  </div>
 
   <div class="input-box">
     <input type="text" placeholder="username" required
       name="username" [(ngModel)]="registerObj.username">
     <i class='bx bx-user'></i>
   </div>
+  <div class="errors">
+    <small *ngIf="formErrors['username']" class="small-error">{{ formErrors['username'] }}</small>
+  </div>
 
   <div class="input-box">
     <input type="number" placeholder="NIF" required
       name="nif" [(ngModel)]="registerObj.nif">
     <i class='bx bx-lock'></i>
+  </div>
+  <div class="errors">
+    <small *ngIf="formErrors['nif']" class="small-error">{{ formErrors['nif'] }}</small>
   </div>
 
   <div class="box-btn">
@@ -88,17 +97,26 @@
       name="password" [(ngModel)]="registerObj.birthday">
     <i class='bx bx-lock'></i>
   </div>
+  <div class="errors">
+    <small *ngIf="formErrors['birthday']" class="small-error">{{ formErrors['birthday'] }}</small>
+  </div>
 
   <div class="input-box">
     <input type="password" placeholder="password" required
       name="password" [(ngModel)]="registerObj.password">
     <i class='bx bx-lock'></i>
   </div>
+  <div class="errors">
+    <small *ngIf="formErrors['password']" class="small-error">{{ formErrors['password'] }}</small>
+  </div>
 
   <div class="input-box">
     <input type="password" placeholder="confirm password" required
     name="password_confirmation" [(ngModel)]="registerObj.password_confirmation">
     <i class='bx bx-lock'></i>
+  </div>
+  <div class="errors">
+    <small *ngIf="formErrors['password_confirmation']" class="small-error">{{ formErrors['password_confirmation'] }}</small>
   </div>
 
   <div class="box-btn sign-up">

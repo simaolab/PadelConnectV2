@@ -55,11 +55,11 @@ export class ReservationsService {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    const body = { reason };
-
-    return this.http.delete<any>(`${ApiRoutes.reservations}${reservation_id}`, { headers, body });
+    return this.http.delete<any>(`${ApiRoutes.reservations}${reservation_id}`, {
+      headers,
+      body: { reason },
+    });
   }
-
 
   private formatDate(date: string): string {
     const d = new Date(date);
