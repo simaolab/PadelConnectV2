@@ -468,7 +468,9 @@ textarea:focus {
   }
 
   .div-form-group{
-    width: 85vw;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 
   .payment-container {
@@ -518,23 +520,51 @@ textarea:focus {
 
   .client-data,
   .payment-container {
-      width: 90%;
+      width: 85%;
+  }
+
+  .div-form-group{
+    display: flex;
+    flex-direction: column;
   }
 
   .form-group {
-      flex-direction: column;
-      width: 100%;
+    flex-direction: column;
+    gap: 20px;
   }
 
-  .card-selection {
-      flex-direction: column;
-      gap: 20px;
-  }
+  .form-group input {
+    width: 80vw;
+}
 
-  .section-total-price,
-  .section-things {
-      flex-direction: column;
-  }
+.card-selection{
+ display: flex;
+  flex-direction: row;
+  gap: 70px;
+}
+
+.card-option .box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px; /* Largura fixa para manter todas as opções iguais */
+  height: 110px; /* Altura fixa para garantir tamanho uniforme */
+  padding: 20px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+
+.card-option .box i {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.card-option .box span {
+  font-size: 18px;
+  font-weight: 500;
+}
 
   .progress-bar .circle {
     display: flex;
@@ -571,9 +601,7 @@ textarea:focus {
       flex-direction: row; /* Mantém os passos em linha */
   }
 
-  .form-group input {
-      width: 100%; /* Mantém os inputs em 100% de largura */
-  }
+ 
 
   .payment-form {
       flex-direction: column;

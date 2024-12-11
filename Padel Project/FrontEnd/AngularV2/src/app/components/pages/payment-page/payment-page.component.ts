@@ -55,9 +55,9 @@ export class PaymentPageComponent {
 
   clientObj = {
     name: '',
-    nif: 0,
+    nif: '',
     birthday: '',
-    contact: 0
+    contact: ''
   }
 
   constructor(
@@ -70,11 +70,6 @@ export class PaymentPageComponent {
     this.loadCartItems();
     this.userInfo();
   }
-
- 
-
- 
-
 
   loadCartItems() {
     const cartData = this.cookieService.get('cart');
@@ -124,12 +119,18 @@ export class PaymentPageComponent {
       })
     ).subscribe({
       next: (clientRes: any) => {
+        // Preencher o objeto clientObj com as informações do utilizador
         this.clientObj = {
           name: `${clientRes.client.first_name} ${clientRes.client.last_name}`,
           contact: clientRes.client.contact,
           nif: clientRes.client.user.nif,
-          birthday: clientRes.client.user.birthday,
+          birthday: this.formatDate(clientRes.client.user.birthday),
         };
+  
+        // Preencher os detalhes do pagamento com as informações do utilizador
+        this.paymentDetails.cardHolderName = this.clientObj.name;
+        // Supondo que outras informações como o NIF ou contacto possam ser usadas no processo de pagamento
+  
       },
       error: (err) => {
         const message = err.error?.message;
@@ -140,7 +141,14 @@ export class PaymentPageComponent {
       }
     });
   }
-
+  
+  formatDate(date: string): string {
+    if (!date) return '';  // Caso a data seja inválida
+  
+    const [day, month, year] = date.split('/');
+    return `${year}-${month}-${day}`;
+  }
+  
   finalizePayment() {
     this.showPopup();
 
