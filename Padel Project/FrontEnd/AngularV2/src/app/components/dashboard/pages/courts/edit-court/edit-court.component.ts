@@ -280,11 +280,11 @@ export class EditCourtComponent {
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
-      const file = input.files[0];
-      this.uploadedImage = file; // Salvar a imagem selecionada
-      this.currentImagePath = URL.createObjectURL(file); // Pre-visualização da imagem
+      const file = input.files[0];      
+      this.uploadedImage = file;
+      this.currentImagePath = URL.createObjectURL(file);
     } else {
-      this.uploadedImage = null; // Caso o usuário desmarque a imagem
+      this.uploadedImage = null;
       this.currentImagePath = this.defaultImagePath;
     }
   }
