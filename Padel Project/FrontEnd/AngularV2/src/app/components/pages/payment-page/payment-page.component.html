@@ -25,14 +25,16 @@
       <div class="form-group">
         <input
           type="text"
-          name="name"
-          ngModel
+          id="name" 
+          name="name" 
+          [(ngModel)]="clientObj.name"
           placeholder="Nome"
           required minlength="3">
         <input
           type="date"
-          name="dob"
-          ngModel
+          id="dob" 
+          name="dob" 
+          [(ngModel)]="clientObj.birthday"
           required
           [max]="maxDate"
           placeholder="Data de Nascimento">
@@ -40,8 +42,9 @@
       <div class="form-group">
         <input
           type="tel"
-          name="contact"
-          ngModel
+          id="contact" 
+          name="contact" 
+          [(ngModel)]="clientObj.contact"
           placeholder="Contacto"
           required
           maxlength="9"
@@ -51,7 +54,9 @@
         <input
           type="text"
           name="nif"
-          ngModel placeholder="NIF"
+          id="nif"
+          [(ngModel)]="clientObj.nif"
+          placeholder="NIF"
           required
           maxlength="9"
           pattern="[0-9]{9}"
@@ -67,51 +72,66 @@
       Confirmar Dados
     </button>
   </form>
+<!---->
 
+<!---->
   <!-- Formulário Dados de Pagamento -->
-  <form #paymentForm="ngForm" *ngIf="step === 2" (ngSubmit)="nextStep($event, paymentForm)" novalidate class="payment-container">
+  <form #customerForm="ngForm" *ngIf="step === 2" (ngSubmit)="nextStep($event, customerForm)"  novalidate class="payment-container">
     <h2>Dados de Pagamento:</h2>
-
+  
     <!-- Seção de seleção do cartão -->
     <div [(ngModel)]="paymentDetails.paymentMethod" class="card-selection">
-      <label for="mastercard1">
+      <label class="card-option" for="mastercard1">
         <input
           type="radio"
           id="mastercard1"
-          name="cardType"
-          ngModel
-          value="mastercard1"
-          required> MasterCard 1
+          name="paymentMethod"  
+          value="creditCard"
+          required
+          [(ngModel)]="selectedOption"
+          >
+        <div class="box">
+          <i class='bx bxs-credit-card'></i>
+          <span>Cartão de Crédito</span>
+        </div>
       </label>
-      <label for="mastercard2">
+    
+      <label class="card-option" for="cash">
         <input
           type="radio"
-          id="mastercard2"
-          name="cardType"
-          ngModel
-          value="mastercard2"
-          required> MasterCard 2
-      </label>
-      <label for="mastercard3">
-        <input
-          type="radio"
-          id="mastercard3"
-          name="cardType"
-          ngModel
-          value="mastercard3"
-          required> MasterCard 3
+          id="cash"
+          name="paymentMethod"  
+          value="cash"
+          required
+          [(ngModel)]="selectedOption"
+          >
+        <div class="box">
+          <i class='bx bx-money'></i>
+          <span>Dinheiro</span>
+        </div>
       </label>
     </div>
 
+     <!-- Mensagem quando o pagamento com cartão de crédito não estiver disponível -->
+  <div *ngIf="selectedOption === 'creditCard'" class="payment-message">
+    <p class="warning-text">Este método de pagamento ainda não está disponível.</p>
+    <br>
+  </div>
+
+  <!-- Mensagem quando o pagamento com dinheiro for selecionado -->
+  <div *ngIf="selectedOption === 'cash'" class="payment-message">
+    <p class="info-text">O pagamento será efetuado no ato.</p>
+  </div>
+
     <!-- Formulário de pagamento -->
-    <div class="payment-form">
-      <div class="input-group full-width">
+    <div class="payment-form"  *ngIf="selectedOption === 'creditCard'">
+      <div class="input-group full-width" >
         <input
           type="text"
-          name="cardNumber"
+          name="cardNumber" 
+          id="cardNumber"
           ngModel placeholder="Número do Cartão"
-          [(ngModel)]="paymentDetails.cardNumber"
-          required
+          disabled="true"
           maxlength="19"
           (input)="formatCardNumber($event)"
           pattern="\d{4}-\d{4}-\d{4}-\d{4}"
@@ -121,18 +141,18 @@
         <input
           type="text"
           name="cardholderName"
-          ngModel id="cardholder-name"
-          [(ngModel)]="paymentDetails.cardHolderName"
+          id = "cardholderName"
+          disabled="true"
           placeholder="Nome Titular"
-          required>
+         >
       </div>
       <div class="input-group third-width">
         <input
           type="text"
           name="cvv"
+          id="cvv"
           ngModel placeholder="CVV"
-          [(ngModel)]="paymentDetails.cvv"
-          required maxlength="3"
+          disabled="true"
           pattern="\d{3}"
           title="CVV deve ter 3 dígitos"
           (input)="validateCVV($event)">
@@ -141,10 +161,10 @@
         <input
           type="text"
           name="expiryDate"
+          id="expiryDate"
           ngModel
-          [(ngModel)]="paymentDetails.cardExpiry"
           placeholder="Mês/Ano"
-          required
+          disabled="true"
           maxlength="5"
           (input)="formatExpiryDate($event)"
           pattern="\d{2}/\d{2}"
@@ -156,17 +176,17 @@
     <div class="total-section">
       <div *ngFor="let item of cartItems" class="section-things">
         <p>{{ item.name }} ({{ item.totalHours }} horas)</p>
-        <p [(ngModel)]="paymentDetails.totalAmount">{{ item.pricePerHour | currency }}</p>
+        <p [(ngModel)]="paymentDetails.totalAmount">{{ item.pricePerHour }} €</p>
       </div>
 
       <!-- Exibindo o preço total -->
       <div class="section-total-price">
         <p class="text-payment">Total:</p>
-        <p ><strong>{{ totalPrice | currency }}</strong></p>
+        <p ><strong>{{ totalPrice }} €</strong></p>
       </div>
     </div>
 
-    <button (click)="submitStripePayment()" class="confirm-btn" type="submit">Confirmar Pagamento</button>
+    <button (click)="nextStep($event, customerForm)" class="confirm-btn" type="submit">Confirmar Pagamento</button>
   </form>
 
   <!-- Confirmado com Sucesso -->

@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
-use App\Http\Controllers\Admin\NationalityController;
+use App\Models\Nationality;
+use Exception;
 
 class ClientController extends Controller
 {
@@ -89,7 +90,7 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateClientRequest $request, $clientId)
+	/**public function update(UpdateClientRequest $request, $clientId)
     {
         //Search for the Client
         $client = Client::find($clientId);
@@ -106,7 +107,46 @@ class ClientController extends Controller
                 'message' => 'Cliente '.$client->user->username.' atualizado com sucesso!'
             ], 200);
         }
+    }*/
+
+    public function update(UpdateClientRequest $request, $clientId)
+{
+    // Search for the customer
+    $client = Client::find($clientId);
+
+    // If the client doesn't exist, it returns an error
+    if (!$client) {
+        return response()->json(
+            [
+                'message' => 'Cliente não foi encontrado!'
+            ], 404
+        );
     }
+
+    // Get the validated data from the request
+    $data = $request->validated();
+
+    // Check that the nationality has been provided
+    if (isset($data['nationality_id'])) {
+        // Check if the nationality exists in the nationalities table
+        $nationality = Nationality::find($data['nationality_id']);
+        if (!$nationality) {
+            return response()->json([
+                'message' => 'A nacionalidade selecionada não existe.'
+            ], 400);
+        }
+    }
+
+    // Update the client with validated data, including nationality
+    $client->update($data);
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Cliente ' . $client->user->username . ' atualizado com sucesso!'
+    ], 200);
+}
+
+
 
     /**
      * Remove the specified resource from storage.

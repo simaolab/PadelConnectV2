@@ -6,18 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreFieldRequest;
 use App\Http\Requests\UpdateFieldRequest;
 use App\Models\Field;
+use App\Models\Company;
+use Illuminate\Support\Facades\DB;
+
 
 class FieldController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Public index: accessible by all roles, returns all fields without restrictions.
      */
-    public function index()
+    public function publicIndex()
     {
         //Try to get all Fields from table Field
         try
         {
-            $fields = Field::with('company')->get();
+            $fields = Field::with('company', 'schedules')
+              ->whereNotIn('status', ['inativo', 'indisponivel'])
+              ->get();
+
             // If table Field does not have any data echo a message, else show data
             if ($fields->isEmpty()) { return response()->json(
                 [
@@ -39,6 +45,54 @@ class FieldController extends Controller
     }
 
     /**
+     * Role-based index: accessible with restrictions based on user role.
+     */
+    public function roleBasedIndex()
+    {
+        try {
+            // Get the authenticated user
+            $user = auth()->user();
+
+            if ($user->role_id === 1) {
+                // Admin: Returns all fields
+                $fields = Field::with('company', 'schedules')->get();
+            } elseif ($user->role_id === 2) {
+                // Company: Returns the fields of the company associated with the user
+                $company = Company::where('user_id', $user->id)->first();
+
+                // Check if the user is associated with a company
+                if (!$company) {
+                    return response()->json(['message' => 'Usuário não está associado a nenhuma empresa.'], 404);
+                }
+
+                // Get the fields associated with the company
+                $fields = Field::where('company_id', $company->id)->with('company', 'schedules')->get();
+            } else {
+                // Other roles: Returns an empty collection or an access error
+                $fields = collect(); // Or return an error: return response()->json([‘message’ => ‘Unauthorised access’], 403);
+            }
+
+            // Check if there are fields available for the user's role
+            if ($fields->isEmpty()) {
+                return response()->json([
+                    'message' => 'Não há campos disponíveis para o seu papel.',
+                    'fields' => []
+                ], 200);
+            }
+
+            // Return the fields found
+            return response()->json([
+                'fields' => $fields
+            ], 200);
+
+        } catch (\Exception $exception) {
+            return response()->json(['error' => $exception->getMessage()], 500);
+        }
+    }
+
+
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -50,16 +104,16 @@ class FieldController extends Controller
      * Store a newly created resource in storage.
      */
 	public function store(StoreFieldRequest $request)
-    {
-          // Validação dos dados recebidos
+      {
+          // Validation of received data
           $validated = $request->validated();
 
           $filePath = null;
           if ($request->hasFile('file_path')) {
-              $filePath = $this->uploadFile($request->file('file_path')); // Chama a função de upload
+              $filePath = $this->uploadFile($request->file('file_path')); // Calls the upload function
           }
 
-          // Criação do Field usando Eloquent (com o método create())
+          // Field creation using Eloquent (with the create() method)
           $field = Field::create([
               'name' => $validated['name'],
               'price_hour' => $validated['price_hour'],
@@ -75,13 +129,13 @@ class FieldController extends Controller
               'file_path' => $filePath
           ]);
 
-          // Agora que o Field foi criado, obtemos o ID do campo
+          // Now that the Field has been created, we get the field ID
           $fieldId = $field->id;
             if (!isset($validated['schedules'])) {
           		return response()->json(['error' => 'Horários não foram fornecidos.'], 400);
       		}
 
-          // Define horários para os dias úteis (segunda a sexta-feira)
+          // Define working hours (Monday to Friday)
           $weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
           foreach ($weekdays as $day) {
               DB::table('field_schedule')->updateOrInsert(
@@ -95,7 +149,7 @@ class FieldController extends Controller
               );
           }
 
-          // Define horário para sábado
+          // Set the schedule for Saturday
           DB::table('field_schedule')->updateOrInsert(
               ['field_id' => $fieldId, 'day_of_week' => 'saturday'],
               [
@@ -106,7 +160,7 @@ class FieldController extends Controller
               ]
           );
 
-          // Define horário para domingo
+          // Set the schedule for Sunday
           DB::table('field_schedule')->updateOrInsert(
               ['field_id' => $fieldId, 'day_of_week' => 'sunday'],
               [
@@ -118,16 +172,12 @@ class FieldController extends Controller
           );
 
           return response()->json([
-            'status' => 'success',
-            'message' => 'Campo e horários criados com sucesso!']);
-    }
+                   'status' => 'success',
+            	   'message' => 'Campo e horários criados com sucesso!']);
+      }
 
-    private function uploadFile($file)
-    {
-      $filePath = $file->store('fields', 'public');
 
-      return $filePath;
-    }
+
 
     /**
      * Display the specified resource.
@@ -140,10 +190,10 @@ class FieldController extends Controller
             return response()->json(['error' => 'Campo não encontrado'], 404);
         }
 
-        // Pegando os horários
+        // Getting the schedules
         $schedules = $field->schedules;
 
-        // Filtrando horários
+        // Filtering schedules
         $weekdays = $schedules->whereIn('day_of_week', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'])
             ->map(function ($schedule) {
                 return [
@@ -156,7 +206,7 @@ class FieldController extends Controller
         $saturday = $schedules->where('day_of_week', 'saturday')->first();
         $sunday = $schedules->where('day_of_week', 'sunday')->first();
 
-        // Organizando a resposta
+        // Organising the response
         $response = [
             'field' => [
                 'id' => $field->id,
@@ -195,6 +245,7 @@ class FieldController extends Controller
         return response()->json($response);
     }
 
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -203,32 +254,39 @@ class FieldController extends Controller
         //Not used, only for view
     }
 
+
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateFieldRequest $request, $fieldId)
     {
         try {
-
-            // Buscar o campo pelo ID
+            // Search the field by ID
             $field = Field::find($fieldId);
 
             if (!$field) {
                 return response()->json([
-                    'message' => 'Campo não foi encontrado!'
+                    'status' => 'error',
+                    'message' => 'Campo não encontrado!',
                 ], 404);
             }
 
-            // Validar os dados enviados
+            // Validate the data sent
             $validated = $request->validated();
 
-            // Verificar se há arquivo para upload
-            $filePath = $field->file_path;
-            if ($request->hasFile('file_path')) {
-                $filePath = $this->uploadFile($request->file('file_path'));
+            // Handle file upload
+			$filePath = $field->file_path;
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                // Delete the old image, if necessary
+                if ($field->file_path && Storage::disk('public')->exists($field->file_path)) {
+                    Storage::disk('public')->delete($field->file_path);
+                }
+
+                // Store the new image
+                $filePath = $request->file('image')->store('images', 'public'); // Stores the image in the ‘images’ directory of ‘public’
             }
 
-            // Atualizar os dados do campo
+            // Update the field data
             $field->update([
                 'name' => $validated['name'],
                 'price_hour' => $validated['price_hour'],
@@ -241,16 +299,16 @@ class FieldController extends Controller
                 'rent_equipment' => $validated['rent_equipment'],
                 'status' => $validated['status'],
                 'last_maintenance' => $validated['last_maintenance'],
-                'file_path' => $filePath,
+                'file_path' => $filePath, // Update the file path, if any
             ]);
 
-            // Atualizar os horários fornecidos
+            // Update the schedules provided
             $schedules = $validated['schedules'];
 
-            // Remover entradas anteriores para evitar duplicação
+            // Remove previous timetable entries to avoid duplication
             DB::table('field_schedule')->where('field_id', $fieldId)->delete();
 
-            // Define horários para os dias úteis (segunda a sexta-feira)
+            // Define working hours (Monday to Friday)
             $weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
             foreach ($weekdays as $day) {
                 DB::table('field_schedule')->insert([
@@ -264,7 +322,7 @@ class FieldController extends Controller
                 ]);
             }
 
-            // Define horário para sábado
+            // Set the schedule for Saturday
             DB::table('field_schedule')->insert([
                 'field_id' => $fieldId,
                 'day_of_week' => 'saturday',
@@ -275,7 +333,7 @@ class FieldController extends Controller
                 'updated_at' => now(),
             ]);
 
-            // Define horário para domingo
+            // Set the schedule for Sunday
             DB::table('field_schedule')->insert([
                 'field_id' => $fieldId,
                 'day_of_week' => 'sunday',
@@ -286,59 +344,66 @@ class FieldController extends Controller
                 'updated_at' => now(),
             ]);
 
+            // Return success response with updated data
             return response()->json([
                 'status' => 'success',
                 'message' => 'Campo e horários atualizados com sucesso!',
-                'field' => $field->load('schedules')
+                'field' => $field->load('schedules') // Returns the field with the updated times
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Erro ao atualizar o campo!',
-                'error' => $e->getMessage()
             ], 500);
         }
     }
+
+
+
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($fieldId)
     {
-        // Encontrar o campo
         $field = Field::find($fieldId);
 
-        // Se o campo não existir, retorna mensagem de erro
         if (!$field) {
             return response()->json([
                 'message' => 'Campo não foi encontrado!'
             ], 404);
         }
 
-        // Verifica se o campo tem um arquivo de imagem e tenta excluí-lo
+        // Checks if the field has an image file and tries to delete it
         if ($field->file_path) {
-            // Gerar o caminho absoluto do arquivo para exclusão
+            // Generate the absolute path of the file to delete
             $filePath = storage_path('app/public/' . $field->file_path);
 
             try {
-                // Verifica se o arquivo existe antes de tentar excluí-lo
+                // Checks if the file exists before trying to delete it
                 if (file_exists($filePath)) {
-                    unlink($filePath); // Exclui o arquivo
+                    unlink($filePath); // Delete the file
                 }
             } catch (\Exception $e) {
-                // Loga o erro e continua com a exclusão do campo
-                \Log::error('Erro ao excluir imagem: ' . $e->getMessage());
+                // Optionally, return a message in the response
+                return response()->json([
+                    'message' => 'Ocorreu um erro ao tentar excluir o arquivo.',
+                    'error' => $e->getMessage()
+                ], 500);
             }
         }
 
-        // Exclui o campo do banco de dados
+        // Delete the field from the database
         $field->delete();
 
-        // Retorna uma resposta de sucesso com o nome do campo
+        // Returns a success response with the field name
         return response()->json([
             'message' => 'Campo ' . $field->name . ' eliminado com sucesso!'
         ]);
     }
+
+
 
     /**
      * Search for any name
@@ -366,5 +431,21 @@ class FieldController extends Controller
             ], 500);
         }
     }
+
+        private function uploadFile($file)
+      {
+        $filePath = $file->store('fields', 'public');
+
+        return $filePath;
+      }
+
+      private function deleteOldFile($filePath)
+      {
+          // Check if the file exists and delete
+          $fullPath = storage_path('app/public/' . $filePath);
+          if (file_exists($fullPath)) {
+              unlink($fullPath);
+          }
+      }
 
 }

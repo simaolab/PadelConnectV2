@@ -62,7 +62,7 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $userId)
-    {      
+    {
         // Validate the request sent by the user
          $request->validate([
             'new_user'     => 'nullable|boolean',
@@ -86,7 +86,7 @@ class UserController extends Controller
         if ($request->has('user_blocked')) {
             $user->user_blocked = $request->input('user_blocked');
             if ($user->user_blocked) {
-            $user->blocked_at = now(); 
+            $user->blocked_at = now();
             } else {
                 $user->blocked_at = null;
             }
@@ -94,7 +94,7 @@ class UserController extends Controller
 
         // Update role
         if ($request->has('role_id')) {
-            $user->role_id = $request->input('role_id'); 
+            $user->role_id = $request->input('role_id');
         }
 
         // Save changes

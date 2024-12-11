@@ -39,7 +39,7 @@
 
 
         <div class="button-checkout">
-          <button class="btn checkout" routerLink="/payment">Checkout</button>
+          <button class="btn checkout" [disabled]="cartItems.length === 0" [ngClass]="{'disabled-btn': cartItems.length === 0}" routerLink="/payment">Checkout</button>
         </div>
       </div>
   </div>

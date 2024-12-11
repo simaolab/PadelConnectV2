@@ -24,9 +24,6 @@ export const ApiRoutes = {
   //NATIONALITIES
   nationalities: 'https://api.padelconnect.pt/api/nationalities/',
 
-  //PAYMENTS
-  payments: 'https://api.padelconnect.pt/api/payments/',
-
   //RESERVATIONS
   reservations: 'https://api.padelconnect.pt/api/reservations/',
   checkAvailability: 'https://api.padelconnect.pt/api/reservations/check-availability?',
