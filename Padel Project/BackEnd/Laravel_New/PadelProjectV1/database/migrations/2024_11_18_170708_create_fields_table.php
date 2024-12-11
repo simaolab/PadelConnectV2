@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('rent_equipment')->default(false);
             $table->string('status');
             $table->date('last_maintenance')->nullable();
+          	$table->string('file_path')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

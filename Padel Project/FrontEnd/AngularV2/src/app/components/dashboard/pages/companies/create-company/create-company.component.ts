@@ -74,7 +74,7 @@ export class CreateCompanyComponent {
 
     this.formErrors = {};
 
-    const regexAddressPort = /^[a-zA-ZÀ-ÿ0-9.,\-/\s]+$/;
+    const regexAddressPort = /^[a-zA-ZÀ-ÿ0-9.\-/\s]+$/;
     const localityRegex = /^[a-zA-ZÀ-ÿ\s\-]+$/;
     const postalCodeRegex = /^\d{4}-\d{3}$/;
 

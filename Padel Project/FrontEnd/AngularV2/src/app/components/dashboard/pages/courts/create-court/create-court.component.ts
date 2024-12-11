@@ -29,6 +29,8 @@ import { Court } from '../../../../../interfaces/court';
 
 export class CreateCourtComponent {
 
+  defaultImagePath: string = 'assets/images/default-image.jpg';
+  currentImagePath: string = this.defaultImagePath;
   todayDate: string = new Date().toISOString().split('T')[0];
   formErrors: { [key: string]: string } = {};
 
@@ -45,6 +47,11 @@ export class CreateCourtComponent {
     lockers: 0,
     rent_equipment: 0,
     file_path: null,
+    schedules: {
+      weekdays: { opening_time: '', closing_time: '', is_closed: 0},
+      saturday: { opening_time: '', closing_time: '', is_closed: 1}, 
+      sunday: { opening_time: '', closing_time: '', is_closed: 1},
+    }
   }
 
   serviceStates = {
@@ -78,18 +85,18 @@ export class CreateCourtComponent {
 
   companies: any[] = [];
 
-    constructor(
-      private router: Router,
-      private courtsService: CourtsService,
-      private dashboardComponent: DashboardComponent,
-      private companiesService: CompaniesService
-    ) {}
+  constructor(
+    private router: Router,
+    private courtsService: CourtsService,
+    private dashboardComponent: DashboardComponent,
+    private companiesService: CompaniesService
+  ) {}
 
-    ngOnInit(): void {
-      this.loadCompanies();
-    }
-
+  ngOnInit(): void {
+    this.loadCompanies();
+  }
     create() {
+      this.updateSchedules();
       this.courtsService.create(this.courtObj).subscribe({
         next: (res: any) => {
           if(res.status === 'success') {
@@ -104,86 +111,125 @@ export class CreateCourtComponent {
           }
         },
         error: (err: any) => {
-          this.formErrors = {};
-          const errorDetails = err.error?.['error(s)'] || {};
-
+        this.formErrors = {};
+        const errorDetails = err.error?.['error(s)'] || {};
           for (const court in errorDetails) {
             if (errorDetails.hasOwnProperty(court)) {
               this.formErrors[court] = errorDetails[court][0];
             }
           }
         }
-      })
-    }
-
-    onFileSelected(event: Event): void {
-      const input = event.target as HTMLInputElement;
-      if (input.files && input.files.length > 0) {
-        const file = input.files[0];
-        this.courtObj.file_path = file;
-      }
-    }
-
-    formatPriceHour(event: Event): void {
-      const input = event.target as HTMLInputElement;
-      let value = input.value;
-
-      value = value.replace(/[^0-9\.]/g, '');
-      if ((value.match(/\./g) || []).length > 1) {
-        value = value.replace(/\.$/, '');
-      }
-      if (value.length > 2 && !value.includes('.')) {
-        value = value.slice(0, 2) + '.' + value.slice(2);
-      }
-      if (value.includes('.')) {
-        const [integerPart, decimalPart] = value.split('.');
-        value = integerPart + '.' + (decimalPart.length > 2 ? decimalPart.substring(0, 2) : decimalPart);
-      }
-
-      input.value = value;
-      this.courtObj.price_hour = value ? parseFloat(value) : 0;
-    }
-
-    loadCompanies(): void {
-      this.companiesService.index().subscribe({
-        next: (data: any) => {
-          this.companies = data.companies;
-        },
-        error: (err: any) => {
-          console.error('Erro ao carregar empresas:', err);
-        }
       });
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      this.currentImagePath = URL.createObjectURL(file);
+      this.courtObj.file_path = file; 
+    } else {
+      this.currentImagePath = this.defaultImagePath;
+      this.courtObj.file_path = null;
+    }
+  }
+
+  formatPriceHour(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let value = input.value;
+
+    value = value.replace(/[^0-9\.]/g, '');
+    if ((value.match(/\./g) || []).length > 1) {
+      value = value.replace(/\.$/, '');
+    }
+    if (value.length > 2 && !value.includes('.')) {
+      value = value.slice(0, 2) + '.' + value.slice(2);
+    }
+    if (value.includes('.')) {
+      const [integerPart, decimalPart] = value.split('.');
+      value = integerPart + '.' + (decimalPart.length > 2 ? decimalPart.substring(0, 2) : decimalPart);
     }
 
-    onCompanySelected(company: any): void {
-      this.courtObj.company_id = company.id;
-    }
+    input.value = value;
+    this.courtObj.price_hour = value ? parseFloat(value) : 0;
+  }
 
-    onStatusSelected(selected: any): void {
-      this.courtObj.status = selected.value;
-    }
+  loadCompanies(): void {
+    this.companiesService.index().subscribe({
+      next: (data: any) => {
+        this.companies = data.companies;
+      },
+      error: (err: any) => {
+        console.error('Erro ao carregar empresas:', err);
+      }
+    });
+  }
 
-    onTypeFloorSelected(selected: any): void {
-      this.courtObj.type_floor = selected.value;
-    }
+  onCompanySelected(company: any): void {
+    this.courtObj.company_id = company.id;
+  }
 
-    toggleService(serviceKey: keyof typeof this.serviceStates): void {
-      this.serviceStates[serviceKey] = !this.serviceStates[serviceKey];
-      this.courtObj[serviceKey] = this.serviceStates[serviceKey] ? 1 : 0;
+  onStatusSelected(selected: any): void {
+    this.courtObj.status = selected.value;
+  }
 
-      this.serviceTexts[serviceKey] = this.serviceStates[serviceKey]
-        ? `Com ${this.getServiceName(serviceKey)}`
-        : `Sem ${this.getServiceName(serviceKey)}`;
-    }
+  onTypeFloorSelected(selected: any): void {
+    this.courtObj.type_floor = selected.value;
+  }
 
-    private getServiceName(serviceKey: string): string {
-      const names: { [key: string]: string } = {
-        illumination: 'Iluminação',
-        cover: 'Cobertura',
-        shower_room: 'Balneário',
-        lockers: 'Cacifo',
-        rent_equipment: 'Aluguer Equipamento',
-      };
-      return names[serviceKey] || serviceKey;
+  toggleService(serviceKey: keyof typeof this.serviceStates): void {
+    this.serviceStates[serviceKey] = !this.serviceStates[serviceKey];
+    this.courtObj[serviceKey] = this.serviceStates[serviceKey] ? 1 : 0;
+
+    this.serviceTexts[serviceKey] = this.serviceStates[serviceKey]
+      ? `Com ${this.getServiceName(serviceKey)}`
+      : `Sem ${this.getServiceName(serviceKey)}`;
+  }
+
+  private getServiceName(serviceKey: string): string {
+    const names: { [key: string]: string } = {
+      illumination: 'Iluminação',
+      cover: 'Cobertura',
+      shower_room: 'Balneário',
+      lockers: 'Cacifo',
+      rent_equipment: 'Aluguer Equipamento',
+    };
+    return names[serviceKey] || serviceKey;
+  }
+  
+  toggleSaturday(): void {
+    this.courtObj.schedules.saturday.is_closed = this.courtObj.schedules.saturday.is_closed === 0 ? 1 : 0;
+    if (this.courtObj.schedules.saturday.is_closed === 0) {
+      this.courtObj.schedules.saturday.opening_time = '';
+      this.courtObj.schedules.saturday.closing_time = '';
     }
+  }
+  
+  toggleSunday(): void {
+    this.courtObj.schedules.sunday.is_closed = this.courtObj.schedules.sunday.is_closed === 0 ? 1 : 0;
+    if (this.courtObj.schedules.sunday.is_closed === 0) {
+      this.courtObj.schedules.sunday.opening_time = '';
+      this.courtObj.schedules.sunday.closing_time = '';
+    }
+  }
+
+  updateSchedules() {
+    this.courtObj.schedules.weekdays = {
+      opening_time: this.courtObj.schedules.weekdays.opening_time || '',
+      closing_time: this.courtObj.schedules.weekdays.closing_time || '',
+      is_closed: this.courtObj.schedules.weekdays.is_closed,
+    };
+  
+    this.courtObj.schedules.saturday = {
+      opening_time: this.courtObj.schedules.saturday.opening_time || '',
+      closing_time: this.courtObj.schedules.saturday.closing_time || '',
+      is_closed: this.courtObj.schedules.saturday.is_closed,
+    };
+  
+    this.courtObj.schedules.sunday = {
+      opening_time: this.courtObj.schedules.sunday.opening_time || '',
+      closing_time: this.courtObj.schedules.sunday.closing_time || '',
+      is_closed: this.courtObj.schedules.sunday.is_closed,
+    };
+  }
 }

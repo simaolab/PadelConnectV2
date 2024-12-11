@@ -14,20 +14,20 @@
 
   <div class="tooltip-sidebar" *ngFor="let item of sidebarLinks">
     <link-sidebar
+      *ngIf="!item.allowedRoles || item.allowedRoles.includes(userRole)"
       [href]="item.href"
       [icon]="item.icon"
       [p]="item.label"
-      [isSidebarClosed]="isSidebarClosed"
-      *ngIf="!item.adminOnly || (item.adminOnly && isAdmin)">
+      [isSidebarClosed]="isSidebarClosed">
     </link-sidebar>
   </div>
 
-    <div class="logout-container">
-      <link-sidebar
-        icon="ri-logout-circle-r-line"
-        p="Logout"
-        (click)="logout()"
-        [isSidebarClosed]="isSidebarClosed">
-      </link-sidebar>
-    </div>
+  <div class="logout-container">
+    <link-sidebar
+      icon="ri-logout-circle-r-line"
+      p="Logout"
+      (click)="logout()"
+      [isSidebarClosed]="isSidebarClosed">
+    </link-sidebar>
+  </div>
 </div>

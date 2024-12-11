@@ -1,0 +1,54 @@
+<div class="page-info-action">
+  <div class="page-info">
+      <title-page pageText="Listagem de Cancelamentos"></title-page>
+      <p class="description-page">Aqui pode ver todas as reservas que foram canceladas associadas ao
+          <span>Padel Connect</span>
+      </p>
+  </div>
+</div>
+
+<div *ngIf="isLoading; else showCancelations" class="loading-screen">
+  <div class="spinner"></div>
+  <p class="loading">A carregar a lista de cancelamentos, por favor aguarde ...</p>
+</div>
+
+<ng-template #showCancelations>
+  <div *ngIf="cancellations.length > 0; else noCancellations">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th class="left">Reserva</th>
+            <th class="left">Razão</th>
+            <th class="left">Total Devolvido</th>
+            <th class="middle">Estado</th>
+            <th class="middle">Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cancellation of cancellations">
+            <td data-cell="Reserva" class="left">{{ cancellation.reservation_id }}</td>
+            <td data-cell="Razão" class="left">{{ cancellation.reason || 'N/A' }}</td>
+            <td data-cell="Total Devolvido" class="left">{{ cancellation.total_refunded }}€</td>
+            <td data-cell="Estado" class="middle">
+              <div class="status-wrapper">
+                <div [ngClass]="{
+                    'status-disponivel': cancellation.status === 'Concluída',
+                    'status-inativo': cancellation.status === 'pendente',
+                    'status-occupied': cancellation.status === 'Cancelada'
+                  }">
+                  {{ cancellation?.status }}
+                </div>
+              </div>
+            </td>
+            <td data-cell="Data" class="middle">{{ cancellation.cancellation_date }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #noCancellations>
+  <p class="no-cancellations">Não existe nenhuma reserva</p>
+</ng-template>

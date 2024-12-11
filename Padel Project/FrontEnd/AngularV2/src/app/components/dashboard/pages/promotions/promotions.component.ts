@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 
 import { AddButtonComponent } from '../../utilities/add-button/add-button.component';
 import { Promotion } from '../../../../interfaces/promotion';
+import { UsersService } from '../../../../services/users.service';
 
 @Component({
   selector: 'promotions',
@@ -26,15 +27,28 @@ export class PromotionsComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private promotionsService: PromotionsService,
-    private dashboardComponent: DashboardComponent
+    private dashboardComponent: DashboardComponent,
+    private usersService: UsersService
   ) {}
 
   promotions: any[] = [];
   isLoading = true;
-
+  isAdmin: boolean = false;
 
   ngOnInit(): void {
     this.loadPromotions();
+    this.userInfo();
+  }
+
+  userInfo(): void {
+    this.usersService.userInfo().subscribe({
+      next: (data: any) => {
+        this.isAdmin = data.isAdmin || false;
+      },
+      error: () => {
+        this.isAdmin = false;
+      },
+    });
   }
 
   loadPromotions(): void {
@@ -73,11 +87,11 @@ export class PromotionsComponent {
 
 
   togglePromotionField(promotion: any, field: string, event: Event): void {
-    
+
     event.preventDefault();
-    promotion.discount = parseInt(promotion.discount.replace('%', ''), 10); 
+    promotion.discount = parseInt(promotion.discount.replace('%', ''), 10);
     promotion[field] = promotion[field] === 1 ? 0 : 1;
-  
+
     if (field === 'for_new_users' || field === 'for_inactive_users') {
       if (promotion.for_new_users === 0 && promotion.for_inactive_users === 0) {
         promotion.generic = 1;
@@ -89,7 +103,7 @@ export class PromotionsComponent {
         promotion.active = 0;
       }
     }
-  
+
     this.promotionsService.update(promotion.id, promotion).subscribe({
       next: (res: any) => {
         const index = this.promotions.findIndex(p => p.id === promotion.id);
@@ -128,5 +142,5 @@ export class PromotionsComponent {
         this.dashboardComponent.showModal('Erro', message);
       }
     });
-  }  
+  }
 }

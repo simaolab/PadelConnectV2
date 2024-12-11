@@ -23,16 +23,28 @@ Route::name('api.')->group(function () {
     Route::get('/fields/search/{name?}', [FieldController::class, 'search']);
 });
 
+
 //With authentication
 Route::middleware('auth:api')->group(function () {
     Route::get('user', [AuthenticationController::class, 'userInfo']);
     Route::post('logout', [AuthenticationController::class, 'logout']);
     Route::put('user/update-password', [UserController::class, 'updatePassword']);
     Route::get('fields/{id}', [FieldController::class, 'show']);
-    Route::apiResource('reservations', ReservationController::class);
+
+    //Specific routes
+    Route::get('reservations/check-availability', [ReservationController::class, 'checkAvailability']);
+    Route::get('reservations/', [ReservationController::class, 'search']);
     Route::get('reservations/search/{reservation?}', [ReservationController::class, 'search']);
-    Route::get('/reservations/deleted', [ReservationController::class, 'indexDeleted']);
-    Route::apiResource('cancellations', CancellationController::class);
+
+    //Generic routes
+    Route::get('reservations/{reservationId}', [ReservationController::class, 'show']);
+    Route::apiResource('reservations', ReservationController::class)->except(['show']);
+
+  	Route::apiResource('cancellations', CancellationController::class);
+
+    Route::post('/cart/add', [ReservationController::class, 'addCart']);
+    Route::post('/cart/remove', [ReservationController::class, 'removeFromCart']);
+    Route::get('/cart/view', [ReservationController::class, 'viewCart']);
 
 
     // STRIPE ROUTES
@@ -83,8 +95,5 @@ Route::middleware('auth:api')->group(function () {
 
     Route::post('/payment/setup-intent', [PaymentController::class, 'createSetupIntent']);
     Route::post('/payment/process', [PaymentController::class, 'processPayment']);
-    
-});
 
-Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook'])
-    ->middleware('verify.stripe.signature');
+});

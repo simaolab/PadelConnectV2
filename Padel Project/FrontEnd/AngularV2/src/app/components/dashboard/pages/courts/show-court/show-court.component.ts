@@ -38,6 +38,12 @@ export class ShowCourtComponent {
     shower_rooms: 0,
     lockers: 0,
     rent_equipment: 0,
+    image: '',
+    schedules: {
+      weekdays: { opening_time: '', closing_time: ''},
+      saturday: { opening_time: '', closing_time: '', is_closed: 1}, 
+      sunday: { opening_time: '', closing_time: '', is_closed: 1},
+    },
   }
 
   court_id: number = 0;
@@ -54,12 +60,16 @@ export class ShowCourtComponent {
     this.showCourt();
   }
 
-  showCourt(): void {
-
+  showCourt(): void {      
       this.courtsService.show(this.court_id).subscribe({
         next: (court: any) => {
 
           const field = court.field;
+          const schedules = court.schedules;
+
+          console.log(schedules);
+          
+          const weekSchedule = this.getWeekdaySchedule(schedules.weekdays);
 
           this.courtObj = {
             name: field.name,
@@ -72,7 +82,13 @@ export class ShowCourtComponent {
             last_maintenance: field.last_maintenance,
             shower_rooms: field.shower_room,
             lockers: field.lockers,
-            rent_equipment: field.rent_equipment
+            rent_equipment: field.rent_equipment,
+            image: field.file_path ? field.file_path : 'assets/images/default-image.jpg',
+            schedules: {
+              weekdays: weekSchedule,
+              saturday: schedules.saturday,
+              sunday: schedules.sunday
+            },
           };
         },
         error: (err) => {
@@ -112,4 +128,23 @@ export class ShowCourtComponent {
       }
     });
   }
+
+  getWeekdaySchedule(weekdays: any): { opening_time: string; closing_time: string;} {
+
+    for (const day of weekdays) {
+      console.log();
+      if (
+        day.opening_time && 
+        day.closing_time
+      ) {
+        return {
+          opening_time: day.opening_time,
+          closing_time: day.closing_time,
+        };
+      }
+    }
+    // Retorna valores vazios caso nenhum dia válido seja encontrado
+    return { opening_time: '', closing_time: ''};
+  }
+  
 }

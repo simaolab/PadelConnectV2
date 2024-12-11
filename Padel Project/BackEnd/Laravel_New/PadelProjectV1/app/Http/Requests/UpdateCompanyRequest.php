@@ -22,35 +22,28 @@ class UpdateCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address' => 'required',
-            'name' => [
+            'address'               => 'required',
+            'name'                  => [
                 'required',
                 'min:2',
                 'max:30',
                 //The unique validation needs to ignore the role we are editing
                 //Rule is a class from FormRequest that allows to create your own rules
                 //This Rule is saying that the company im editing is unique, but I want to ignore this specific company
-                Rule::unique('companies')->ignore($this->route('company')),
+                Rule::unique('companies', 'name')->ignore($this->route('company')),
             ],
-            'nif'           => [
-                'required',
-                new NifValidationRule(),
-                Rule::unique('companies')->ignore($this->route('company')),
-            ],
-            'contact'           => [
+            'contact'               => [
                 'nullable',
                 'regex:/^(91|92|93|96|94|95)[0-9]{7}$/',
-                Rule::unique('companies')->ignore($this->route('company'))
+                Rule::unique('companies', 'contact')->ignore($this->route('company'))
             ],
-            'email' => [
+            'newsletter'            => 'nullable',
+            'user_email'            => [
+              	'required',
+            ],
+            'user_nif'              => [
                 'required',
-                'email',
-                //The unique validation needs to ignore the role we are editing
-                //Rule is a class from FormRequest that allows to create your own rules
-                //This Rule is saying that the company im editing is unique, but I want to ignore this specific company
-                Rule::unique('companies')->ignore($this->route('company')),
             ],
-            'newsletter' => 'nullable',
         ];
     }
 
@@ -58,22 +51,19 @@ class UpdateCompanyRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'address.required'   => 'A morada é um campo obrigatório.',
+            'address.required'      => 'A morada é um campo obrigatório.',
 
             'name.min'              => 'O nome da empresa tem de ter no mínimo 2 caractéres.',
             'name.max'              => 'O nome da empresa não pode ter mais do que 30 caractéres.',
             'name.unique'           => 'O nome da empresa já existe, use outro nome',
             'name.required'         => 'O nome da empresa é um campo obrigatório',
 
-            'nif.unique'            => 'O NIF inserido já se encontra associado a outra empresa.',
-            'nif.required'          => 'O NIF é um campo obrigatório',
-
             'contact.regex'         => 'O contacto tem de ser um contacto válido português.',
             'contact.unique'        => 'O contacto inserido já está associado a outro cliente.',
 
-            'email.email'           => 'Coloque um email válido (ex.: user@padelconnect.pt).',
-            'email.unique'          => 'O email inserido já está associado a outro cliente.',
-            'email.required'        => 'O email é um campo obrigatório.',
+            'user_email.email'      => 'Insira um email válido para o utilizador.',
+
+            'user_nif.required'     => 'O NIF é um campo obrigatório.',
         ];
     }
 

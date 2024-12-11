@@ -20,14 +20,15 @@ export class SidebarComponent implements OnInit {
   @Input() isSidebarClosed: boolean = false;
 
   isAdmin: boolean = false;
+  userRole: number = 0;
 
   sidebarLinks = [
-    { href: '/dashboard/reservations', icon: 'ri-list-check-2', label: 'Reservas', adminOnly: false },
-    { href: '/dashboard/companies', icon: 'ri-hotel-line', label: 'Empresas', adminOnly: true },
-    { href: '/dashboard/courts', icon: 'ri-input-field', label: 'Campos', adminOnly: true },
-    { href: '/dashboard/customers', icon: 'ri-group-line', label: 'Clientes', adminOnly: true },
-    { href: '/dashboard/promotions', icon: 'ri-percent-line', label: 'Promoções', adminOnly: false },
-    { href: '/dashboard/settings', icon: 'ri-user-settings-line', label: 'Definições', adminOnly: false },
+    { href: '/dashboard/reservations', icon: 'ri-list-check-2', label: 'Reservas', adminOnly: false, allowedRoles: [1, 2, 3] },
+    { href: '/dashboard/companies', icon: 'ri-hotel-line', label: 'Empresas', adminOnly: true, allowedRoles: [1] },
+    { href: '/dashboard/courts', icon: 'ri-input-field', label: 'Campos', adminOnly: true, allowedRoles: [1, 2] },
+    { href: '/dashboard/customers', icon: 'ri-group-line', label: 'Clientes', adminOnly: true, allowedRoles: [1] },
+    { href: '/dashboard/promotions', icon: 'ri-percent-line', label: 'Promoções', adminOnly: false, allowedRoles: [1, 2, 3] },
+    { href: '/dashboard/settings', icon: 'ri-user-settings-line', label: 'Definições', adminOnly: false,  allowedRoles: [1, 3] },
   ];
 
   constructor(
@@ -45,6 +46,7 @@ export class SidebarComponent implements OnInit {
     this.usersService.userInfo().subscribe({
       next: (data: any) => {
         this.isAdmin = data.isAdmin || false;
+        this.userRole = data.user.role.id;
       },
       error: () => {
         this.isAdmin = false;

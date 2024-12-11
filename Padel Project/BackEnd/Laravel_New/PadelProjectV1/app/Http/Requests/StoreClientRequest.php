@@ -20,18 +20,18 @@ class StoreClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name'        => 'nullable|string|max:50',
-            'last_name'         => 'nullable|string|max:50',
-            'gender'            => 'nullable|string|in:Male,Female,Other',
-            'contact'           => [
+            'first_name'            => 'nullable|string|max:50',
+            'last_name'             => 'nullable|string|max:50',
+            'gender'                => 'nullable|string|in:Male,Female,Other',
+            'contact'               => [
                 'nullable',
                 'regex:/^(91|92|93|96|94|95)[0-9]{7}$/',
                 'unique:clients,contact'
             ],
-            'nationality_id'    => 'nullable|exists:nationalities,id',
-            'newsletter'        => 'boolean',
-            'user_id'           => 'required|exists:users,id|unique:clients,user_id',
-            'address'           => 'nullable|string|max:100',
+            'nationality_id'        => 'nullable|exists:nationalities,id',
+            'newsletter'            => 'boolean',
+            'user_id'               => 'required|exists:users,id|unique:clients,user_id',
+            'address'               => 'nullable|string|max:100',
         ];
     }
 
@@ -54,7 +54,7 @@ class StoreClientRequest extends FormRequest
         //We need to use HttpResponse to break the current task execution and show the errors
         throw new HttpResponseException(response()->json([
             'message' => 'Erro ao criar o cliente:',
-            'errors' => $validator->errors()
+            'error(s)' => $validator->errors()
         ], 422));
     }
 }

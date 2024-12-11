@@ -17,10 +17,11 @@ class UpdatePaymentMethodRequest extends FormRequest
         return true;
     }
 
+    //Rules to update a Payment Method
     public function rules(): array
     {
         return [
-            'description' => [
+            'description'           => [
                 'required',
                 'string',
                 'max:50',

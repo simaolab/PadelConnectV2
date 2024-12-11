@@ -32,7 +32,7 @@ export class CustomersComponent {
   src: string = '../../../../../assets/images/icons/unauthorized.png'
 
   constructor(
-    private userService: UsersService,
+    private usersService: UsersService,
     private router: Router,
     private dashboardComponent: DashboardComponent,
   ) {}
@@ -42,7 +42,7 @@ export class CustomersComponent {
   }
 
   loadUsers(): void {
-    this.userService.index().subscribe({
+    this.usersService.index().subscribe({
       next: (data: any) => {
         setTimeout(() => {
           this.users = data;
@@ -75,7 +75,7 @@ export class CustomersComponent {
   }
 
   showUser(user_id: number) {
-    this.userService.show(user_id).subscribe({
+    this.usersService.show(user_id).subscribe({
       next: (data: any) => {
       },
       error: (err: any) => {

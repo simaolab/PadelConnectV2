@@ -392,6 +392,11 @@ input[type=number] {
   font-size: 12px;
 }
 
+.small-success {
+  color: var(--color-primary);
+  font-size: 12px;
+}
+
 .loading {
   font-size: 1.1rem;
   color: var(--color-primary);

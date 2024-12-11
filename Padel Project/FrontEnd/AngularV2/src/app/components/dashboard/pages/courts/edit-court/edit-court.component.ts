@@ -45,6 +45,11 @@ export class EditCourtComponent {
     lockers: 0,
     rent_equipment: 0,
     file_path: null,
+    schedules: {
+      weekdays: { opening_time: '', closing_time: '', is_closed: 0 },
+      saturday: { opening_time: '', closing_time: '', is_closed: 1 },
+      sunday: { opening_time: '', closing_time: '', is_closed: 1 },
+    }
   }
 
   serviceStates = {
@@ -80,6 +85,10 @@ export class EditCourtComponent {
 
   court_id: number = 0;
 
+  defaultImagePath: string = 'assets/images/default-image.jpg';
+  currentImagePath: string = this.defaultImagePath;
+  uploadedImage: File | null = null;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -95,11 +104,15 @@ export class EditCourtComponent {
   }
 
   loadCourt(): void {
-
     this.courtsService.show(this.court_id).subscribe({
       next: (court: any) => {
         const field = court.field;
         const formattedDate = this.convertToDateFormat(field.last_maintenance);
+
+        const weekdays = this.formatTimeFields(court.schedules?.weekdays?.[0] || {});
+        const saturday = this.formatTimeFields(court.schedules?.saturday || {});
+        const sunday = this.formatTimeFields(court.schedules?.sunday || {});
+
         this.courtObj = {
           name: field.name,
           company_id: field.company.id,
@@ -112,14 +125,20 @@ export class EditCourtComponent {
           shower_room: field.shower_room,
           lockers: field.lockers,
           rent_equipment: field.rent_equipment,
-          file_path: field.file_path
+          file_path: field.file_path,
+          schedules: {
+            weekdays: weekdays,
+            saturday: saturday,
+            sunday: sunday,
+          },
         };
+        
+        this.currentImagePath = field.file_path || this.defaultImagePath;        
       },
       error: (err) => {
-        const errorMessage = err?.error?.message
-
+        const errorMessage = err?.error?.message;
         this.dashboardComponent.showModal(
-          'Error',
+          'Erro',
           errorMessage,
           () => {
             this.router.navigate(['/dashboard/courts']);
@@ -129,9 +148,24 @@ export class EditCourtComponent {
     });
   }
 
+  formatTimeFields(schedule: any): any {
+    if (!schedule) return schedule;
+
+    const formatTime = (time: string | null): string => {
+      if (!time) return '';
+      const [hours, minutes] = time.split(':');
+      return `${hours}:${minutes}`;
+    };
+
+    return {
+      opening_time: formatTime(schedule.opening_time),
+      closing_time: formatTime(schedule.closing_time),
+      is_closed: schedule.is_closed ?? 0,
+    };
+  }
+
   convertToDateFormat(date: string): string {
     if (!date) return '';
-
     const [day, month, year] = date.split('/');
     return `${year}-${month}-${day}`;
   }
@@ -139,7 +173,7 @@ export class EditCourtComponent {
   editCourt(): void {
     this.courtsService.edit(this.courtObj, this.court_id).subscribe({
       next: (res: any) => {
-        if(res.status === 'success') {
+        if (res.status === 'success') {
           this.dashboardComponent.showModal(
             'Mensagem',
             res.message,
@@ -147,19 +181,21 @@ export class EditCourtComponent {
               this.router.navigate(['/dashboard/courts']);
             }
           );
-          this.formErrors = {}
         }
       },
-      error: (err: any) => {
+      error: (err) => {
         this.formErrors = {};
         const errorDetails = err.error?.['error(s)'] || {};
-        for (const company in errorDetails) {
-          if (errorDetails.hasOwnProperty(company)) {
-            this.formErrors[company] = errorDetails[company][0];
+
+        console.log(err);
+
+        for (const field in errorDetails) {
+          if (errorDetails.hasOwnProperty(field)) {
+            this.formErrors[field] = errorDetails[field][0];
           }
         }
       }
-    })
+    });
   }
 
   loadCompanies(): void {
@@ -183,6 +219,22 @@ export class EditCourtComponent {
 
   onTypeFloorSelected(selected: any): void {
     this.courtObj.type_floor = selected.value;
+  }
+
+  toggleSaturday(): void {
+    this.courtObj.schedules.saturday.is_closed = this.courtObj.schedules.saturday.is_closed === 0 ? 1 : 0;
+    if (this.courtObj.schedules.saturday.is_closed === 0) {
+      this.courtObj.schedules.saturday.opening_time = '';
+      this.courtObj.schedules.saturday.closing_time = '';
+    }
+  }
+
+  toggleSunday(): void {
+    this.courtObj.schedules.sunday.is_closed = this.courtObj.schedules.sunday.is_closed === 0 ? 1 : 0;
+    if (this.courtObj.schedules.sunday.is_closed === 0) {
+      this.courtObj.schedules.sunday.opening_time = '';
+      this.courtObj.schedules.sunday.closing_time = '';
+    }
   }
 
   toggleService(serviceKey: keyof typeof this.serviceStates): void {
@@ -223,5 +275,17 @@ export class EditCourtComponent {
       rent_equipment: 'Aluguer Equipamento',
     };
     return names[serviceKey] || serviceKey;
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      this.uploadedImage = file; // Salvar a imagem selecionada
+      this.currentImagePath = URL.createObjectURL(file); // Pre-visualização da imagem
+    } else {
+      this.uploadedImage = null; // Caso o usuário desmarque a imagem
+      this.currentImagePath = this.defaultImagePath;
+    }
   }
 }

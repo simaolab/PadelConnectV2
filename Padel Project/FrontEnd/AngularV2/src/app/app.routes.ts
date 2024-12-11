@@ -24,6 +24,7 @@ import { PromotionsComponent } from './components/dashboard/pages/promotions/pro
 import { CustomersComponent } from './components/dashboard/pages/customers/customers.component';
 import { SettingsComponent } from './components/dashboard/pages/settings/settings.component';
 import { DetailsPageComponent } from './components/pages/details-page/details-page.component';
+import { CancellationsComponent } from './components/dashboard/pages/cancellations/cancellations.component';
 
 //CRUD COMPANY
 import { CreateCompanyComponent } from './components/dashboard/pages/companies/create-company/create-company.component';
@@ -103,10 +104,10 @@ export const routes: Routes = [
       //CRUD PAGES
       { path: 'main', component: MainComponent },
       { path: 'reservations', component: ReservationsComponent, title: 'Dashboard - Reservas' },
+      { path: 'cancellations', component: CancellationsComponent, title: 'Dashboard - Cancelamentos'},
       { path: 'companies', component: CompaniesComponent, title: 'Dashboard - Empresas',
         canActivate: [roleGuard] },
-      { path: 'courts', component: CourtsComponent, title: 'Dashboard - Campos',
-        canActivate: [roleGuard] },
+      { path: 'courts', component: CourtsComponent, title: 'Dashboard - Campos'},
       { path: 'customers', component: CustomersComponent, title: 'Dashboard - Clientes',
         canActivate: [roleGuard] },
       { path: 'promotions', component: PromotionsComponent, title: 'Dashboard - Promoções' },

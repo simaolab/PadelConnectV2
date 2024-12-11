@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,6 +19,11 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent {
   @ViewChild(ModalComponent) modalComponent: ModalComponent | undefined;
+  @ViewChild('container', { static: false }) container: ElementRef | undefined;
+  @ViewChild('step1', { static: false }) step1: ElementRef | undefined;
+  @ViewChild('step2', { static: false }) step2: ElementRef | undefined;
+  @ViewChild('registerBtn', { static: false }) registerBtn: ElementRef | undefined;
+  @ViewChild('loginBtn', { static: false }) loginBtn: ElementRef | undefined;
 
   loginObj = {
     login: '',
@@ -29,6 +34,7 @@ export class LoginComponent {
     username: '',
     email: '',
     nif: 0,
+    birthday: '',
     password: '',
     password_confirmation: ''
   };
@@ -74,10 +80,16 @@ export class LoginComponent {
   register() {
     this.authService.register(this.registerObj).subscribe({
       next: (res: any) => {
+        console.log(res)
         if (res.status === 'success') {
-          this.modalComponent?.modalClosed.subscribe(() => {
-            location.reload();
-          });
+          console.log("cheguei")
+            this.modalComponent?.showModal(
+              'Sucess',
+              res.message
+            )
+            setTimeout(() => {
+              location.reload();
+            }, 1500);
         }
       },
       error: (err) => {
