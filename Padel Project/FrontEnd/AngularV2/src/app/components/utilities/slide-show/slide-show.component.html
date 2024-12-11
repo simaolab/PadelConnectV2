@@ -10,7 +10,7 @@
         <div class="swiper-slide" *ngFor="let court of courts">
           <a [routerLink]="['/court', court.id]" class="slide-link">
             <div class="slide-img">
-              <img src="assets/images/slideshow/1.jpg" [alt]="court.name">
+              <img [src]="getCourtImage(court.file_path)" [alt]="court.name">
             </div>
             <div class="slide-content-bottom">
               <h3 class="field-name">{{ court.name }}</h3>

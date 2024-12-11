@@ -33,9 +33,9 @@ export class SlideShowComponent implements OnInit, AfterViewInit {
     }
   }
 
-    ngOnInit(): void {
-      this.loadCourts();
-    }
+ ngOnInit(): void {
+  this.loadCourts();
+}
 
   loadCourts(): void {
     this.courtsService.index().subscribe({
@@ -45,6 +45,10 @@ export class SlideShowComponent implements OnInit, AfterViewInit {
       error: (err: any) => {
       }
     })
+  }
+
+  getCourtImage(filePath: string): string {
+    return this.courtsService.getCourtImage(filePath);
   }
 
   initializeSwiper(): void {
