@@ -13,7 +13,7 @@
     <p class="loading">A carregar a lista de clientes, por favor aguarde ...</p>
   </div>
   <ng-template #showTable>
-    <div *ngIf="users.length > 0; else noUsers">
+    <div *ngIf="users && users.length > 0">
       <div class="table-wrapper">
         <table>
           <thead>

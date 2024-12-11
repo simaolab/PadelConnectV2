@@ -50,10 +50,11 @@ export class CreatePromotionComponent {
     }
 
   create(): void {
-
+    console.log(this.promotionObj)
     this.promotionsService.create(this.promotionObj).subscribe({
       next: (res: any) => {
-        if(res.status === 'success') {
+        console.log(res)
+        if(res) {
           this.dashboardComponent.showModal(
             'Successo',
             res.message,
@@ -62,6 +63,14 @@ export class CreatePromotionComponent {
             }
           );
           this.formErrors = {};
+        }
+        else {
+          // Caso a resposta não tenha o status esperado
+          console.log('cheguei')
+          this.dashboardComponent.showModal(
+            'Erro',
+            'Resposta inesperada do servidor'
+          );
         }
       },
       error: (err: any) => {

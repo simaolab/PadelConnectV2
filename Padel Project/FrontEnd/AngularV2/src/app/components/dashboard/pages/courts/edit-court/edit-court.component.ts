@@ -132,8 +132,8 @@ export class EditCourtComponent {
             sunday: sunday,
           },
         };
-        
-        this.currentImagePath = field.file_path || this.defaultImagePath;        
+
+        this.currentImagePath = field.file_path || this.defaultImagePath;
       },
       error: (err) => {
         const errorMessage = err?.error?.message;
@@ -281,10 +281,10 @@ export class EditCourtComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
-      this.uploadedImage = file; // Salvar a imagem selecionada
-      this.currentImagePath = URL.createObjectURL(file); // Pre-visualização da imagem
+      this.uploadedImage = file;
+      this.currentImagePath = URL.createObjectURL(file);
     } else {
-      this.uploadedImage = null; // Caso o usuário desmarque a imagem
+      this.uploadedImage = null;
       this.currentImagePath = this.defaultImagePath;
     }
   }

@@ -5,7 +5,7 @@
           <span>Padel Connect</span>
       </p>
   </div>
-  <div class="button-add-container">
+  <div class="button-add-container" *ngIf="isAdmin">
     <a class="cancellations-button" [routerLink]="['/dashboard/cancellations']">
       <i class="ri-close-circle-line"></i>
     </a>
@@ -24,7 +24,7 @@
       <table>
         <thead>
           <tr>
-            <th class="left">Utilizador</th>
+            <th class="left" *ngIf="isAdmin">Utilizador</th>
             <th class="left">Campo</th>
             <th class="middle">Total</th>
             <th class="left">Inicio Reserva</th>
@@ -35,7 +35,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let reservation of reservations">
-            <td data-cell="Utilizador" class="left">
+            <td data-cell="Utilizador" class="left" *ngIf="isAdmin">
               <div class="tooltip">
                 <a class="user" [routerLink]="['/dashboard/customer', reservation.user?.id]">
                   {{ reservation.user?.username }}

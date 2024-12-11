@@ -176,91 +176,122 @@ export class DetailsPageComponent implements OnInit {
 
   addToCart(): void {
     if (!this.startDate || !this.endDate || this.totalPrice === 0) {
-        this.modalComponent?.showModal(
-            'Erro',
-            'Por favor, preencha datas válidas antes de adicionar ao carrinho'
-        );
-        return;
+      this.modalComponent?.showModal(
+        'Erro',
+        'Por favor, preencha datas válidas antes de adicionar ao carrinho'
+      );
+      return;
+    }
+
+    // Verifica se a data de início não é anterior à data atual
+    const today = new Date();
+    if (new Date(this.startDate) < today) {
+      this.modalComponent?.showModal(
+        'Erro',
+        'A data de início não pode ser inferior à data atual.'
+      );
+      return;
+    }
+
+    // Verifica se a hora de início e de término são múltiplos de hora cheia (ex: 18:00, 19:00)
+    const startDateObj = new Date(this.startDate);
+    const endDateObj = new Date(this.endDate);
+
+    if (startDateObj.getMinutes() !== 0) {
+      this.modalComponent?.showModal(
+        'Erro',
+        'A hora de início deve ser um valor completo, como 18:00 ou 19:00.'
+      );
+      return;
+    }
+
+    if (endDateObj.getMinutes() !== 0) {
+      this.modalComponent?.showModal(
+        'Erro',
+        'A hora de término deve ser um valor completo, como 18:00 ou 19:00.'
+      );
+      return;
     }
 
     let cart: Cart = this.cookieService.get('cart')
-        ? JSON.parse(this.cookieService.get('cart'))
-        : { items: [], totalPrice: 0 };
+      ? JSON.parse(this.cookieService.get('cart'))
+      : { items: [], totalPrice: 0 };
 
     const isDuplicate = cart.items.some((item: CartItem) =>
-        item.startDate === this.startDate && item.endDate === this.endDate && item.fieldId === this.court_id
+      item.startDate === this.startDate && item.endDate === this.endDate && item.fieldId === this.court_id
     );
 
     if (isDuplicate) {
-        this.modalComponent?.showModal(
-            'Erro',
-            'Já existe uma reserva com as mesmas datas no carrinho.'
-        );
-        return;
+      this.modalComponent?.showModal(
+        'Erro',
+        'Já existe uma reserva com as mesmas datas no carrinho.'
+      );
+      return;
     }
 
     const formatDateToPT = (date: any) => {
-        const formattedDate = new Date(date);
-        const day = String(formattedDate.getDate()).padStart(2, '0');
-        const month = String(formattedDate.getMonth() + 1).padStart(2, '0');
-        const year = formattedDate.getFullYear();
-        const hours = String(formattedDate.getHours()).padStart(2, '0');
-        const minutes = String(formattedDate.getMinutes()).padStart(2, '0');
-        const seconds = String(formattedDate.getSeconds()).padStart(2, '0');
-        return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+      const formattedDate = new Date(date);
+      const day = String(formattedDate.getDate()).padStart(2, '0');
+      const month = String(formattedDate.getMonth() + 1).padStart(2, '0');
+      const year = formattedDate.getFullYear();
+      const hours = String(formattedDate.getHours()).padStart(2, '0');
+      const minutes = String(formattedDate.getMinutes()).padStart(2, '0');
+      const seconds = String(formattedDate.getSeconds()).padStart(2, '0');
+      return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
     };
 
     const availabilityParams = {
-        start_date: formatDateToPT(this.startDate),
-        end_date: formatDateToPT(this.endDate),
-        field: this.court_id,
+      start_date: formatDateToPT(this.startDate),
+      end_date: formatDateToPT(this.endDate),
+      field: this.court_id,
     };
 
     this.reservationsService.checkAvailability(availabilityParams).subscribe({
-        next: (response: any) => {
-            if (response.available) {
-                const reservationItem: CartItem = {
-                    fieldId: this.court_id,
-                    name: this.courtObj.name,
-                    address: this.address,
-                    startDate: this.startDate,
-                    endDate: this.endDate,
-                    pricePerHour: this.courtObj.price_hour,
-                    totalPrice: this.totalPrice,
-                    totalHours: (new Date(this.endDate).getTime() - new Date(this.startDate).getTime()) / (1000 * 60 * 60),
-                };
+      next: (response: any) => {
+        if (response.available) {
+          const reservationItem: CartItem = {
+            fieldId: this.court_id,
+            name: this.courtObj.name,
+            address: this.address,
+            startDate: this.startDate,
+            endDate: this.endDate,
+            pricePerHour: this.courtObj.price_hour,
+            totalPrice: this.totalPrice,
+            totalHours: (new Date(this.endDate).getTime() - new Date(this.startDate).getTime()) / (1000 * 60 * 60),
+          };
 
-                // Atualiza o carrinho
-                if (!Array.isArray(cart.items)) {
-                    cart.items = [];
-                }
+          if (!Array.isArray(cart.items)) {
+            cart.items = [];
+          }
 
-                cart.items.push(reservationItem);
+          cart.items.push(reservationItem);
 
-                cart.totalPrice = cart.items.reduce((total, item: CartItem) => {
-                    return total + item.totalPrice;
-                }, 0);
+          cart.totalPrice = cart.items.reduce((total, item: CartItem) => {
+            return total + item.totalPrice;
+          }, 0);
 
-                this.cookieService.set('cart', JSON.stringify(cart), 1, '/');
+          this.cookieService.set('cart', JSON.stringify(cart), 1, '/');
 
-                this.modalComponent?.showModal(
-                    'Sucesso',
-                    `${reservationItem.name} adicionado ao carrinho`
-                );
-            } else {
-                this.modalComponent?.showModal(
-                    'Erro',
-                    response.message || 'As datas selecionadas não estão disponíveis.'
-                );
-            }
-        },
-        error: (err: any) => {
-            this.modalComponent?.showModal(
-                'Erro',
-                err.error.message
-            );
-        },
+          this.modalComponent?.showModal(
+            'Sucesso',
+            `${reservationItem.name} adicionado ao carrinho`
+          );
+        } else {
+          this.modalComponent?.showModal(
+            'Erro',
+            response.message || 'As datas selecionadas não estão disponíveis.'
+          );
+        }
+      },
+      error: (err: any) => {
+        this.modalComponent?.showModal(
+          'Erro',
+          err.error.message
+        );
+      },
     });
-}
+  }
+
+
 
 }

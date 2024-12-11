@@ -1,3 +1,4 @@
+import { UsersService } from './../../../../services/users.service';
 import { Component } from '@angular/core';
 import { TitlePageComponent } from '../../utilities/title-page/title-page.component';
 import { CancellationsService } from '../../../../services/cancellations.service';
@@ -22,7 +23,8 @@ export class CancellationsComponent {
 
   constructor(
     private cancellationsService: CancellationsService,
-    private dashboardComponent: DashboardComponent,) {}
+    private dashboardComponent: DashboardComponent,
+    private usersService: UsersService) {}
 
   ngOnInit(): void {
     this.loadCancellations();

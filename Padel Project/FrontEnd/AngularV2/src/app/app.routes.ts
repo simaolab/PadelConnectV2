@@ -125,14 +125,11 @@ export const routes: Routes = [
       },
 
       //CRUD COURT
-      { path: 'create-court', component: CreateCourtComponent, title: 'Dashboard - Adicionar Campo',
-        canActivate: [roleGuard]
+      { path: 'create-court', component: CreateCourtComponent, title: 'Dashboard - Adicionar Campo'
       },
-      { path: 'court/:id', component: ShowCourtComponent, title: 'Dashboard - Detalhes Campo',
-        canActivate: [roleGuard]
+      { path: 'court/:id', component: ShowCourtComponent, title: 'Dashboard - Detalhes Campo'
       },
-      { path: 'court/:id/edit', component: EditCourtComponent, title: 'Dashboard - Editar Campo',
-        canActivate: [roleGuard]
+      { path: 'court/:id/edit', component: EditCourtComponent, title: 'Dashboard - Editar Campo'
       },
 
       //CRUD CUSTOMER

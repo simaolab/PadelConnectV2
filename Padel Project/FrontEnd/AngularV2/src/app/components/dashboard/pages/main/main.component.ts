@@ -37,6 +37,18 @@ export class MainComponent {
   isAdmin: boolean = false;
   userRole: number = 0;
 
+  totalCourtsCount: number = 0;
+  totalIndoorCourtsCount: number  = 0;
+  totalOutdoorCourtsCount: number  = 0;
+
+  totalUsersCount: number = 0;
+  totalClientsCount: number = 0;
+  totalCompanysCount: number = 0;
+
+  totalReservationsCount: number = 0;
+  totalAtivesReservationsCount: number = 0;
+  totalCancellationsCount: number = 0;
+
   ngOnInit(): void {
     this.loadReservations();
     this.loadCourts();
@@ -57,12 +69,20 @@ export class MainComponent {
     });
   }
 
+  getProgressPercentage(value: number, total: number): number {
+    if (total === 0) {
+      return 0;
+    }
+    return Math.round((value / total) * 100);
+  }
+
   loadReservations(): void {
     this.reservationsService.index().subscribe({
       next: (data: any) => {
           this.reservations = data.reservations;
           this.totalReservations = this.reservations.length;
-          console.log("reservaas: ", this.reservations)
+
+          this.countReservations();
       },
       error: (err: any) => {
         const message = err.error?.message;
@@ -74,11 +94,28 @@ export class MainComponent {
     this.courtsService.indexRestricted().subscribe({
       next: (data: any) => {
         this.courts = data.fields;
-        console.log("campos: ", this.courts)
         this.totalCourts = this.courts.length;
+
+        this.countFields();
       },
       error: (err: any) => {
         const message = err.error?.message;
+      }
+    });
+  }
+
+  countFields(): void {
+    this.totalCourtsCount = 0;
+    this.totalIndoorCourtsCount = 0;
+    this.totalOutdoorCourtsCount = 0;
+
+    this.courts.forEach(court => {
+      this.totalCourtsCount++;
+      if (court.cover === 0) {
+        this.totalIndoorCourtsCount++;
+      }
+      if (court.cover === 1) {
+        this.totalOutdoorCourtsCount++;
       }
     });
   }
@@ -88,7 +125,6 @@ export class MainComponent {
       next: (data: any) => {
           this.promotions = data.promotions || [];
           this.totalPromotions = this.promotions.length;
-          console.log("promoções: ", this.promotions)
       },
       error: (err: any) => {
         const message = err.error?.message;
@@ -101,11 +137,34 @@ export class MainComponent {
       next: (data: any) => {
           this.users = data;
           this.totalUsers = this.users.length;
-          console.log("users: ", this.users)
+          this.countUsers();
       },
       error: (err: any) => {
         const message = err.error?.message;
       }
     });
+  }
+
+  countUsers(): void {
+    this.totalUsersCount = this.users.length;
+
+    this.totalClientsCount = this.users.filter(user => user.role.id === 3).length;
+
+    this.totalCompanysCount = this.users.filter(user => user.role.id === 2).length;
+
+    const totalAdmins = this.users.filter(user => user.role.id === 1).length;
+    this.totalUsersCount = this.totalUsersCount - totalAdmins;
+  }
+
+  countReservations(): void {
+    this.totalReservationsCount = this.reservations.length;
+
+    this.totalAtivesReservationsCount = this.reservations.filter(reservation => reservation.status === "pendente").length;
+
+    this.totalCancellationsCount = this.reservations.filter(reservation => reservation.status === "Cancelada").length;
+
+    console.log(this.totalAtivesReservationsCount)
+    console.log(this.totalCancellationsCount)
+
   }
 }
