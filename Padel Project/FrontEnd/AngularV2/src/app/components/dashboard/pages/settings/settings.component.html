@@ -185,27 +185,10 @@
 
         <div class="user-container-info">
             <div class="container-description">
-                <p class="description-text">Segurança conta</p>
+                <p class="description-text">Segurança conta - Alterar Password</p>
                 <hr>
             </div>
             <div class="container-forms">
-                <div class="contact-detail">
-                  <div class="detail">
-                      <div class="label-container">
-                        <i class="ri-lock-password-line"></i>
-                        <label for="current_password">Password Atual</label>
-                      </div>
-                      <input
-                        id="current_password"
-                        type="password"
-                        name="current_password"
-                        [(ngModel)]="passwordObj.current_password"
-                        placeholder="Insira a sua password atual"
-                        required
-                        />
-                        <small *ngIf="formErrors['current_password']" class="small-error">{{ formErrors['current_password'] }}</small>
-                  </div>
-                </div>
                 <div class="data-detail">
                   <div class="detail">
                     <div class="label-container">
@@ -256,6 +239,23 @@
                     <small *ngIf="formErrors['new_password_confirmation']" class="small-error">{{ formErrors['new_password_confirmation'] }}</small>
                   </div>
                 </div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="detail">
+                <div class="label-container">
+                  <i class="ri-lock-password-line"></i>
+                  <label for="current_password">Password Atual</label>
+                </div>
+                <input
+                  id="current_password"
+                  type="password"
+                  name="current_password"
+                  [(ngModel)]="passwordObj.current_password"
+                  placeholder="Insira a sua password atual"
+                  required
+                  />
+                  <small *ngIf="formErrors['current_password']" class="small-error">{{ formErrors['current_password'] }}</small>
             </div>
           </div>
           <div class="button left">
