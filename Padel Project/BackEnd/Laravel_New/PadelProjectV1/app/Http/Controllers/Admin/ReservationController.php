@@ -11,6 +11,7 @@ use Illuminate\Support\Arr;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Mail\ReservationCompleted;
+use App\Mail\CancellationNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Reservation;
@@ -280,6 +281,9 @@ class ReservationController extends Controller
 
            	$reservation->status = 'Cancelled';
         	$reservation->save();
+
+
+          	\Mail::to($reservation->user->email)->send(new CancellationNotification($reservation, $reservation->user));
 
             return response()->json([
                 'status' => 'success',
