@@ -389,6 +389,77 @@ textarea:focus {
   outline: none;
 }
 
+.card-selection {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+}
+
+.card-option {
+  cursor: pointer;
+  position: relative;
+}
+
+.card-option:hover {
+  color: var(--color-primary);
+}
+
+.card-option input[type="radio"] {
+  display: none;
+}
+
+.card-option .box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 260px; /* Largura fixa para manter todas as opções iguais */
+  height: 150px; /* Altura fixa para garantir tamanho uniforme */
+  padding: 20px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+
+.card-option .box i {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.card-option .box span {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.card-option input[type="radio"]:checked + .box {
+  border-color: var(--color-primary); /* Cor quando selecionado */
+  color: var(--color-primary);
+}
+
+.card-option .box:hover {
+  border-color: var(--color-primary); /* Cor ao passar o rato */
+}
+
+.payment-message {
+  margin-top: 20px;
+}
+
+.warning-text {
+  color: red;
+  font-weight: bold;
+}
+
+.info-text {
+  color: green;
+  font-weight: bold;
+}
+
+.payment-form input[disabled] {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
 /* Responsividade para telas menores */
 @media (max-width: 768px) {
   .checkout h1 {

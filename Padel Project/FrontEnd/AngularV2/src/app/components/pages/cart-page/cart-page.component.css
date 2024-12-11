@@ -97,6 +97,18 @@
   justify-content: center;
 }
 
+.checkout {
+  background-color: var(--color-primary);
+  color: white;
+  cursor: pointer;
+}
+
+.checkout:disabled {
+  background-color: #d3d3d3;
+  color: #a1a1a1;
+  cursor: not-allowed;
+}
+
 @media screen and (max-width: 1000px) {
   .reservations {
     gap: 2rem;
