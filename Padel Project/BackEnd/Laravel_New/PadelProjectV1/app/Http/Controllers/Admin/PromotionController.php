@@ -162,7 +162,7 @@ class PromotionController extends Controller
         if($promotion->active == true) {
             return response()->json(
             [
-                'message' => 'Não pode eliminar uma promoção visivel!'
+                'message' => 'Não pode eliminar uma promoção que ainda está ativa!'
             ], 404);
         }
 

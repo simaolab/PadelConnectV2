@@ -14,11 +14,42 @@ class CancellationController extends Controller
      */
     public function index()
     {
-        // Recupera todos os cancelamentos com dados relacionados (reservations, user, fields)
-        $cancellations = Cancellation::with('reservation', 'reservation.user', 'reservation.fields')->get();
+        try {
+            // Retrieves the authenticated user's ID
+            $userId = auth()->id();
+            // Recover the logged-in user and check their role
+            $user = auth()->user();
 
-        // Retorna a resposta em JSON
-        return response()->json(['cancellations' => $cancellations]);
+            // Check if the user has the admin role (role_id = 1)
+            if ($user->role_id === 1) {
+                // If admin, returns all cancellations with booking information
+                $cancellations = Cancellation::with(['reservation.fields'])->get();
+            } else {
+                // If the user is not admin, it does not return cancellations
+                return response()->json([
+                    'message' => 'Não tem permissão para visualizar os cancelamentos.'
+                ], 403);
+            }
+
+            // If there are no cancellations, returns a message stating
+            if ($cancellations->isEmpty()) {
+                return response()->json([
+                    'message' => 'Nenhum cancelamento encontrado.',
+                    'cancellations' => []
+                ]);
+            }
+
+            // Prepare the answer
+            $response = [
+                'cancellations' => $cancellations
+            ];
+
+            // Returns the cancellations
+            return response()->json($response, 200);
+
+        } catch (\Exception $exception) {
+            return response()->json(['error' => $exception->getMessage()], 500);
+        }
     }
 
     /**

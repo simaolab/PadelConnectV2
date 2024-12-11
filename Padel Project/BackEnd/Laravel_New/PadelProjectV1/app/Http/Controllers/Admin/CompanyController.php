@@ -63,7 +63,7 @@ class CompanyController extends Controller
         $user->password = Hash::make($validatedData['user_password']);
         $user->nif      = $validatedData['user_nif'];
         $user->birthday = '01/01/2000';
-        $user->role_id  = 2; 
+        $user->role_id  = 2;
 
         $user->save();
 
@@ -118,6 +118,7 @@ class CompanyController extends Controller
     {
         //Search for the Company
         $company = Company::withCount('fields')->find($companyId);
+      	$request->merge(['user' => $company->user_id]);
         //If the company does not exist show message error, else validate and update the company data
         if(!$company) { return response()->json(
             [
