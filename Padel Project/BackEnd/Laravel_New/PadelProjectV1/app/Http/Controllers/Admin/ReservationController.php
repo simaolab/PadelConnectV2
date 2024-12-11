@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Exception;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
 use App\Http\Requests\StoreCancellationRequest;
@@ -26,46 +25,57 @@ class ReservationController extends Controller
     public function index()
     {
         try {
-            // Recupera o ID do usuário autenticado
+            // Retrieve the authenticated user's ID
             $userId = auth()->id();
-            // Recupera o usuário logado e verifica sua role
+            // Retrieve the authenticated user and check their role
             $user = auth()->user();
 
-            // Inicializa a variável para armazenar as reservas
+            // Initialize the variable to store the reservations
             $reservations = [];
 
-            // Verifica se o usuário tem a role de admin (role_id = 1)
+            // Check if the user has the role of admin (role_id = 1)
             if ($user->role_id === 1) {
-                // Se for admin, retorna todas as reservas com informações dos usuários associados
+                // If the user is admin, return all reservations with associated user information
                 $reservations = Reservation::with(['fields', 'user'])->get();
+            } elseif ($user->role_id === 2) {
+                // If the user is from role 2 (company), return reservations associated with the company's fields
+                // Retrieve the company associated with the logged-in user
+                $company = $user->company;
+
+                // Retrieve the reservations related to the fields of the user's company
+                $reservations = Reservation::with(['fields' => function($query) use ($company) {
+                    // Check if the field belongs to the user's company
+                    $query->where('company_id', $company->id);
+                }])->whereHas('fields', function($query) use ($company) {
+                    // Additional filter to ensure the reservation is for a field belonging to the company
+                    $query->where('company_id', $company->id);
+                })->get();
             } else {
-                // Caso contrário, retorna apenas as reservas do usuário logado
+                // Otherwise, return only the reservations of the logged-in user
                 $reservations = Reservation::with('fields')->where('user_id', $userId)->get();
             }
 
-            // Se não houver reservas, retorna uma mensagem informando
             if ($reservations->isEmpty()) {
                 return response()->json([
-                    'message' => 'Nenhuma reserva encontrada.',
+                    'message' => 'No reservations found.',
                     'reservations' => []
                 ]);
             }
 
-            // Prepara a resposta
+            // Prepare the response
             $response = [
                 'reservations' => $reservations
             ];
 
-            // Adiciona as informações do usuário apenas se for admin
+            // Add the user information only if the user is an admin
             if ($user->role_id === 1) {
                 $response['user'] = $user;
             }
 
-            // Retorna as reservas (e informações do admin, se aplicável)
+            // Return the reservations (and admin info if applicable)
             return response()->json($response, 200);
 
         } catch (\Exception $exception) {
-            // Caso haja erro, retorna uma mensagem de erro
             return response()->json(['error' => $exception->getMessage()], 500);
         }
     }
@@ -85,38 +95,38 @@ class ReservationController extends Controller
     public function store(StoreReservationRequest $request)
     {
         try {
-            // Validação dos dados recebidos
+            // Validate the received data
             $validatedData = $request->validated();
             $reservations = [];
 
             foreach ($validatedData['reservations'] as $reservationData) {
-                // Extrai os IDs dos campos e remove da entrada principal
+                // Extract the field IDs and remove from the main input
                 $fields = $reservationData['fields'];
                 unset($reservationData['fields']);
 
-                // Adiciona informações adicionais obrigatórias
+                // Add mandatory additional information
                 $reservationData['user_id'] = auth()->id();
                 $reservationData['status'] = $validatedData['status'];
                 $reservationData['privacy_policy'] = $validatedData['privacy_policy'];
 
-                // Converte as datas para o formato correto
+                // Convert the dates to the correct format
                 $reservationData['start_date'] = Carbon::createFromFormat('d/m/Y H:i', $reservationData['start_date'])->format('Y-m-d H:i:s');
                 $reservationData['end_date'] = Carbon::createFromFormat('d/m/Y H:i', $reservationData['end_date'])->format('Y-m-d H:i:s');
 
-                // Cria a reserva
+                // Create the reservation
                 $reservation = Reservation::create($reservationData);
 
-                $detailedFields = []; // Lista para armazenar os detalhes dos campos associados
+                $detailedFields = []; // List to store field details
 
                 if (!empty($fields)) {
                     foreach ($fields as $fieldId) {
-                        // Associa os campos à reserva na tabela pivot
+                        // Associate the fields with the reservation in the pivot table
                         $reservation->fields()->attach($fieldId, [
                             'start_date' => $reservationData['start_date'],
                             'end_date' => $reservationData['end_date']
                         ]);
 
-                        // Obtém os detalhes do campo e da empresa
+                        // Get the details of the field and company
                         $field = Field::with('company')->find($fieldId);
 
                         if ($field) {
@@ -125,7 +135,7 @@ class ReservationController extends Controller
                                 ->first()
                                 ->pivot;
 
-                            // Adiciona os detalhes do campo e informações do pivot
+                            // Add the field details and pivot information
                             $detailedFields[] = [
                                 'field' => $field,
                                 'pivot' => [
@@ -137,39 +147,37 @@ class ReservationController extends Controller
                     }
                 }
 
-                // Adiciona os detalhes completos dos campos ao objeto de reserva
+                // Add the complete field details to the reservation object
                 $reservation->detailed_fields = $detailedFields;
 
-                // Armazena a reserva na lista
+                // Store the reservation in the list
                 $reservations[] = $reservation;
             }
 
-            // Se houver reservas, envia o e-mail ao usuário autenticado
+            // If there are reservations, send an email to the authenticated user
             if (!empty($reservations)) {
-                $user = auth()->user(); // Usuário autenticado
+                $user = auth()->user(); // Authenticated user
                 $userEmail = $user->email;
 
-                // Envia o e-mail com o Mailable
+                // Send the email with the Mailable
                 Mail::to($userEmail)->send(new ReservationCompleted($reservations, $user));
             }
 
-            // Retorna resposta de sucesso com as reservas criadas
             return response()->json([
                 'status' => 'success',
-                'message' => 'Reservas criadas com sucesso.',
-              	'user' => $user,
+                'message' => 'Reservations created successfully.',
+                'user' => $user,
                 'reservations' => $reservations
             ], 201);
 
         } catch (\Exception $exception) {
-            // Retorna erro em caso de exceção
             return response()->json([
-                'error' => 'Erro ao criar as reservas: ' . $exception->getMessage()
+                'error' => 'Error creating the reservations: ' . $exception->getMessage()
             ], 500);
         }
     }
 
-      /**
+    /**
      * Display the specified resource.
      */
     public function show($reservationId)
@@ -217,7 +225,7 @@ class ReservationController extends Controller
             $updatedReservation = Reservation::where('id', $reservation->id)->with('fields')->first();
         if(!$updatedReservation){ return response()->json(
             [
-                'message' => 'Reserva não foi encontrada!'
+                'message' => 'Reservation not found!'
             ], 404); }
         else
         {
@@ -225,11 +233,10 @@ class ReservationController extends Controller
             return response()->json(
                 [
                     'status' => 'success',
-                    'message' => 'Reserva atualizada com sucesso!'
+                    'message' => 'Reservation updated successfully!'
                 ], 200);
         }
     }
-
 
 
     /**
@@ -238,53 +245,52 @@ class ReservationController extends Controller
     public function destroy(StoreCancellationRequest $request, $reservationId)
     {
         try {
-            // Localizar a reserva pelo ID
             $reservation = Reservation::find($reservationId);
 
-            // Verificar se a reserva existe
             if (!$reservation) {
-                return response()->json(['message' => 'Reserva não encontrada'], 404);
+                return response()->json(['message' => 'Reservation not found'], 404);
             }
 
-            // Validar os dados do request
             $data = $request->validated();
 
-            // Calcular o tempo restante para a reserva
+            // Calculate the remaining time for the reservation
             $reservationDate = Carbon::createFromFormat('d/m/Y H:i', $reservation->start_date);
             $todayDate = Carbon::now();
             $diff = $todayDate->diffInHours($reservationDate);
             $totalRefunded = $reservation->total;
 
-            // Calcular o reembolso com base no tempo restante
+            // Calculate the refund based on the remaining time
             if ($diff <= 24) {
-                $totalRefunded = 0; // Sem reembolso se faltar menos de 24h
+                $totalRefunded = 0; // No refund if less than 24 hours left
             } elseif ($diff < 48) {
-                $totalRefunded *= 0.5; // 50% de reembolso se faltar entre 24h e 48h
+                $totalRefunded *= 0.5; // 50% refund if between 24 and 48 hours left
             }
 
-            // Criar um registro de cancelamento antes de excluir a reserva
+            // Create a cancellation record before deleting the reservation
             $cancellation = Cancellation::create([
                 'reservation_id' => $reservation->id,
-                'reason' => $data['reason'] ?? null, // Aqui o motivo está sendo atribuído da requisição
+                'reason' => $data['reason'] ?? null, // Here the reason is assigned from the request
                 'total_refunded' => $totalRefunded,
-                'status' => $data['status'] ?? 'Cancelada', // Status é opcional, então atribui 'Cancelada' se não vier
-                'cancellation_date' => now(), // Registro automático do momento de cancelamento
+                'status' => $data['status'] ?? 'Cancelled', // Status is optional, so assign 'Cancelled' if not provided
+                'cancellation_date' => now(), // Automatic record of cancellation date
             ]);
 
-            // Excluir a reserva e os registros associados na tabela intermediária
+            // Delete the reservation and associated records in the pivot table
             $reservation->delete();
+
+           	$reservation->status = 'Cancelled';
+        	$reservation->save();
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Reserva ' . $reservationId . ' eliminada com sucesso',
+                'message' => 'Reservation ' . $reservationId . ' successfully deleted',
                 'cancellation' => $cancellation,
             ], 200);
 
         } catch (\Exception $exception) {
-            // Retornar erro em caso de exceção
             return response()->json([
                 'status' => 'error',
-                'message' => 'Erro a eliminar a reserva: ' . $exception->getMessage()
+                'message' => 'Error deleting the reservation: ' . $exception->getMessage()
             ], 500);
         }
     }
@@ -296,18 +302,17 @@ class ReservationController extends Controller
         try {
             //If something was sent in the route
             if ($typeReservation) {
-                //Get all reservations that matches with the data sent
+                //Get all reservations that match the data sent
                 $reservations = Reservation::where('address', 'LIKE', '%' . $typeReservation . '%')->get();
             }
 
-            //Return the data
             return response()->json([
-                'message' => 'Resultados da sua pesquisa:',
+                'message' => 'Search results:',
                 'reservations' => $reservations
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Erro ao procurar a reserva!',
+                'message' => 'Error searching for reservation!',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -317,61 +322,62 @@ class ReservationController extends Controller
     public function checkAvailability(Request $request)
     {
         try {
+            // Validate the received data
             $validatedData = $request->validate([
                 'start_date' => 'required|date_format:d/m/Y H:i:s',
                 'end_date' => 'required|date_format:d/m/Y H:i:s',
                 'field' => 'required|exists:fields,id',
             ]);
 
-            // Converte as datas para o formato adequado e remove os segundos
+            // Convert the dates to the appropriate format and remove seconds
             $startDate = Carbon::createFromFormat('d/m/Y H:i:s', $validatedData['start_date'])->setSecond(0);
             $endDate = Carbon::createFromFormat('d/m/Y H:i:s', $validatedData['end_date'])->setSecond(0);
 
-            // Verifica se a reserva ultrapassa o mesmo dia
+            // Check if the reservation spans across multiple days
             if ($startDate->toDateString() !== $endDate->toDateString()) {
                 return response()->json([
                     'available' => false,
-                    'message' => 'Reservas não podem abranger mais de um dia.',
-                ], 400); // Código 400: Solicitação inválida
+                    'message' => 'Reservations cannot span more than one day.',
+                ], 400);
             }
 
-            // Obtém o dia da semana
-            $dayOfWeek = strtolower($startDate->format('l')); // Exemplo: 'monday', 'tuesday'
+            // Get the day of the week
+            $dayOfWeek = strtolower($startDate->format('l')); // Example: 'monday', 'tuesday'
 
-            // Obter os horários de funcionamento do campo
+            // Get the field's working hours
             $field = Field::find($validatedData['field']);
             $schedule = $field->schedules()->where('day_of_week', $dayOfWeek)->first();
 
             if (!$schedule) {
                 return response()->json([
                     'available' => false,
-                    'message' => 'O campo não possui horários de funcionamento cadastrados para o dia selecionado.',
-                ], 400); // Código 400: Solicitação inválida
+                    'message' => 'The field does not have working hours registered for the selected day.',
+                ], 400);
             }
 
-            // Verifica se o campo está fechado neste dia
+            // Check if the field is closed on this day
             if ($schedule->is_closed) {
                 return response()->json([
                     'available' => false,
-                    'message' => 'O campo está fechado no dia selecionado.',
-                ], 400); // Código 400: Solicitação inválida
+                    'message' => 'The field is closed on the selected day.',
+                ], 400);
             }
 
-            // Converte os horários de funcionamento para objetos Carbon
+            // Convert the working hours to Carbon objects
             $openingTime = Carbon::parse($schedule->opening_time, $startDate->timezone)
                 ->setDate($startDate->year, $startDate->month, $startDate->day);
             $closingTime = Carbon::parse($schedule->closing_time, $startDate->timezone)
                 ->setDate($startDate->year, $startDate->month, $startDate->day);
 
-            // Validação de horário
+            // Validate the time
             if ($startDate->lt($openingTime) || $endDate->gt($closingTime)) {
                 return response()->json([
                     'available' => false,
-                    'message' => 'As datas selecionadas estão fora do horário de funcionamento do campo.',
-                ], 400); // Código 400: Solicitação inválida
+                    'message' => 'The selected dates are outside the field\'s operating hours.',
+                ], 400);
             }
 
-            // Verifica conflitos de reservas
+            // Check for reservation conflicts
             $conflictingReservations = DB::table('field_reservation')
                 ->where('field_id', $validatedData['field'])
                 ->where(function ($query) use ($startDate, $endDate) {
@@ -387,18 +393,18 @@ class ReservationController extends Controller
             if ($conflictingReservations) {
                 return response()->json([
                     'available' => false,
-                    'message' => 'Já existe uma reserva para as datas selecionadas.',
-                ], 409); // Código 409: Conflito
+                    'message' => 'There is already a reservation for the selected dates.',
+                ], 409);
             }
 
             return response()->json([
                 'available' => true,
-                'message' => 'As datas estão disponíveis.',
-            ], 200); // Código 200: Sucesso
+                'message' => 'The dates are available.',
+            ], 200);
         } catch (\Exception $exception) {
             return response()->json([
-                'error' => 'Erro ao verificar disponibilidade: ' . $exception->getMessage(),
-            ], 500); // Código 500: Erro no servidor
+                'error' => 'Error checking availability: ' . $exception->getMessage(),
+            ], 500);
         }
     }
 

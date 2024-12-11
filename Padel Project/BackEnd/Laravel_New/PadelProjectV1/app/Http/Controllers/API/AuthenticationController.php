@@ -47,6 +47,7 @@ class AuthenticationController extends Controller
 
             // Create an access token for the new user
             $token = $user->createToken('authToken')->accessToken;
+            Mail::to($user->email)->send(new UserRegistered($user));
 
             // Register the successful registration in the register log
             \Log::channel('register')->info('User registered', [

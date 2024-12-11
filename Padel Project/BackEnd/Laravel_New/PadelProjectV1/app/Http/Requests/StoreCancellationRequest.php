@@ -21,7 +21,6 @@ class StoreCancellationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'field_id'          => 'required|exists:fields,id',
         ];
     }
 
@@ -29,7 +28,6 @@ class StoreCancellationRequest extends FormRequest
     public function messages()
     {
         return [
-          'field_id.exists'   => 'O campo fornecido não existe.',
         ];
     }
 
