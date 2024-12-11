@@ -91,6 +91,7 @@ export class PaymentPageComponent {
 
             return total + (pricePerHour * totalHours);
           }, 0);
+          this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
         } else {
           this.modalComponent?.showModal(
             'Erro',
